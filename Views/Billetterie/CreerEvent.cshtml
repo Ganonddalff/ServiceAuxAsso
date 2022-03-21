@@ -1,0 +1,17 @@
+@model ServiceBilletterie.Models.Evenements
+
+@{
+    Layout = "_LayoutTest";
+}
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Créez votre évènement !</title>
+</head>
+<h1>Créez votre évènement </h1>
+<body>
+<div class="form-floating">
+    @Html.TextBox(Model.NomEvent, new {@class="form-control", placeholder="Nom"})
+</div>
+</body>
