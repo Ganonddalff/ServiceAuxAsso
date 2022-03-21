@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Pomelo;
 
@@ -28,9 +29,9 @@ public class Methodes : IDisposable
     }
 
 
-public int CreerEvenement(string orga,string nomEvent, string lieu, string cat,DateTime datedebut, DateTime datefin, int nbtickets, bool statut)
+public int CreerEvenement(string orga,string nomEvent, string lieu, string cat, DateTime datedebut, DateTime datefin, int nbtickets, bool statut)
 {
- //eventContext evctxt = new eventContext();
+
     Evenements nouvelEvenement = new Evenements(){
     Organisateur = orga,
     NomEvent = nomEvent,

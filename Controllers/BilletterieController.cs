@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ServiceBilletterie.Models;
 
 namespace ServiceBilletterie.Controllers
@@ -21,8 +22,30 @@ namespace ServiceBilletterie.Controllers
 
         public ActionResult CreerEvent()
         {
-            Methodes meth = new Methodes();
+          
             return View();
+        }
+        [HttpPost]
+        public ActionResult CreerEvent(Evenements eventACreer)
+        {
+             if (ModelState.IsValid)
+            {
+                Methodes _methodes = new Methodes();
+                var creationEvent = _methodes.CreerEvenement(
+                eventACreer.Organisateur,
+                eventACreer.NomEvent,
+                eventACreer.LieuEvent,
+                eventACreer.CategorieEvent,
+                eventACreer.DateDebutEvent,
+                eventACreer.DateFinEvent,
+                eventACreer.NbTickets,
+                true
+                
+                );
+                return RedirectToAction("Index");
+            }
+            return View("Error");
+
         }
     }
 }

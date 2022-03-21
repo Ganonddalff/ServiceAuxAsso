@@ -12,11 +12,11 @@ namespace ServiceBilletterie.Models
         public short IdEvent { get; set; }
         public string Organisateur { get; set; }
         public string NomEvent { get; set; }
-        public DateTime? DateDebutEvent { get; set; }
-        public long NbTickets { get; set; }
-        public DateTime? DateFinEvent { get; set; }
+        public DateTime DateDebutEvent { get; set; }
+        public int NbTickets { get; set; }
+        public DateTime DateFinEvent { get; set; }
         public string LieuEvent { get; set; }
-        public bool? Statut { get; set; }
+        public bool Statut { get; set; }
         public string CategorieEvent { get; set; }
 
         public virtual Billetterie Billetterie { get; set; }
