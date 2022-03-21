@@ -16,7 +16,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
     <div class="container-fluid">
-    	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="assets/img/logo_startup.png"></a>
+    	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="assets/img/logo_startup.png" alt="logo"></a>
     	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
     		<span class="navbar-toggler-icon"></span>
     	</button>
@@ -60,7 +60,7 @@
 				    }
 				    else
 				    {
-					    <a class="nav-item nav-link" href=@Url.Action("Index", "Login") style="color: #157347; font-weight:700;">Se Connecter</a>
+					    <a class="nav-item nav-link" role="button" href=@Url.Action("Index", "Login") style="color: #157347; font-weight:700;">Se Connecter</a>
 				    }
 			    }
 		    </div>

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AssoFlex.Models
 {
@@ -24,10 +26,10 @@ namespace AssoFlex.Models
             this._assoFlex.Database.EnsureCreated();
             this.CreateUtilisateur(
                 "Guytri", "Kastane", "31 rue de l'aurore", 0755172316, "gkastane@gmail.com",
-                "11111", "Admin");
+                EncodeMD5("11111"), "Admin");
             this.CreateUtilisateur(
                 "Paul", "Jean", "78 rue de l'aurore", 0755172316, "pjean@gmail.com",
-                "22222");
+                EncodeMD5("22222"));
             this.CreateAssociation(
                 "AGP", 
                 "111111-111", 
@@ -54,10 +56,17 @@ namespace AssoFlex.Models
             return int.TryParse(idStr, out var id) ? this.getUtilisateur(id) : null;
         }
 
+        private string EncodeMD5(string motDePasse)
+        {
+            string motDePasseSel = "Assoflex" + motDePasse + "ASP.NET MVC";
+            return BitConverter.ToString(
+                new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
+        }
         public Utilisateur Authentifier(string email, string password)
         {
+            var motDePasse = EncodeMD5(password);
             var user = this._assoFlex.Utilisateurs.FirstOrDefault(u => 
-                u.Email == email && u.Password == password);
+                u.Email == email && u.Password == motDePasse);
             return user;
         }
 
