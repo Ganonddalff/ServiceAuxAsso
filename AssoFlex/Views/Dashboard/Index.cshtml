@@ -1,0 +1,66 @@
+@model AssoFlex.ViewModels.DashboardViewModel
+
+@{
+    ViewBag.Title = "Dashboard Admin";
+    Layout = "_Layout";
+}
+
+<div class="container p-5 my-5 bg-dark text-white" style="text-align: center;">
+    <h1>Liste des associations</h1>
+</div>
+<div class="container mt-xl-auto">
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>SIRET</th>
+            <th>Inscription</th>
+            <th></th>
+        </tr>
+        </thead>
+        
+        @foreach (var association in Model.Associations)
+        {
+            <tr>
+                <td>@association.Id</td>
+                <td>@association.Nom</td>
+                <td>@association.NumSiret</td>
+                <td>@association.DateInscription</td>
+                <td><a class="link-primary" href=@Url.Action("DetailsAssociation","Association",new {id = @association.Id})> Voir Détails</a></td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="container p-5 my-5 bg-dark text-white" style="text-align: center;">
+    <h1>Liste des membres</h1>
+</div>
+<div class="container mt-xl-auto">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        
+        @foreach (var user in Model.Utilisateurs)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Prenom</td>
+                <td>@user.Nom</td>
+                <td>@user.Adresse</td>
+                <td>@user.Telephone</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                @* <td><a class="link-primary" href=@Url.Action("DetailsAssociation","Association",new {id = @association.Id})> Voir Détails</a></td> *@
+            </tr>
+        }
+    </table>
+</div>
