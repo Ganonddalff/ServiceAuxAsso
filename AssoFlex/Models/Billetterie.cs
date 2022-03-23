@@ -7,17 +7,15 @@ using Microsoft.VisualBasic.CompilerServices;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace ServiceBilletterie.Models
+namespace AssoFlex.Models
 {
     public partial class Billetterie
-    
     {
-        
-        public short Id { get; set; }
+        public int Id { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
 
-        public short IdBillet { get; set; }
-        public virtual Evenements IdBilletNavigation { get; set; }
+        public int IdBillet { get; set; }
+        public virtual Evenement IdBilletNavigation { get; set; }
     }
 }

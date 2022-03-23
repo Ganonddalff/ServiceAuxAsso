@@ -5,12 +5,13 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace ServiceBilletterie.Models
+namespace AssoFlex.Models
 {
-    public class Evenements
+    public class Evenement
     {
-        public short IdEvent { get; set; }
-        public string Organisateur { get; set; }
+        public int IdEvent { get; set; }
+        public int OrganisateurId { get; set; }
+        public Association Organisateur { get; set; }
         public string NomEvent { get; set; }
         public DateTime DateDebutEvent { get; set; }
         public int NbTickets { get; set; }
@@ -19,6 +20,6 @@ namespace ServiceBilletterie.Models
         public bool Statut { get; set; }
         public string CategorieEvent { get; set; }
 
-        public virtual Billetterie Billetterie { get; set; }
+        // public virtual Billetterie Billetterie { get; set; }
     }
 }

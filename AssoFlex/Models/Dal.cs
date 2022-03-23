@@ -302,5 +302,79 @@ namespace AssoFlex.Models
             crowdfundingToUpdate.DateFinProjet = DateFin;
 
         }
+
+        public List<Billetterie> getAllBilletteries()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Billetterie getBilletterie(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Billetterie CreateBilletterie(string Nom, string Prenom)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBilletterie(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateBilletterie(int Id, string Nom, string Prenom)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Evenement> getAllEvenements()
+        {
+            return _assoFlex.Evenements.ToList();
+        }
+
+        public Evenement getEvenement(int Id)
+        {
+            return _assoFlex.Evenements.Find(Id);
+        }
+
+        public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
+            string Lieu, string categorie)
+        {
+            Evenement eventToAdd = new Evenement()
+            {
+                Organisateur = organisateur,
+                NomEvent = nom,
+                NbTickets = nbTickets,
+                DateDebutEvent = DateDebut,
+                DateFinEvent = DateFin,
+                LieuEvent = Lieu,
+                CategorieEvent = categorie,
+                Statut = true
+            };
+            this._assoFlex.Evenements.Add(eventToAdd);
+            this._assoFlex.SaveChanges();
+            return eventToAdd;
+        }
+
+        public void DeleteEvenement(int Id)
+        {
+            Evenement eventToDelete = this._assoFlex.Evenements.Find(Id);
+            this._assoFlex.Evenements.Remove(eventToDelete);
+            this._assoFlex.SaveChanges();
+        }
+
+        public void UpdateEvenement(int Id, string nom, int nbTicket, DateTime DateDebut, DateTime DateFin,
+            string Lieu, string categorie)
+        {
+            Evenement eventToUpdate = this._assoFlex.Evenements.Find(Id);
+            eventToUpdate.NomEvent = nom;
+            eventToUpdate.NbTickets = nbTicket;
+            eventToUpdate.DateDebutEvent = DateDebut;
+            eventToUpdate.DateFinEvent = DateFin;
+            eventToUpdate.LieuEvent = Lieu;
+            eventToUpdate.CategorieEvent = categorie;
+            this._assoFlex.SaveChanges();
+        }
     }
 }
