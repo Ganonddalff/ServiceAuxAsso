@@ -29,6 +29,15 @@ namespace AssoFlex.Models
                 "Guytri", "Kastane", "31 rue de l'aurore", 0755172316, "gkastane@gmail.com",
                 EncodeMD5("11111"), "Admin");
             this.CreateUtilisateur(
+                "Mateusz",
+                "Tirel",
+                "19, rue des petites murailles",
+                0667127014,
+                "admin",
+                EncodeMD5("admin"),
+                "admin"
+            );
+            this.CreateUtilisateur(
                 "Paul", "Jean", "78 rue de l'aurore", 0755172320, "pjean@gmail.com",
                 EncodeMD5("22222"), "Admin-Asso");
             this.CreateUtilisateur(

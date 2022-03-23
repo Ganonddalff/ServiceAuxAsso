@@ -14,9 +14,9 @@ namespace AssoFlex.Controllers
         }
         
         // GET
-        public ActionResult Index()
-        {
-            return View();
-        }
+        // public ActionResult Index()
+        // {
+        //     return View();
+        // }
     }
 }
