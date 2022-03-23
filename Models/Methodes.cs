@@ -47,7 +47,7 @@ public int CreerEvenement(string orga,string nomEvent, string lieu, string cat, 
  return nouvelEvenement.IdEvent;
 }
 
-public void ModifierEvent(int id, string nom, string lieu)
+public int ModifierEvent(int id, string nom, string lieu, DateTime datedebut, DateTime datefin)
 {
     Evenements eventToChange = _eventContext.Evenements.Find(id);
 
@@ -55,10 +55,12 @@ public void ModifierEvent(int id, string nom, string lieu)
     {
         eventToChange.LieuEvent = lieu;
         eventToChange.NomEvent = nom;
+        eventToChange.DateDebutEvent = datedebut;
+        eventToChange.DateFinEvent = datefin;
         _eventContext.SaveChanges();
     }
 
-
+    return eventToChange.IdEvent;
 }
 
 public void ModifierEvent(Evenements eventUpD)
@@ -69,6 +71,23 @@ public void ModifierEvent(Evenements eventUpD)
         _eventContext.SaveChanges();
     }
 }
+
+public Evenements GetEvent (int id)
+{
+    Evenements eventToGet = _eventContext.Evenements.Find(id);
+    return eventToGet;
+}
+
+public void deleteEvent(int id)
+{
+    Evenements eventToDelete = _eventContext.Evenements.Find(id);
+    if (eventToDelete != null)
+    {
+        _eventContext.Evenements.Remove(eventToDelete);
+        _eventContext.SaveChanges();
+    }
+}
+
 public void Dispose()
 {
     _eventContext.Dispose();

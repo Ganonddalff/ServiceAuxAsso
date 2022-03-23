@@ -15,8 +15,33 @@ namespace ServiceBilletterie.Controllers
             return View(listerMesEvenements);
         }
 
+        public ActionResult RechercheEvent(string nomEvent)
+        {
+            Methodes meth = new Methodes();
+            List<Evenements> uneListeTemporaire = meth.ObtenirEvent();
+            List<Evenements> resultatRecherche;
+            foreach (var nomEvent in uneListeTemporaire)
+            {
+                resultatRecherche.Add(Evenements);
+            }
+
+            return View(resultatRecherche);
+        }
+
         public ActionResult AchatTicket()
         {
+            return View();
+        }
+        
+        public ActionResult ModifEvent(Evenements eventModifie)
+        {
+            Methodes _methodes = new Methodes();
+            var eventAModif = _methodes.ModifierEvent(
+                eventModifie.IdEvent,
+                eventModifie.NomEvent,
+                eventModifie.LieuEvent,
+                eventModifie.DateDebutEvent,
+                eventModifie.DateFinEvent);
             return View();
         }
 
