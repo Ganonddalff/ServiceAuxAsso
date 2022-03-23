@@ -941,28 +941,31 @@
     ]
   },
   "packageFolders": {
-    "/home/guytri/.nuget/packages/": {}
+    "C:\\Users\\PKAMMEGNE\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/AssoFlex.csproj",
+      "projectUniqueName": "C:\\Users\\PKAMMEGNE\\Documents\\Paul\\ISIKA\\Formation ISIKA\\Partie 2\\Projet 2\\ServiceAuxAsso\\AssoFlex\\AssoFlex.csproj",
       "projectName": "AssoFlex",
-      "projectPath": "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/AssoFlex.csproj",
-      "packagesPath": "/home/guytri/.nuget/packages/",
-      "outputPath": "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/",
+      "projectPath": "C:\\Users\\PKAMMEGNE\\Documents\\Paul\\ISIKA\\Formation ISIKA\\Partie 2\\Projet 2\\ServiceAuxAsso\\AssoFlex\\AssoFlex.csproj",
+      "packagesPath": "C:\\Users\\PKAMMEGNE\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PKAMMEGNE\\Documents\\Paul\\ISIKA\\Formation ISIKA\\Partie 2\\Projet 2\\ServiceAuxAsso\\AssoFlex\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/guytri/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\PKAMMEGNE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -974,6 +977,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
@@ -1008,7 +1012,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.417/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

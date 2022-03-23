@@ -25,7 +25,7 @@ namespace AssoFlex.Models
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=guytri;password=aaaaa;database=Assoflex");
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=Knph-Nmas27;database=Assoflex");
             }
             else
             {
