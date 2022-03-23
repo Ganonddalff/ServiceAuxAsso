@@ -1,5 +1,6 @@
+@using System.Security.Claims
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,15 +9,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-	<link href="~/css/style.css" rel="stylesheet">
+	<script src="~/plugins/fontawesome-free-6.1.0-web/css/all.min.css"></script>
+	@* <link href="~/css/style.css" rel="stylesheet"> *@
+	@* <link rel="stylesheet" href="~/css/style-2.css"/> *@
 </head>
 
 <body>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container-fluid">
-    	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="assets/img/logo_startup.png" alt="logo"></a>
+    	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="~/assets/img/logo_startup.png" alt="logo"></a>
     	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
     		<span class="navbar-toggler-icon"></span>
     	</button>
@@ -25,8 +27,11 @@
 			    <a class="nav-item nav-link" href=@Url.Action("Index", "Home")>Acceuil</a>
 			    <a class="nav-item nav-link" href="#">Présentation</a>
 			    <div class="nav-item dropdown">
-				    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Nos services</a>
-				    <div class="dropdown-menu">
+				    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" 
+				       aria-haspopup="true" aria-expanded="false" href="#">
+					    Nos services
+				    </a>
+				    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					    <a class="dropdown-item" href=@Url.Action("Index", "Crowdfunding")>Crowdfunding</a> 
 					    <a class="dropdown-item" href=@Url.Action("Index", "Evenement")>Évènement</a> 
 				    </div>
@@ -34,36 +39,39 @@
 			     <a class="nav-link" href=@Url.Action("Index", "Association")>Nos associations</a>
 		    </div>
 		    <div class="navbar-nav ms-auto">
-			    <a class="nav-item nav-link" href="#" style="color: #0c63e4; font-weight:700;">Inscrit Ton Asso</a> @* @Url.Action("CreerAsso", "Association") *@
+			    <a class="nav-item nav-link" href=@Url.Action("Index","Souscription") style="color: #0c63e4; font-weight:700;">Inscris Ton Asso</a> @* @Url.Action("CreerAsso", "Association") *@
 			    @{
 				    if (User.Identity.IsAuthenticated)
 				    {
 					    <div class="nav-item dropdown">
-						    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Bonjour @User.Identity.Name</a>
-						    <div class="dropdown-menu">
+						    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#userResponsive">Bonjour @User.Identity.Name</a>
+						    <div class="dropdown-menu" id="userResponsive">
 							    @if (User.IsInRole("Admin"))
 							    {
-								    <a class="dropdown-item" href=@Url.Action("Index", "Dashboard")>Dashboard</a>
+								    <a class="dropdown-item" href=@Url.Action("DashboardAdmin", "Dashboard")>Dashboard</a>
 							    }else if (User.IsInRole("Admin-Asso"))
 							    {
-								    <a class="dropdown-item" href="#">Dashboard</a>
+								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>Profil</a>
 							    }
 							    else
 							    {
-								    <a class="dropdown-item" href="#">Dashboard</a>
+								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>Profil</a>
 							    }
 							    
-							    <a class="dropdown-divider"></a>
-							    <a class="nav-link dropdown-item" role="menuitem" href=@Url.Action("Deconnexion", "Login")>Se Déconnecter</a>
+							    <div class="dropdown-divider"></div>
+							    <a class="nav-link dropdown-item" role="menuitem" href=@Url.Action("Deconnexion", "Login")><b>Se Déconnecter</b></a>
 						    </div>
 					    </div>
 				    }
 				    else
 				    {
-					    <a class="nav-item nav-link" role="button" href=@Url.Action("Index", "Login") style="color: #157347; font-weight:700;">Se Connecter</a>
+					    <div class="dropdown">
+						    <a class="nav-item nav-link" href=@Url.Action("Index", "Login") style="color: #157347; font-weight:700;"><b>Se Connecter</b></a>
+					    </div>
 				    }
 			    }
 		    </div>
+		    
 	    </div>
     </div>
 </nav>
@@ -112,6 +120,12 @@
 		</div>
 	</div>
 </footer>
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/popper.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/main.js"></script>
+
 </body>
 </html>
 

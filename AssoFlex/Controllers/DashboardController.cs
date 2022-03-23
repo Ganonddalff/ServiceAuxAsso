@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AssoFlex.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
         private IDal _dal;
@@ -15,15 +14,26 @@ namespace AssoFlex.Controllers
             this._dal = new Dal();
         }
         
+        [Authorize(Roles = "Admin")]
         // GET
-        public IActionResult Index()
+        public IActionResult DashboardAdmin()
         {
             DashboardViewModel dVM = new DashboardViewModel()
             {
                 Associations = _dal.getAllAssociations(),
-                Utilisateurs = _dal.getAllUtilisateurs()
+                Utilisateurs = _dal.getAllUtilisateurs(),
+                Adhesions = _dal.getAllAdhesions()
             };
             return View(dVM);
         }
+        
+        [Authorize(Roles = "Admin-Asso, Basic")]
+        // GET
+        public IActionResult Profil(int id)
+        {
+            return View();
+        }
+        
+        
     }
 }

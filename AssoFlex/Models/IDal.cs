@@ -21,11 +21,23 @@ namespace AssoFlex.Models
         Association getAssociation(int id);
         Association getAssociation(string idStr);
         List<Association> getAllAssociations();
-        Association CreateAssociation(string nom, string numSiret,
+        Association CreateAssociation(string nom, string numSiret, int idGerant,
              string description="");
         void UpdateAssociation(int id, string nom, string numSiret,
              string description);
         void DeleteAssociation(int id);
         
+        // ************************************ //
+        List<Adhesion> getAllAdhesions();
+        Adhesion CreateAdhesion(int idAsso, int idUser);
+        void UpdateAdhesion();
+        void DeleteAdhesion(int id);
+        
+        // ************************************ //
+        List<Souscription> getAllSouscriptions();
+        Souscription CreateSouscrition(int id, string formule);
+        void UpdateSouscription();
+        void DeleteSouscription(int id);
+
     }
 }

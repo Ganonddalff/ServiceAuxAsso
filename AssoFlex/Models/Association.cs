@@ -10,7 +10,7 @@ namespace AssoFlex.Models
         public string NumSiret { get; set; }
         public DateTime DateInscription { get; set; }
         public string Description { get; set; }
-        // public Utilisateur AdminAsso { get; set; }
-        // public List<Utilisateur> Adherent { get; set; }
+        public int AdminAssoId { get; set; }
+        public Utilisateur AdminAsso { get; set; }
     }
 }
