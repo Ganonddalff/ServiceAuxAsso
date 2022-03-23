@@ -35,7 +35,7 @@ namespace AssoFlex.Models
                 0667127014,
                 "admin",
                 EncodeMD5("admin"),
-                "admin"
+                "Admin"
             );
             this.CreateUtilisateur(
                 "Paul", "Jean", "78 rue de l'aurore", 0755172320, "pjean@gmail.com",
