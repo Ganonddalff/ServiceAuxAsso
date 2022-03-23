@@ -62,4 +62,8 @@
 /mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Evenement/Index.cshtml.g.cs
 /mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Association/Index.cshtml.g.cs
 /mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Association/DetailsAssociation.cshtml.g.cs
-/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Dashboard/Index.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Dashboard/DashboardAdmin.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Dashboard/Profil.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_LayoutDashboard.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Souscription/Index.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Paiement/Index.cshtml.g.cs

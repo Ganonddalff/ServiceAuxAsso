@@ -8,6 +8,14 @@ namespace AssoFlex.Models
     {
         public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<Association> Associations { get; set; }
+        public DbSet<Adhesion> Adhesions { get; set; }
+        public DbSet<Souscription> Souscriptions { get; set; }
+        
+        public DbSet<Crowdfunding> Crowdfundings { get; set; }
+        
+        public DbSet<Contrepartie> Contreparties { get; set; }
+        
+        public DbSet<Contribution> Contributions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

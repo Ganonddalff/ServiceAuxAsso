@@ -7,5 +7,6 @@ namespace AssoFlex.ViewModels
     {
         public List<Utilisateur> Utilisateurs{ get; set; }
         public List<Association> Associations { get; set; }
+        public List<Adhesion> Adhesions { get; set; }
     }
 }

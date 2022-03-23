@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AssoFlex.Models;
+using AssoFlex.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssoFlex.Controllers
@@ -26,6 +28,12 @@ namespace AssoFlex.Controllers
         {
             Association association = _dal.getAssociation(id);
             return View(association);
+        }
+        
+        public ActionResult AddAdhesion(int idAsso, int idUser)
+        {
+            _dal.CreateAdhesion(idAsso, idUser);
+            return RedirectToAction("Index");
         }
     }
 }

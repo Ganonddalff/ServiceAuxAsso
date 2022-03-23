@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace AssoFlexV1.Controllers
+namespace AssoFlex.Controllers
 {
-    public class CrowdfundingController : Controller
+    public class PaiementController : Controller
     {
         // GET
         public IActionResult Index()
         {
-            
             return View();
         }
     }

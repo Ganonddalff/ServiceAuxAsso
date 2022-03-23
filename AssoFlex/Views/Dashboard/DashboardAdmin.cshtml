@@ -2,20 +2,21 @@
 
 @{
     ViewBag.Title = "Dashboard Admin";
-    Layout = "_Layout";
+    Layout = "_LayoutDashboard";
 }
 
 <div class="container p-5 my-5 bg-dark text-white" style="text-align: center;">
     <h1>Liste des associations</h1>
 </div>
-<div class="container mt-xl-auto">
-    <table class="table">
+<div class="container mt-auto">
+    <table class="table-responsive">
         <thead class="table-dark">
         <tr>
             <th>ID</th>
             <th>Nom</th>
             <th>SIRET</th>
             <th>Inscription</th>
+            <th>Administrateur</th>
             <th></th>
         </tr>
         </thead>
@@ -27,7 +28,9 @@
                 <td>@association.Nom</td>
                 <td>@association.NumSiret</td>
                 <td>@association.DateInscription</td>
+                <th>@association.AdminAsso.Prenom @association.AdminAsso.Nom</th>
                 <td><a class="link-primary" href=@Url.Action("DetailsAssociation","Association",new {id = @association.Id})> Voir Détails</a></td>
+                <td></td>
             </tr>
         }
     </table>
@@ -35,18 +38,18 @@
 <div class="container p-5 my-5 bg-dark text-white" style="text-align: center;">
     <h1>Liste des membres</h1>
 </div>
-<div class="container mt-xl-auto">
-    <table class="table">
+<div class="container mt-auto">
+    <table class="table-responsive">
         <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>Adresse</th>
-                <th>Telephone</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>Prenom</th>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Telephone</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
         </thead>
         
         @foreach (var user in Model.Utilisateurs)
@@ -59,6 +62,34 @@
                 <td>@user.Telephone</td>
                 <td>@user.Email</td>
                 <td>@user.Role</td>
+                @* <td><a class="link-primary" href=@Url.Action("DetailsAssociation","Association",new {id = @association.Id})> Voir Détails</a></td> *@
+            </tr>
+        }
+    </table>
+</div>
+<div class="container p-5 my-5 bg-dark text-white" style="text-align: center;">
+    <h1>Liste des adhésions</h1>
+</div>
+<div class="container mt-sm-auto">
+    <table class="table-responsive">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Associaiton</th>
+                <th>Utilisateur</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+            </tr>
+        </thead>
+        
+        @foreach (var adh in Model.Adhesions)
+        {
+            <tr>
+                <td>@adh.Id</td>
+                <td>@adh.Association.Nom</td>
+                <td>@adh.Utilisateur.Prenom @adh.Utilisateur.Nom</td>
+                <td>@adh.DateDebut</td>
+                <td>@adh.DateFin</td>
                 @* <td><a class="link-primary" href=@Url.Action("DetailsAssociation","Association",new {id = @association.Id})> Voir Détails</a></td> *@
             </tr>
         }
