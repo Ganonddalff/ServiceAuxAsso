@@ -57,7 +57,7 @@ namespace AssoFlex.Models
         // ******************************** //
         List<Evenement> getAllEvenements();
         Evenement getEvenement(int Id);
-        Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, 
+        Evenement CreateEvenement(int organisateurId, string nom, int nbTickets, 
             DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
         void DeleteEvenement(int Id);
         void UpdateEvenement(int Id, string nom, int nbTicket, 

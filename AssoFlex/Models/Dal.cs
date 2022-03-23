@@ -338,12 +338,12 @@ namespace AssoFlex.Models
             return _assoFlex.Evenements.Find(Id);
         }
 
-        public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
+        public Evenement CreateEvenement(int organisateurId, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
             string Lieu, string categorie)
         {
             Evenement eventToAdd = new Evenement()
             {
-                Organisateur = organisateur,
+                OrganisateurId = organisateurId,
                 NomEvent = nom,
                 NbTickets = nbTickets,
                 DateDebutEvent = DateDebut,

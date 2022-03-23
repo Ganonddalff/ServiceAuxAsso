@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -9,6 +10,7 @@ namespace AssoFlex.Models
 {
     public class Evenement
     {
+        [Key]
         public int IdEvent { get; set; }
         public int OrganisateurId { get; set; }
         public Association Organisateur { get; set; }
@@ -19,7 +21,7 @@ namespace AssoFlex.Models
         public string LieuEvent { get; set; }
         public bool Statut { get; set; }
         public string CategorieEvent { get; set; }
-
+        
         // public virtual Billetterie Billetterie { get; set; }
     }
 }

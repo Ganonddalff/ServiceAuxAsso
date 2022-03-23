@@ -9,13 +9,14 @@ using Microsoft.VisualBasic.CompilerServices;
 
 namespace AssoFlex.Models
 {
-    public partial class Billetterie
+    public class Billetterie
     {
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-
-        public int IdBillet { get; set; }
-        public virtual Evenement IdBilletNavigation { get; set; }
+        public int EvenementId { get; set; }
+        public Evenement Evenement { get; set; }
+        // public int IdBillet { get; set; }
+        // public virtual Evenement IdBilletNavigation { get; set; }
     }
 }

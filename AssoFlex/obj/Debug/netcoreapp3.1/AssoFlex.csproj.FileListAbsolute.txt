@@ -67,3 +67,9 @@
 /mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_LayoutDashboard.cshtml.g.cs
 /mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Souscription/Index.cshtml.g.cs
 /mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Paiement/Index.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Pages/Billetterie/Index.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Evenement/AchatTicket.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Evenement/CreerEvent.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Evenement/Error.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Evenement/ModifEvent.cshtml.g.cs
+/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/obj/Debug/netcoreapp3.1/Razor/Views/Evenement/RechercheEvent.cshtml.g.cs
