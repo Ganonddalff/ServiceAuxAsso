@@ -1,0 +1,131 @@
+@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AssoFlex</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/plugins/fontawesome-free-6.1.0-web/css/all.min.css"></script>
+	@* <link href="~/css/style.css" rel="stylesheet"> *@
+	@* <link rel="stylesheet" href="~/css/style-2.css"/> *@
+</head>
+
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container-fluid">
+    	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="~/assets/img/logo_startup.png" alt="logo"></a>
+    	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+    		<span class="navbar-toggler-icon"></span>
+    	</button>
+	    <div class="collapse navbar-collapse" id="navbarResponsive">
+		    <div class="navbar">
+			    <a class="nav-item nav-link" href=@Url.Action("Index", "Home")>Acceuil</a>
+			    <a class="nav-item nav-link" href="#">Présentation</a>
+			    <div class="nav-item dropdown">
+				    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" 
+				       aria-haspopup="true" aria-expanded="false" href="#">
+					    Nos services
+				    </a>
+				    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					    <a class="dropdown-item" href=@Url.Action("Index", "Crowdfunding")>Crowdfunding</a> 
+					    <a class="dropdown-item" href=@Url.Action("Index", "Evenement")>Évènement</a> 
+				    </div>
+			    </div>
+			     <a class="nav-link" href=@Url.Action("Index", "Association")>Nos associations</a>
+		    </div>
+		    <div class="navbar-nav ms-auto">
+			    <a class="nav-item nav-link" href=@Url.Action("Index","Souscription") style="color: #0c63e4; font-weight:700;">Inscris Ton Asso</a> @* @Url.Action("CreerAsso", "Association") *@
+			    @{
+				    if (User.Identity.IsAuthenticated)
+				    {
+					    <div class="nav-item dropdown">
+						    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#userResponsive">Bonjour @User.Identity.Name</a>
+						    <div class="dropdown-menu" id="userResponsive">
+							    @if (User.IsInRole("Admin"))
+							    {
+								    <a class="dropdown-item" href=@Url.Action("DashboardAdmin", "Dashboard")>Dashboard</a>
+							    }else if (User.IsInRole("Admin-Asso"))
+							    {
+								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>Profil</a>
+							    }
+							    else
+							    {
+								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>Profil</a>
+							    }
+							    
+							    <div class="dropdown-divider"></div>
+							    <a class="nav-link dropdown-item" role="menuitem" href=@Url.Action("Deconnexion", "Login")><b>Se Déconnecter</b></a>
+						    </div>
+					    </div>
+				    }
+				    else
+				    {
+					    <div class="dropdown">
+						    <a class="nav-item nav-link" href=@Url.Action("Index", "Login") style="color: #157347; font-weight:700;"><b>Se Connecter</b></a>
+					    </div>
+				    }
+			    }
+		    </div>
+		    
+	    </div>
+    </div>
+</nav>
+<div id="main">
+	@* <div id="menu"> *@
+	@*     <ul> *@
+	@*         @RenderSection("Menu", required:false) *@
+	@*     </ul> *@
+	@* </div> *@
+	<div id="content">
+		@RenderBody()
+	</div>
+</div>
+<!--- Footer -->
+<footer>
+	<div class="container-fluid padding">
+		<div class="row text-center">
+			<div class="col-md-4">
+				@* <img src="img/w3newbie.png"> *@
+				<hr class="light">
+				<p>+33 (0)7 55 17 23 16</p>
+				<p>contact@assoflex.com</p>
+				<p>31 rue de l'aurore</p>
+				<p>78100, Saint-Germain-en-Laye, France</p>
+			</div>
+			<div class="col-md-4">
+				<hr class="light">
+				<h5>Nos horaires</h5>
+				<hr class="light">
+				<p>Lundi, Mardi : 9h - 17h</p>
+				<p>Mercredi,Jeudi : 12h - 17h</p>
+				<p>Vendredi : Fermé</p>
+			</div>
+			<div class="col-md-4">
+				<hr class="light">
+				<h5>Ville</h5>
+				<hr class="light">
+				<p>78100, Saint-Germain-en-Laye, France</p>
+				<p>75000, Paris, France</p>
+				<p>51100 , Reims, France</p>
+			</div>
+			<div class="col-12">
+				<hr class="light-100">
+				<h5>&COPY; @DateTime.Now.Year - Assoflex.com</h5>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/popper.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/main.js"></script>
+
+</body>
+</html>
+
