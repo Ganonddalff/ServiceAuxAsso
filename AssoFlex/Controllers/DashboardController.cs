@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +21,7 @@ namespace AssoFlex.Controllers
         {
             DashboardViewModel dVM = new DashboardViewModel()
             {
+                Admin = _dal.getUtilisateur(User.FindFirst(ClaimTypes.NameIdentifier).Value),
                 Associations = _dal.getAllAssociations(),
                 Utilisateurs = _dal.getAllUtilisateurs(),
                 Adhesions = _dal.getAllAdhesions()
