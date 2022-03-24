@@ -24,4 +24,10 @@ namespace AssoFlex.Models
         
         // public virtual Billetterie Billetterie { get; set; }
     }
+
+    enum TypeEvent
+    {
+        
+    }
+    
 }

@@ -27,6 +27,9 @@
                     {
                         <div class="form-floating mb-3">
                             @Html.Label("Nom de l'évènement : ")
+                            </div>
+                        <br/>
+                        <div class="form-floating mb-3">
                             @Html.TextBoxFor(model => model.NomEvent, new {@class = "form-control", placeholder = "ex : Birdy Nam Nam en concert"})
                             @Html.ValidationMessageFor(model => model.NomEvent)
                         </div>
@@ -35,30 +38,46 @@
                         
                         <div class="form-floating mb-3">
                             @Html.Label("Type d'évènement : ")
+                            </div>
+                        <br/>
+                        <div class="form-floating mb-3">
+                            
                             @Html.TextBoxFor(model => model.CategorieEvent, new {@class = "form-control", placeholder = "ex : Concert"})
                             @Html.ValidationMessageFor(model => model.CategorieEvent)
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
                             @Html.Label("Lieu : ")
+                            </div>
+                                                    <br/>
+                        <div class="form-floating mb-3">
                             @Html.TextBoxFor(model => model.LieuEvent, new {@class = "form-control", placeholder = "ex : Nom de la salle de concert"})
                             @Html.ValidationMessageFor(model => model.LieuEvent)
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
                             @Html.Label("Date et heure de début de l'évènement : ")
+                            </div>
+                                                    <br/>
+                                                    <div class="form-floating mb-3">
                             @Html.TextBoxFor(model => model.DateDebutEvent, new {@class = "form-control", placeholder = "AAAA/MM/JJ HH,MM,SS"})
                             @Html.ValidationMessageFor(model => model.DateDebutEvent)
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
                             @Html.Label("Date et heure de fin : ")
+                            </div>
+                                                    <br/>
+                                                    <div class="form-floating mb-3">
                             @Html.TextBoxFor(model => model.DateFinEvent, new {@class = "form-control", placeholder = "AAAA/MM/JJ HH,MM,SS"})
                             @Html.ValidationMessageFor(model => model.DateFinEvent)
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
                             @Html.Label("Nombre de places disponibles à la vente : ")
+                            </div>
+                                                    <br/>
+                                                    <div class="form-floating mb-3">
                             @Html.TextBoxFor(model => model.NbTickets, new {@class = "form-control", placeholder = "ex : 150 "})
                             @Html.ValidationMessageFor(model => model.NbTickets)
                         </div>

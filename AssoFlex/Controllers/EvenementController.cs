@@ -27,11 +27,18 @@ namespace AssoFlex.Controllers
             return View(listerMesEvenements);
         }
 
+        // public ActionResult Details(int id)
+        // {
+        //     EvenementViewModel evm = new EvenementViewModel();
+        //     evm = _dal.getEvenementViewModel(id);
+        //     return View(evm);
+        // }
+
         public ActionResult Details(int id)
         {
-            EvenementViewModel evm = new EvenementViewModel();
-            evm = _dal.getEvenementViewModel(id);
-            return View(evm);
+            Evenement monEvent = _dal.getEvenement(id);
+            monEvent.Organisateur = _dal.getAssociation(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            return View(monEvent);
         }
         //GET
         public ActionResult RechercheEvent(string critereRecherche)
