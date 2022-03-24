@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace AssoFlexV1.Controllers
+namespace AssoFlex.Controllers
 {
     public class CrowdfundingController : Controller
     {

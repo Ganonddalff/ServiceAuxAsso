@@ -16,6 +16,10 @@ namespace AssoFlex.Models
         public DbSet<Contrepartie> Contreparties { get; set; }
         
         public DbSet<Contribution> Contributions { get; set; }
+        
+        public DbSet<Billetterie> Billetteries { get; set; }
+        
+        public DbSet<Evenement> Evenements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -46,6 +46,21 @@ namespace AssoFlex.Models
         Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut, DateTime DateFin);
         void DeleteCrowdfunding(int Id);
         void UpdateCrowdfunding(int Id, string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateFin);
-
+        
+        // ******************************** //
+        List<Billetterie> getAllBilletteries();
+        Billetterie getBilletterie(int Id);
+        Billetterie CreateBilletterie(string Nom, string Prenom);
+        void DeleteBilletterie(int Id);
+        void UpdateBilletterie(int Id, string Nom, string Prenom);
+        
+        // ******************************** //
+        List<Evenement> getAllEvenements();
+        Evenement getEvenement(int Id);
+        Evenement CreateEvenement(int organisateurId, string nom, int nbTickets, 
+            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
+        void DeleteEvenement(int Id);
+        void UpdateEvenement(int Id, string nom, int nbTicket, 
+            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
     }
 }

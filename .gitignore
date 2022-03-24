@@ -1,1 +1,5 @@
-/AssoFlex/bin/
+/bin
+/AssoFlex/bin
+/obj
+/AssoFlex/obj
+
