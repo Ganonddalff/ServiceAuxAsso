@@ -69,6 +69,16 @@ namespace AssoFlex.Models
             4,
             "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations, soirées privées etc.");
 
+            this.CreateEvenement(
+                this.getAssociation(2),
+                "Concert super",
+                200,
+                new DateTime(2022, 04, 02),
+                new DateTime(2022, 04, 03),
+                "Paris",
+                "Concert"
+            );
+
         }
 
         public Utilisateur getUtilisateur(int id)
@@ -154,6 +164,11 @@ namespace AssoFlex.Models
         public Association getAssociation(string idStr)
         {
             return int.TryParse(idStr, out var id) ? this.getAssociation(id) : null;
+        }
+
+        public int getAssociationID(int idAdmin)
+        {
+            return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == idAdmin).Id;
         }
 
         public List<Association> getAllAssociations()
@@ -347,12 +362,12 @@ namespace AssoFlex.Models
             return _assoFlex.Evenements.Find(Id);
         }
 
-        public Evenement CreateEvenement(int organisateurId, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
+        public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
             string Lieu, string categorie)
         {
             Evenement eventToAdd = new Evenement()
             {
-                OrganisateurId = organisateurId,
+                Organisateur = organisateur,
                 NomEvent = nom,
                 NbTickets = nbTickets,
                 DateDebutEvent = DateDebut,
@@ -373,17 +388,26 @@ namespace AssoFlex.Models
             this._assoFlex.SaveChanges();
         }
 
-        public void UpdateEvenement(int Id, string nom, int nbTicket, DateTime DateDebut, DateTime DateFin,
+        public Evenement UpdateEvenement(int Id, string nom, int nbTicket, DateTime DateDebut, DateTime DateFin,
             string Lieu, string categorie)
         {
             Evenement eventToUpdate = this._assoFlex.Evenements.Find(Id);
-            eventToUpdate.NomEvent = nom;
-            eventToUpdate.NbTickets = nbTicket;
-            eventToUpdate.DateDebutEvent = DateDebut;
-            eventToUpdate.DateFinEvent = DateFin;
-            eventToUpdate.LieuEvent = Lieu;
-            eventToUpdate.CategorieEvent = categorie;
-            this._assoFlex.SaveChanges();
+            if (eventToUpdate != null)
+            {
+                eventToUpdate.NomEvent = nom;
+                eventToUpdate.NbTickets = nbTicket;
+                eventToUpdate.DateDebutEvent = DateDebut;
+                eventToUpdate.DateFinEvent = DateFin;
+                eventToUpdate.LieuEvent = Lieu;
+                eventToUpdate.CategorieEvent = categorie;
+
+                this._assoFlex.Update(eventToUpdate);
+                this._assoFlex.SaveChanges();
+            }
+
+            return eventToUpdate;
+        }
+        
+
         }
     }
-}

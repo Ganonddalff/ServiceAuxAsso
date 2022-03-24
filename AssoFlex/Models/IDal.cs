@@ -20,6 +20,7 @@ namespace AssoFlex.Models
         // ****************************************** //
         Association getAssociation(int id);
         Association getAssociation(string idStr);
+        int getAssociationID(int idAdmin);
         List<Association> getAllAssociations();
         Association CreateAssociation(string nom, string numSiret, int idGerant,
              string description="");
@@ -57,10 +58,10 @@ namespace AssoFlex.Models
         // ******************************** //
         List<Evenement> getAllEvenements();
         Evenement getEvenement(int Id);
-        Evenement CreateEvenement(int organisateurId, string nom, int nbTickets, 
+        Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, 
             DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
         void DeleteEvenement(int Id);
-        void UpdateEvenement(int Id, string nom, int nbTicket, 
+        Evenement UpdateEvenement(int Id, string nom, int nbTicket, 
             DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
     }
 }

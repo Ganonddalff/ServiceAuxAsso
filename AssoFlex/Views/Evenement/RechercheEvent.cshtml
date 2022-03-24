@@ -4,3 +4,21 @@
     Layout = "_Layout";
 }
 <h4>Rechercher evenement</h4>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Lieu</th>
+        <th>Nom de l'évènement</th>
+        <th>Organisateur</th>
+    </tr>
+    @foreach (var evenements in Model)
+    {
+        <tr>
+            <td>@evenements.DateDebutEvent</td>
+            <td>@evenements.LieuEvent</td>
+            <td>@evenements.NomEvent</td>
+            <td>@evenements.Organisateur.Nom</td>
+        </tr>
+    }
+</table>

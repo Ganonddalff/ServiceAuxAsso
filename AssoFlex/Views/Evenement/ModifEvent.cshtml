@@ -1,6 +1,79 @@
 @model AssoFlex.Models.Evenement
 
 @{
+     
     Layout = "_Layout";
 }
-<h4>Modifier evement</h4>
+
+<title>AssoFlex - Modifier mon évènement</title>
+<h4>Modifier @Model.NomEvent</h4>
+
+       <div class="container">
+
+            <!-- Icon Divider-->
+            @* <div class="divider-custom"> *@
+            @*     <div class="divider-custom-line"></div> *@
+            @*     <div class="divider-custom-icon"><i class="fas fa-star"></i></div> *@
+            @*     <div class="divider-custom-line"></div> *@
+            @* </div> *@
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-7">
+                    @using (Html.BeginForm())
+                    {
+                        <div>@Html.HiddenFor(model =>model.IdEvent)</div>
+                            
+                        <div class="form-floating mb-3">
+                            @*@Html.Label("Nom de l'évènement : ")*@
+                            @Html.TextBoxFor(model => model.NomEvent, new {@class = "form-control", placeholder = @Model.NomEvent})
+                            @Html.ValidationMessageFor(model => model.NomEvent)
+                        </div>
+                        <br/>
+                            
+                        
+                        <div class="form-floating mb-3">
+                            @*@Html.Label("Type d'évènement : ")*@
+                            @Html.TextBoxFor(model => model.CategorieEvent, new {@class = "form-control", placeholder = @Model.CategorieEvent})
+                            @Html.ValidationMessageFor(model => model.CategorieEvent)
+                        </div>
+                        <br/>
+                        <div class="form-floating mb-3">
+                            @*@Html.Label("Lieu : ")*@
+                            @Html.TextBoxFor(model => model.LieuEvent, new {@class = "form-control", placeholder = @Model.LieuEvent})
+                            @Html.ValidationMessageFor(model => model.LieuEvent)
+                        </div>
+                        <br/>
+                        <div class="form-floating mb-3">
+                            @*
+                            @Html.Label("Date et heure de début de l'évènement : ")
+                            *@
+                            @Html.TextBoxFor(model => model.DateDebutEvent, new {@class = "form-control", placeholder = @Model.DateDebutEvent})
+                            @Html.ValidationMessageFor(model => model.DateDebutEvent)
+                        </div>
+                        <br/>
+                        <div class="form-floating mb-3">
+                            @*
+                            @Html.Label("Date et heure de fin : ")
+                            *@
+                            @Html.TextBoxFor(model => model.DateFinEvent, new {@class = "form-control", placeholder = @Model.DateFinEvent})
+                            @Html.ValidationMessageFor(model => model.DateFinEvent)
+                        </div>
+                        <br/>
+                        <div class="form-floating mb-3">
+                            @*
+                            @Html.Label("Nombre de places disponibles à la vente : ")
+                            *@
+                            @Html.TextBoxFor(model => model.NbTickets, new {@class = "form-control", placeholder = @Model.DateFinEvent})
+                            @Html.ValidationMessageFor(model => model.NbTickets)
+                        </div>
+                        <br/>
+
+
+
+
+
+                        <!-- Submit Button-->
+                        <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
+                    }
+                </div>
+            </div>
+        </div>

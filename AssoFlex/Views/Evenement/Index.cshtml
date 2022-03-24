@@ -1,5 +1,6 @@
 @model System.Collections.Generic.List<AssoFlex.Models.Evenement>
 
+
 @{
     Layout = "_Layout";
 }
@@ -8,8 +9,9 @@
 <div>
     <label for="site-search">Search the site:</label>
     <input type="search" id="site-search" name="q">
+    <button class="btn fa-searchengin" type="submit" >Rechercher</button>
     
-    <button>Search</button>
+    
 </div>
 <br/>
 <p>Evènements à venir :</p>
@@ -19,13 +21,15 @@
         <th>Date</th>
         <th>Lieu</th>
         <th>Nom de l'évènement</th>
+        <th>Organisateur</th>
     </tr>
     @foreach (var evenements in Model)
     {
         <tr>
             <td>@evenements.DateDebutEvent</td>
             <td>@evenements.LieuEvent</td>
-            <td>@evenements.NomEvent</td>
+            <td><a href=@Url.Action("Details","Evenement",new {id = @evenements.IdEvent})>@evenements.NomEvent</a></td>
+            <td>@evenements.Organisateur.Nom</td>
         </tr>
     }
 </table>

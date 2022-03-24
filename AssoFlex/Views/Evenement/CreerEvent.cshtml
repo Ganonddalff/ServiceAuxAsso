@@ -1,10 +1,14 @@
+@using AssoFlex.Models
+@using System.Security.Claims
+@using AssoFlex.Controllers
 @model AssoFlex.Models.Evenement
+
 
 @{
     Layout = "_Layout";
 }
 
-<h1>Créez votre évènement </h1>
+<h1 class="page-section-heading text-center mb-0">Créez votre évènement </h1>
 <body>
   <section class="page-section portfolio mt-5">
     @if (User.IsInRole("Admin-Asso"))
@@ -23,18 +27,11 @@
                     {
                         <div class="form-floating mb-3">
                             @Html.Label("Nom de l'évènement : ")
-                            @*
                             @Html.TextBoxFor(model => model.NomEvent, new {@class = "form-control", placeholder = "ex : Birdy Nam Nam en concert"})
-                            *@
                             @Html.ValidationMessageFor(model => model.NomEvent)
                         </div>
                         <br/>
-                            <div class="form-floating mb-3">
-                                @Html.Label("Nom de l'organisateur : ")
-                                @Html.TextBoxFor(model => model.Organisateur,new { @class = "form-control", placeholder = "ex : Good Music Production" })
-                                @Html.ValidationMessageFor(model => model.Organisateur )
-                            </div>  
-                        <br/> 
+                            
                         
                         <div class="form-floating mb-3">
                             @Html.Label("Type d'évènement : ")
