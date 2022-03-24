@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using AssoFlex.ViewModels;
 
 namespace AssoFlex.Models
 {
@@ -360,6 +361,15 @@ namespace AssoFlex.Models
         public Evenement getEvenement(int Id)
         {
             return _assoFlex.Evenements.Find(Id);
+        }
+
+        public EvenementViewModel getEvenementViewModel(int id)
+        {
+            Evenement eventToVM = _assoFlex.Evenements.Find(id);
+            EvenementViewModel evm = new EvenementViewModel();
+            evm.Evenements = eventToVM;
+            return evm;
+            
         }
 
         public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,

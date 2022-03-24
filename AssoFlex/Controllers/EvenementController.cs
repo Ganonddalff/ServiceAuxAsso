@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
 using AssoFlex.Models;
+using AssoFlex.ViewModels;
 
 namespace AssoFlex.Controllers
 {
@@ -28,8 +29,9 @@ namespace AssoFlex.Controllers
 
         public ActionResult Details(int id)
         {
-            Evenement eventDetaille = _dal.getEvenement(id);
-            return View(eventDetaille);
+            EvenementViewModel evm = new EvenementViewModel();
+            evm = _dal.getEvenementViewModel(id);
+            return View(evm);
         }
         //GET
         public ActionResult RechercheEvent(string critereRecherche)
