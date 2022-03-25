@@ -1,6 +1,30 @@
+@model System.Collections.Generic.List<AssoFlex.Models.Crowdfunding>
 @{
     ViewBag.Title = "Crowdfunding";
     Layout = "_Layout";
 }
 
 <h2 class="text-center">PAGE CROWDFUNDING</h2>
+
+ @foreach (var crowdfunding in Model)
+    {
+        <div class="card col-4 m-5" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@crowdfunding.Nom</h5>
+                <h6 class="card-subtitle">@crowdfunding.MontantProjet</h6>
+                <h6 class="card-subtitle">@crowdfunding.DateCreation</h6>
+                <p class="card-text">@crowdfunding.DateDebutProjet - @crowdfunding.DateFinProjet</p>
+                @* <a href=@Url.Action("DetailsAssociation", new {id=@crowdfunding.Id}) class="btn btn-outline-primary">Voir Détails</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href=@Url.Action("AddAdhesion", "Association", new {idAsso=@crowdfunding.Id, idUser=User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Adhérer</a>
+                }
+                else
+                {
+                    <a href=@Url.Action("Index", "Login") class="btn btn-primary">Adhérer</a>
+                }*@
+                
+            </div>
+        </div>
+    }
+</div>
