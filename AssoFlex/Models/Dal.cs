@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using AssoFlex.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace AssoFlex.Models
 {
@@ -355,12 +356,12 @@ namespace AssoFlex.Models
 
         public List<Evenement> getAllEvenements()
         {
-            return _assoFlex.Evenements.ToList();
+            return _assoFlex.Evenements.Include(e=>e.Organisateur).ToList();
         }
 
         public Evenement getEvenement(int Id)
         {
-            return _assoFlex.Evenements.Find(Id);
+            return _assoFlex.Evenements.Include(e=>e.Organisateur).ThenInclude(a=> a.AdminAsso).FirstOrDefault(e=>e.IdEvent==Id);
         }
 
         public EvenementViewModel getEvenementViewModel(int id)

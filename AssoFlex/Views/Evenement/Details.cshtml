@@ -1,3 +1,7 @@
+@using System.Security.Claims
+@using System.Collections
+@using System.ComponentModel
+@using System.Text.Json
 @model AssoFlex.Models.Evenement
 
 
@@ -8,20 +12,22 @@
 <div class="container p-5 my-5 bg-dark text-white text-center">
     <h2>@Model.NomEvent</h2>
     <br/>
-    <h6>Type : @Model.CategorieEvent</h6>
-    
-    
+    <h6>Type : @Enum.GetName(typeof(EventTypes),Convert.ToInt32(Model.CategorieEvent))</h6>
+
+
     <h6>Organisateur : @Model.Organisateur.Nom</h6>
-    
-    
+
+
     <h6>Lieu : @Model.LieuEvent</h6>
     <h6>Commencement : @Model.DateDebutEvent</h6>
     <h6>Fin : @Model.DateFinEvent</h6>
     <h6>Places restantes : @Model.NbTickets</h6>
-    
-    @if (User.IsInRole("Admin-Asso"))
-    {
-        <a href=@Url.Action("ModifEvent","Evenement",new {id = @Model.IdEvent})>Modifier cet évènement</a>
-    }
-</div>
 
+    
+    @if (User.Identity.IsAuthenticated && @Model.Organisateur.AdminAsso.Prenom == @User.Identity.Name)
+    {
+        <a href=@Url.Action("ModifEvent", "Evenement", new {id = @Model.IdEvent})>Modifier cet évènement</a>
+    }
+
+
+</div>

@@ -36,8 +36,15 @@
 
 <br/>
 
-<a href=@Url.Action("AchatTicket", "Evenement")>Acheter un billet</a>
+@if (User.Identity.IsAuthenticated)
+{
 
-<br/>
+    <a href=@Url.Action("AchatTicket", "Evenement")>Acheter un billet</a>
 
-<a href=@Url.Action("CreerEvent")>Créer un évènement</a>
+    <br/>
+
+    <a href=@Url.Action("CreerEvent")>Créer un évènement</a>
+}
+@if (User.Identity.IsAuthenticated.Equals(false)){
+    <a>Connectez-vous pour accéder à plus de services ! </a>
+}

@@ -25,9 +25,16 @@ namespace AssoFlex.Models
         // public virtual Billetterie Billetterie { get; set; }
     }
 
-    enum TypeEvent
+    public enum EventTypes 
     {
-        
+Education = 1,
+Sport = 2,
+Humanitaire = 3,
+Environnement = 4,
+Culture = 5,
+Santé = 6,
+
     }
+    
     
 }

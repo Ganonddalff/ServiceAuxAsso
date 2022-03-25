@@ -34,10 +34,17 @@ namespace AssoFlex.Controllers
         //     return View(evm);
         // }
 
+        // public ActionResult Details(int id)
+        // {
+        //     Evenement monEvent = _dal.getEvenement(id);
+        //     monEvent.Organisateur = _dal.getAssociation(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+        //     return View(monEvent);
+        // }
+        
         public ActionResult Details(int id)
         {
             Evenement monEvent = _dal.getEvenement(id);
-            monEvent.Organisateur = _dal.getAssociation(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            
             return View(monEvent);
         }
         //GET
