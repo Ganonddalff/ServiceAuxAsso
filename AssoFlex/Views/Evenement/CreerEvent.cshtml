@@ -92,6 +92,13 @@
                             @Html.ValidationMessageFor(model => model.NbTickets)
                         </div>
                         <br/>
+                        <div class="form-floating mb-3">
+                            @Html.Label("Prix (€) : ")
+                            @Html.TextBoxFor(model => model.Prix, new {@class = "form-control", placeholder = "ex : 15 "})
+                            @Html.ValidationMessageFor(model => model.Prix)
+                            
+                        </div>
+                        <br/>
                         <!-- Submit Button-->
                         <button class="btn btn-primary btn-xl" type="submit">Créer</button>
                     }

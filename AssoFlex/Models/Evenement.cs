@@ -17,6 +17,8 @@ namespace AssoFlex.Models
         public string NomEvent { get; set; }
         public DateTime DateDebutEvent { get; set; }
         public int NbTickets { get; set; }
+        
+        public int Prix { get; set; }
         public DateTime DateFinEvent { get; set; }
         public string LieuEvent { get; set; }
         public bool Statut { get; set; }

@@ -30,11 +30,15 @@
                         <br/>
                             
                         
-                        <div class="form-floating mb-3">
-                            @*@Html.Label("Type d'évènement : ")*@
-                            @Html.TextBoxFor(model => model.CategorieEvent, new {@class = "form-control", placeholder = @Model.CategorieEvent})
+                        <div class="col-lg-8 col-xl-7">
+                        
+                        
+                            @Html.Label("  Type d'évènement : ")
+                            <select asp-for="@Model.CategorieEvent" asp-items="Html.GetEnumSelectList<EventTypes>()"> </select>
                             @Html.ValidationMessageFor(model => model.CategorieEvent)
+                            <br/>
                         </div>
+
                         <br/>
                         <div class="form-floating mb-3">
                             @*@Html.Label("Lieu : ")*@
@@ -67,7 +71,12 @@
                         </div>
                         <br/>
 
-
+                        <div class="form-floating mb-3">
+                            @Html.Label("Prix (€) : ")
+                            @Html.TextBoxFor(model => model.Prix, new {@class = "form-control", placeholder = "ex : 15 "})
+                            @Html.ValidationMessageFor(model => model.Prix)
+                            
+                        </div>
 
 
 

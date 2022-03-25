@@ -78,7 +78,9 @@ namespace AssoFlex.Models
                 new DateTime(2022, 04, 02),
                 new DateTime(2022, 04, 03),
                 "Paris",
-                "1"
+                
+                "1",
+                0
             );
 
         }
@@ -374,7 +376,7 @@ namespace AssoFlex.Models
         }
 
         public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
-            string Lieu, string categorie)
+            string Lieu, string categorie, int prix)
         {
             Evenement eventToAdd = new Evenement()
             {
@@ -385,6 +387,7 @@ namespace AssoFlex.Models
                 DateFinEvent = DateFin,
                 LieuEvent = Lieu,
                 CategorieEvent = categorie,
+                Prix = prix,
                 Statut = true
             };
             this._assoFlex.Evenements.Add(eventToAdd);
@@ -400,7 +403,7 @@ namespace AssoFlex.Models
         }
 
         public Evenement UpdateEvenement(int Id, string nom, int nbTicket, DateTime DateDebut, DateTime DateFin,
-            string Lieu, string categorie)
+            string Lieu, string categorie, int prix)
         {
             Evenement eventToUpdate = this._assoFlex.Evenements.Find(Id);
             if (eventToUpdate != null)
@@ -411,6 +414,7 @@ namespace AssoFlex.Models
                 eventToUpdate.DateFinEvent = DateFin;
                 eventToUpdate.LieuEvent = Lieu;
                 eventToUpdate.CategorieEvent = categorie;
+                eventToUpdate.Prix = prix;
 
                 this._assoFlex.Update(eventToUpdate);
                 this._assoFlex.SaveChanges();

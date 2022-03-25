@@ -87,7 +87,7 @@ namespace AssoFlex.Controllers
             {
                 eventUpdate = _dal.UpdateEvenement(eventUpdate.IdEvent, eventUpdate.NomEvent, eventUpdate.NbTickets,
                     eventUpdate.DateDebutEvent, eventUpdate.DateFinEvent, eventUpdate.LieuEvent,
-                    eventUpdate.CategorieEvent);
+                    eventUpdate.CategorieEvent, eventUpdate.Prix);
                 return RedirectToAction("Index");
             }
 
@@ -117,7 +117,7 @@ namespace AssoFlex.Controllers
                     orga, evenement.NomEvent,
                     evenement.NbTickets, 
                     evenement.DateDebutEvent, evenement.DateFinEvent,
-                    evenement.LieuEvent, evenement.CategorieEvent);
+                    evenement.LieuEvent, evenement.CategorieEvent, evenement.Prix);
                 return RedirectToAction("Index");
             }
             return View("Error");

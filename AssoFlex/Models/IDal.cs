@@ -61,9 +61,9 @@ namespace AssoFlex.Models
         Evenement getEvenement(int Id);
         EvenementViewModel getEvenementViewModel(int id);
         Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, 
-            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
+            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie, int prix);
         void DeleteEvenement(int Id);
         Evenement UpdateEvenement(int Id, string nom, int nbTicket, 
-            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
+            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie, int prix);
     }
 }
