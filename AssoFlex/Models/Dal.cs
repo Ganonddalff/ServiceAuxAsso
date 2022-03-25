@@ -34,9 +34,14 @@ namespace AssoFlex.Models
             this._assoFlex.Database.EnsureCreated();
 
             this.CreateUtilisateur(
-                "Guytri", "Kastane", "31 rue de l'aurore", 0755172316, "gkastane@gmail.com",
+                "Guytri",
+                "Kastane",
+                "31 rue de l'aurore",
+                0755172316,
+                "gkastane@gmail.com",
                 EncodeMD5("11111"),
                 ImageToByteArray(),"Admin");
+            
             this.CreateUtilisateur(
                 "Mateusz",
                 "Tirel",
@@ -45,28 +50,58 @@ namespace AssoFlex.Models
                 "admin",
                 EncodeMD5("admin"),
                 ImageToByteArray(),"Admin");
+            
             this.CreateUtilisateur(
-                "Billal", "Benziane", "32 rue de l'aurore", 0755172317, "billal.benziane1@gmail.com",
+                "Billal",
+                "Benziane",
+                "32 rue de l'aurore",
+                0755172317,
+                "billal.benziane1@gmail.com",
                 EncodeMD5("11111"), 
                 ImageToByteArray(),"Admin");
+            
             this.CreateUtilisateur(
-                "Paul", "Jean", "78 rue de l'aurore", 0755172320, "pjean@gmail.com",
+                "Paul",
+                "Jean",
+                "78 rue de l'aurore",
+                0755172320,
+                "pjean@gmail.com",
                 EncodeMD5("22222"), 
                 ImageToByteArray(),"Admin-Asso");
+            
             this.CreateUtilisateur(
-                "Jean", "Jacques", "", 0755172324, "jjacques@gmail.com", 
+                "Jean",
+                "Jacques",
+                "",
+                0755172324,
+                "jjacques@gmail.com", 
                 EncodeMD5("33333"), 
                 ImageToByteArray(),"Admin-Asso");
+            
             this.CreateUtilisateur(
-                "Jessica", "Alba", "", 0755172328, "jalba@gmail.com",
+                "Jessica",
+                "Alba", 
+                "",
+                0755172328,
+                "jalba@gmail.com",
                 EncodeMD5("44444"), 
                 ImageToByteArray(),"Admin-Asso");
+            
             this.CreateUtilisateur(
-                "Louis", "David", "", 0755172332, "ldavid@gmail.com",
+                "Louis",
+                "David",
+                "",
+                0755172332,
+                "ldavid@gmail.com",
                 EncodeMD5("55555"),
                 ImageToByteArray());
+            
             this.CreateUtilisateur(
-                "Alban", "Ivanoff", "", 0755172338, "aivanoff@gmail.com",
+                "Alban",
+                "Ivanoff",
+                "",
+                0755172338,
+                "aivanoff@gmail.com",
                 EncodeMD5("66666"),
                 ImageToByteArray());
             
@@ -75,20 +110,49 @@ namespace AssoFlex.Models
                 "111111-111", 
                 2,
                 "Association des Gabonais de Poitiers");
+            
             this.CreateAssociation(
                 "ASTEC",
                 "222222-222",
                 3,
-                "L'Association pour la Science et la Transmission de l'Esprit Critique a pour principal projet la chaîne YouTube la Tronche en Biais.");
+                "L'Association pour la Science et la " +
+                "Transmission de l'Esprit Critique a pour principal" +
+                " projet la chaîne YouTube la Tronche en Biais.");
+            
             this.CreateAssociation(
             "Tête en l'air",
             "333333-333",
             4,
-            "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations, soirées privées etc.");
+            "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. " +
+            "A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations, soirées privées etc.");
             
-            this.CreateEvenement(1, "Eminem", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
-            this.CreateEvenement(1, "PNL", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
-            this.CreateEvenement(1, "Eminem", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
+            this.CreateEvenement(
+                this.getAssociation(1),
+                "Eminem", 
+                50, 
+                new DateTime(2022, 12, 30), 
+                new DateTime(2022, 12, 30), 
+                "ACCORD ARENA", 
+                "5",
+                0);
+            this.CreateEvenement(
+                this.getAssociation(1),
+                "PNL",
+                50,
+                new DateTime(2022, 12, 30),
+                new DateTime(2022, 12, 30),
+                "ACCORD ARENA",
+                "5",
+                0);
+            this.CreateEvenement(
+                this.getAssociation(3),
+                "Eminem", 
+                50,
+                new DateTime(2022, 12, 30),
+                new DateTime(2022, 12, 30),
+                "ACCORD ARENA",
+                "5",
+                0);
 
             this.CreateEvenement(
                 this.getAssociation(2),
@@ -97,31 +161,64 @@ namespace AssoFlex.Models
                 new DateTime(2022, 04, 02),
                 new DateTime(2022, 04, 03),
                 "Paris",
-                
                 "1",
-                0
-            );
+                0);
 
             this.CreateCrowdfunding(
-                "Jackson", 10000, "Montreuil", "Développement local", new DateTime(2022, 04, 22), new DateTime(2023, 04, 21));
+                "Jackson",
+                10000,
+                "Montreuil",
+                "Développement local", 
+                new DateTime(2022, 04, 22),
+                new DateTime(2023, 04, 21));
 
             this.CreateCrowdfunding(
-                "Weah", 200000, "Australie", "Santé", new DateTime(2022, 08, 13), new DateTime(2023, 02, 12));
+                "Weah",
+                200000,
+                "Australie",
+                "Santé",
+                new DateTime(2022, 08, 13),
+                new DateTime(2023, 02, 12));
 
             this.CreateCrowdfunding(
-                "Sawadogo", 350000, "Burkina-Faso", "Environnement", new DateTime(2022, 10, 01), new DateTime(2023, 09, 30));
+                "Sawadogo",
+                350000,
+                "Burkina-Faso",
+                "Environnement",
+                new DateTime(2022, 10, 01),
+                new DateTime(2023, 09, 30));
 
             this.CreateCrowdfunding(
-                "Rajomalala", 1000000, "Madagascar", "Energie solaire", new DateTime(2022, 11, 02), new DateTime(2023, 07, 18));
+                "Rajomalala",
+                1000000,
+                "Madagascar",
+                "Energie solaire",
+                new DateTime(2022, 11, 02),
+                new DateTime(2023, 07, 18));
 
             this.CreateCrowdfunding(
-                "Jefferson", 30000, "Dallas", "Transports", new DateTime(2022, 06, 27), new DateTime(2023, 05, 30));
+                "Jefferson",
+                30000,
+                "Dallas", 
+                "Transports",
+                new DateTime(2022, 06, 27),
+                new DateTime(2023, 05, 30));
 
             this.CreateCrowdfunding(
-                "Nguyen", 80000, "Vietnam", "Santé", new DateTime(2022, 09, 22), new DateTime(2023, 05, 01));
+                "Nguyen",
+                80000,
+                "Vietnam",
+                "Santé",
+                new DateTime(2022, 09, 22),
+                new DateTime(2023, 05, 01));
 
             this.CreateCrowdfunding(
-                "Benjamin", 450000, "Montpellier", "Construction", new DateTime(2022, 12, 24), new DateTime(2023, 11, 21));
+                "Benjamin",
+                450000,
+                "Montpellier",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21));
         }
 
         public Utilisateur getUtilisateur(int id)
