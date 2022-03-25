@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using AssoFlex.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace AssoFlex.Models
 {
@@ -33,7 +35,15 @@ namespace AssoFlex.Models
 
             this.CreateUtilisateur(
                 "Guytri", "Kastane", "31 rue de l'aurore", 0755172316, "gkastane@gmail.com",
-                EncodeMD5("11111"), 
+                EncodeMD5("11111"),
+                ImageToByteArray(),"Admin");
+            this.CreateUtilisateur(
+                "Mateusz",
+                "Tirel",
+                "19, rue des petites murailles",
+                0667127014,
+                "admin",
+                EncodeMD5("admin"),
                 ImageToByteArray(),"Admin");
             this.CreateUtilisateur(
                 "Billal", "Benziane", "32 rue de l'aurore", 0755172317, "billal.benziane1@gmail.com",
@@ -79,6 +89,18 @@ namespace AssoFlex.Models
             this.CreateEvenement(1, "Eminem", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
             this.CreateEvenement(1, "PNL", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
             this.CreateEvenement(1, "Eminem", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
+
+            this.CreateEvenement(
+                this.getAssociation(2),
+                "Concert super",
+                200,
+                new DateTime(2022, 04, 02),
+                new DateTime(2022, 04, 03),
+                "Paris",
+                
+                "1",
+                0
+            );
 
             this.CreateCrowdfunding(
                 "Jackson", 10000, "Montreuil", "Développement local", new DateTime(2022, 04, 22), new DateTime(2023, 04, 21));
@@ -187,6 +209,11 @@ namespace AssoFlex.Models
         public Association getAssociation(string idStr)
         {
             return int.TryParse(idStr, out var id) ? this.getAssociation(id) : null;
+        }
+
+        public int getAssociationID(int idAdmin)
+        {
+            return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == idAdmin).Id;
         }
 
         public List<Association> getAllAssociations()
@@ -372,26 +399,36 @@ namespace AssoFlex.Models
 
         public List<Evenement> getAllEvenements()
         {
-            return _assoFlex.Evenements.ToList();
+            return _assoFlex.Evenements.Include(e=>e.Organisateur).ToList();
         }
 
         public Evenement getEvenement(int Id)
         {
-            return _assoFlex.Evenements.Find(Id);
+            return _assoFlex.Evenements.Include(e=>e.Organisateur).ThenInclude(a=> a.AdminAsso).FirstOrDefault(e=>e.IdEvent==Id);
         }
 
-        public Evenement CreateEvenement(int organisateurId, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
-            string Lieu, string categorie)
+        public EvenementViewModel getEvenementViewModel(int id)
+        {
+            Evenement eventToVM = _assoFlex.Evenements.Find(id);
+            EvenementViewModel evm = new EvenementViewModel();
+            evm.Evenements = eventToVM;
+            return evm;
+            
+        }
+
+        public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
+            string Lieu, string categorie, int prix)
         {
             Evenement eventToAdd = new Evenement()
             {
-                OrganisateurId = organisateurId,
+                Organisateur = organisateur,
                 NomEvent = nom,
                 NbTickets = nbTickets,
                 DateDebutEvent = DateDebut,
                 DateFinEvent = DateFin,
                 LieuEvent = Lieu,
                 CategorieEvent = categorie,
+                Prix = prix,
                 Statut = true
             };
             this._assoFlex.Evenements.Add(eventToAdd);
@@ -406,17 +443,27 @@ namespace AssoFlex.Models
             this._assoFlex.SaveChanges();
         }
 
-        public void UpdateEvenement(int Id, string nom, int nbTicket, DateTime DateDebut, DateTime DateFin,
-            string Lieu, string categorie)
+        public Evenement UpdateEvenement(int Id, string nom, int nbTicket, DateTime DateDebut, DateTime DateFin,
+            string Lieu, string categorie, int prix)
         {
             Evenement eventToUpdate = this._assoFlex.Evenements.Find(Id);
-            eventToUpdate.NomEvent = nom;
-            eventToUpdate.NbTickets = nbTicket;
-            eventToUpdate.DateDebutEvent = DateDebut;
-            eventToUpdate.DateFinEvent = DateFin;
-            eventToUpdate.LieuEvent = Lieu;
-            eventToUpdate.CategorieEvent = categorie;
-            this._assoFlex.SaveChanges();
+            if (eventToUpdate != null)
+            {
+                eventToUpdate.NomEvent = nom;
+                eventToUpdate.NbTickets = nbTicket;
+                eventToUpdate.DateDebutEvent = DateDebut;
+                eventToUpdate.DateFinEvent = DateFin;
+                eventToUpdate.LieuEvent = Lieu;
+                eventToUpdate.CategorieEvent = categorie;
+                eventToUpdate.Prix = prix;
+
+                this._assoFlex.Update(eventToUpdate);
+                this._assoFlex.SaveChanges();
+            }
+
+            return eventToUpdate;
+        }
+        
+
         }
     }
-}

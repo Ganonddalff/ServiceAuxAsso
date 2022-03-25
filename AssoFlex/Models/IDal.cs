@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using AssoFlex.ViewModels;
 
 namespace AssoFlex.Models
 {
@@ -20,6 +21,7 @@ namespace AssoFlex.Models
         // ****************************************** //
         Association getAssociation(int id);
         Association getAssociation(string idStr);
+        int getAssociationID(int idAdmin);
         List<Association> getAllAssociations();
         Association CreateAssociation(string nom, string numSiret, int idGerant,
              string description="");
@@ -57,10 +59,11 @@ namespace AssoFlex.Models
         // ******************************** //
         List<Evenement> getAllEvenements();
         Evenement getEvenement(int Id);
-        Evenement CreateEvenement(int organisateurId, string nom, int nbTickets, 
-            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
+        EvenementViewModel getEvenementViewModel(int id);
+        Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, 
+            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie, int prix);
         void DeleteEvenement(int Id);
-        void UpdateEvenement(int Id, string nom, int nbTicket, 
-            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie);
+        Evenement UpdateEvenement(int Id, string nom, int nbTicket, 
+            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie, int prix);
     }
 }

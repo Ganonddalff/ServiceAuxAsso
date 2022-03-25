@@ -1,8 +1,6 @@
-@using System.Security.Claims
 @model System.Collections.Generic.List<AssoFlex.Models.Evenement>
 
 @{
-    ViewBag.Title = "Nos Evenements";
     Layout = "_Layout";
 }
 
@@ -15,6 +13,7 @@
                 <h5 class="card-title">@evenement.NomEvent</h5>
                 <h6 class="card-subtitle">@evenement.NbTickets</h6>
                 <h6 class="card-subtitle">@evenement.LieuEvent</h6>
+                <td><a href=@Url.Action("Details","Evenement",new {id = @eventInList.IdEvent})>@eventInList.NomEvent</a></td>
 
                 
                 @*<a href=@Url.Action("DetailsAssociation", new {id=@asso.Id}) class="btn btn-outline-primary">Voir Détails</a>
@@ -31,3 +30,18 @@
         </div>
     }
 </div>
+<br/>
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <a href=@Url.Action("AchatTicket", "Evenement")>Acheter un billet</a>
+
+    <br/>
+
+    <a href=@Url.Action("CreerEvent")>Créer un évènement</a>
+}
+@if (User.Identity.IsAuthenticated.Equals(false))
+{
+    <a>Connectez-vous pour accéder à plus de services ! </a>
+}

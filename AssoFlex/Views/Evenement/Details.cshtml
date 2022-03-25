@@ -1,0 +1,36 @@
+@using System.Security.Claims
+@using System.Collections
+@using System.ComponentModel
+@using System.Text.Json
+@model AssoFlex.Models.Evenement
+
+
+@{
+    ViewBag.Title = "Détails ";
+    Layout = "_Layout";
+}
+<div class="container p-5 my-5 bg-dark text-white text-center">
+    <h2>@Model.NomEvent</h2>
+    <br/>
+    <h6>Type : @Enum.GetName(typeof(EventTypes),Convert.ToInt32(Model.CategorieEvent))</h6>
+
+
+    <h6>Organisé par @Model.Organisateur.Nom</h6>
+
+    
+    <h6>à @Model.LieuEvent</h6>
+    <h6>Commence le @Model.DateDebutEvent</h6>
+    <h6>Termine le @Model.DateFinEvent</h6>
+    <h6>@Model.NbTickets places restantes</h6>
+    <h6>@Model.Prix €</h6>
+
+    
+    @if (User.Identity.IsAuthenticated && @Model.Organisateur.AdminAsso.Prenom == @User.Identity.Name)
+    {
+        <a href=@Url.Action("ModifEvent", "Evenement", new {id = @Model.IdEvent})>Modifier cet évènement</a>
+        <a href=@Url.Action("SupprEvent","Evenement",new {id = @Model.IdEvent})>Supprimer cet évènement</a>                                                                                       
+                                                                                               
+    }
+
+
+</div>

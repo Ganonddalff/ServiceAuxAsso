@@ -17,6 +17,8 @@ namespace AssoFlex.Models
         public string NomEvent { get; set; }
         public DateTime DateDebutEvent { get; set; }
         public int NbTickets { get; set; }
+        
+        public int Prix { get; set; }
         public DateTime DateFinEvent { get; set; }
         public string LieuEvent { get; set; }
         public bool Statut { get; set; }
@@ -24,4 +26,17 @@ namespace AssoFlex.Models
         
         // public virtual Billetterie Billetterie { get; set; }
     }
+
+    public enum EventTypes 
+    {
+Education = 1,
+Sport = 2,
+Humanitaire = 3,
+Environnement = 4,
+Culture = 5,
+Santé = 6,
+
+    }
+    
+    
 }

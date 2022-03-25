@@ -18,13 +18,14 @@ namespace AssoFlex.Models
         public DbSet<Contribution> Contributions { get; set; }
         
         public DbSet<Billetterie> Billetteries { get; set; }
+        
         public DbSet<Evenement> Evenements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=root;password=Knph-Nmas27;database=Assoflex");
+                optionsBuilder.UseMySql("server=localhost;user id=guytri;password=aaaaa;database=Assoflex");
             }
             else
             {
