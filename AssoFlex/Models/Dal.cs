@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -34,6 +33,10 @@ namespace AssoFlex.Models
 
             this.CreateUtilisateur(
                 "Guytri", "Kastane", "31 rue de l'aurore", 0755172316, "gkastane@gmail.com",
+                EncodeMD5("11111"), 
+                ImageToByteArray(),"Admin");
+            this.CreateUtilisateur(
+                "Billal", "Benziane", "32 rue de l'aurore", 0755172317, "billal.benziane1@gmail.com",
                 EncodeMD5("11111"), 
                 ImageToByteArray(),"Admin");
             this.CreateUtilisateur(
@@ -72,7 +75,10 @@ namespace AssoFlex.Models
             "333333-333",
             4,
             "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations, soirées privées etc.");
-
+            
+            this.CreateEvenement(1, "Eminem", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
+            this.CreateEvenement(1, "PNL", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
+            this.CreateEvenement(1, "Eminem", 50, new DateTime(2022, 12, 30), new DateTime(2022, 12, 30), "ACCORD ARENA", "Concert");
 
             this.CreateCrowdfunding(
                 "Jackson", 10000, "Montreuil", "Développement local", new DateTime(2022, 04, 22), new DateTime(2023, 04, 21));
