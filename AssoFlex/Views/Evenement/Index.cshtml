@@ -23,13 +23,13 @@
         <th>Nom de l'évènement</th>
         <th>Organisateur</th>
     </tr>
-    @foreach (var evenements in Model)
+    @foreach (var eventInList in Model)
     {
         <tr>
-            <td>@evenements.DateDebutEvent</td>
-            <td>@evenements.LieuEvent</td>
-            <td><a href=@Url.Action("Details","Evenement",new {id = @evenements.IdEvent})>@evenements.NomEvent</a></td>
-            <td>@evenements.Organisateur.Nom</td>
+            <td>@eventInList.DateDebutEvent</td>
+            <td>@eventInList.LieuEvent</td>
+            <td><a href=@Url.Action("Details","Evenement",new {id = @eventInList.IdEvent})>@eventInList.NomEvent</a></td>
+            <td>@eventInList.Organisateur.Nom</td>
         </tr>
     }
 </table>

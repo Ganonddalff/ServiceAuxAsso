@@ -123,6 +123,17 @@ namespace AssoFlex.Controllers
             return View("Error");
         }
 
+        public ActionResult SupprEvent(int id)
+        {
+            Evenement eventToDel = _dal.getEvenement(id);
+            if (eventToDel != null)
+            {
+                _dal.DeleteEvenement(id);
+            }
+            return RedirectToAction("Index");
+        }
+
+
         public IActionResult AchatTicket()
         {
             return View();

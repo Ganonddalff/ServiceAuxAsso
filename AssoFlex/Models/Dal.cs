@@ -78,7 +78,7 @@ namespace AssoFlex.Models
                 new DateTime(2022, 04, 02),
                 new DateTime(2022, 04, 03),
                 "Paris",
-                "Concert"
+                "1"
             );
 
         }
