@@ -35,5 +35,17 @@ namespace AssoFlex.Controllers
             _dal.CreateAdhesion(idAsso, idUser);
             return RedirectToAction("Index");
         }
+
+      
+        
+
+            
+
+
+        
+
+
+
     }
+
 }

@@ -30,7 +30,7 @@
                 <td>@association.DateInscription</td>
                 <th>@association.AdminAsso.Prenom @association.AdminAsso.Nom</th>
                 <td><a class="link-primary" href=@Url.Action("DetailsAssociation","Association",new {id = @association.Id})> Voir Détails</a></td>
-                <td></td>
+                <td><a class="link-primary" href=@Url.Action("SupprimerAssociation","Dashboard",new {id = @association.Id});> Supprimer </a></td>
             </tr>
         }
     </table>

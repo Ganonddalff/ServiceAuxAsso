@@ -13,7 +13,7 @@ namespace AssoFlex.Controllers
         {
             this._dal = new Dal();
         }
-        
+
         [Authorize(Roles = "Admin")]
         // GET
         public IActionResult DashboardAdmin()
@@ -26,15 +26,33 @@ namespace AssoFlex.Controllers
             };
             return View(dVM);
         }
-        
-        
+        //suppression Billal
+        public IActionResult SupprimerAssociation(int id)
+        {
+
+            _dal.DeleteAssociation(id);
+
+            return RedirectToAction("DashboardAdmin", "Dashboard");
+        }
+
+
+
         [Authorize(Roles = "Admin-Asso, Basic")]
         // GET
-        public IActionResult Profil(int id)
+        IActionResult Profil(int id)
         {
             return View();
         }
-        
-        
     }
 }
+
+
+
+
+
+
+
+
+
+
+

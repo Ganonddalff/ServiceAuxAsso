@@ -1,39 +1,33 @@
+@using System.Security.Claims
 @model System.Collections.Generic.List<AssoFlex.Models.Evenement>
 
 @{
+    ViewBag.Title = "Nos Evenements";
     Layout = "_Layout";
 }
-<h1>Bienvenue sur l'espace billetterie</h1>
-<br/>
-<div>
-    <label for="site-search">Search the site:</label>
-    <input type="search" id="site-search" name="q">
-    
-    <button>Search</button>
-</div>
-<br/>
-<p>Evènements à venir :</p>
-<br/>
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Lieu</th>
-        <th>Nom de l'évènement</th>
-    </tr>
-    @foreach (var evenements in Model)
+
+<h2 class="page-section-heading text-center mb-0">Nos Evenements</h2>
+<div class="row justify-content-start">
+    @foreach (var evenement in Model)
     {
-        <tr>
-            <td>@evenements.DateDebutEvent</td>
-            <td>@evenements.LieuEvent</td>
-            <td>@evenements.NomEvent</td>
-        </tr>
+        <div class="card col-4 m-5" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@evenement.NomEvent</h5>
+                <h6 class="card-subtitle">@evenement.NbTickets</h6>
+                <h6 class="card-subtitle">@evenement.LieuEvent</h6>
+
+                
+                @*<a href=@Url.Action("DetailsAssociation", new {id=@asso.Id}) class="btn btn-outline-primary">Voir Détails</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href=@Url.Action("AddAdhesion", "Association", new {idAsso=@asso.Id, idUser=User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Adhérer</a>
+                }
+                else
+                {
+                    <a href=@Url.Action("Index", "Login") class="btn btn-primary">Adhérer</a>
+                }
+                    *@
+            </div>
+        </div>
     }
-</table>
-
-<br/>
-
-<a href=@Url.Action("AchatTicket", "Evenement")>Acheter un billet</a>
-
-<br/>
-
-<a href=@Url.Action("CreerEvent")>Créer un évènement</a>
+</div>
