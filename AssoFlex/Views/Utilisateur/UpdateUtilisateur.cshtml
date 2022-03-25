@@ -1,0 +1,61 @@
+@model AssoFlex.Models.Utilisateur
+
+@{
+    ViewBag.Title = "Mdification Profil";
+    Layout = "_Layout";
+}
+<section class="page-section portfolio mt-5">
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Création de compte</h2>
+        <!-- Icon Divider-->
+        @* <div class="divider-custom"> *@
+        @*     <div class="divider-custom-line"></div> *@
+        @*     <div class="divider-custom-icon"><i class="fas fa-star"></i></div> *@
+        @*     <div class="divider-custom-line"></div> *@
+        @* </div> *@
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                @using (Html.BeginForm())
+                {
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(model => model.Prenom, new {@class = "form-control", placeholder = "Prénom"})
+                        @Html.LabelFor(model => model.Prenom)
+                        @Html.ValidationMessageFor(model => model.Prenom)
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(model => model.Nom, new {@class = "form-control", placeholder = "Nom"})
+                        @Html.LabelFor(model => model.Nom)
+                        @Html.ValidationMessageFor(model => model.Nom)
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(model => model.Adresse, new {@class = "form-control", placeholder = "Adresse"})
+                        @Html.LabelFor(model => model.Adresse)
+                        @Html.ValidationMessageFor(model => model.Adresse)
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(model => model.Telephone, new {@class = "form-control", placeholder = "Téléphone"})
+                        @Html.LabelFor(model => model.Telephone)
+                        @Html.ValidationMessageFor(model => model.Telephone)
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(model => model.Email, new {@class = "form-control", placeholder = "Email"})
+                        @Html.LabelFor(model => model.Email)
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        @Html.TextBoxFor(model => model.Password, new {@type = "password", @class = "form-control", placeholder = "Mot de passe"})
+                        @Html.LabelFor(model => model.Password)
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                    <!-- Submit Button-->
+                    <button class="btn btn-primary btn-xl" type="submit">Sauvegarder</button>
+                }
+            </div>
+        </div>
+    </div>
+</section>

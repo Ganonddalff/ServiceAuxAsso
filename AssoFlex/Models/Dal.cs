@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -8,6 +9,7 @@ namespace AssoFlex.Models
 {
     public class Dal : IDal
     {
+        private const string DefaultAvatar = "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/wwwroot/assets/img/avatar.jpeg";
         private AssoFlexContext _assoFlex;
 
         public Dal()
@@ -20,29 +22,40 @@ namespace AssoFlex.Models
            this._assoFlex.Dispose();
         }
 
+        public byte[] ImageToByteArray() //Image image
+        {
+            return System.IO.File.ReadAllBytes(DefaultAvatar);
+        }
+
         public void InitializeDb()
         {
             this._assoFlex.Database.EnsureDeleted();
             this._assoFlex.Database.EnsureCreated();
-            
+
             this.CreateUtilisateur(
                 "Guytri", "Kastane", "31 rue de l'aurore", 0755172316, "gkastane@gmail.com",
-                EncodeMD5("11111"), "Admin");
+                EncodeMD5("11111"), 
+                ImageToByteArray(),"Admin");
             this.CreateUtilisateur(
                 "Paul", "Jean", "78 rue de l'aurore", 0755172320, "pjean@gmail.com",
-                EncodeMD5("22222"), "Admin-Asso");
+                EncodeMD5("22222"), 
+                ImageToByteArray(),"Admin-Asso");
             this.CreateUtilisateur(
                 "Jean", "Jacques", "", 0755172324, "jjacques@gmail.com", 
-                EncodeMD5("33333"), "Admin-Asso");
+                EncodeMD5("33333"), 
+                ImageToByteArray(),"Admin-Asso");
             this.CreateUtilisateur(
                 "Jessica", "Alba", "", 0755172328, "jalba@gmail.com",
-                EncodeMD5("44444"), "Admin-Asso");
+                EncodeMD5("44444"), 
+                ImageToByteArray(),"Admin-Asso");
             this.CreateUtilisateur(
                 "Louis", "David", "", 0755172332, "ldavid@gmail.com",
-                EncodeMD5("55555"));
+                EncodeMD5("55555"),
+                ImageToByteArray());
             this.CreateUtilisateur(
                 "Alban", "Ivanoff", "", 0755172338, "aivanoff@gmail.com",
-                EncodeMD5("66666"));
+                EncodeMD5("66666"),
+                ImageToByteArray());
             
             this.CreateAssociation(
                 "AGP", 
@@ -93,7 +106,7 @@ namespace AssoFlex.Models
         }
 
         public Utilisateur CreateUtilisateur(string prenom, string nom, string adresse, int telephone, string email,
-            string password, string role="Basic")
+            string password, byte[] profilImg, string role="Basic")
         {
             Utilisateur userToAdd = new Utilisateur()
             {
@@ -103,6 +116,7 @@ namespace AssoFlex.Models
                 Telephone = telephone,
                 Email = email,
                 Password = password,
+                ProfilImg = profilImg,
                 Role = role
             };
             this._assoFlex.Utilisateurs.Add(userToAdd);
@@ -111,7 +125,7 @@ namespace AssoFlex.Models
         }
 
         public void UpdateUtilisateur(int id, string prenom, string nom, string adresse, int telephone, string email,
-            string password, string role)
+            string password, byte[] profilImg, string role)
         {
             Utilisateur userToUpdate = this._assoFlex.Utilisateurs.Find(id);
             if (userToUpdate != null)
@@ -122,6 +136,7 @@ namespace AssoFlex.Models
                 userToUpdate.Telephone = telephone;
                 userToUpdate.Email = email;
                 userToUpdate.Password = password;
+                userToUpdate.ProfilImg = profilImg;
                 userToUpdate.Role = role;
                 this._assoFlex.SaveChanges();
             }

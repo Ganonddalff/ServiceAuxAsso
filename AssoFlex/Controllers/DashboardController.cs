@@ -28,6 +28,12 @@ namespace AssoFlex.Controllers
             };
             return View(dVM);
         }
+
+        public IActionResult GetImageProfil(int id)
+        {
+            Utilisateur user = _dal.getUtilisateur(id);
+            return File(user.ProfilImg, "image/jpeg");
+        }
         
         
         [Authorize(Roles = "Admin-Asso, Basic")]

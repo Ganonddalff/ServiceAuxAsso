@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 
 namespace AssoFlex.Models
 {
@@ -12,6 +13,7 @@ namespace AssoFlex.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+        public byte[] ProfilImg { get; set; }
         // public List<Association> UserAssociations { get; set; }
 
     }

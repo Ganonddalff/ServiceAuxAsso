@@ -1,9 +1,14 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssoFlex.Controllers
@@ -72,20 +77,27 @@ namespace AssoFlex.Controllers
         
         // POST
         [HttpPost]
-        public ActionResult CreateCompte(Utilisateur utilisateur)
+        public ActionResult CreateCompte(UtilisateurViewModel model, IFormFile imageUpload)
         {
             if (ModelState.IsValid)
             {
+                byte[] profilImg;
+                using (var memoryStream = new MemoryStream())
+                {
+                    imageUpload.CopyTo(memoryStream);
+                    profilImg = memoryStream.ToArray();
+                }
                 var userToCreate = _dal.CreateUtilisateur(
-                    utilisateur.Prenom,
-                    utilisateur.Nom,
-                    utilisateur.Adresse,
-                    utilisateur.Telephone,
-                    utilisateur.Email,
-                    utilisateur.Password);
+                    model.Utilisateur.Prenom,
+                    model.Utilisateur.Nom,
+                    model.Utilisateur.Adresse,
+                    model.Utilisateur.Telephone,
+                    model.Utilisateur.Email,
+                    model.Utilisateur.Password,
+                    profilImg);
                 var userClaims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, utilisateur.Prenom),
+                    new Claim(ClaimTypes.Name, userToCreate.Prenom),
                     new Claim(ClaimTypes.Email, userToCreate.Email),
                     new Claim(ClaimTypes.NameIdentifier, userToCreate.Id.ToString()),
                     new Claim(ClaimTypes.Role, userToCreate.Role)
@@ -98,7 +110,7 @@ namespace AssoFlex.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        
+
         // GET
         public ActionResult Deconnexion()
         {

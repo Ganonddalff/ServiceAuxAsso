@@ -1,0 +1,37 @@
+@model AssoFlex.Models.Association
+
+@{
+    ViewBag.Title = "Modification Profil Asso";
+    Layout = "_Layout";
+}
+<section class="page-section portfolio mt-5">
+<div class="container">
+<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Création de compte</h2>
+<div class="row justify-content-center">
+<div class="col-lg-8 col-xl-7">
+@using (Html.BeginForm())
+{
+<div class="form-floating mb-3">
+@Html.TextBoxFor(model => model.Nom, new { @class = "form-control", placeholder = "Prénom" })
+@Html.LabelFor(model => model.Nom)
+@Html.ValidationMessageFor(model => model.Nom)
+</div>
+
+<div class="form-floating mb-3">
+@Html.TextBoxFor(model => model.NumSiret, new { @class = "form-control", placeholder = "NumSiret" })
+@Html.LabelFor(model => model.NumSiret)
+@Html.ValidationMessageFor(model => model.NumSiret)
+</div>
+
+<div class="form-floating mb-3">
+@Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Description" })
+@Html.LabelFor(model => model.Description)
+@Html.ValidationMessageFor(model => model.Description)
+</div>
+    <!-- Submit Button-->
+<button class="btn btn-primary btn-xl" type="submit">Sauvegarder</button>
+}
+</div>
+</div>
+</div>
+</section>

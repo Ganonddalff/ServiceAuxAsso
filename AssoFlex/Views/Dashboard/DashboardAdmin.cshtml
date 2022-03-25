@@ -141,7 +141,9 @@
                                 <td>@association.DateInscription</td>
                                 <th>@association.AdminAsso.Prenom @association.AdminAsso.Nom</th>
                                 <td><a class="link-primary" href=@Url.Action("DetailsAssociation","Association",new {id = @association.Id})> Voir Détails</a></td>
-                                <td></td>
+                                <td><a class="fa-link" href=@Url.Action("DeleteAssociation", "Association", new {id = @association.Id})>Supprimer</a></td>
+                                <td><a class="fa-link" href=@Url.Action("UpdateAssociation", "Association", new {id = @association.Id})>Modifier</a></td>
+
                             </tr>
                         }
                     </table>
@@ -154,6 +156,7 @@
                         <thead class="table-dark">
                         <tr>
                             <th>ID</th>
+                            <th>Avatar</th>
                             <th>Prenom</th>
                             <th>Nom</th>
                             <th>Adresse</th>
@@ -167,12 +170,16 @@
                         {
                             <tr>
                                 <td>@user.Id</td>
+                                <td><img src=@("/Dashboard/GetImageProfil/"+ user.Id) class="rounded-circle" height="30" width="40"/></td>
                                 <td>@user.Prenom</td>
                                 <td>@user.Nom</td>
                                 <td>@user.Adresse</td>
                                 <td>@user.Telephone</td>
                                 <td>@user.Email</td>
                                 <td>@user.Role</td>
+                                <td><a class="fa-link" href=@Url.Action("DeleteUtilisateur", "Utilisateur", new {id = @user.Id})>Supprimer</a></td>
+                                <td><a class="fa-link" href=@Url.Action("UpdateUtilisateur", "Utilisateur", new {id = @user.Id})>Modifier</a></td>
+
                                 @* <td><a class="link-primary" href=@Url.Action("DetailsAssociation","Association",new {id = @association.Id})> Voir Détails</a></td> *@
                             </tr>
                         }
@@ -207,46 +214,46 @@
                     </table>
                 </div>
             </div>
-            <div class="container" id="overviewContent">
-                @using (Html.BeginForm())
-                {
-                    <div class="form-floating mb-3">
-                        @Html.TextBoxFor(model => model.Admin.Prenom)
-                        @Html.LabelFor(model => model.Admin.Prenom)
-                        @Html.ValidationMessageFor(model => model.Admin.Prenom)
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        @Html.TextBoxFor(model => model.Admin.Nom)
-                        @Html.LabelFor(model => model.Admin.Nom)
-                        @Html.ValidationMessageFor(model => model.Admin.Nom)
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        @Html.TextBoxFor(model => model.Admin.Adresse)
-                        @Html.LabelFor(model => model.Admin.Adresse)
-                        @Html.ValidationMessageFor(model => model.Admin.Adresse)
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        @Html.TextBoxFor(model => model.Admin.Telephone)
-                        @Html.LabelFor(model => model.Admin.Telephone)
-                        @Html.ValidationMessageFor(model => model.Admin.Telephone)
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        @Html.TextBoxFor(model => model.Admin.Email)
-                        @Html.LabelFor(model => model.Admin.Email)
-                        @Html.ValidationMessageFor(model => model.Admin.Email)
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        @Html.TextBoxFor(model => model.Admin.Password)
-                        @Html.LabelFor(model => model.Admin.Password)
-                        @Html.ValidationMessageFor(model => model.Admin.Password)
-                    </div>
-                }
-            </div>
+            @* <div class="container" id="overviewContent"> *@
+            @*     @using (Html.BeginForm()) *@
+            @*     { *@
+            @*         <div class="form-floating mb-3"> *@
+            @*             @Html.TextBoxFor(model => model.Admin.Prenom) *@
+            @*             @Html.LabelFor(model => model.Admin.Prenom) *@
+            @*             @Html.ValidationMessageFor(model => model.Admin.Prenom) *@
+            @*         </div> *@
+            @* *@
+            @*         <div class="form-floating mb-3"> *@
+            @*             @Html.TextBoxFor(model => model.Admin.Nom) *@
+            @*             @Html.LabelFor(model => model.Admin.Nom) *@
+            @*             @Html.ValidationMessageFor(model => model.Admin.Nom) *@
+            @*         </div> *@
+            @* *@
+            @*         <div class="form-floating mb-3"> *@
+            @*             @Html.TextBoxFor(model => model.Admin.Adresse) *@
+            @*             @Html.LabelFor(model => model.Admin.Adresse) *@
+            @*             @Html.ValidationMessageFor(model => model.Admin.Adresse) *@
+            @*         </div> *@
+            @* *@
+            @*         <div class="form-floating mb-3"> *@
+            @*             @Html.TextBoxFor(model => model.Admin.Telephone) *@
+            @*             @Html.LabelFor(model => model.Admin.Telephone) *@
+            @*             @Html.ValidationMessageFor(model => model.Admin.Telephone) *@
+            @*         </div> *@
+            @* *@
+            @*         <div class="form-floating mb-3"> *@
+            @*             @Html.TextBoxFor(model => model.Admin.Email) *@
+            @*             @Html.LabelFor(model => model.Admin.Email) *@
+            @*             @Html.ValidationMessageFor(model => model.Admin.Email) *@
+            @*         </div> *@
+            @* *@
+            @*         <div class="form-floating mb-3"> *@
+            @*             @Html.TextBoxFor(model => model.Admin.Password) *@
+            @*             @Html.LabelFor(model => model.Admin.Password) *@
+            @*             @Html.ValidationMessageFor(model => model.Admin.Password) *@
+            @*         </div> *@
+            @*     } *@
+            @* </div> *@
         </div>
     </div>
 
