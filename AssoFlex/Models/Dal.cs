@@ -73,6 +73,27 @@ namespace AssoFlex.Models
             4,
             "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations, soirées privées etc.");
 
+
+            this.CreateCrowdfunding(
+                "Jackson", 10000, "Montreuil", "Développement local", new DateTime(2022, 04, 22), new DateTime(2023, 04, 21));
+
+            this.CreateCrowdfunding(
+                "Weah", 200000, "Australie", "Santé", new DateTime(2022, 08, 13), new DateTime(2023, 02, 12));
+
+            this.CreateCrowdfunding(
+                "Sawadogo", 350000, "Burkina-Faso", "Environnement", new DateTime(2022, 10, 01), new DateTime(2023, 09, 30));
+
+            this.CreateCrowdfunding(
+                "Rajomalala", 1000000, "Madagascar", "Energie solaire", new DateTime(2022, 11, 02), new DateTime(2023, 07, 18));
+
+            this.CreateCrowdfunding(
+                "Jefferson", 30000, "Dallas", "Transports", new DateTime(2022, 06, 27), new DateTime(2023, 05, 30));
+
+            this.CreateCrowdfunding(
+                "Nguyen", 80000, "Vietnam", "Santé", new DateTime(2022, 09, 22), new DateTime(2023, 05, 01));
+
+            this.CreateCrowdfunding(
+                "Benjamin", 450000, "Montpellier", "Construction", new DateTime(2022, 12, 24), new DateTime(2023, 11, 21));
         }
 
         public Utilisateur getUtilisateur(int id)
