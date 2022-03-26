@@ -15,10 +15,12 @@ namespace AssoFlex.Models
         public int OrganisateurId { get; set; }
         public Association Organisateur { get; set; }
         public string NomEvent { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DateDebutEvent { get; set; }
         public int NbTickets { get; set; }
         
         public int Prix { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DateFinEvent { get; set; }
         public string LieuEvent { get; set; }
         public bool Statut { get; set; }

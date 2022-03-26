@@ -10,7 +10,7 @@ namespace AssoFlex.Models
 {
     public class Dal : IDal
     {
-        private const string DefaultAvatar = "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/wwwroot/assets/img/avatar.jpeg";
+        private const string DefaultAvatar = "wwwroot/assets/img/avatar.jpeg";
         private AssoFlexContext _assoFlex;
 
         public Dal()
@@ -170,7 +170,9 @@ namespace AssoFlex.Models
                 "Montreuil",
                 "Développement local", 
                 new DateTime(2022, 04, 22),
-                new DateTime(2023, 04, 21));
+                new DateTime(2023, 04, 21),
+                this.getAssociation(1)
+                );
 
             this.CreateCrowdfunding(
                 "Weah",
@@ -178,7 +180,9 @@ namespace AssoFlex.Models
                 "Australie",
                 "Santé",
                 new DateTime(2022, 08, 13),
-                new DateTime(2023, 02, 12));
+                new DateTime(2023, 02, 12),
+                this.getAssociation(2)
+                );
 
             this.CreateCrowdfunding(
                 "Sawadogo",
@@ -186,7 +190,9 @@ namespace AssoFlex.Models
                 "Burkina-Faso",
                 "Environnement",
                 new DateTime(2022, 10, 01),
-                new DateTime(2023, 09, 30));
+                new DateTime(2023, 09, 30),
+                this.getAssociation(3)
+                );
 
             this.CreateCrowdfunding(
                 "Rajomalala",
@@ -194,7 +200,9 @@ namespace AssoFlex.Models
                 "Madagascar",
                 "Energie solaire",
                 new DateTime(2022, 11, 02),
-                new DateTime(2023, 07, 18));
+                new DateTime(2023, 07, 18),
+                this.getAssociation(1)
+                );
 
             this.CreateCrowdfunding(
                 "Jefferson",
@@ -202,7 +210,9 @@ namespace AssoFlex.Models
                 "Dallas", 
                 "Transports",
                 new DateTime(2022, 06, 27),
-                new DateTime(2023, 05, 30));
+                new DateTime(2023, 05, 30),
+                this.getAssociation(2)
+                );
 
             this.CreateCrowdfunding(
                 "Nguyen",
@@ -210,7 +220,9 @@ namespace AssoFlex.Models
                 "Vietnam",
                 "Santé",
                 new DateTime(2022, 09, 22),
-                new DateTime(2023, 05, 01));
+                new DateTime(2023, 05, 01),
+                this.getAssociation(2)
+                );
 
             this.CreateCrowdfunding(
                 "Benjamin",
@@ -218,7 +230,9 @@ namespace AssoFlex.Models
                 "Montpellier",
                 "Construction",
                 new DateTime(2022, 12, 24),
-                new DateTime(2023, 11, 21));
+                new DateTime(2023, 11, 21),
+                this.getAssociation(3)
+                );
         }
 
         public Utilisateur getUtilisateur(int id)
@@ -425,15 +439,15 @@ namespace AssoFlex.Models
 
         public Crowdfunding getCrowdfunding(int Id)
         {
-            return _assoFlex.Crowdfundings.Find(Id);
+            return _assoFlex.Crowdfundings.Include(e => e.PorteurDuProjetId).FirstOrDefault(a => a.Id==Id);
         }
         public List<Crowdfunding> getAllCrowdfundings()
         {
-            return _assoFlex.Crowdfundings.ToList();
+            return _assoFlex.Crowdfundings.Include(e => e.PorteurDuProjetId).ToList();
         }
 
         public Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut,
-            DateTime DateFin)
+            DateTime DateFin, Association Porteur)
         {
             Crowdfunding crowdfundingToAdd = new Crowdfunding()
             {
@@ -444,6 +458,7 @@ namespace AssoFlex.Models
                 DateCreation = DateTime.Now,
                 DateDebutProjet = DateDebut,
                 DateFinProjet = DateFin,
+                PorteurDuProjet = Porteur,
                 Statut = true,
             };
             this._assoFlex.Crowdfundings.Add(crowdfundingToAdd);
@@ -458,14 +473,28 @@ namespace AssoFlex.Models
             this._assoFlex.SaveChanges();
         }
 
-        public void UpdateCrowdfunding(int Id, string Nom, int Montant, string LieuProjet, string CategorieProjet,
+        public Crowdfunding UpdateCrowdfunding(int Id, string Nom, int Montant, string LieuProjet, string CategorieProjet,
             DateTime DateFin)
         {
             Crowdfunding crowdfundingToUpdate = this._assoFlex.Crowdfundings.Find(Id);
-            crowdfundingToUpdate.Nom = Nom;
-            crowdfundingToUpdate.MontantProjet = Montant;
-            crowdfundingToUpdate.LieuProjet = LieuProjet;
-            crowdfundingToUpdate.DateFinProjet = DateFin;
+
+            if (crowdfundingToUpdate != null)
+            {
+
+
+                crowdfundingToUpdate.Nom = Nom;
+                crowdfundingToUpdate.MontantProjet = Montant;
+                crowdfundingToUpdate.LieuProjet = LieuProjet;
+                crowdfundingToUpdate.CategorieProjet = CategorieProjet;
+                crowdfundingToUpdate.DateFinProjet = DateFin;
+
+                this._assoFlex.Update(crowdfundingToUpdate);
+                this._assoFlex.SaveChanges();
+                
+
+            }
+
+            return crowdfundingToUpdate;
 
         }
 

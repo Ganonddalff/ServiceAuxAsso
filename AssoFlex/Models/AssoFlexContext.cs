@@ -25,7 +25,7 @@ namespace AssoFlex.Models
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=guytri;password=aaaaa;database=Assoflex");
+                optionsBuilder.UseMySql("server=localhost;user id=matt;password=loki;database=Assoflex");
             }
             else
             {
@@ -33,7 +33,7 @@ namespace AssoFlex.Models
                     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                     .AddJsonFile("appsettings.json")
                     .Build();
-                optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+                optionsBuilder.UseMySql("server=localhost;user id=matt;password=loki;database=Assoflex");
             }
         }
 

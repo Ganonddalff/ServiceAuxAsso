@@ -13,6 +13,10 @@ namespace AssoFlex.Models
         public string LieuProjet { get; set; }
         public string CategorieProjet { get; set; }
         public bool Statut { get; set; }
+        
+        public int PorteurDuProjetId { get; set; }
+        
+        public Association PorteurDuProjet { get; set; }
 
     }
 }
