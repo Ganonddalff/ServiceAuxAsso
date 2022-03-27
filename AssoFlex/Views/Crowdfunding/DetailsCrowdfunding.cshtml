@@ -7,10 +7,10 @@
 <div class="container p-10 my-10 bg-dark text-white text-center">
     <h2>@Model.Nom</h2>
     <br/>
-    <h6>Type : @Enum.GetName(typeof(EventTypes),Convert.ToInt32(Model.CategorieProjet))</h6>
+    <h6>Type : @Enum.GetName(typeof(TypesProjet),Convert.ToInt32(Model.CategorieProjet))</h6>
 
 
-    <h6>Organisé par @Model.PorteurDuProjet.Nom/h6>
+    <h6>Organisé par @Model.PorteurDuProjet.Nom</h6>
 
     
     <h6>à @Model.</h6>
@@ -26,8 +26,8 @@
     
     @if (User.Identity.IsAuthenticated && @Model.PorteurDuProjet.AdminAsso.Prenom == @User.Identity.Name)
     {
-        <a href=@Url.Action("ModifEvent", "Evenement", new {id = @Model.Id})>Modifier ce projet</a>
-        <a href=@Url.Action("SupprEvent","Evenement",new {id = @Model.Id})>Supprimer ce projet</a>                                                                                       
+        <a href=@Url.Action("UpdateCrowdfunding", "Crowdfunding", new {id = @Model.Id})>Modifier ce projet</a>
+        <a href=@Url.Action("DeleteCrowdfunding","Crowdfunding",new {id = @Model.Id})>Supprimer ce projet</a>                                                                                       
                                                                                                
     }
 

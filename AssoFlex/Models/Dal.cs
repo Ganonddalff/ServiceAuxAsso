@@ -168,7 +168,7 @@ namespace AssoFlex.Models
                 "Jackson",
                 10000,
                 "Montreuil",
-                "Développement local", 
+                "1", 
                 new DateTime(2022, 04, 22),
                 new DateTime(2023, 04, 21),
                 this.getAssociation(1)
@@ -178,7 +178,7 @@ namespace AssoFlex.Models
                 "Weah",
                 200000,
                 "Australie",
-                "Santé",
+                "2",
                 new DateTime(2022, 08, 13),
                 new DateTime(2023, 02, 12),
                 this.getAssociation(2)
@@ -188,7 +188,7 @@ namespace AssoFlex.Models
                 "Sawadogo",
                 350000,
                 "Burkina-Faso",
-                "Environnement",
+                "3",
                 new DateTime(2022, 10, 01),
                 new DateTime(2023, 09, 30),
                 this.getAssociation(3)
@@ -198,7 +198,7 @@ namespace AssoFlex.Models
                 "Rajomalala",
                 1000000,
                 "Madagascar",
-                "Energie solaire",
+                "1",
                 new DateTime(2022, 11, 02),
                 new DateTime(2023, 07, 18),
                 this.getAssociation(1)
@@ -208,7 +208,7 @@ namespace AssoFlex.Models
                 "Jefferson",
                 30000,
                 "Dallas", 
-                "Transports",
+                "2",
                 new DateTime(2022, 06, 27),
                 new DateTime(2023, 05, 30),
                 this.getAssociation(2)
@@ -218,7 +218,7 @@ namespace AssoFlex.Models
                 "Nguyen",
                 80000,
                 "Vietnam",
-                "Santé",
+                "2",
                 new DateTime(2022, 09, 22),
                 new DateTime(2023, 05, 01),
                 this.getAssociation(2)
@@ -228,7 +228,7 @@ namespace AssoFlex.Models
                 "Benjamin",
                 450000,
                 "Montpellier",
-                "Construction",
+                "1",
                 new DateTime(2022, 12, 24),
                 new DateTime(2023, 11, 21),
                 this.getAssociation(3)
@@ -439,7 +439,7 @@ namespace AssoFlex.Models
 
         public Crowdfunding getCrowdfunding(int Id)
         {
-            return _assoFlex.Crowdfundings.Include(e => e.PorteurDuProjetId).FirstOrDefault(a => a.Id==Id);
+            return _assoFlex.Crowdfundings.Include(c => c.PorteurDuProjet).ThenInclude(e => e.AdminAsso).FirstOrDefault(a => a.Id==Id);
         }
         public List<Crowdfunding> getAllCrowdfundings()
         {

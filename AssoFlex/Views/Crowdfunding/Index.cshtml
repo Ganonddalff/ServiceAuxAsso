@@ -10,7 +10,7 @@
     {
         <div class="card col-4 m-5" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">@crowdfunding.Nom</h5>
+                <h5 class="card-title"><a href=@Url.Action("DetailsCrowdfunding",new {id=@crowdfunding.Id})>@crowdfunding.Nom</a></h5>
                 <h6 class="card-subtitle">@crowdfunding.MontantProjet</h6>
                 <h6 class="card-subtitle">@crowdfunding.DateCreation</h6>
                 <p class="card-text">@crowdfunding.DateDebutProjet - @crowdfunding.DateFinProjet</p>
