@@ -19,4 +19,14 @@ namespace AssoFlex.Models
         public Association PorteurDuProjet { get; set; }
 
     }
+
+    public enum TypesProjet
+    {
+        Education = 1,
+        Sport = 2,
+        Humanitaire = 3,
+        Environnement = 4,
+        Culture = 5,
+        Santé = 6
+    }
 }

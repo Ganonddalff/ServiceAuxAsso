@@ -36,7 +36,6 @@
                     {
                     <div >
                         
-                        <p>Date: <input type="text" id="datepicker"></p>
                         
                         @Html.Label("  Type d'évènement : ")
                         <select asp-for="@Model.CategorieEvent" asp-items="Html.GetEnumSelectList<EventTypes>()"> </select>

@@ -443,7 +443,7 @@ namespace AssoFlex.Models
         }
         public List<Crowdfunding> getAllCrowdfundings()
         {
-            return _assoFlex.Crowdfundings.Include(e => e.PorteurDuProjetId).ToList();
+            return _assoFlex.Crowdfundings.ToList();
         }
 
         public Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut,

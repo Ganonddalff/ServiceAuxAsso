@@ -37,6 +37,9 @@ Humanitaire = 3,
 Environnement = 4,
 Culture = 5,
 Santé = 6,
+Spectacle = 7,
+Conférence = 8,
+Séminaire = 9
 
     }
     

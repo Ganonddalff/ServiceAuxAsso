@@ -3,6 +3,7 @@ using AssoFlex.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace AssoFlex.Controllers
 {
@@ -29,22 +30,24 @@ namespace AssoFlex.Controllers
         [HttpPost]
         public ActionResult CreateCrowdfunding(Crowdfunding nouveauCrowdfunding)
         {
-            if (ModelState.IsValid)
-            {
-                var PorteurID = _dal.getAssociationID(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-                Association Porteur = _dal.getAssociation(PorteurID);
+            var PorteurID = _dal.getAssociationID(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            Association Porteur = _dal.getAssociation(PorteurID);
+            if (ModelState.IsValid){
+         
                 nouveauCrowdfunding = _dal.CreateCrowdfunding(
                         nouveauCrowdfunding.Nom,
                         nouveauCrowdfunding.MontantProjet,
                         nouveauCrowdfunding.LieuProjet,
                         nouveauCrowdfunding.CategorieProjet,
-                        nouveauCrowdfunding.DateDebutProjet,
+                        DateTime.Today,
                         nouveauCrowdfunding.DateFinProjet,
                         Porteur
                 );
             }
-            return View("Error");
+            return RedirectToAction("Index");
         }
+        
+
 
         public ActionResult DetailsCrowdfunding(int id)
         {
