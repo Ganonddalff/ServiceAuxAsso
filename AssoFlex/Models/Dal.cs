@@ -134,7 +134,7 @@ namespace AssoFlex.Models
                 new DateTime(2022, 12, 30), 
                 "ACCORD ARENA", 
                 "5",
-                0);
+                90);
             this.CreateEvenement(
                 this.getAssociation(1),
                 "PNL",
@@ -143,7 +143,7 @@ namespace AssoFlex.Models
                 new DateTime(2022, 12, 30),
                 "ACCORD ARENA",
                 "5",
-                0);
+                10);
             this.CreateEvenement(
                 this.getAssociation(3),
                 "Eminem", 
@@ -152,7 +152,7 @@ namespace AssoFlex.Models
                 new DateTime(2022, 12, 30),
                 "ACCORD ARENA",
                 "5",
-                0);
+                100);
 
             this.CreateEvenement(
                 this.getAssociation(2),
@@ -162,7 +162,7 @@ namespace AssoFlex.Models
                 new DateTime(2022, 04, 03),
                 "Paris",
                 "1",
-                0);
+                5);
 
             this.CreateCrowdfunding(
                 "Jackson",

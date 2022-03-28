@@ -5,5 +5,48 @@
     Layout = "_Layout";
 }
 
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+  /*For total*/
+  $(document).ready(function() {
+    
+    
+    
+    $(".checkout").on("input", ".quantity", function() {
+      var price = +$(".price").data("price");
+      var quantity = +$(this).val();
+      $("#total").text(price * quantity + " €");
+    })
+  
+    var $buttonPlus = $('.increase-btn');
+    var $buttonMin = $('.decrease-btn');
+    var $quantity = $('.quantity');
+    
+    /*For plus and minus buttons*/
+    $buttonPlus.click(function() {
+      $quantity.val(parseInt($quantity.val()) + 1).trigger('input');
+    });
+    
+    $buttonMin.click(function() {
+      $quantity.val(Math.max(parseInt($quantity.val()) - 1, 0)).trigger('input');
+    });
+  })
+  </script>
+  
+</head>
+
 <h2>Acheter un ticket pour @Model.NomEvent</h2>
 
+<div class="checkout">
+<a>Nombre de tickets : </a>
+<p class="price" data-price=@Model.Prix> Prix Unitaire HT = @Model.Prix</p>
+<button type="button" class="decrease-btn">-</button>
+<input type="text" class="quantity" value="1"/>
+<button type="button" class="increase-btn">+</button>
+
+<br/>
+<p class="total">Total: <span id="total"> @Model.Prix € </span></p>
+
+</div>

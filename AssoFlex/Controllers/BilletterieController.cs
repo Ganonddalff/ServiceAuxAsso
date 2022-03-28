@@ -10,6 +10,7 @@ namespace AssoFlex.Controllers
 
         public BilletterieController()
         {
+            
             this._dal = new Dal();
         }
         
@@ -20,9 +21,10 @@ namespace AssoFlex.Controllers
         // }
         
         //GET
-        public ActionResult BuyTicket()
+        public ActionResult BuyTicket(int id)
         {
-            return View();
+            Evenement monEvent = _dal.getEvenement(id);
+            return View(monEvent);
         }
     }
 }
