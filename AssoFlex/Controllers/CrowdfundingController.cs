@@ -69,24 +69,37 @@ namespace AssoFlex.Controllers
         [HttpPost]
          public ActionResult Contribute(ContributionViewModel cvm, int cfId, int userId)
          {
-             Crowdfunding monCF = _dal.getCFCollecte(cfId);
-             Utilisateur monUser = _dal.getUtilisateur(userId);
-             Collecte maCollecte = monCF.Collecte;
-             ContributionViewModel cvm2 = new ContributionViewModel()
+             if (cvm.Montant != 0)
              {
-                 Collecte = maCollecte,
-                 Contribution = _dal.CreateContribution(cvm.Montant, maCollecte.Id, monUser),
-                 Crowdfunding = monCF,
-                 Utilisateur = monUser
-             };
-             maCollecte.MontantCollecte = (maCollecte.MontantCollecte + cvm.Montant);
-             return RedirectToAction("Index","Crowdfunding");
+
+
+                 Crowdfunding monCF = _dal.getCFCollecte(cfId);
+                 Utilisateur monUser = _dal.getUtilisateur(userId);
+                 Collecte maCollecte = monCF.Collecte;
+                 ContributionViewModel cvm2 = new ContributionViewModel()
+                 {
+                     Collecte = maCollecte,
+                     Contribution = _dal.CreateContribution(cvm.Montant, maCollecte.Id, monUser),
+                     Crowdfunding = monCF,
+                     Utilisateur = monUser
+                 };
+
+                 return RedirectToAction("Index", "Crowdfunding");
+             }
+
+             return RedirectToAction("Index", "Crowdfunding");
          }
         
         public ActionResult DetailsCrowdfunding(int id)
         {
             Crowdfunding monCF = _dal.getCrowdfunding(id);
-            return View(monCF);
+            ContributionViewModel cvm = new ContributionViewModel()
+            {
+                Collecte = _dal.getCollecte(monCF.Id),
+                Crowdfunding = _dal.getCrowdfunding(id)
+
+            };
+            return View(cvm);
         }
 
         public ActionResult UpdateCrowdfunding(int id)

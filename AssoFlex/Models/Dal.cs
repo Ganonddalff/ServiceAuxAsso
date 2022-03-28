@@ -401,10 +401,7 @@ namespace AssoFlex.Models
             return _assoFlex.Collectes.Find(id);
         }
 
-        public Collecte getCollecteID(int id)
-        {
-            return _assoFlex.Collectes.Find(id);
-        }
+
         public List<Crowdfunding> getAllCrowdfundings()
         {
             return _assoFlex.Crowdfundings.Include(c =>c.Collecte).ToList();
@@ -480,20 +477,26 @@ namespace AssoFlex.Models
 
         public Contribution CreateContribution(double montantContribution, int collecteId, Utilisateur userLoggedIn)
         {
-            Contribution maContribution = new Contribution()
+            
+
+
+                Collecte maCollecte = getCollecte(collecteId);
+                Contribution maContribution = new Contribution()
                 {
                     MontantContribution = montantContribution,
-                    collecte = getCollecte(collecteId),
+                    collecte = maCollecte,
                     DateContribution = DateTime.Now,
                     utilisateur = userLoggedIn,
-                    
+
                 };
-            
-                
+
+                maCollecte.MontantCollecte = (maCollecte.MontantCollecte + montantContribution);
+                _assoFlex.Update(maCollecte);
                 _assoFlex.Add(maContribution);
                 _assoFlex.SaveChanges();
                 return maContribution;
-
+            
+            
         }
 
         public List<Billetterie> getAllBilletteries()

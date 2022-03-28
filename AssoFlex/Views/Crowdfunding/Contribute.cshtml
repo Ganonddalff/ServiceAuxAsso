@@ -49,21 +49,9 @@
     @Html.ValidationMessageFor(Model => Model.Montant)
     <button type="button" class="increase-btn">+</button>
     
-    @Html.HiddenFor(Model => Model.Collecte,@Model.Collecte)
-    @Html.ValidationMessageFor(Model => Model.Collecte)
-    @Html.HiddenFor(Model => Model.Crowdfunding,@Model.Collecte)
-    @Html.ValidationMessageFor(Model => Model.Crowdfunding)
-    @Html.HiddenFor(Model => Model.Utilisateur,@Model.Utilisateur)
-    @Html.ValidationMessageFor(Model => Model.Utilisateur)
 
-    @*
-    <button type="button" class="decrease-btn">-</button>
-    
-    <input type="text" class="montant" name="contribution" value="10"/>
-    
-    <button type="button" class="increase-btn">+</button>
-    <br/>
-    <p class="total">Total: <span id="total"> 10 € </span></p>*@
+
+
 
   </div>
   

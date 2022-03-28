@@ -47,7 +47,7 @@ namespace AssoFlex.Models
         Crowdfunding getCrowdfunding(int Id);
         Crowdfunding getCFCollecte(int id);
         Collecte getCollecte(int id);
-        Collecte getCollecteID(int id);
+        
 
         Contribution CreateContribution(double montantContribution, int collecteId, Utilisateur userLoggedIn);
 
