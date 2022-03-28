@@ -15,6 +15,8 @@ namespace AssoFlex.Models
         
         public DbSet<Contrepartie> Contreparties { get; set; }
         
+        public DbSet<Collecte> Collectes { get; set; }
+
         public DbSet<Contribution> Contributions { get; set; }
         
         public DbSet<Billetterie> Billetteries { get; set; }

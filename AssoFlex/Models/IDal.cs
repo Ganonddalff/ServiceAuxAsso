@@ -45,7 +45,15 @@ namespace AssoFlex.Models
         // ******************************** //
         List<Crowdfunding> getAllCrowdfundings();
         Crowdfunding getCrowdfunding(int Id);
-        Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut, DateTime DateFin, Association PorteurDuProjet);
+        Crowdfunding getCFCollecte(int id);
+        Collecte getCollecte(int id);
+        Collecte getCollecteID(int id);
+
+        Contribution CreateContribution(double montantContribution, int collecteId, Utilisateur userLoggedIn);
+
+        Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet,
+            DateTime DateDebut, DateTime DateFin, Association PorteurDuProjet, Collecte collecte);
+        Collecte CreateCollecte();
         void DeleteCrowdfunding(int Id);
         Crowdfunding UpdateCrowdfunding(int Id, string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateFin);
         

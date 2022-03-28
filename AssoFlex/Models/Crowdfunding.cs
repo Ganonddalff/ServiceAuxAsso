@@ -16,6 +16,10 @@ namespace AssoFlex.Models
         
         public int PorteurDuProjetId { get; set; }
         
+        public int CollecteId { get; set; }
+        
+        public Collecte Collecte { get; set; }
+
         public Association PorteurDuProjet { get; set; }
 
     }

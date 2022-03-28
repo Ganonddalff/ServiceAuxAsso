@@ -1,3 +1,4 @@
+@using System.Security.Claims
 @model System.Collections.Generic.List<AssoFlex.Models.Crowdfunding>
 @{
     ViewBag.Title = "Crowdfunding";
@@ -11,7 +12,9 @@
         <div class="card col-4 m-5" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title"><a href=@Url.Action("DetailsCrowdfunding",new {id=@crowdfunding.Id})>@crowdfunding.Nom</a></h5>
-                <h6 class="card-subtitle"><a href=@Url.Action("","Crowdfunding", new {@id = @crowdfunding.Id})>xx / @crowdfunding.MontantProjet</a></h6>
+                
+                <h6 class="card-subtitle"><a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @crowdfunding.Id, @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value})>@crowdfunding.Collecte.MontantCollecte / @crowdfunding.MontantProjet</a></h6>
+                
                 
                 
                 <h6 class="card-subtitle">@crowdfunding.DateCreation</h6>

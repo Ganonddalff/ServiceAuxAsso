@@ -4,7 +4,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using AssoFlex.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace AssoFlex.Models
 {
@@ -164,6 +166,8 @@ namespace AssoFlex.Models
                 "1",
                 5);
 
+            
+
             this.CreateCrowdfunding(
                 "Jackson",
                 10000,
@@ -171,68 +175,11 @@ namespace AssoFlex.Models
                 "1", 
                 new DateTime(2022, 04, 22),
                 new DateTime(2023, 04, 21),
-                this.getAssociation(1)
+                this.getAssociation(1), 
+                this.CreateCollecte()
                 );
 
-            this.CreateCrowdfunding(
-                "Weah",
-                200000,
-                "Australie",
-                "2",
-                new DateTime(2022, 08, 13),
-                new DateTime(2023, 02, 12),
-                this.getAssociation(2)
-                );
 
-            this.CreateCrowdfunding(
-                "Sawadogo",
-                350000,
-                "Burkina-Faso",
-                "3",
-                new DateTime(2022, 10, 01),
-                new DateTime(2023, 09, 30),
-                this.getAssociation(3)
-                );
-
-            this.CreateCrowdfunding(
-                "Rajomalala",
-                1000000,
-                "Madagascar",
-                "1",
-                new DateTime(2022, 11, 02),
-                new DateTime(2023, 07, 18),
-                this.getAssociation(1)
-                );
-
-            this.CreateCrowdfunding(
-                "Jefferson",
-                30000,
-                "Dallas", 
-                "2",
-                new DateTime(2022, 06, 27),
-                new DateTime(2023, 05, 30),
-                this.getAssociation(2)
-                );
-
-            this.CreateCrowdfunding(
-                "Nguyen",
-                80000,
-                "Vietnam",
-                "2",
-                new DateTime(2022, 09, 22),
-                new DateTime(2023, 05, 01),
-                this.getAssociation(2)
-                );
-
-            this.CreateCrowdfunding(
-                "Benjamin",
-                450000,
-                "Montpellier",
-                "1",
-                new DateTime(2022, 12, 24),
-                new DateTime(2023, 11, 21),
-                this.getAssociation(3)
-                );
         }
 
         public Utilisateur getUtilisateur(int id)
@@ -441,13 +388,30 @@ namespace AssoFlex.Models
         {
             return _assoFlex.Crowdfundings.Include(c => c.PorteurDuProjet).ThenInclude(e => e.AdminAsso).FirstOrDefault(a => a.Id==Id);
         }
+
+        public Crowdfunding getCFCollecte(int id)
+        {
+            return _assoFlex.Crowdfundings.Include(c => c.Collecte).FirstOrDefault(a => a.Id == id);
+        }
+
+        
+
+        public Collecte getCollecte(int id)
+        {
+            return _assoFlex.Collectes.Find(id);
+        }
+
+        public Collecte getCollecteID(int id)
+        {
+            return _assoFlex.Collectes.Find(id);
+        }
         public List<Crowdfunding> getAllCrowdfundings()
         {
-            return _assoFlex.Crowdfundings.ToList();
+            return _assoFlex.Crowdfundings.Include(c =>c.Collecte).ToList();
         }
 
         public Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut,
-            DateTime DateFin, Association Porteur)
+            DateTime DateFin, Association Porteur, Collecte collecte)
         {
             Crowdfunding crowdfundingToAdd = new Crowdfunding()
             {
@@ -459,9 +423,11 @@ namespace AssoFlex.Models
                 DateDebutProjet = DateDebut,
                 DateFinProjet = DateFin,
                 PorteurDuProjet = Porteur,
+                Collecte = collecte,
                 Statut = true,
             };
             this._assoFlex.Crowdfundings.Add(crowdfundingToAdd);
+            
             this._assoFlex.SaveChanges();
             return crowdfundingToAdd;
         }
@@ -495,6 +461,38 @@ namespace AssoFlex.Models
             }
 
             return crowdfundingToUpdate;
+
+        }
+
+        public Collecte CreateCollecte()
+        {
+            
+            Collecte maCollecte = new Collecte()
+            {
+                MontantCollecte = 0,
+            };
+            _assoFlex.Add(maCollecte);
+            _assoFlex.SaveChanges();
+            return maCollecte;
+        }
+
+
+
+        public Contribution CreateContribution(double montantContribution, int collecteId, Utilisateur userLoggedIn)
+        {
+            Contribution maContribution = new Contribution()
+                {
+                    MontantContribution = montantContribution,
+                    collecte = getCollecte(collecteId),
+                    DateContribution = DateTime.Now,
+                    utilisateur = userLoggedIn,
+                    
+                };
+            
+                
+                _assoFlex.Add(maContribution);
+                _assoFlex.SaveChanges();
+                return maContribution;
 
         }
 

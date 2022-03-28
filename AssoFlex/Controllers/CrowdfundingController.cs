@@ -3,7 +3,9 @@ using AssoFlex.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
+using AssoFlex.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AssoFlex.Controllers
 {
@@ -41,14 +43,46 @@ namespace AssoFlex.Controllers
                         nouveauCrowdfunding.CategorieProjet,
                         nouveauCrowdfunding.DateDebutProjet,
                         nouveauCrowdfunding.DateFinProjet,
-                        Porteur
+                        Porteur,
+                        _dal.CreateCollecte()
                 );
+                
             }
             return RedirectToAction("Index");
         }
         
+        //Get
+        public ActionResult Contribute(int cfId, int userId)
+        {
+            Crowdfunding monCF = _dal.getCFCollecte(cfId);
+            Utilisateur monUser = _dal.getUtilisateur(userId);
+            Collecte maCollecte = monCF.Collecte;
+            ContributionViewModel cvm = new ContributionViewModel()
+            {
+                Collecte = maCollecte,
+                Crowdfunding = monCF,
+                Utilisateur = monUser
+            };
+            return View(cvm);
+        }
 
-
+        [HttpPost]
+         public ActionResult Contribute(ContributionViewModel cvm, int cfId, int userId)
+         {
+             Crowdfunding monCF = _dal.getCFCollecte(cfId);
+             Utilisateur monUser = _dal.getUtilisateur(userId);
+             Collecte maCollecte = monCF.Collecte;
+             ContributionViewModel cvm2 = new ContributionViewModel()
+             {
+                 Collecte = maCollecte,
+                 Contribution = _dal.CreateContribution(cvm.Montant, maCollecte.Id, monUser),
+                 Crowdfunding = monCF,
+                 Utilisateur = monUser
+             };
+             maCollecte.MontantCollecte = (maCollecte.MontantCollecte + cvm.Montant);
+             return RedirectToAction("Index","Crowdfunding");
+         }
+        
         public ActionResult DetailsCrowdfunding(int id)
         {
             Crowdfunding monCF = _dal.getCrowdfunding(id);

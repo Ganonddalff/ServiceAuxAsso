@@ -6,11 +6,11 @@ namespace AssoFlex.Models
     {
         public int Id { get; set; }
         
-        public int MontantCollecte { get; set; }
+        public double MontantCollecte { get; set; }
         
-        public int crowdfundingId { get; set; }
         
-        public Crowdfunding crowdfunding { get; set; }
+
+     
         
         
     }
