@@ -18,6 +18,7 @@ namespace AssoFlex.Models
         [DataType(DataType.Date)]
         public DateTime DateDebutEvent { get; set; }
         public int NbTickets { get; set; }
+        public int NbPlacesRestantes { get; set; }
         
         public int Prix { get; set; }
         [DataType(DataType.Date)]

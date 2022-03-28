@@ -18,5 +18,11 @@ namespace AssoFlex.Controllers
         // {
         //     return View();
         // }
+        
+        //GET
+        public ActionResult BuyTicket()
+        {
+            return View();
+        }
     }
 }

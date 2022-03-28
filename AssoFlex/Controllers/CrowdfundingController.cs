@@ -39,7 +39,7 @@ namespace AssoFlex.Controllers
                         nouveauCrowdfunding.MontantProjet,
                         nouveauCrowdfunding.LieuProjet,
                         nouveauCrowdfunding.CategorieProjet,
-                        DateTime.Today,
+                        nouveauCrowdfunding.DateDebutProjet,
                         nouveauCrowdfunding.DateFinProjet,
                         Porteur
                 );

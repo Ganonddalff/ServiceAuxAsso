@@ -13,16 +13,20 @@
     <h6>Organisé par @Model.PorteurDuProjet.Nom</h6>
 
     
-    <h6>à @Model.</h6>
+    <h6>à @Model.LieuProjet</h6>
     <br/>
     <div class="fa-display">Commence le </div>
     <div>@Html.DisplayFor(model => model.DateDebutProjet)</div>
     <div>Termine le</div>
     <div >@Html.DisplayFor(model => model.DateFinProjet)</div>
     <br/>
-    <h6> Objectif : @Model.MontantProjet €</h6>
-    <h6>@Model.</h6>
-
+    <h6> xx  / @Model.MontantProjet €</h6>
+    <h6> Pour plus d'informations, contactez @Model.PorteurDuProjet.AdminAsso</h6>
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href=@Url.Action("","Crowdfunding", new {@id = @Model.Id})>Contribuer à ce projet</a>
+    }
     
     @if (User.Identity.IsAuthenticated && @Model.PorteurDuProjet.AdminAsso.Prenom == @User.Identity.Name)
     {

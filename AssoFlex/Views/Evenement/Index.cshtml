@@ -14,6 +14,7 @@
                 <h6 class="card-subtitle">@eventInList.NbTickets</h6>
                 <h6 class="card-subtitle">@eventInList.LieuEvent</h6>
                 <td><a href=@Url.Action("Details","Evenement",new {id = @eventInList.IdEvent})>@eventInList.NomEvent</a></td>
+                <td><a href=@Url.Action("BuyTicket", "Billetterie", new {@id = @eventInList.IdEvent})>Acheter un billet</a></td>
             </div>
         </div>
     }
@@ -23,7 +24,7 @@
 @if (User.Identity.IsAuthenticated)
 {
 
-    <a href=@Url.Action("AchatTicket", "Evenement")>Acheter un billet</a>
+    
 
     <br/>
 

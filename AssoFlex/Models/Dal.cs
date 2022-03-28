@@ -550,6 +550,7 @@ namespace AssoFlex.Models
                 Organisateur = organisateur,
                 NomEvent = nom,
                 NbTickets = nbTickets,
+                NbPlacesRestantes = nbTickets,
                 DateDebutEvent = DateDebut,
                 DateFinEvent = DateFin,
                 LieuEvent = Lieu,
