@@ -10,8 +10,7 @@ namespace AssoFlex.Models
 {
     public class Dal : IDal
     {
-        private const string AbsolutePath =
-            "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/wwwroot/assets/";
+        private const string AbsolutePath =    "./wwwroot/assets/";
         //private const string DefaultAvatar = "../wwwroot/assets/img/avatar.jpeg";
         private AssoFlexContext _assoFlex;
 
@@ -108,23 +107,28 @@ namespace AssoFlex.Models
                 "111111-111",
                 2,
                 ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
+                "13",
                 "Association des Gabonais de Poitiers");
             this.CreateAssociation(
                 "ASTEC",
                 "222222-222",
                 3,
                 ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
+                "5",
                 "L'Association pour la Science et la " +
                 "Transmission de l'Esprit Critique a pour principal" +
-                " projet la chaîne YouTube la Tronche en Biais.");
+                " projet la chaîne YouTube la Tronche en Biais."
+                );
             this.CreateAssociation(
                 "Tête en l'air",
                 "333333-333",
                 4,
                 ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
+                "2",
                 "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. " +
                 "A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations," +
-                " soirées privées etc.");
+                " soirées privées etc."
+                );
             
             //------------- EVÈNEMENT -------------//
             this.CreateEvenement(
@@ -310,7 +314,7 @@ namespace AssoFlex.Models
             return _assoFlex.Associations.ToList();
         }
 
-        public Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso, string description = "")
+        public Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso, string categorie, string description = "")
         {
             Association assoToAdd = new Association()
             {
@@ -318,7 +322,8 @@ namespace AssoFlex.Models
                 NumSiret = numSiret,
                 DateInscription = DateTime.Now,
                 Description = description,
-                AdminAsso = this._assoFlex.Utilisateurs.Find(idGerant)
+                AdminAsso = this._assoFlex.Utilisateurs.Find(idGerant),
+                CategorieAsso = categorie
             };
             this._assoFlex.Associations.Add(assoToAdd);
             this._assoFlex.SaveChanges();

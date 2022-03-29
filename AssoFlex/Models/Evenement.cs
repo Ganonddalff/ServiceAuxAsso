@@ -13,7 +13,9 @@ namespace AssoFlex.Models
         [Key]
         public int IdEvent { get; set; }
         public int OrganisateurId { get; set; }
+        [MaxLength(30)]
         public Association Organisateur { get; set; }
+        [MaxLength(40)]
         public string NomEvent { get; set; }
         [DataType(DataType.Date)]
         public DateTime DateDebutEvent { get; set; }
@@ -23,8 +25,10 @@ namespace AssoFlex.Models
         public int Prix { get; set; }
         [DataType(DataType.Date)]
         public DateTime DateFinEvent { get; set; }
+        [MaxLength(30)]
         public string LieuEvent { get; set; }
         public bool Statut { get; set; }
+        [MaxLength(30)]
         public string CategorieEvent { get; set; }
         
         // public virtual Billetterie Billetterie { get; set; }

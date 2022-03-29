@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AssoFlex.Models
 {
@@ -9,6 +10,7 @@ namespace AssoFlex.Models
         public Association Association { get; set; }
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
+        [MaxLength(30)]
         public string Formule { get; set; }
         
     }

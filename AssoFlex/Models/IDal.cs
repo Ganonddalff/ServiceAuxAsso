@@ -34,7 +34,8 @@ namespace AssoFlex.Models
         int GetAssociationId(int idAdmin);
         List<Association> GetAllAssociations();
         Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso,
-            string description="");
+
+            string categorie, string description = "");
         void UpdateAssociation(int id, string nom, string numSiret, byte[] logoAsso,
             string description);
         void DeleteAssociation(int id);
