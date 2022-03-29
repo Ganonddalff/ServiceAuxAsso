@@ -10,7 +10,9 @@ namespace AssoFlex.Models
 {
     public class Dal : IDal
     {
-        private const string DefaultAvatar = "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/wwwroot/assets/img/avatar.jpeg";
+        private const string AbsolutePath =
+            "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/wwwroot/assets/";
+        //private const string DefaultAvatar = "../wwwroot/assets/img/avatar.jpeg";
         private AssoFlexContext _assoFlex;
 
         public Dal()
@@ -23,9 +25,9 @@ namespace AssoFlex.Models
            this._assoFlex.Dispose();
         }
 
-        public byte[] ImageToByteArray() //Image image
+        public byte[] ImageToByteArray(string pathImage) //Image image
         {
-            return System.IO.File.ReadAllBytes(DefaultAvatar);
+            return System.IO.File.ReadAllBytes(pathImage);
         }
 
         #region Initialisation
@@ -42,7 +44,7 @@ namespace AssoFlex.Models
                 0755172316,
                 "gkastane@gmail.com",
                 EncodeMD5("11111"),
-                ImageToByteArray(),"Admin");
+                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin");
             this.CreateUtilisateur(
                 "Mateusz",
                 "Tirel",
@@ -50,7 +52,7 @@ namespace AssoFlex.Models
                 0667127014,
                 "admin",
                 EncodeMD5("admin"),
-                ImageToByteArray(),"Admin");
+                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin");
             this.CreateUtilisateur(
                 "Billal",
                 "Benziane",
@@ -58,7 +60,7 @@ namespace AssoFlex.Models
                 0755172317,
                 "billal.benziane1@gmail.com",
                 EncodeMD5("11111"), 
-                ImageToByteArray(),"Admin");
+                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin");
             this.CreateUtilisateur(
                 "Paul",
                 "Jean",
@@ -66,7 +68,7 @@ namespace AssoFlex.Models
                 0755172320,
                 "pjean@gmail.com",
                 EncodeMD5("22222"), 
-                ImageToByteArray(),"Admin-Asso");
+                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin-Asso");
             this.CreateUtilisateur(
                 "Jean",
                 "Jacques",
@@ -74,7 +76,7 @@ namespace AssoFlex.Models
                 0755172324,
                 "jjacques@gmail.com", 
                 EncodeMD5("33333"), 
-                ImageToByteArray(),"Admin-Asso");
+                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin-Asso");
             this.CreateUtilisateur(
                 "Jessica",
                 "Alba", 
@@ -82,7 +84,7 @@ namespace AssoFlex.Models
                 0755172328,
                 "jalba@gmail.com",
                 EncodeMD5("44444"), 
-                ImageToByteArray(),"Admin-Asso");
+                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin-Asso");
             this.CreateUtilisateur(
                 "Louis",
                 "David",
@@ -90,7 +92,7 @@ namespace AssoFlex.Models
                 0755172332,
                 "ldavid@gmail.com",
                 EncodeMD5("55555"),
-                ImageToByteArray());
+                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"));
             this.CreateUtilisateur(
                 "Alban",
                 "Ivanoff",
@@ -98,28 +100,31 @@ namespace AssoFlex.Models
                 0755172338,
                 "aivanoff@gmail.com",
                 EncodeMD5("66666"),
-                ImageToByteArray());
+                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"));
             
             //------------- ASSOCIATIONS -------------//
             this.CreateAssociation(
-                "AGP", 
-                "111111-111", 
+                "AGP",
+                "111111-111",
                 2,
+                ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
                 "Association des Gabonais de Poitiers");
             this.CreateAssociation(
                 "ASTEC",
                 "222222-222",
                 3,
+                ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
                 "L'Association pour la Science et la " +
                 "Transmission de l'Esprit Critique a pour principal" +
                 " projet la chaîne YouTube la Tronche en Biais.");
             this.CreateAssociation(
-            "Tête en l'air",
-            "333333-333",
-            4,
-            "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. " +
-            "A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations," +
-            " soirées privées etc.");
+                "Tête en l'air",
+                "333333-333",
+                4,
+                ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
+                "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. " +
+                "A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations," +
+                " soirées privées etc.");
             
             //------------- EVÈNEMENT -------------//
             this.CreateEvenement(
@@ -305,7 +310,7 @@ namespace AssoFlex.Models
             return _assoFlex.Associations.ToList();
         }
 
-        public Association CreateAssociation(string nom, string numSiret, int idGerant, string description = "")
+        public Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso, string description = "")
         {
             Association assoToAdd = new Association()
             {
@@ -320,7 +325,7 @@ namespace AssoFlex.Models
             return assoToAdd;
         }
 
-        public void UpdateAssociation(int id, string nom, string numSiret, string description)
+        public void UpdateAssociation(int id, string nom, string numSiret, byte[] logoAsso, string description)
         {
             Association assoToUpdate = this._assoFlex.Associations.Find(id);
             if (assoToUpdate != null)

@@ -60,7 +60,7 @@ namespace AssoFlex.Controllers
             if (ModelState.IsValid)
             {
                 this._dal.UpdateAssociation(
-                    association.Id, association.Nom, association.NumSiret,
+                    association.Id, association.Nom, association.NumSiret, association.AssoLogo,
                     association.Description);
                 return RedirectToAction("DashboardAdmin", "Dashboard");
 
