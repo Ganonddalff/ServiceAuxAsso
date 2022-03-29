@@ -7,6 +7,10 @@
 }
 
 <h2 class="page-section-heading text-center mb-0">Nos Associations</h2>
+<form id="form"> 
+  <input type="search" id="query" name="q" placeholder="Search...">
+  <button>Search</button>
+</form>
 <div class="row justify-content-start">
     @foreach (var asso in Model)
     {
@@ -25,8 +29,12 @@
                 {
                     <a href=@Url.Action("Index", "Login") class="btn btn-primary">Adhérer</a>
                 }
-                
             </div>
         </div>
     }
 </div>
+
+@section Scripts
+{
+    
+}

@@ -357,7 +357,7 @@ namespace AssoFlex.Models
 
         public List<Adhesion> getAllAdhesions()
         {
-            return this._assoFlex.Adhesions.ToList();
+            return this._assoFlex.Adhesions.Include(a => a.Association).ToList();
         }
 
         public Adhesion CreateAdhesion(int idAsso, int idUser)

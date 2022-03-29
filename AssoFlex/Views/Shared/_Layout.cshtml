@@ -5,10 +5,17 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AssoFlex</title>
-	<link href="~/css/bootstrap.min.css" rel="stylesheet">
-	<link href="~/plugins/fontawesome-free-6.1.0-web/css/all.min.css" rel="stylesheet"/>
-	@* <link href="~/css/style.css" rel="stylesheet"> *@
-	@* <link rel="stylesheet" href="~/css/style-2.css"/> *@
+	<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Icons-->
+    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/lib/coreui/icons/css/coreui-icons.css" rel="stylesheet" />
+    <link href="~/lib/flag-icon-css/css/flag-icon.css" rel="stylesheet" />
+    <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
+    <link href="~/lib/pace-progress/css/pace.css" rel="stylesheet" />
+    <!-- MAIN CSS -->
+    <link href="~/lib/coreui/css/style.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
 <body>
@@ -21,45 +28,66 @@
     	</button>
 	    <div class="collapse navbar-collapse" id="navbarResponsive">
 		    <div class="navbar">
-			    <a class="nav-item nav-link" href=@Url.Action("Index", "Home")>Acceuil</a>
-			    <a class="nav-item nav-link" href="#">Présentation</a>
+			    <a class="nav-item nav-link" href=@Url.Action("Index", "Home")>
+				    Acceuil
+			    </a>
+			    <a class="nav-item nav-link" href="#">
+				    Présentation
+			    </a>
 			    <div class="nav-item dropdown">
 				    <a class="" href="#" role="button" id="servicesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="False">
 					    Nos services
 				    </a>
 				    <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="servicesDropdown">
-					    <a class="dropdown-item" href=@Url.Action("Index", "Crowdfunding")>Crowdfunding</a> 
+					    <a class="dropdown-item" href=@Url.Action("Index", "Crowdfunding")>
+						    Crowdfunding
+					    </a> 
 					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href=@Url.Action("Index", "Evenement")>Évènement</a> 
+					    <a class="dropdown-item" href=@Url.Action("Index", "Evenement")>
+						    Évènement
+					    </a> 
 				    </div>
 			    </div>
-			     <a class="nav-link" href=@Url.Action("Index", "Association")>Nos associations</a>
+			    <a class="nav-link" href=@Url.Action("Index", "Association")>
+				    Nos associations
+			    </a>
 		    </div>
-		    <div class="navbar-nav ms-auto">
-			    <a class="nav-item nav-link" href=@Url.Action("Index","Souscription") style="color: #0c63e4; font-weight:700;">Inscris Ton Asso</a> @* @Url.Action("CreerAsso", "Association") *@
+		    <div class="navbar-nav ml-auto">
+			    <a class="nav-item nav-link" href=@Url.Action("Index", "Souscription") style="color: #0c63e4; font-weight:700;">
+				    Inscris Ton Asso
+			    </a> @* @Url.Action("CreerAsso", "Association") *@
 			    @{
 				    if (User.Identity.IsAuthenticated)
 				    {
 					    <div class="nav-item dropdown justify-content-end">
 						    <a class="" data-toggle="dropdown" href="#" role="button" id="profilDropdown" aria-haspopup="true" aria-expanded="False">
-							    <b style="color: red">Bonjour @User.Identity.Name</b>
-							    <img src="~/assets/img/profile.png" alt="Guytri" class="rounded-circle" width="40px" height="40px"/>
+							    <b>Bonjour @User.Identity.Name</b>
+							    <img src=@("/Dashboard/GetImageProfil/"+ User.FindFirst(ClaimTypes.NameIdentifier).Value) 
+							         alt="userAvatar" class="rounded-circle" width="50px" height="40px"/>
 						    </a>
 						    <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="profilDropdown">
 							    @if (User.IsInRole("Admin"))
 							    {
-								    <a class="dropdown-item" href=@Url.Action("DashboardAdmin", "Dashboard")>Dashboard</a>
+								    <a class="dropdown-item" href=@Url.Action("DashboardAdmin", "Dashboard")>
+									    <i class="fa fa-home"></i> Espace Personnel
+								    </a>
 							    }else if (User.IsInRole("Admin-Asso"))
 							    {
-								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>Profil</a>
+								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id = User.FindFirst(ClaimTypes.NameIdentifier).Value})>
+									    <i class="fa fa-home"></i> Espace Personnel
+								    </a>
 							    }
 							    else
 							    {
-								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>Profil</a>
+								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id = User.FindFirst(ClaimTypes.NameIdentifier).Value})>
+									    <i class="fa fa-home"></i> Espace Personnel
+								    </a>
 							    }
 							    
 							    <div class="dropdown-divider"></div>
-							    <a class="nav-link dropdown-item" role="menuitem" href=@Url.Action("Deconnexion", "Login")><b>Se Déconnecter</b></a>
+							    <a class="dropdown-item" href=@Url.Action("Deconnexion", "Login")>
+								    <i class="fa fa-lock"></i> Deconnexion
+							    </a>
 						    </div>
 					    </div>
 				    }
@@ -121,10 +149,22 @@
 	</div>
 </footer>
 
-<script src="~/js/jquery.min.js"></script>
-<script src="~/js/popper.js"></script>
-<script src="~/js/bootstrap.min.js"></script>
-<script src="~/js/main.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- CoreUI and necessary plugins-->
+<script src="~/lib/pace-progress/pace.min.js"></script>
+
+<script src="~/lib/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+<script src="~/lib/coreui/dist/js/coreui.min.js"></script>
+<script src="~/lib/jquery-sdfilterme-master/jquery.sdFilterMe.js"></script>
+<!-- Plugins and scripts required by this view-->
+@*<script src="~/lib/chart.js/dist/Chart.min.js"></script>
+<script src="~/lib/coreui/js/custom-tooltips.js"></script>
+<script src="~/lib/coreui/js/main.js"></script>*@
+
+<script src="~/js/site.min.js" asp-append-version="true"></script>
+
+@RenderSection("Scripts", required: false) 
 
 </body>
 </html>

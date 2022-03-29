@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using AssoFlex.Models;
 using Microsoft.AspNetCore.Mvc;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace AssoFlex.Controllers
 {
@@ -10,6 +13,33 @@ namespace AssoFlex.Controllers
         public UtilisateurController()
         {
             this._dal = new Dal();
+        }
+
+        public IActionResult GetUtilisateur(int id)
+        {
+            Utilisateur user = _dal.getUtilisateur(id);
+            return View(user);
+        }
+
+        public IActionResult GetAdhesions(int id)
+        {
+            List<Adhesion> allAdhesions = _dal.getAllAdhesions();
+            List<Adhesion> listeAdhesion = allAdhesions.Where(adhesion => adhesion.UtilisateurId == id).ToList();
+            return View(listeAdhesion);
+        }
+
+        public IActionResult GetEvenements(int id)
+        {
+            List<Evenement> allEvenements = _dal.getAllEvenements();
+            List<Evenement> listEvenements = new List<Evenement>();
+            return View(listEvenements);
+        }
+        
+        public IActionResult GetCrowdfundings(string id)
+        {
+            List<Crowdfunding> allCrowdfundings = _dal.getAllCrowdfundings();
+            List<Crowdfunding> listCrowdfundings = new List<Crowdfunding>();
+            return View(listCrowdfundings);
         }
 
         public IActionResult DeleteUtilisateur(int id)
@@ -25,7 +55,7 @@ namespace AssoFlex.Controllers
             return View(user);
         }
 
-        [HttpPost]
+        [Microsoft.AspNetCore.Mvc.HttpPost]
         public IActionResult UpdateUtilisateur(Utilisateur user)
         {
             if (ModelState.IsValid)

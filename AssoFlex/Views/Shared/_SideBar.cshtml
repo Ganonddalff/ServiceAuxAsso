@@ -1,0 +1,35 @@
+﻿@using System.Security.Claims
+<div class="sidebar">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("DashboardAdmin","Dashboard")>
+                    <i class="nav-icon icon-speedometer"></i> Dashboard
+                    @* <span class="badge badge-primary">NEW</span> *@
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("GetUtilisateur","Utilisateur", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>
+                    <i class="nav-icon icon-user"></i> Mon profil
+                </a>
+            </li>
+            <li class="nav-title">Mes activités</li>
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("GetAdhesions", "Utilisateur", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>
+                    <i class="nav-icon icon-puzzle"></i> Adhésions
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("GetEvenements", "Utilisateur", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>
+                    <i class="nav-icon icon-puzzle"></i> Évènements
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("GetCrowdfundings", "Utilisateur", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value})>
+                    <i class="nav-icon icon-puzzle"></i> Crowfundings
+                </a>
+            </li>
+        </ul>    
+    </nav>
+    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+</div>

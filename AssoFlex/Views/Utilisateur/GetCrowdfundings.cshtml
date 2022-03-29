@@ -1,0 +1,57 @@
+@model System.Collections.Generic.List<AssoFlex.Models.Crowdfunding>
+
+@{
+    ViewBag.Title = "Mes Crowdfundings";
+    Layout = "_LayoutDashboard";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Liste de mes crowdfundings
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive-sm table-bordered table-striped table-sm" id="crowdfundingTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        @* <th>Utilisateur</th> *@
+                        <th>Montant visé</th>
+                        @* <th>Montant encours</th> *@
+                        @* <th>Ma participation</th> *@
+                        <th>Date de début</th>
+                        <th>Data de fin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var crowdfunding in Model)
+                    {
+                        <tr>
+                            <td>@crowdfunding.Id</td>
+                            <td>@crowdfunding.Nom</td>
+                            <td>@crowdfunding.MontantProjet</td>
+                            <td>@crowdfunding.DateDebutProjet</td>
+                            <td>@crowdfunding.DateFinProjet</td>
+                            @* <td>@adhesion.Statut</td> *@
+                            <td>
+                                <span class="badge badge-success">Active</span>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-->
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready( function () {
+            $('#crowdfundingTable').DataTable();
+        } );
+    </script>
+}

@@ -1,0 +1,54 @@
+@model System.Collections.Generic.List<AssoFlex.Models.Adhesion>
+
+@{
+    ViewBag.Title = "Adhésions";
+    Layout = "_LayoutDashboard";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Liste de mes adhésions
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive-sm table-bordered table-striped table-sm" id="adhesionTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Associaton</th>
+                        @* <th>Utilisateur</th> *@
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var adhesion in Model)
+                    {
+                        <tr>
+                            <td>@adhesion.Id</td>
+                            <td>@adhesion.Association.Nom</td>
+                            <td>@adhesion.DateDebut</td>
+                            <td>@adhesion.DateFin</td>
+                            @* <td>@adhesion.Statut</td> *@
+                            <td>
+                                <span class="badge badge-success">Active</span>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-->
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready( function () {
+            $('#adhesionTable').DataTable();
+        } );
+    </script>
+}
