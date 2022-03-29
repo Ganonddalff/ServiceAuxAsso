@@ -15,10 +15,13 @@ namespace AssoFlex.Models
         public int OrganisateurId { get; set; }
         public Association Organisateur { get; set; }
         public string NomEvent { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DateDebutEvent { get; set; }
         public int NbTickets { get; set; }
+        public int NbPlacesRestantes { get; set; }
         
         public int Prix { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DateFinEvent { get; set; }
         public string LieuEvent { get; set; }
         public bool Statut { get; set; }
@@ -35,6 +38,9 @@ Humanitaire = 3,
 Environnement = 4,
 Culture = 5,
 Santé = 6,
+Spectacle = 7,
+Conférence = 8,
+Séminaire = 9
 
     }
     

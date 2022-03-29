@@ -1,38 +1,43 @@
 @model AssoFlex.Models.Evenement
-
 @{
+     
     Layout = null;
 }
-<!doctype html>  
-<html lang="en">  
-   <head>  
-      <meta charset="utf-8">  
-      <title>Modification évènement</title>  
-      <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">  
-      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>  
-      <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  
-      <!-- Javascript -->  
-      <script>  
-         $(function() {
-             $( "#datepick" ).datepicker({
-             altField: "#datepicker",
-             closeText: 'Fermer',
-             prevText: 'Précédent',
-             nextText: 'Suivant',
-             currentText: 'Aujourd\'hui',
-             monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-             monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-             dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-             dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-             dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-             weekHeader: 'Sem.',
-             dateFormat: 'yy-mm-dd'
-             });
-         }); 
-      </script>  
-   </head> 
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet"> 
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script> 
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> 
+
+<script>  
+   $(function() {
+       $( ".datepick" ).datepicker({
+       altField: "#datepicker",
+       closeText: 'Fermer',
+       prevText: 'Précédent',
+       nextText: 'Suivant',
+       currentText: 'Aujourd\'hui',
+       monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+       monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+       dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+       dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+       dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+       weekHeader: 'Sem.',
+       dateFormat: 'yy-mm-dd'
+       });
+   }); 
+</script>  
+
 <title>AssoFlex - Modifier mon évènement</title>
+</head>
+
+
+
+
+
+
+<body>
 <h4>Modifier @Model.NomEvent</h4>
 
 <div class="container">
@@ -44,7 +49,7 @@
     @*     <div class="divider-custom-line"></div> *@
     @* </div> *@
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-xl-7">
+        <div >
             @using (Html.BeginForm())
             {
                 <div>@Html.HiddenFor(model =>model.IdEvent)</div>
@@ -73,20 +78,19 @@
                     @Html.ValidationMessageFor(model => model.LieuEvent)
                 </div>
                 <br/>
-                <div class="form-floating mb-3">
+                <div class="date-field">
                     @*
                             @Html.Label("Date et heure de début de l'évènement : ")
                             *@
-                    @Html.TextBoxFor(model => model.DateDebutEvent, new {@class = "form-control", @type="text", @id="datepick", placeholder = @Model.DateDebutEvent})
-                    @* <p>Date: <input type="text" id="datepick"></p> *@
+                    @Html.TextBoxFor(model => model.DateDebutEvent, new {@class = "form-control datepick",@type="text",@id="datepick1", placeholder = @Model.DateDebutEvent})
                     @Html.ValidationMessageFor(model => model.DateDebutEvent)
                 </div>
                 <br/>
-                <div class="form-floating mb-3">
+                <div class="date-field">
                     @*
                             @Html.Label("Date et heure de fin : ")
                             *@
-                    @Html.TextBoxFor(model => model.DateFinEvent, new {@class = "form-control", placeholder = @Model.DateFinEvent})
+                    @Html.TextBoxFor(model => model.DateFinEvent, new {@class = "form-control datepick",@type="text",@id="datepick2", placeholder = @Model.DateFinEvent})
                     @Html.ValidationMessageFor(model => model.DateFinEvent)
                 </div>
                 <br/>
@@ -105,6 +109,9 @@
                     @Html.ValidationMessageFor(model => model.Prix)
                             
                 </div>
+
+
+
                 <!-- Submit Button-->
                 <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
             }

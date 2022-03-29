@@ -1,0 +1,59 @@
+@model AssoFlex.ViewModels.ContributionViewModel
+
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script>
+  /*For total*/
+  $(document).ready(function() {
+    
+    
+    
+    $(".checkout").on("text", ".montant", function() {
+      
+      var montant = +$(this).val();
+      $("#total").text( montant + " €");
+    })
+  
+    var $buttonPlus = $('.increase-btn');
+    var $buttonMin = $('.decrease-btn');
+    var $montant = $('.montant');
+    
+    /*For plus and minus buttons*/
+    $buttonPlus.click(function() {
+      $montant.val(parseInt($montant.val()) + 10).trigger('input');
+    });
+    
+    $buttonMin.click(function() {
+      $montant.val(Math.max(parseInt($montant.val()) - 10, 0)).trigger('input');
+    });
+  })
+  </script>
+  
+</head>
+
+<h2>Contribuer à @Model.Crowdfunding.Nom </h2>
+
+@using (@Html.BeginForm())
+{
+  <div class="checkout">
+    <button type="button" class="decrease-btn">-</button>
+    @Html.LabelFor(Model=> Model.Montant)
+    @Html.TextBoxFor(Model => Model.Montant, new {@class = "form-control montant", type = "text"})
+    @Html.ValidationMessageFor(Model => Model.Montant)
+    <button type="button" class="increase-btn">+</button>
+    
+
+
+
+
+  </div>
+  
+  <button class="btn btn-primary btn-xl" type="submit">Contribuer</button>
+}

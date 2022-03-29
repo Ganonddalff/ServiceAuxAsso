@@ -27,19 +27,7 @@ namespace AssoFlex.Controllers
             return View(listerMesEvenements);
         }
 
-        // public ActionResult Details(int id)
-        // {
-        //     EvenementViewModel evm = new EvenementViewModel();
-        //     evm = _dal.getEvenementViewModel(id);
-        //     return View(evm);
-        // }
 
-        // public ActionResult Details(int id)
-        // {
-        //     Evenement monEvent = _dal.getEvenement(id);
-        //     monEvent.Organisateur = _dal.getAssociation(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-        //     return View(monEvent);
-        // }
         
         public ActionResult Details(int id)
         {
@@ -85,9 +73,14 @@ namespace AssoFlex.Controllers
         {
             if (ModelState.IsValid)
             {
-                eventUpdate = _dal.UpdateEvenement(eventUpdate.IdEvent, eventUpdate.NomEvent, eventUpdate.NbTickets,
-                    eventUpdate.DateDebutEvent, eventUpdate.DateFinEvent, eventUpdate.LieuEvent,
-                    eventUpdate.CategorieEvent, eventUpdate.Prix);
+                eventUpdate = _dal.UpdateEvenement(eventUpdate.IdEvent, 
+                    eventUpdate.NomEvent, 
+                    eventUpdate.NbTickets,
+                    eventUpdate.DateDebutEvent, 
+                    eventUpdate.DateFinEvent, 
+                    eventUpdate.LieuEvent,
+                    eventUpdate.CategorieEvent, 
+                    eventUpdate.Prix);
                 return RedirectToAction("Index");
             }
 
