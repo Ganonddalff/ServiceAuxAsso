@@ -21,17 +21,17 @@ namespace AssoFlex.Controllers
         {
             DashboardViewModel dVM = new DashboardViewModel()
             {
-                Admin = _dal.getUtilisateur(User.FindFirst(ClaimTypes.NameIdentifier).Value),
-                Associations = _dal.getAllAssociations(),
-                Utilisateurs = _dal.getAllUtilisateurs(),
-                Adhesions = _dal.getAllAdhesions()
+                Admin = _dal.GetUtilisateur(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                Associations = _dal.GetAllAssociations(),
+                Utilisateurs = _dal.GetAllUtilisateurs(),
+                Adhesions = _dal.GetAllAdhesions()
             };
             return View(dVM);
         }
 
         public IActionResult GetImageProfil(int id)
         {
-            Utilisateur user = _dal.getUtilisateur(id);
+            Utilisateur user = _dal.GetUtilisateur(id);
             return File(user.ProfilImg, "image/jpeg");
         }
         

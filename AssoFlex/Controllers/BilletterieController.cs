@@ -23,7 +23,7 @@ namespace AssoFlex.Controllers
         //GET
         public ActionResult BuyTicket(int id)
         {
-            Evenement monEvent = _dal.getEvenement(id);
+            Evenement monEvent = _dal.GetEvenement(id);
             return View(monEvent);
         }
     }

@@ -19,14 +19,14 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult Index()
         {
-            List<Association> listeDesAssociations = _dal.getAllAssociations();
+            List<Association> listeDesAssociations = _dal.GetAllAssociations();
             return View(listeDesAssociations);
         }
         
         // GET
         public ActionResult DetailsAssociation(int id)
         {
-            Association association = _dal.getAssociation(id);
+            Association association = _dal.GetAssociation(id);
             return View(association);
         }
         
@@ -39,7 +39,7 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult DeleteAssociation(int id)
         {
-            if (_dal.getAssociation(id) != null)
+            if (_dal.GetAssociation(id) != null)
             {
                 _dal.DeleteAssociation(id);
                 return RedirectToAction("DashboardAdmin", "Dashboard");
@@ -50,7 +50,7 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult UpdateAssociation(int id, string nom, string numSiret, string description)
         {
-            Association association = this._dal.getAssociation(id);
+            Association association = this._dal.GetAssociation(id);
             return View(association);
         }
 

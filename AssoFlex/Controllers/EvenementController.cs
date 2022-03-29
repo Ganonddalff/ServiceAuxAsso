@@ -19,10 +19,10 @@ namespace AssoFlex.Controllers
         // GET
         public ActionResult Index()
         {
-            List<Evenement> listerMesEvenements = _dal.getAllEvenements();
+            List<Evenement> listerMesEvenements = _dal.GetAllEvenements();
             foreach (var monEvent in listerMesEvenements)
             {
-                monEvent.Organisateur = _dal.getAssociation(monEvent.OrganisateurId);
+                monEvent.Organisateur = _dal.GetAssociation(monEvent.OrganisateurId);
             }
             return View(listerMesEvenements);
         }
@@ -31,14 +31,14 @@ namespace AssoFlex.Controllers
         
         public ActionResult Details(int id)
         {
-            Evenement monEvent = _dal.getEvenement(id);
+            Evenement monEvent = _dal.GetEvenement(id);
             
             return View(monEvent);
         }
         //GET
         public ActionResult RechercheEvent(string critereRecherche)
         {
-            List<Evenement> uneListeTemporaire = _dal.getAllEvenements();
+            List<Evenement> uneListeTemporaire = _dal.GetAllEvenements();
             List<Evenement> resultatRecherche = new List<Evenement>();
 
             foreach (var eventRecherche in uneListeTemporaire)
@@ -64,7 +64,7 @@ namespace AssoFlex.Controllers
         //GET
         public ActionResult ModifEvent(int id)
         {
-            Evenement evenement = _dal.getEvenement(id);
+            Evenement evenement = _dal.GetEvenement(id);
             return View(evenement);
         }
 
@@ -89,7 +89,7 @@ namespace AssoFlex.Controllers
 
         public Association getOrg(int orgaId)
         {
-            Association assoOrga = _dal.getAssociation(orgaId);
+            Association assoOrga = _dal.GetAssociation(orgaId);
             return assoOrga;
         }
         
@@ -104,8 +104,8 @@ namespace AssoFlex.Controllers
         {
             if (ModelState.IsValid)
             {
-                var orgaID = _dal.getAssociationID(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-                Association orga = _dal.getAssociation(orgaID);
+                var orgaID = _dal.GetAssociationId(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+                Association orga = _dal.GetAssociation(orgaID);
                 evenement = _dal.CreateEvenement(
                     orga, evenement.NomEvent,
                     evenement.NbTickets, 
@@ -118,7 +118,7 @@ namespace AssoFlex.Controllers
 
         public ActionResult SupprEvent(int id)
         {
-            Evenement eventToDel = _dal.getEvenement(id);
+            Evenement eventToDel = _dal.GetEvenement(id);
             if (eventToDel != null)
             {
                 _dal.DeleteEvenement(id);

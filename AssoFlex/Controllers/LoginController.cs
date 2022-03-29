@@ -31,7 +31,7 @@ namespace AssoFlex.Controllers
             if (HttpContext.User.Identity.IsAuthenticated)
             {
                 var userId = User.Claims.FirstOrDefault(u => u.Type == ClaimTypes.NameIdentifier)?.Value;
-                viewModel.Utilisateur = _dal.getUtilisateur(userId);
+                viewModel.Utilisateur = _dal.GetUtilisateur(userId);
                 return Redirect("home/index");
             }
             return View(viewModel);

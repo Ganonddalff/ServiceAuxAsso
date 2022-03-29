@@ -8,70 +8,127 @@ namespace AssoFlex.Models
     public interface IDal : IDisposable
     {
         void InitializeDb();
-        Utilisateur getUtilisateur(int id);
-        Utilisateur getUtilisateur(string idStr);
+        
+        // ************************************ //
+
+        #region Utilisateur
+
+        Utilisateur GetUtilisateur(int id);
+        Utilisateur GetUtilisateur(string idStr);
         Utilisateur Authentifier(string email, string password);
-        List<Utilisateur> getAllUtilisateurs();
+        List<Utilisateur> GetAllUtilisateurs();
         Utilisateur CreateUtilisateur(string prenom, string nom, string adresse,
             int telephone, string email, string password, byte[] profilImg, string role="Basic");
         void UpdateUtilisateur(int id, string prenom, string nom, string adresse,
             int telephone, string email, string password, byte[] profilImg, string role);
         void DeleteUtilisateur(int id);
+
+        #endregion
         
         // ****************************************** //
-        Association getAssociation(int id);
-        Association getAssociation(string idStr);
-        int getAssociationID(int idAdmin);
-        List<Association> getAllAssociations();
+
+        #region Association
+
+        Association GetAssociation(int id);
+        Association GetAssociation(string idStr);
+        int GetAssociationId(int idAdmin);
+        List<Association> GetAllAssociations();
         Association CreateAssociation(string nom, string numSiret, int idGerant,
-             string description="");
+            string description="");
         void UpdateAssociation(int id, string nom, string numSiret,
-             string description);
+            string description);
         void DeleteAssociation(int id);
+
+        #endregion
         
         // ************************************ //
-        List<Adhesion> getAllAdhesions();
+
+        #region Adhesion
+
+        List<Adhesion> GetAllAdhesions();
         Adhesion CreateAdhesion(int idAsso, int idUser);
         void UpdateAdhesion();
         void DeleteAdhesion(int id);
-        
+
+        #endregion
+
         // ************************************ //
-        List<Souscription> getAllSouscriptions();
-        Souscription getSouscription(int id);
+
+        #region Souscription
+
+        List<Souscription> GetAllSouscriptions();
+        Souscription GetSouscription(int id);
         Souscription CreateSouscrition(int id, string formule);
         void UpdateSouscription();
         void DeleteSouscription(int id);
+
+        #endregion
         
         // ******************************** //
-        List<Crowdfunding> getAllCrowdfundings();
-        Crowdfunding getCrowdfunding(int Id);
-        Crowdfunding getCFCollecte(int id);
-        Collecte getCollecte(int id);
+
+        #region Crowdfunding
+
+        List<Crowdfunding> GetAllCrowdfundings();
+        Crowdfunding GetCrowdfunding(int id);
+        Crowdfunding GetCfCollecte(int id);
+        Crowdfunding CreateCrowdfunding(string nom, int montant, string lieuProjet, string categorieProjet,
+            DateTime dateDebut, DateTime dateFin, Association porteurDuProjet, Collecte collecte);
+        Crowdfunding UpdateCrowdfunding(int id, string nom, int montant, string lieuProjet, 
+            string categorieProjet, DateTime dateFin);
+        void DeleteCrowdfunding(int id);
         
+        #endregion
+        
+        // ******************************** //
 
-        Contribution CreateContribution(double montantContribution, int collecteId, Utilisateur userLoggedIn);
+        #region Collecte
 
-        Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet,
-            DateTime DateDebut, DateTime DateFin, Association PorteurDuProjet, Collecte collecte);
+        List<Collecte> GetAllCollectes();
+        Collecte GetCollecte(int id);
         Collecte CreateCollecte();
-        void DeleteCrowdfunding(int Id);
-        Crowdfunding UpdateCrowdfunding(int Id, string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateFin);
+        void UpdateCollecte();
+        void DeleteCollecte(int id);
+
+        #endregion
         
         // ******************************** //
-        List<Billetterie> getAllBilletteries();
-        Billetterie getBilletterie(int Id);
-        Billetterie CreateBilletterie(string Nom, string Prenom);
-        void DeleteBilletterie(int Id);
-        void UpdateBilletterie(int Id, string Nom, string Prenom);
+
+        #region Contribution
+
+        List<Contribution> GetAllContributions();
+        Contribution GetAllContribution(int id);
+        Contribution CreateContribution(double montantContribution, int collecteId, Utilisateur userLoggedIn);
+        void UpdateContribution(int id, double montantContribution, int collecteId, Utilisateur userLoggedIn);
+        void DeleteContribution(int id);
+
+        #endregion
+
+        // ******************************** //
+
+        #region Billetterie
+
+        List<Billetterie> GetAllBilletteries();
+        Billetterie GetBilletterie(int id);
+        Billetterie CreateBilletterie(string nom, string prenom);
+        void DeleteBilletterie(int id);
+        void UpdateBilletterie(int id, string nom, string prenom);
+
+        #endregion
         
         // ******************************** //
-        List<Evenement> getAllEvenements();
-        Evenement getEvenement(int Id);
-        EvenementViewModel getEvenementViewModel(int id);
+
+        #region Evenement
+
+        List<Evenement> GetAllEvenements();
+        Evenement GetEvenement(int id);
+        EvenementViewModel GetEvenementViewModel(int id);
         Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, 
-            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie, int prix);
-        void DeleteEvenement(int Id);
-        Evenement UpdateEvenement(int Id, string nom, int nbTicket, 
-            DateTime DateDebut, DateTime DateFin, string Lieu, string categorie, int prix);
+            DateTime dateDebut, DateTime dateFin, string lieu, string categorie, int prix);
+        void DeleteEvenement(int id);
+        Evenement UpdateEvenement(int id, string nom, int nbTicket, 
+            DateTime dateDebut, DateTime dateFin, string lieu, string categorie, int prix);
+
+        #endregion
+       
     }
 }

@@ -17,7 +17,7 @@ namespace AssoFlex.Controllers
         {
             HomeViewModel hvm = new HomeViewModel()
             {
-                Associations = _dal.getAllAssociations()
+                Associations = _dal.GetAllAssociations()
             };
             return View(hvm);
         }

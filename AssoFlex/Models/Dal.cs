@@ -34,6 +34,7 @@ namespace AssoFlex.Models
             this._assoFlex.Database.EnsureDeleted();
             this._assoFlex.Database.EnsureCreated();
 
+            //------------- UTILISATEURS -------------//
             this.CreateUtilisateur(
                 "Guytri",
                 "Kastane",
@@ -42,7 +43,6 @@ namespace AssoFlex.Models
                 "gkastane@gmail.com",
                 EncodeMD5("11111"),
                 ImageToByteArray(),"Admin");
-            
             this.CreateUtilisateur(
                 "Mateusz",
                 "Tirel",
@@ -51,7 +51,6 @@ namespace AssoFlex.Models
                 "admin",
                 EncodeMD5("admin"),
                 ImageToByteArray(),"Admin");
-            
             this.CreateUtilisateur(
                 "Billal",
                 "Benziane",
@@ -60,7 +59,6 @@ namespace AssoFlex.Models
                 "billal.benziane1@gmail.com",
                 EncodeMD5("11111"), 
                 ImageToByteArray(),"Admin");
-            
             this.CreateUtilisateur(
                 "Paul",
                 "Jean",
@@ -69,7 +67,6 @@ namespace AssoFlex.Models
                 "pjean@gmail.com",
                 EncodeMD5("22222"), 
                 ImageToByteArray(),"Admin-Asso");
-            
             this.CreateUtilisateur(
                 "Jean",
                 "Jacques",
@@ -78,7 +75,6 @@ namespace AssoFlex.Models
                 "jjacques@gmail.com", 
                 EncodeMD5("33333"), 
                 ImageToByteArray(),"Admin-Asso");
-            
             this.CreateUtilisateur(
                 "Jessica",
                 "Alba", 
@@ -87,7 +83,6 @@ namespace AssoFlex.Models
                 "jalba@gmail.com",
                 EncodeMD5("44444"), 
                 ImageToByteArray(),"Admin-Asso");
-            
             this.CreateUtilisateur(
                 "Louis",
                 "David",
@@ -96,7 +91,6 @@ namespace AssoFlex.Models
                 "ldavid@gmail.com",
                 EncodeMD5("55555"),
                 ImageToByteArray());
-            
             this.CreateUtilisateur(
                 "Alban",
                 "Ivanoff",
@@ -106,12 +100,12 @@ namespace AssoFlex.Models
                 EncodeMD5("66666"),
                 ImageToByteArray());
             
+            //------------- ASSOCIATIONS -------------//
             this.CreateAssociation(
                 "AGP", 
                 "111111-111", 
                 2,
                 "Association des Gabonais de Poitiers");
-            
             this.CreateAssociation(
                 "ASTEC",
                 "222222-222",
@@ -119,16 +113,17 @@ namespace AssoFlex.Models
                 "L'Association pour la Science et la " +
                 "Transmission de l'Esprit Critique a pour principal" +
                 " projet la chaîne YouTube la Tronche en Biais.");
-            
             this.CreateAssociation(
             "Tête en l'air",
             "333333-333",
             4,
             "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. " +
-            "A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations, soirées privées etc.");
+            "A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations," +
+            " soirées privées etc.");
             
+            //------------- EVÈNEMENT -------------//
             this.CreateEvenement(
-                this.getAssociation(1),
+                this.GetAssociation(1),
                 "Eminem", 
                 50, 
                 new DateTime(2022, 12, 30), 
@@ -137,7 +132,7 @@ namespace AssoFlex.Models
                 "5",
                 90);
             this.CreateEvenement(
-                this.getAssociation(1),
+                this.GetAssociation(1),
                 "PNL",
                 50,
                 new DateTime(2022, 12, 30),
@@ -146,7 +141,7 @@ namespace AssoFlex.Models
                 "5",
                 10);
             this.CreateEvenement(
-                this.getAssociation(3),
+                this.GetAssociation(3),
                 "Eminem", 
                 50,
                 new DateTime(2022, 12, 30),
@@ -154,9 +149,8 @@ namespace AssoFlex.Models
                 "ACCORD ARENA",
                 "5",
                 100);
-
             this.CreateEvenement(
-                this.getAssociation(2),
+                this.GetAssociation(2),
                 "Concert super",
                 200,
                 new DateTime(2022, 04, 02),
@@ -164,9 +158,8 @@ namespace AssoFlex.Models
                 "Paris",
                 "1",
                 5);
-
             
-
+            //------------- CROWDFUNDING -------------//
             this.CreateCrowdfunding(
                 "Jackson",
                 10000,
@@ -174,46 +167,52 @@ namespace AssoFlex.Models
                 "1", 
                 new DateTime(2022, 04, 22),
                 new DateTime(2023, 04, 21),
-                this.getAssociation(1), 
+                this.GetAssociation(1), 
                 this.CreateCollecte()
                 );
-
             this.CreateCrowdfunding(
                 "Jefferson",
                 30000,
                 "Dallas", 
-                "Transports",
+                "2",
                 new DateTime(2022, 06, 27),
-                new DateTime(2023, 05, 30));
-
+                new DateTime(2023, 05, 30),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
             this.CreateCrowdfunding(
                 "Nguyen",
                 80000,
                 "Vietnam",
-                "Santé",
+                "3",
                 new DateTime(2022, 09, 22),
-                new DateTime(2023, 05, 01));
-
+                new DateTime(2023, 05, 01),
+                this.GetAssociation(2),
+                this.CreateCollecte()
+                );
             this.CreateCrowdfunding(
                 "Benjamin",
                 450000,
                 "Montpellier",
                 "Construction",
                 new DateTime(2022, 12, 24),
-                new DateTime(2023, 11, 21));
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(1),
+                this.CreateCollecte()
+                );
         }
         #endregion
 
         #region Utilisateur
 
-        public Utilisateur getUtilisateur(int id)
+        public Utilisateur GetUtilisateur(int id)
         {
             return this._assoFlex.Utilisateurs.FirstOrDefault(u => u.Id == id);
         }
 
-        public Utilisateur getUtilisateur(string idStr)
+        public Utilisateur GetUtilisateur(string idStr)
         {
-            return int.TryParse(idStr, out var id) ? this.getUtilisateur(id) : null;
+            return int.TryParse(idStr, out var id) ? this.GetUtilisateur(id) : null;
         }
 
         private string EncodeMD5(string motDePasse)
@@ -230,7 +229,7 @@ namespace AssoFlex.Models
             return user;
         }
 
-        public List<Utilisateur> getAllUtilisateurs()
+        public List<Utilisateur> GetAllUtilisateurs()
         {
             return _assoFlex.Utilisateurs.ToList();
         }
@@ -286,22 +285,22 @@ namespace AssoFlex.Models
 
         #region Association
 
-        public Association getAssociation(int id)
+        public Association GetAssociation(int id)
         {
             return this._assoFlex.Associations.FirstOrDefault(a => a.Id == id);
         }
 
-        public Association getAssociation(string idStr)
+        public Association GetAssociation(string idStr)
         {
-            return int.TryParse(idStr, out var id) ? this.getAssociation(id) : null;
+            return int.TryParse(idStr, out var id) ? this.GetAssociation(id) : null;
         }
 
-        public int getAssociationID(int idAdmin)
+        public int GetAssociationId(int idAdmin)
         {
             return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == idAdmin)!.Id;
         }
 
-        public List<Association> getAllAssociations()
+        public List<Association> GetAllAssociations()
         {
             return _assoFlex.Associations.ToList();
         }
@@ -347,7 +346,7 @@ namespace AssoFlex.Models
 
         #region Adhesion
 
-        public List<Adhesion> getAllAdhesions()
+        public List<Adhesion> GetAllAdhesions()
         {
             return this._assoFlex.Adhesions.ToList();
         }
@@ -382,12 +381,12 @@ namespace AssoFlex.Models
 
         #region Souscription
 
-        public List<Souscription> getAllSouscriptions()
+        public List<Souscription> GetAllSouscriptions()
         {
             return this._assoFlex.Souscriptions.ToList();
         }
 
-        public Souscription getSouscription(int id)
+        public Souscription GetSouscription(int id)
         {
             throw new NotImplementedException();
         }
@@ -423,25 +422,17 @@ namespace AssoFlex.Models
 
         #region Crowdfunding
 
-        public Crowdfunding getCrowdfunding(int id)
+        public Crowdfunding GetCrowdfunding(int id)
         {
             return _assoFlex.Crowdfundings.Include(c => c.PorteurDuProjet).ThenInclude(e => e.AdminAsso).FirstOrDefault(a => a.Id==id);
         }
 
-        public Crowdfunding getCFCollecte(int id)
+        public Crowdfunding GetCfCollecte(int id)
         {
             return _assoFlex.Crowdfundings.Include(c => c.Collecte).FirstOrDefault(a => a.Id == id);
         }
-
         
-
-        public Collecte getCollecte(int id)
-        {
-            return _assoFlex.Collectes.Find(id);
-        }
-
-
-        public List<Crowdfunding> getAllCrowdfundings()
+        public List<Crowdfunding> GetAllCrowdfundings()
         {
             return _assoFlex.Crowdfundings.Include(c =>c.Collecte).ToList();
         }
@@ -481,8 +472,6 @@ namespace AssoFlex.Models
 
             if (crowdfundingToUpdate != null)
             {
-
-
                 crowdfundingToUpdate.Nom = Nom;
                 crowdfundingToUpdate.MontantProjet = Montant;
                 crowdfundingToUpdate.LieuProjet = LieuProjet;
@@ -491,17 +480,25 @@ namespace AssoFlex.Models
 
                 this._assoFlex.Update(crowdfundingToUpdate);
                 this._assoFlex.SaveChanges();
-                
-
             }
-
             return crowdfundingToUpdate;
+        }
+        
+        #endregion
 
+        #region Collecte
+
+        public List<Collecte> GetAllCollectes()
+        {
+            throw new NotImplementedException();
         }
 
+        public Collecte GetCollecte(int id)
+        {
+            return _assoFlex.Collectes.Find(id);
+        }
         public Collecte CreateCollecte()
         {
-            
             Collecte maCollecte = new Collecte()
             {
                 MontantCollecte = 0,
@@ -511,42 +508,69 @@ namespace AssoFlex.Models
             return maCollecte;
         }
 
+        public void UpdateCollecte()
+        {
+            throw new NotImplementedException();
+        }
 
+        public void DeleteCollecte(int id)
+        {
+            throw new NotImplementedException();
+        }
 
+        #endregion
+
+        #region Contribution
+
+        public List<Contribution> GetAllContributions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Contribution GetAllContribution(int id)
+        {
+            throw new NotImplementedException();
+        }
+        
         public Contribution CreateContribution(double montantContribution, int collecteId, Utilisateur userLoggedIn)
         {
-            
+            Collecte maCollecte = GetCollecte(collecteId);
+            Contribution maContribution = new Contribution()
+            {
+                MontantContribution = montantContribution,
+                collecte = maCollecte,
+                DateContribution = DateTime.Now,
+                utilisateur = userLoggedIn,
 
+            };
 
-                Collecte maCollecte = getCollecte(collecteId);
-                Contribution maContribution = new Contribution()
-                {
-                    MontantContribution = montantContribution,
-                    collecte = maCollecte,
-                    DateContribution = DateTime.Now,
-                    utilisateur = userLoggedIn,
+            maCollecte.MontantCollecte = (maCollecte.MontantCollecte + montantContribution);
+            _assoFlex.Update(maCollecte);
+            _assoFlex.Add(maContribution);
+            _assoFlex.SaveChanges();
+            return maContribution;
+        }
 
-                };
+        public void UpdateContribution(int id, double montantContribution, int collecteId, Utilisateur userLoggedIn)
+        {
+            throw new NotImplementedException();
+        }
 
-                maCollecte.MontantCollecte = (maCollecte.MontantCollecte + montantContribution);
-                _assoFlex.Update(maCollecte);
-                _assoFlex.Add(maContribution);
-                _assoFlex.SaveChanges();
-                return maContribution;
-            
-            
+        public void DeleteContribution(int id)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
 
         #region Billetterie
 
-        public List<Billetterie> getAllBilletteries()
+        public List<Billetterie> GetAllBilletteries()
         {
             throw new NotImplementedException();
         }
 
-        public Billetterie getBilletterie(int id)
+        public Billetterie GetBilletterie(int id)
         {
             throw new NotImplementedException();
         }
@@ -570,17 +594,17 @@ namespace AssoFlex.Models
 
         #region Evenement
 
-        public List<Evenement> getAllEvenements()
+        public List<Evenement> GetAllEvenements()
         {
             return _assoFlex.Evenements.Include(e=>e.Organisateur).ToList();
         }
 
-        public Evenement getEvenement(int id)
+        public Evenement GetEvenement(int id)
         {
             return _assoFlex.Evenements.Include(e=>e.Organisateur).ThenInclude(a=> a.AdminAsso).FirstOrDefault(e=>e.IdEvent==id);
         }
 
-        public EvenementViewModel getEvenementViewModel(int id)
+        public EvenementViewModel GetEvenementViewModel(int id)
         {
             Evenement eventToVM = _assoFlex.Evenements.Find(id);
             EvenementViewModel evm = new EvenementViewModel();

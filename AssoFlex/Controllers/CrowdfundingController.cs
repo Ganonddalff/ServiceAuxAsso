@@ -20,7 +20,7 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult Index()
         {
-            List<Crowdfunding> listeDesCrowdfundings = _dal.getAllCrowdfundings();
+            List<Crowdfunding> listeDesCrowdfundings = _dal.GetAllCrowdfundings();
             return View(listeDesCrowdfundings);
         }
 
@@ -32,8 +32,8 @@ namespace AssoFlex.Controllers
         [HttpPost]
         public ActionResult CreateCrowdfunding(Crowdfunding nouveauCrowdfunding)
         {
-            var PorteurID = _dal.getAssociationID(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-            Association Porteur = _dal.getAssociation(PorteurID);
+            var PorteurID = _dal.GetAssociationId(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            Association Porteur = _dal.GetAssociation(PorteurID);
             if (ModelState.IsValid){
          
                 nouveauCrowdfunding = _dal.CreateCrowdfunding(
@@ -54,8 +54,8 @@ namespace AssoFlex.Controllers
         //Get
         public ActionResult Contribute(int cfId, int userId)
         {
-            Crowdfunding monCF = _dal.getCFCollecte(cfId);
-            Utilisateur monUser = _dal.getUtilisateur(userId);
+            Crowdfunding monCF = _dal.GetCfCollecte(cfId);
+            Utilisateur monUser = _dal.GetUtilisateur(userId);
             Collecte maCollecte = monCF.Collecte;
             ContributionViewModel cvm = new ContributionViewModel()
             {
@@ -73,8 +73,8 @@ namespace AssoFlex.Controllers
              {
 
 
-                 Crowdfunding monCF = _dal.getCFCollecte(cfId);
-                 Utilisateur monUser = _dal.getUtilisateur(userId);
+                 Crowdfunding monCF = _dal.GetCfCollecte(cfId);
+                 Utilisateur monUser = _dal.GetUtilisateur(userId);
                  Collecte maCollecte = monCF.Collecte;
                  ContributionViewModel cvm2 = new ContributionViewModel()
                  {
@@ -92,11 +92,11 @@ namespace AssoFlex.Controllers
         
         public ActionResult DetailsCrowdfunding(int id)
         {
-            Crowdfunding monCF = _dal.getCrowdfunding(id);
+            Crowdfunding monCF = _dal.GetCrowdfunding(id);
             ContributionViewModel cvm = new ContributionViewModel()
             {
-                Collecte = _dal.getCollecte(monCF.Id),
-                Crowdfunding = _dal.getCrowdfunding(id)
+                Collecte = _dal.GetCollecte(monCF.Id),
+                Crowdfunding = _dal.GetCrowdfunding(id)
 
             };
             return View(cvm);
@@ -104,7 +104,7 @@ namespace AssoFlex.Controllers
 
         public ActionResult UpdateCrowdfunding(int id)
         {
-            Crowdfunding monCF = _dal.getCrowdfunding(id);
+            Crowdfunding monCF = _dal.GetCrowdfunding(id);
             return View(monCF);
         }
 
@@ -130,7 +130,7 @@ namespace AssoFlex.Controllers
         //GET
         public ActionResult DeleteCrowdfunding(int id)
         {
-            Crowdfunding cfToDel = _dal.getCrowdfunding(id);
+            Crowdfunding cfToDel = _dal.GetCrowdfunding(id);
             if (cfToDel != null)
             {
                 _dal.DeleteCrowdfunding(id);

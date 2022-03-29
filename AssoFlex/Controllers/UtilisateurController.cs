@@ -17,27 +17,27 @@ namespace AssoFlex.Controllers
 
         public IActionResult GetUtilisateur(int id)
         {
-            Utilisateur user = _dal.getUtilisateur(id);
+            Utilisateur user = _dal.GetUtilisateur(id);
             return View(user);
         }
 
         public IActionResult GetAdhesions(int id)
         {
-            List<Adhesion> allAdhesions = _dal.getAllAdhesions();
+            List<Adhesion> allAdhesions = _dal.GetAllAdhesions();
             List<Adhesion> listeAdhesion = allAdhesions.Where(adhesion => adhesion.UtilisateurId == id).ToList();
             return View(listeAdhesion);
         }
 
         public IActionResult GetEvenements(int id)
         {
-            List<Evenement> allEvenements = _dal.getAllEvenements();
+            List<Evenement> allEvenements = _dal.GetAllEvenements();
             List<Evenement> listEvenements = new List<Evenement>();
             return View(listEvenements);
         }
         
         public IActionResult GetCrowdfundings(string id)
         {
-            List<Crowdfunding> allCrowdfundings = _dal.getAllCrowdfundings();
+            List<Crowdfunding> allCrowdfundings = _dal.GetAllCrowdfundings();
             List<Crowdfunding> listCrowdfundings = new List<Crowdfunding>();
             return View(listCrowdfundings);
         }
@@ -51,7 +51,7 @@ namespace AssoFlex.Controllers
         public IActionResult UpdateUtilisateur(int id, string prenom, string nom, string adresse,
             int telephone, string email, string password, string role)
         {
-            Utilisateur user = this._dal.getUtilisateur(id);
+            Utilisateur user = this._dal.GetUtilisateur(id);
             return View(user);
         }
 
