@@ -13,5 +13,6 @@ namespace AssoFlex.Models
         public int AdminAssoId { get; set; }
         public Utilisateur AdminAsso { get; set; }
         public byte[] AssoHeaderImage { get; set; }
+        public byte[] AssoLogo { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -28,6 +29,7 @@ namespace AssoFlex.Models
             return System.IO.File.ReadAllBytes(DefaultAvatar);
         }
 
+        #region Initialisation
         public void InitializeDb()
         {
             this._assoFlex.Database.EnsureDeleted();
@@ -220,10 +222,12 @@ namespace AssoFlex.Models
                 new DateTime(2022, 12, 24),
                 new DateTime(2023, 11, 21));
         }
+        #endregion
+
+        #region Utilisateur
 
         public Utilisateur getUtilisateur(int id)
         {
-            
             return this._assoFlex.Utilisateurs.FirstOrDefault(u => u.Id == id);
         }
 
@@ -298,6 +302,10 @@ namespace AssoFlex.Models
             }
         }
 
+        #endregion
+
+        #region Association
+
         public Association getAssociation(int id)
         {
             return this._assoFlex.Associations.FirstOrDefault(a => a.Id == id);
@@ -310,7 +318,7 @@ namespace AssoFlex.Models
 
         public int getAssociationID(int idAdmin)
         {
-            return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == idAdmin).Id;
+            return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == idAdmin)!.Id;
         }
 
         public List<Association> getAllAssociations()
@@ -355,6 +363,10 @@ namespace AssoFlex.Models
             }
         }
 
+        #endregion
+
+        #region Adhesion
+
         public List<Adhesion> getAllAdhesions()
         {
             return this._assoFlex.Adhesions.Include(a => a.Association).ToList();
@@ -386,6 +398,10 @@ namespace AssoFlex.Models
             this._assoFlex.SaveChanges();
         }
 
+        #endregion
+
+        #region Souscription
+
         public List<Souscription> getAllSouscriptions()
         {
             return this._assoFlex.Souscriptions.ToList();
@@ -398,17 +414,17 @@ namespace AssoFlex.Models
 
         public Souscription CreateSouscrition(int id, string formule="Formule 0")
         {
-           Association association = this._assoFlex.Associations.Find(id);
-           Souscription souscriptionToAdd = new Souscription()
-           {
-               Association = association,
-               DateDebut = DateTime.Now,
-               DateFin = DateTime.Now.AddYears(1),
-               Formule = formule
-           };
-           this._assoFlex.Souscriptions.Add(souscriptionToAdd);
-           this._assoFlex.SaveChanges();
-           return souscriptionToAdd;
+            Association association = this._assoFlex.Associations.Find(id);
+            Souscription souscriptionToAdd = new Souscription()
+            {
+                Association = association,
+                DateDebut = DateTime.Now,
+                DateFin = DateTime.Now.AddYears(1),
+                Formule = formule
+            };
+            this._assoFlex.Souscriptions.Add(souscriptionToAdd);
+            this._assoFlex.SaveChanges();
+            return souscriptionToAdd;
         }
 
         public void UpdateSouscription()
@@ -418,32 +434,36 @@ namespace AssoFlex.Models
 
         public void DeleteSouscription(int id)
         {
-           Souscription souscriptionToDelete = this._assoFlex.Souscriptions.Find(id);
-           this._assoFlex.Souscriptions.Remove(souscriptionToDelete);
-           this._assoFlex.SaveChanges();
+            Souscription souscriptionToDelete = this._assoFlex.Souscriptions.Find(id);
+            this._assoFlex.Souscriptions.Remove(souscriptionToDelete);
+            this._assoFlex.SaveChanges();
         }
 
-        public Crowdfunding getCrowdfunding(int Id)
+        #endregion
+
+        #region Crowdfunding
+
+        public Crowdfunding getCrowdfunding(int id)
         {
-            return _assoFlex.Crowdfundings.Find(Id);
+            return _assoFlex.Crowdfundings.Find(id);
         }
         public List<Crowdfunding> getAllCrowdfundings()
         {
             return _assoFlex.Crowdfundings.ToList();
         }
 
-        public Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut,
-            DateTime DateFin)
+        public Crowdfunding CreateCrowdfunding(string nom, int montant, string lieuProjet, string categorieProjet, DateTime dateDebut,
+            DateTime dateFin)
         {
             Crowdfunding crowdfundingToAdd = new Crowdfunding()
             {
-                Nom = Nom,
-                MontantProjet = Montant,
-                LieuProjet = LieuProjet,
-                CategorieProjet = CategorieProjet,
+                Nom = nom,
+                MontantProjet = montant,
+                LieuProjet = lieuProjet,
+                CategorieProjet = categorieProjet,
                 DateCreation = DateTime.Now,
-                DateDebutProjet = DateDebut,
-                DateFinProjet = DateFin,
+                DateDebutProjet = dateDebut,
+                DateFinProjet = dateFin,
                 Statut = true,
             };
             this._assoFlex.Crowdfundings.Add(crowdfundingToAdd);
@@ -451,57 +471,65 @@ namespace AssoFlex.Models
             return crowdfundingToAdd;
         }
 
-        public void DeleteCrowdfunding(int Id)
+        public void DeleteCrowdfunding(int id)
         {
-            Crowdfunding crowdfundingToDelete = this._assoFlex.Crowdfundings.Find(Id);
+            Crowdfunding crowdfundingToDelete = this._assoFlex.Crowdfundings.Find(id);
             this._assoFlex.Crowdfundings.Remove(crowdfundingToDelete);
             this._assoFlex.SaveChanges();
         }
 
-        public void UpdateCrowdfunding(int Id, string Nom, int Montant, string LieuProjet, string CategorieProjet,
-            DateTime DateFin)
+        public void UpdateCrowdfunding(int id, string nom, int montant, string lieuProjet, string categorieProjet,
+            DateTime dateFin)
         {
-            Crowdfunding crowdfundingToUpdate = this._assoFlex.Crowdfundings.Find(Id);
-            crowdfundingToUpdate.Nom = Nom;
-            crowdfundingToUpdate.MontantProjet = Montant;
-            crowdfundingToUpdate.LieuProjet = LieuProjet;
-            crowdfundingToUpdate.DateFinProjet = DateFin;
+            Crowdfunding crowdfundingToUpdate = this._assoFlex.Crowdfundings.Find(id);
+            crowdfundingToUpdate.Nom = nom;
+            crowdfundingToUpdate.MontantProjet = montant;
+            crowdfundingToUpdate.LieuProjet = lieuProjet;
+            crowdfundingToUpdate.DateFinProjet = dateFin;
 
         }
+
+        #endregion
+
+        #region Billetterie
 
         public List<Billetterie> getAllBilletteries()
         {
             throw new NotImplementedException();
         }
 
-        public Billetterie getBilletterie(int Id)
+        public Billetterie getBilletterie(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Billetterie CreateBilletterie(string Nom, string Prenom)
+        public Billetterie CreateBilletterie(string nom, string prenom)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteBilletterie(int Id)
+        public void DeleteBilletterie(int id)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public void UpdateBilletterie(int id, string nom, string prenom)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateBilletterie(int Id, string Nom, string Prenom)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
+
+        #region Evenement
 
         public List<Evenement> getAllEvenements()
         {
             return _assoFlex.Evenements.Include(e=>e.Organisateur).ToList();
         }
 
-        public Evenement getEvenement(int Id)
+        public Evenement getEvenement(int id)
         {
-            return _assoFlex.Evenements.Include(e=>e.Organisateur).ThenInclude(a=> a.AdminAsso).FirstOrDefault(e=>e.IdEvent==Id);
+            return _assoFlex.Evenements.Include(e=>e.Organisateur).ThenInclude(a=> a.AdminAsso).FirstOrDefault(e=>e.IdEvent==id);
         }
 
         public EvenementViewModel getEvenementViewModel(int id)
@@ -560,7 +588,8 @@ namespace AssoFlex.Models
 
             return eventToUpdate;
         }
-        
 
-        }
+        #endregion
+
     }
+}
