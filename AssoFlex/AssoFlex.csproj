@@ -5,7 +5,23 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Remove="Views\Presentation\VoirCvGuytri1.cshtml" />
+      <Content Remove="Views\Presentation\VoirCvMateusz1.cshtml" />
+      <Content Remove="Views\Presentation\VoirCvPaul1.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Folder Include="wwwroot\assets" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="Views\Presentation\VoirCvGuytri1.cshtml" />
+      <None Include="Views\Presentation\VoirCvMateusz1.cshtml" />
+      <None Include="Views\Presentation\VoirCvPaul1.cshtml" />
+      <None Include="wwwroot\pdf\cv_billal.pdf" />
+      <None Include="wwwroot\pdf\cv_guytri.pdf" />
+      <None Include="wwwroot\pdf\CV_MATEUSZ_TIREL.pdf" />
+      <None Include="wwwroot\pdf\cv_paul.pdf" />
     </ItemGroup>
 
     <ItemGroup>
@@ -14,6 +30,7 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
       <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.5" />
     </ItemGroup>
 
