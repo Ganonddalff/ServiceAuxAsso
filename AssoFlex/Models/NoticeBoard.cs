@@ -1,6 +1,6 @@
 namespace AssoFlex.Models
 {
-    public class NoticeBoard : IWidget
+    public class NoticeBoard 
     {
         public int SortOrder { get; set; }
         public string ClassName { get; set; }

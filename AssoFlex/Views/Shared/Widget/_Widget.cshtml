@@ -1,16 +1,12 @@
 @model  AssoFlex.Models.IWidget
 
-@{
-    
-    Layout = "_Layout";
-}
 
  
 <div class="widget">
-    <div class="@Model.ClassName">
+    <div class="@Model.Nom">
  
         <div class="header">
-            @Model.HeaderText
+            @Model.AdminAsso.Email
         </div>
         <div class="body">
  
@@ -19,7 +15,7 @@
  
         </div>
         <div class="footer">
-            @Model.FooterText
+            @Model.DateInscription
         </div>
     </div>
 </div>

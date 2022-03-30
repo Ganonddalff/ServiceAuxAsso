@@ -15,16 +15,17 @@ namespace AssoFlex.Controllers
         {
             this._dal = new Dal();
         }
-        
+
+
         // GET
         public IActionResult Index()
         {
-            List<Association> listeDesAssociations = _dal.GetAllAssociations();
-            return View(listeDesAssociations);
+            ViewBag.Widgets = _dal.GetAssociationsToWidget();
+            return View();
         }
         
         // GET
-        public ActionResult DetailsAssociation(int id)
+        public ActionResult DetailsAssociation(int id)  
         {
             Association association = _dal.GetAssociation(id);
             return View(association);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+
 using AssoFlex.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,7 @@ namespace AssoFlex.Models
     public class Dal : IDal
     {
         private const string AbsolutePath =
-            "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/wwwroot/assets/";
+            "wwwroot/assets/";
         //private const string DefaultAvatar = "../wwwroot/assets/img/avatar.jpeg";
         private AssoFlexContext _assoFlex;
 
@@ -307,7 +308,24 @@ namespace AssoFlex.Models
 
         public List<Association> GetAllAssociations()
         {
-            return _assoFlex.Associations.ToList();
+            return _assoFlex.Associations.Include(a => a.AdminAsso).ToList();
+        }
+
+        public List<IWidget> GetAssociationsToWidget()
+        {
+            
+            List<Association> laListe = GetAllAssociations();
+            var assoWidget = new List<IWidget>();
+            foreach (var asso in laListe)
+            {
+                asso.SubWidget = new Subwidget
+                {
+                    Nom = asso.Nom,
+                    Description = asso.Description
+                };
+                assoWidget.Add(asso);
+            }
+            return assoWidget;
         }
 
         public Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso, string description = "")

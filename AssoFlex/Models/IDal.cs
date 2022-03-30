@@ -46,6 +46,7 @@ namespace AssoFlex.Models
         #region Adhesion
 
         List<Adhesion> GetAllAdhesions();
+        public List<IWidget> GetAssociationsToWidget();
         Adhesion CreateAdhesion(int idAsso, int idUser);
         void UpdateAdhesion();
         void DeleteAdhesion(int id);
