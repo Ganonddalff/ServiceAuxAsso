@@ -2,7 +2,7 @@ using System;
 
 namespace AssoFlex.Models
 {
-    public interface IWidget
+    public interface IWidgetAsso
     {
         public int Id { get; set; }
         public string Nom { get; set; }
@@ -13,6 +13,7 @@ namespace AssoFlex.Models
         public Utilisateur AdminAsso { get; set; }
         public byte[] AssoHeaderImage { get; set; }
         public byte[] AssoLogo { get; set; }
-        public ISubWidget SubWidget { get; set; }
+        public ISubWidgetAsso SubWidgetAsso { get; set; }
+        
     }
 }

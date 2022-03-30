@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
-
 namespace AssoFlex.Models
 {
-    public class Evenement : IWidgetEvent
+    public interface IWidgetEvent
     {
         [Key]
         public int IdEvent { get; set; }
@@ -29,23 +24,5 @@ namespace AssoFlex.Models
         public string CategorieEvent { get; set; }
         [NotMapped]
         public ISubWidgetEvent SubWidgetEvent { get; set; }
-        
-        // public virtual Billetterie Billetterie { get; set; }
     }
-
-    public enum EventTypes 
-    {
-Education = 1,
-Sport = 2,
-Humanitaire = 3,
-Environnement = 4,
-Culture = 5,
-Santé = 6,
-Spectacle = 7,
-Conférence = 8,
-Séminaire = 9
-
-    }
-    
-    
 }

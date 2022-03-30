@@ -311,14 +311,14 @@ namespace AssoFlex.Models
             return _assoFlex.Associations.Include(a => a.AdminAsso).ToList();
         }
 
-        public List<IWidget> GetAssociationsToWidget()
+        public List<IWidgetAsso> GetAssociationsToWidget()
         {
             
             List<Association> laListe = GetAllAssociations();
-            var assoWidget = new List<IWidget>();
+            var assoWidget = new List<IWidgetAsso>();
             foreach (var asso in laListe)
             {
-                asso.SubWidget = new Subwidget
+                asso.SubWidgetAsso = new SubwidgetAsso
                 {
                     Nom = asso.Nom,
                     Description = asso.Description

@@ -1,6 +1,6 @@
 namespace AssoFlex.Models
 {
-    public interface ISubWidget
+    public interface ISubWidgetAsso
     {
         string Nom { get; set; }
         string Description { get; set; }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace AssoFlex.Models
 {
-    public class Association : IWidget
+    public class Association : IWidgetAsso
     {
         public int Id { get; set; }
         public string Nom { get; set; }
@@ -19,6 +19,6 @@ namespace AssoFlex.Models
         public byte[] AssoHeaderImage { get; set; }
         public byte[] AssoLogo { get; set; }
         [NotMapped]
-        public ISubWidget SubWidget { get; set; }
+        public ISubWidgetAsso SubWidgetAsso { get; set; }
     }
 }
