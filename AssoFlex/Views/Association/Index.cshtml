@@ -6,7 +6,7 @@
      ViewBag.Title = "Widgets";
     Layout = "_Layout";
 }
-<link href="css/Widget.css" rel="stylesheet"/>
+
 
 
 <h2 class="page-section-heading text-center mb-0">Nos Associations</h2> <br/>
@@ -16,14 +16,17 @@
   <button>Search</button>
 </form>
 
-<div class="widget text-center">
-    <p>
-                @{
-            
-                    @Html.Partial("Widget/_WidgetContainer");
-                }
-            </p>
-        
+
+<div class="container-fluid padding">
+     <div class="row padding">
+    
+        @{
+
+            @Html.Partial("Widget/_WidgetContainer")
+            ;
+        }
+    </div>
+
 </div>
 
 

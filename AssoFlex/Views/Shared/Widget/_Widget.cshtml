@@ -1,20 +1,20 @@
 @model  AssoFlex.Models.IWidget
 
 
+
+<div class="card col-3 m-5">
+    <div class="@Model.AdminAsso.Prenom">
  
-<div class="widget">
-    <div class="@Model.Nom">
- 
-        <div class="header">
-            @Model.AdminAsso.Email
+        <div class="card-header">
+            @Model.Nom
         </div>
-        <div class="body">
+        <div class="card-body">
  
             @Html.Partial(string.Concat(new[] { "Widget", 
                 "/", "_SubWidget" }), @Model.SubWidget)
  
         </div>
-        <div class="footer">
+        <div class="card-footer">
             @Model.DateInscription
         </div>
     </div>
