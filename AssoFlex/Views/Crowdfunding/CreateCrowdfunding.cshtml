@@ -53,6 +53,13 @@
             @Html.ValidationMessageFor(model => model.Nom)
         </div>
         <br/>
+        
+        <div class="form-floating-mb-3">
+            @Html.Label("Description de mon projet : ")
+            @Html.TextBoxFor(model => model.Description, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <br/>
 
         <div class="form-floating-mb-3">
             @Html.Label("Objectif de collecte : ")

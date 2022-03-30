@@ -22,6 +22,7 @@ namespace AssoFlex.Models
         public string LieuEvent { get; set; }
         public bool Statut { get; set; }
         public string CategorieEvent { get; set; }
+        public string Description { get; set; }
         [NotMapped]
         public ISubWidgetEvent SubWidgetEvent { get; set; }
     }

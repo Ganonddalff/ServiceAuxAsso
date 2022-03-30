@@ -20,8 +20,8 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult Index()
         {
-            List<Crowdfunding> listeDesCrowdfundings = _dal.GetAllCrowdfundings();
-            return View(listeDesCrowdfundings);
+            ViewBag.Widgets = _dal.GetCrowdfundingsToWidget();
+            return View();
         }
 
         public ActionResult CreateCrowdfunding()
@@ -44,7 +44,8 @@ namespace AssoFlex.Controllers
                         nouveauCrowdfunding.DateDebutProjet,
                         nouveauCrowdfunding.DateFinProjet,
                         Porteur,
-                        _dal.CreateCollecte()
+                        _dal.CreateCollecte(),
+                        nouveauCrowdfunding.Description
                 );
                 
             }

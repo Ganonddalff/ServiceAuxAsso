@@ -1,11 +1,12 @@
-@model System.Collections.Generic.List<AssoFlex.Models.Evenement>
+@model AssoFlex.Models.IWidgetEvent
 
 @{
+    ViewBag.Title = "Widgets";
     Layout = "_Layout";
 }
 
 <h2 class="page-section-heading text-center mb-0">Nos Evenements</h2>
-<div class="row justify-content-start">
+@*<div class="row justify-content-start">
     @foreach (var eventInList in Model)
     {
         <div class="card col-4 m-5" style="width: 18rem;">
@@ -18,10 +19,23 @@
             </div>
         </div>
     }
-</div>
+</div>*@
 <br/>
 
-@if (User.Identity.IsAuthenticated)
+<div class="container-fluid padding">
+     <div class="row padding">
+    
+        @{
+
+            @Html.Partial("Widget/_WidgetContainerEvent")
+            ;
+        }
+    </div>
+
+</div>
+
+
+@if (User.IsInRole("Admin-Asso"))
 {
 
     

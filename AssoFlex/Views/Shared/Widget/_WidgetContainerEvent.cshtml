@@ -1,0 +1,9 @@
+@model AssoFlex.Models.IWidgetEvent
+
+
+
+@foreach (AssoFlex.Models.IWidgetEvent wm in ViewBag.Widgets)
+{
+    
+    @Html.Partial(string.Concat(new[] { "Widget", "/", "_WidgetEvent" }), wm)
+}

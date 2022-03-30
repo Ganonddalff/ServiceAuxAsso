@@ -19,12 +19,9 @@ namespace AssoFlex.Controllers
         // GET
         public ActionResult Index()
         {
-            List<Evenement> listerMesEvenements = _dal.GetAllEvenements();
-            foreach (var monEvent in listerMesEvenements)
-            {
-                monEvent.Organisateur = _dal.GetAssociation(monEvent.OrganisateurId);
-            }
-            return View(listerMesEvenements);
+            ViewBag.Widgets = _dal.GetEventToWidget();
+   
+            return View();
         }
 
 
@@ -110,7 +107,7 @@ namespace AssoFlex.Controllers
                     orga, evenement.NomEvent,
                     evenement.NbTickets, 
                     evenement.DateDebutEvent, evenement.DateFinEvent,
-                    evenement.LieuEvent, evenement.CategorieEvent, evenement.Prix);
+                    evenement.LieuEvent, evenement.CategorieEvent, evenement.Prix,evenement.Description);
                 return RedirectToAction("Index");
             }
             return View("Error");
