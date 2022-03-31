@@ -5,22 +5,20 @@
 
 <div class="card col-3 m-5">
     <div class="@Model.CategorieProjet">
- 
         <div class="card-header">
             @Model.Nom
         </div>
         <div class="card-body">
- 
-            @Html.Partial(string.Concat(new[] { "Widget", 
-                "/", "_SubWidgetCF" }), @Model.SubWidgetCF)
- 
+            @Html.Partial(string.Concat(new[] { "Widget", "/", "_SubWidgetCF" }), @Model.SubWidgetCF)
         </div>
         <div class="card-footer">
-            <a href=@Url.Action("DetailsCrowdfunding","Crowdfunding", new {id=@Model.Id}) class="btn btn-outline-primary">Voir Détails</a>
+            <a href=@Url.Action("DetailsCrowdfunding", "Crowdfunding", new {id = @Model.Id}) class="btn btn-outline-primary">
+                Voir Détails
+            </a>
             @if (User.Identity.IsAuthenticated)
             {
-                <a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @Model.Id, @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Contribuer</a>
-                
+                <a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @Model.Id, 
+                            @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Contribuer</a>
             }
         </div>
     </div>

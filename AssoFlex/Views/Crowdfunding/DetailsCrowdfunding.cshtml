@@ -1,40 +1,38 @@
 @using System.Security.Claims
-@model AssoFlex.ViewModels.ContributionViewModel
+@model AssoFlex.ViewModels.LayoutModelView
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 <div class="container p-10 my-10 bg-dark text-white text-center">
-    <h2>@Model.Crowdfunding.Nom</h2>
+    <h2>@Model.ContributionViewModel.Crowdfunding.Nom</h2>
     <br/>
-    <h6>Type : @Enum.GetName(typeof(TypesProjet),Convert.ToInt32(Model.Crowdfunding.CategorieProjet))</h6>
+    <h6>Type : @Enum.GetName(typeof(TypesProjet),Convert.ToInt32(Model.ContributionViewModel.Crowdfunding.CategorieProjet))</h6>
 
 
-    <h6>Organisé par @Model.Crowdfunding.PorteurDuProjet.Nom</h6>
+    <h6>Organisé par @Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.Nom</h6>
 
     
-    <h6>à @Model.Crowdfunding.LieuProjet</h6>
+    <h6>à @Model.ContributionViewModel.Crowdfunding.LieuProjet</h6>
     <br/>
     <div class="fa-display">Commence le </div>
-    <div>@Html.DisplayFor(model => model.Crowdfunding.DateDebutProjet)</div>
+    <div>@Html.DisplayFor(model => model.ContributionViewModel.Crowdfunding.DateDebutProjet)</div>
     <div>Termine le</div>
-    <div >@Html.DisplayFor(model => model.Crowdfunding.DateFinProjet)</div>
+    <div >@Html.DisplayFor(model => model.ContributionViewModel.Crowdfunding.DateFinProjet)</div>
     <br/>
-    <h6> @Model.Collecte.MontantCollecte  / @Model.Crowdfunding.MontantProjet €</h6>
-    <h6> Pour plus d'informations, contactez @Model.Crowdfunding.PorteurDuProjet.AdminAsso.Email</h6>
+    <h6> @Model.ContributionViewModel.Collecte.MontantCollecte  / @Model.ContributionViewModel.Crowdfunding.MontantProjet €</h6>
+    <h6> Pour plus d'informations, contactez @Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.AdminAsso.Email</h6>
     
     @if (User.Identity.IsAuthenticated)
     {
-        <a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @Model.Crowdfunding.Id, @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value})>Contribuer à ce projet</a>
+        <a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @Model.ContributionViewModel.Crowdfunding.Id, @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value})>Contribuer à ce projet</a>
     }
     
-    @if (User.Identity.IsAuthenticated && @Model.Crowdfunding.PorteurDuProjet.AdminAsso.Prenom == @User.Identity.Name)
+    @if (User.Identity.IsAuthenticated && @Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.AdminAsso.Prenom == @User.Identity.Name)
     {
-        <a href=@Url.Action("UpdateCrowdfunding", "Crowdfunding", new {id = @Model.Crowdfunding.Id})>Modifier ce projet</a>
-        <a href=@Url.Action("DeleteCrowdfunding","Crowdfunding",new {id = @Model.Crowdfunding.Id})>Supprimer ce projet</a>                                                                                       
+        <a href=@Url.Action("UpdateCrowdfunding", "Crowdfunding", new {id = @Model.ContributionViewModel.Crowdfunding.Id})>Modifier ce projet</a>
+        <a href=@Url.Action("DeleteCrowdfunding","Crowdfunding",new {id = @Model.ContributionViewModel.Crowdfunding.Id})>Supprimer ce projet</a>                                                                                       
                                                                                                
     }
-
-
 </div>

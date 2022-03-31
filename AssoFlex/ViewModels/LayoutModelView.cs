@@ -11,6 +11,9 @@ namespace AssoFlex.ViewModels
         {
             _dal = new Dal();
         }
+        
+        public Evenement Evenement { get; set; }
+        public ContributionViewModel ContributionViewModel { get; set; }
         public List<Association> Associations { get; set; }
         public List<Evenement> Evenements { get; set; }
         public List<Crowdfunding> Crowdfundings { get; set; }

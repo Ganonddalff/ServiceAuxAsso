@@ -7,40 +7,17 @@
 }
 
 <h2 class="page-section-heading text-center mb-0">Nos Evenements</h2>
-@* <div class="row justify-content-start"> *@
-@*     @foreach (var eventInList in Model.Evenements) *@
-@*     { *@
-@*         <div class="card col-4 m-5" style="width: 18rem;"> *@
-@*             <div class="card-body"> *@
-@*                 <h5 class="card-title">@eventInList.NomEvent</h5> *@
-@*                 <h6 class="card-subtitle">@eventInList.NbTickets</h6> *@
-@*                 <h6 class="card-subtitle">@eventInList.LieuEvent</h6> *@
-@*                 <td><a href=@Url.Action("Details","Evenement",new {id = @eventInList.IdEvent})>@eventInList.NomEvent</a></td> *@
-@*                 <td><a href=@Url.Action("BuyTicket", "Billetterie", new {@id = @eventInList.IdEvent})>Acheter un billet</a></td> *@
-@*             </div> *@
-@*         </div> *@
-@*     } *@
-@* </div> *@
-@* <br/> *@
 <div class="container-fluid padding">
      <div class="row padding">
-
-        @{
-
-            @Html.Partial("Widget/_WidgetContainerEvent")
-            ;
+         @{
+             @Html.Partial("Widget/_WidgetContainerEvent");
         }
     </div>
 </div>
 
-
 @if (User.IsInRole("Admin-Asso"))
 {
-
-    
-
     <br/>
-
     <a href=@Url.Action("CreerEvent")>Créer un évènement</a>
 }
 @if (User.Identity.IsAuthenticated.Equals(false))

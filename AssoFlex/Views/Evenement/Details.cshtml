@@ -1,40 +1,31 @@
-@using System.Security.Claims
-@using System.Collections
-@using System.ComponentModel
-@using System.Text.Json
-@model AssoFlex.Models.Evenement
-
+@model AssoFlex.ViewModels.LayoutModelView
 
 @{
     ViewBag.Title = "Détails ";
     Layout = "_Layout";
 }
 <div class="container p-10 my-10 bg-dark text-white text-center">
-    <h2>@Model.NomEvent</h2>
+    <h2>@Model.Evenement.NomEvent</h2>
     <br/>
-    <h6>Type : @Enum.GetName(typeof(EventTypes),Convert.ToInt32(Model.CategorieEvent))</h6>
-
-
-    <h6>Organisé par @Model.Organisateur.Nom</h6>
-
+    <h6>Type : @Enum.GetName(typeof(EventTypes),Convert.ToInt32(Model.Evenement.CategorieEvent))</h6>
     
-    <h6>à @Model.LieuEvent</h6>
+    <h6>Organisé par @Model.Evenement.Organisateur.Nom</h6>
+    
+    <h6>à @Model.Evenement.LieuEvent</h6>
     <br/>
     <div class="fa-display">Commence le </div>
-    <div>@Html.DisplayFor(model => model.DateDebutEvent)</div>
+    <div>@Html.DisplayFor(model => model.Evenement.DateDebutEvent)</div>
     <div>Termine le</div>
-    <div >@Html.DisplayFor(model => model.DateFinEvent)</div>
+    <div >@Html.DisplayFor(model => model.Evenement.DateFinEvent)</div>
     <br/>
-    <h6>@Model.NbTickets places restantes</h6>
-    <h6>@Model.Prix €</h6>
-
+    <h6>@Model.Evenement.NbTickets places restantes</h6>
+    <h6>@Model.Evenement.Prix €</h6>
     
-    @if (User.Identity.IsAuthenticated && @Model.Organisateur.AdminAsso.Prenom == @User.Identity.Name)
+    @if (User.Identity.IsAuthenticated && @Model.Evenement.Organisateur.AdminAsso.Prenom == @User.Identity.Name)
     {
-        <a href=@Url.Action("ModifEvent", "Evenement", new {id = @Model.IdEvent})>Modifier cet évènement</a>
-        <a href=@Url.Action("SupprEvent","Evenement",new {id = @Model.IdEvent})>Supprimer cet évènement</a>                                                                                       
+        <a href=@Url.Action("ModifEvent", "Evenement", new {id = @Model.Evenement.IdEvent})>Modifier cet évènement</a>
+        <a href=@Url.Action("SupprEvent","Evenement",new {id = @Model.Evenement.IdEvent})>Supprimer cet évènement</a>                                                                                       
                                                                                                
     }
-
-
+    
 </div>

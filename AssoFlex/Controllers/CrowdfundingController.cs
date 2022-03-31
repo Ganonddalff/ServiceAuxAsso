@@ -1,12 +1,8 @@
 using System;
 using AssoFlex.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Security.Claims;
 using AssoFlex.ViewModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-
 namespace AssoFlex.Controllers
 {
     public class CrowdfundingController : Controller
@@ -77,7 +73,12 @@ namespace AssoFlex.Controllers
                 Crowdfunding = monCF,
                 Utilisateur = monUser
             };
-            return View(cvm);
+            LayoutModelView layoutModelView = new LayoutModelView()
+            {
+                ContributionViewModel = cvm
+            };
+            
+            return View(layoutModelView);
         }
 
         [HttpPost]
@@ -85,8 +86,6 @@ namespace AssoFlex.Controllers
          {
              if (cvm.Montant != 0)
              {
-
-
                  Crowdfunding monCF = _dal.GetCfCollecte(cfId);
                  Utilisateur monUser = _dal.GetUtilisateur(userId);
                  Collecte maCollecte = monCF.Collecte;
@@ -113,7 +112,12 @@ namespace AssoFlex.Controllers
                 Crowdfunding = _dal.GetCrowdfunding(id)
 
             };
-            return View(cvm);
+            LayoutModelView layoutModelView = new LayoutModelView()
+            {
+                ContributionViewModel = cvm
+            };
+            
+            return View(layoutModelView);
         }
 
         public ActionResult UpdateCrowdfunding(int id)

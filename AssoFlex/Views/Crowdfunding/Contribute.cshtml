@@ -1,4 +1,4 @@
-@model AssoFlex.ViewModels.ContributionViewModel
+@model AssoFlex.ViewModels.LayoutModelView
 
 
 @{
@@ -12,8 +12,6 @@
   <script>
   /*For total*/
   $(document).ready(function() {
-    
-    
     
     $(".checkout").on("text", ".montant", function() {
       
@@ -38,21 +36,16 @@
   
 </head>
 
-<h2>Contribuer à @Model.Crowdfunding.Nom </h2>
+<h2>Contribuer à @Model.ContributionViewModel.Crowdfunding.Nom </h2>
 
 @using (@Html.BeginForm())
 {
   <div class="checkout">
     <button type="button" class="decrease-btn">-</button>
-    @Html.LabelFor(Model=> Model.Montant)
-    @Html.TextBoxFor(Model => Model.Montant, new {@class = "form-control montant", type = "text"})
-    @Html.ValidationMessageFor(Model => Model.Montant)
+    @Html.LabelFor(Model=> Model.ContributionViewModel.Montant)
+    @Html.TextBoxFor(Model => Model.ContributionViewModel.Montant, new {@class = "form-control montant", type = "text"})
+    @Html.ValidationMessageFor(Model => Model.ContributionViewModel.Montant)
     <button type="button" class="increase-btn">+</button>
-    
-
-
-
-
   </div>
   
   <button class="btn btn-primary btn-xl" type="submit">Contribuer</button>

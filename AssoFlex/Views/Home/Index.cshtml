@@ -77,7 +77,7 @@
 <h1>Projets à ne pas manquer</h1>
 <div class="container-fluid padding">
     <div class="row padding">
-        @foreach (var crowdfunding in Model.Crowdfunding)
+        @foreach (var crowdfunding in Model.Crowdfundings)
         {
             if (crowdfunding.Id <= 4)
             {
@@ -93,7 +93,6 @@
                 </div>
             }
         }
-
     </div>
     <hr class="my-4">
 </div>

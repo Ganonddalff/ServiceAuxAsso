@@ -39,14 +39,15 @@ namespace AssoFlex.Controllers
             }
             return View(lModelView);
         }
-
-
         
         public ActionResult Details(int id)
         {
             Evenement monEvent = _dal.GetEvenement(id);
-            
-            return View(monEvent);
+            LayoutModelView layoutModelView = new LayoutModelView()
+            {
+                Evenement = monEvent
+            };
+            return View(layoutModelView);
         }
         //GET
         public ActionResult RechercheEvent(string critereRecherche)
@@ -139,11 +140,34 @@ namespace AssoFlex.Controllers
             }
             return RedirectToAction("Index");
         }
-
-
-        public IActionResult AchatTicket()
+        
+        public IActionResult AchatTicket(int idEvent, int idUser)
         {
-            return View();
+            Utilisateur user = _dal.GetUtilisateur(idUser);
+            Evenement evenement = _dal.GetEvenement(idEvent);
+            var panier = _dal.GetPanierByUserId(idUser);
+            ArticlePanier articlePanier = new ArticlePanier()
+            {
+                Quantite = 1,
+                MontantUnitaire = evenement.Prix,
+                ProduitId = evenement.IdEvent,
+                ProduitNom = evenement.NomEvent,
+                UtilisateurId = idUser,
+                Panier = panier,
+                TypeDeCommande = "Evenement",
+            };
+            if ( panier != null)
+            {
+                _dal.AddArticleToPanier(panier.Id,articlePanier);
+            }
+            else
+            {
+                Panier panierNew = _dal.CreatePanier(user);
+                _dal.AddArticleToPanier(panierNew.Id, articlePanier);
+            }
+            
+            // _dal.CreateAdhesion(idAsso, idUser);
+            return RedirectToAction("Index");
         }
     }
 }
