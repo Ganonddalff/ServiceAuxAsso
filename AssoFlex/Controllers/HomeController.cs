@@ -17,9 +17,17 @@ namespace AssoFlex.Controllers
         {
             HomeViewModel hvm = new HomeViewModel()
             {
-                Associations = _dal.GetAllAssociations()
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfunding = _dal.GetAllCrowdfundings()
+
             };
             return View(hvm);
         }
+
+
+
+
     }
+
 }

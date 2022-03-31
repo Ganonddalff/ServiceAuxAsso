@@ -68,5 +68,10 @@ namespace AssoFlex.Controllers
 
             return View("Error");
         }
+        public IActionResult GetImageAsso(int id)
+        {
+            Association asso = _dal.GetAssociation(id);
+            return File(asso.AssoLogo, "image/png");
+        }
     }
 }
