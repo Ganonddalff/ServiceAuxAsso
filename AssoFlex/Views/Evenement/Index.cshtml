@@ -1,6 +1,8 @@
 @model AssoFlex.ViewModels.LayoutModelView
+@* @model AssoFlex.Models.IWidgetEvent *@
 
 @{
+    ViewBag.Title = "Widgets";
     Layout = "_Layout";
 }
 
@@ -20,10 +22,26 @@
     }
 </div>
 <br/>
+@* <div class="container-fluid padding"> *@
+@*      <div class="row padding"> *@
+@*      *@
+@*         @{ *@
+@* *@
+@*             @Html.Partial("Widget/_WidgetContainerEvent") *@
+@*             ; *@
+@*         } *@
+@*     </div> *@
+@* *@
+@* </div> *@
 
-@if (User.Identity.IsAuthenticated)
+
+@if (User.IsInRole("Admin-Asso"))
 {
+
+    
+
     <br/>
+
     <a href=@Url.Action("CreerEvent")>Créer un évènement</a>
 }
 @if (User.Identity.IsAuthenticated.Equals(false))

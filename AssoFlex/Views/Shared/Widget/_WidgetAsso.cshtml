@@ -1,0 +1,26 @@
+@using System.Security.Claims
+@model  AssoFlex.Models.IWidgetAsso
+
+
+
+<div class="card col-3 m-5">
+    <div class="@Model.AdminAsso.Prenom">
+ 
+        <div class="card-header">
+            @Model.Nom
+        </div>
+        <div class="card-body">
+ 
+            @Html.Partial(string.Concat(new[] { "Widget", 
+                "/", "_SubWidgetAsso" }), @Model.SubWidgetAsso)
+ 
+        </div>
+        <div class="card-footer">
+            <a href=@Url.Action("DetailsAssociation","Association", new {id=@Model.Id}) class="btn btn-outline-primary">Voir Détails</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href=@Url.Action("AddAdhesion", "Association", new {idAsso = @Model.Id, idUser = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Adhérer</a>
+            }
+        </div>
+    </div>
+</div>

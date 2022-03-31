@@ -1,10 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace AssoFlex.Models
 {
-    public class Crowdfunding : IWidgetCF
+    public interface IWidgetCF
     {
         public int Id { get; set; }
         public string Nom { get; set; }
@@ -24,18 +22,6 @@ namespace AssoFlex.Models
 
         public Association PorteurDuProjet { get; set; }
         public string Description { get; set; }
-        [NotMapped]
         public ISubWidgetCF SubWidgetCF { get; set; }
-
-    }
-
-    public enum TypesProjet
-    {
-        Education = 1,
-        Sport = 2,
-        Humanitaire = 3,
-        Environnement = 4,
-        Culture = 5,
-        Santé = 6
     }
 }

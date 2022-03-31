@@ -1,5 +1,6 @@
 @using System.Security.Claims
 @model AssoFlex.ViewModels.LayoutModelView
+@* @model AssoFlex.Models.IWidgetCF *@
 @{
     ViewBag.Title = "Crowdfunding";
     Layout = "_Layout";
@@ -20,6 +21,17 @@
             </div>
         </div>
     }
+    @* <div class="container-fluid padding"> *@
+    @*          <div class="row padding"> *@
+    @*          *@
+    @*             @{ *@
+    @*      *@
+    @*                 @Html.Partial("Widget/_WidgetContainerCF") *@
+    @*                 ; *@
+    @*             } *@
+    @*         </div> *@
+    @*      *@
+    @*     </div> *@
 </div>
 <div>
     @if (User.Identity.IsAuthenticated)

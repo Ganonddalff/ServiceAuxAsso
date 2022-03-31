@@ -33,6 +33,7 @@ namespace AssoFlex.Models
         Association GetAssociation(string idStr);
         int GetAssociationId(int idAdmin);
         List<Association> GetAllAssociations();
+        public List<IWidgetAsso> GetAssociationsToWidget();
         Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso,
             string description="");
         void UpdateAssociation(int id, string nom, string numSiret, byte[] logoAsso,
@@ -54,19 +55,6 @@ namespace AssoFlex.Models
 
         // ************************************ //
 
-        #region AdhesionArticle
-
-        List<AdhesionArticle> GetAllAdhesionArticles();
-        AdhesionArticle GetAdhesionArticle(int id);
-        AdhesionArticle CreateAdhesionArticle(Association association,
-            string frequence, decimal montant);
-        void UpdateAdhesionArticle(int id);
-        void DeleteAdhesionArticle(int id);
-
-        #endregion
-        
-        // ************************************ //
-
         #region Souscription
 
         List<Souscription> GetAllSouscriptions();
@@ -82,10 +70,11 @@ namespace AssoFlex.Models
         #region Crowdfunding
 
         List<Crowdfunding> GetAllCrowdfundings();
+        public List<IWidgetCF> GetCrowdfundingsToWidget();
         Crowdfunding GetCrowdfunding(int id);
         Crowdfunding GetCfCollecte(int id);
-        Crowdfunding CreateCrowdfunding(string nom, int montant, string lieuProjet, string categorieProjet,
-            DateTime dateDebut, DateTime dateFin, Association porteurDuProjet, Collecte collecte);
+        public Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut,
+            DateTime DateFin, Association Porteur, Collecte collecte, string description);
         Crowdfunding UpdateCrowdfunding(int id, string nom, int montant, string lieuProjet, 
             string categorieProjet, DateTime dateFin);
         void DeleteCrowdfunding(int id);
@@ -133,10 +122,11 @@ namespace AssoFlex.Models
         #region Evenement
 
         List<Evenement> GetAllEvenements();
+        public List<IWidgetEvent> GetEventToWidget();
         Evenement GetEvenement(int id);
         EvenementViewModel GetEvenementViewModel(int id);
-        Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, 
-            DateTime dateDebut, DateTime dateFin, string lieu, string categorie, int prix);
+        public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
+            string Lieu, string categorie, int prix, string description);
         void DeleteEvenement(int id);
         Evenement UpdateEvenement(int id, string nom, int nbTicket, 
             DateTime dateDebut, DateTime dateFin, string lieu, string categorie, int prix);

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
@@ -25,7 +24,10 @@ namespace AssoFlex.Controllers
                 Associations = _dal.GetAllAssociations(),
                 Evenements = _dal.GetAllEvenements(),
                 Crowdfundings = _dal.GetAllCrowdfundings(),
-                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier))
+                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier)),
+                WidgetsAssos = _dal.GetAssociationsToWidget(),
+                WidgetsEvents = _dal.GetEventToWidget(),
+                WidgetsCrowdfundings = _dal.GetCrowdfundingsToWidget(),
             };
             if (lModelView.Panier == null)
             {
@@ -98,7 +100,9 @@ namespace AssoFlex.Controllers
                     association.Id, association.Nom, association.NumSiret, association.AssoLogo,
                     association.Description);
                 return RedirectToAction("DashboardAdmin", "Dashboard");
+
             }
+
             return View("Error");
         }
     }

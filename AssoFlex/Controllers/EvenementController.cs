@@ -24,7 +24,10 @@ namespace AssoFlex.Controllers
                 Associations = _dal.GetAllAssociations(),
                 Evenements = _dal.GetAllEvenements(),
                 Crowdfundings = _dal.GetAllCrowdfundings(),
-                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier))
+                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier)),
+                WidgetsAssos = _dal.GetAssociationsToWidget(),
+                WidgetsEvents = _dal.GetEventToWidget(),
+                WidgetsCrowdfundings = _dal.GetCrowdfundingsToWidget(),
             };
             if (lModelView.Panier == null)
             {
@@ -36,6 +39,8 @@ namespace AssoFlex.Controllers
             }
             return View(lModelView);
         }
+
+
         
         public ActionResult Details(int id)
         {

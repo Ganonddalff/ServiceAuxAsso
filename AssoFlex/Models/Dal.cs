@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+
 using AssoFlex.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +13,7 @@ namespace AssoFlex.Models
     public class Dal : IDal
     {
         private const string AbsolutePath =
-            "/mnt/sdb1/Sauvegarde/Documents/Formation - ISIKA/Projets/ISIKA_Projet2/AssoFlex/AssoFlex/wwwroot/assets/";
+            "wwwroot/assets/";
         //private const string DefaultAvatar = "../wwwroot/assets/img/avatar.jpeg";
         private AssoFlexContext _assoFlex;
 
@@ -135,7 +137,8 @@ namespace AssoFlex.Models
                 new DateTime(2022, 12, 30), 
                 "ACCORD ARENA", 
                 "5",
-                90);
+                90,
+                "Slim Shady, the real Slim Shady. \nPlease, stand up.");
             this.CreateEvenement(
                 this.GetAssociation(1),
                 "PNL",
@@ -144,7 +147,8 @@ namespace AssoFlex.Models
                 new DateTime(2022, 12, 30),
                 "ACCORD ARENA",
                 "5",
-                10);
+                10,
+                "Concert pour collégiens.");
             this.CreateEvenement(
                 this.GetAssociation(3),
                 "Eminem", 
@@ -153,7 +157,8 @@ namespace AssoFlex.Models
                 new DateTime(2022, 12, 30),
                 "ACCORD ARENA",
                 "5",
-                100);
+                100,
+                "Slim Shady, the real Slim Shady. \nPlease, stand up.");
             this.CreateEvenement(
                 this.GetAssociation(2),
                 "Concert super",
@@ -162,7 +167,8 @@ namespace AssoFlex.Models
                 new DateTime(2022, 04, 03),
                 "Paris",
                 "1",
-                5);
+                5,
+                "C'est un concert qu'a l'air bien.");
             
             //------------- CROWDFUNDING -------------//
             this.CreateCrowdfunding(
@@ -173,7 +179,8 @@ namespace AssoFlex.Models
                 new DateTime(2022, 04, 22),
                 new DateTime(2023, 04, 21),
                 this.GetAssociation(1), 
-                this.CreateCollecte()
+                this.CreateCollecte(),
+                "Pour jackson svp"
                 );
             this.CreateCrowdfunding(
                 "Jefferson",
@@ -183,7 +190,8 @@ namespace AssoFlex.Models
                 new DateTime(2022, 06, 27),
                 new DateTime(2023, 05, 30),
                 this.GetAssociation(3),
-                this.CreateCollecte()
+                this.CreateCollecte(),
+                "Pour Jefferson svp"
                 );
             this.CreateCrowdfunding(
                 "Nguyen",
@@ -193,7 +201,8 @@ namespace AssoFlex.Models
                 new DateTime(2022, 09, 22),
                 new DateTime(2023, 05, 01),
                 this.GetAssociation(2),
-                this.CreateCollecte()
+                this.CreateCollecte(),
+                "Pour Nguyen svp"
                 );
             this.CreateCrowdfunding(
                 "Benjamin",
@@ -203,7 +212,8 @@ namespace AssoFlex.Models
                 new DateTime(2022, 12, 24),
                 new DateTime(2023, 11, 21),
                 this.GetAssociation(1),
-                this.CreateCollecte()
+                this.CreateCollecte(),
+                "Pour Benjamin svp"
                 );
             //------------- ADHESION ARTICLE -------------//
             this.CreateAdhesionArticle(
@@ -315,7 +325,24 @@ namespace AssoFlex.Models
 
         public List<Association> GetAllAssociations()
         {
-            return _assoFlex.Associations.ToList();
+            return _assoFlex.Associations.Include(a => a.AdminAsso).ToList();
+        }
+
+        public List<IWidgetAsso> GetAssociationsToWidget()
+        {
+            
+            List<Association> laListe = GetAllAssociations();
+            var assoWidget = new List<IWidgetAsso>();
+            foreach (var asso in laListe)
+            {
+                asso.SubWidgetAsso = new SubwidgetAsso
+                {
+                    Nom = asso.Nom,
+                    Description = asso.Description
+                };
+                assoWidget.Add(asso);
+            }
+            return assoWidget;
         }
 
         public Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso, string description = "")
@@ -511,9 +538,34 @@ namespace AssoFlex.Models
         {
             return _assoFlex.Crowdfundings.Include(c =>c.Collecte).ToList();
         }
+        
+        public List<IWidgetCF> GetCrowdfundingsToWidget()
+        {
+            
+            List<Crowdfunding> laListe = GetAllCrowdfundings();
+            var cfWidget = new List<IWidgetCF>();
+            foreach (var cf in laListe)
+            {
+                cf.SubWidgetCF = new SubWidgetCF
+                {
+                    Nom = cf.Nom,
+                    DateFinProjet = cf.DateFinProjet,
+                    CategorieProjet = cf.CategorieProjet,
+                    MontantProjet = cf.MontantProjet,
+                    Collecte = cf.Collecte,
+                    PorteurDuProjet = cf.PorteurDuProjet,
+                    Description = cf.Description
+                };
+                cfWidget.Add(cf);
+            }
+            return cfWidget;
+        }
+        
+
+
 
         public Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut,
-            DateTime DateFin, Association Porteur, Collecte collecte)
+            DateTime DateFin, Association Porteur, Collecte collecte, string description)
         {
             Crowdfunding crowdfundingToAdd = new Crowdfunding()
             {
@@ -527,6 +579,7 @@ namespace AssoFlex.Models
                 PorteurDuProjet = Porteur,
                 Collecte = collecte,
                 Statut = true,
+                Description =description
             };
             this._assoFlex.Crowdfundings.Add(crowdfundingToAdd);
             this._assoFlex.SaveChanges();
@@ -673,6 +726,25 @@ namespace AssoFlex.Models
         {
             return _assoFlex.Evenements.Include(e=>e.Organisateur).ToList();
         }
+        
+        public List<IWidgetEvent> GetEventToWidget()
+        {
+            
+            List<Evenement> laListe = GetAllEvenements();
+            var eventWidget = new List<IWidgetEvent>();
+            foreach (var eventInList in laListe)
+            {
+                eventInList.SubWidgetEvent = new SubWidgetEvent
+                {
+                    NomEvent = eventInList.NomEvent,
+                    Description = eventInList.Description,
+                    Prix = eventInList.Prix,
+                    DateDebutEvent = eventInList.DateDebutEvent
+                };
+                eventWidget.Add(eventInList);
+            }
+            return eventWidget;
+        }
 
         public Evenement GetEvenement(int id)
         {
@@ -689,7 +761,7 @@ namespace AssoFlex.Models
         }
 
         public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
-            string Lieu, string categorie, int prix)
+            string Lieu, string categorie, int prix, string description)
         {
             Evenement eventToAdd = new Evenement()
             {
@@ -702,7 +774,8 @@ namespace AssoFlex.Models
                 LieuEvent = Lieu,
                 CategorieEvent = categorie,
                 Prix = prix,
-                Statut = true
+                Statut = true,
+                Description = description
             };
             this._assoFlex.Evenements.Add(eventToAdd);
             this._assoFlex.SaveChanges();

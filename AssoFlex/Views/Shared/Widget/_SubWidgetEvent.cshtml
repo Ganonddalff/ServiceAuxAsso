@@ -1,0 +1,15 @@
+@model AssoFlex.Models.ISubWidgetEvent
+
+
+
+<div @*class="card-body "*@>
+    <div>
+        <div style="float: left">
+            @Html.LabelFor(p => p.Description, @Model.Description)
+        </div>
+    </div>
+    <div style="clear: both">
+        @Model.Prix
+        @Model.DateDebutEvent
+    </div>
+</div>
