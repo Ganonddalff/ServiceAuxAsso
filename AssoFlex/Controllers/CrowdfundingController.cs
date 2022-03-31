@@ -64,21 +64,30 @@ namespace AssoFlex.Controllers
         //Get
         public ActionResult Contribute(int cfId, int userId)
         {
-            Crowdfunding monCF = _dal.GetCfCollecte(cfId);
-            Utilisateur monUser = _dal.GetUtilisateur(userId);
-            Collecte maCollecte = monCF.Collecte;
-            ContributionViewModel cvm = new ContributionViewModel()
+            Crowdfunding crowdfunding = _dal.GetCfCollecte(cfId);
+            Utilisateur user = _dal.GetUtilisateur(userId);
+            Collecte collecte = crowdfunding.Collecte;
+            var panier = _dal.GetPanierByUserId(userId);
+            ArticlePanier articlePanier = new ArticlePanier()
             {
-                Collecte = maCollecte,
-                Crowdfunding = monCF,
-                Utilisateur = monUser
+                Quantite = 1,
+                MontantUnitaire = 0,
+                ProduitId = crowdfunding.Id,
+                ProduitNom = crowdfunding.Nom,
+                UtilisateurId = userId,
+                Panier = panier,
+                TypeDeCommande = "Crowdfunding",
             };
-            LayoutModelView layoutModelView = new LayoutModelView()
+            if ( panier != null)
             {
-                ContributionViewModel = cvm
-            };
-            
-            return View(layoutModelView);
+                _dal.AddArticleToPanier(panier.Id,articlePanier);
+            }
+            else
+            {
+                Panier panierNew = _dal.CreatePanier(user);
+                _dal.AddArticleToPanier(panierNew.Id, articlePanier);
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

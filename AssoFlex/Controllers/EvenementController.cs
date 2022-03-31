@@ -165,8 +165,6 @@ namespace AssoFlex.Controllers
                 Panier panierNew = _dal.CreatePanier(user);
                 _dal.AddArticleToPanier(panierNew.Id, articlePanier);
             }
-            
-            // _dal.CreateAdhesion(idAsso, idUser);
             return RedirectToAction("Index");
         }
     }
