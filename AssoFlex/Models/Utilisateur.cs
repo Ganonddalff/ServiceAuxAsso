@@ -13,7 +13,7 @@ namespace AssoFlex.Models
         public string Nom { get; set; }
         [MaxLength(80)]
         public string Adresse { get; set; }
-        [MaxLength(15)]
+        
         public int Telephone { get; set; }
         [MaxLength(50)]
         [Required]
@@ -24,6 +24,7 @@ namespace AssoFlex.Models
        
 
         [MaxLength(100)]
+        [Required]
         public string Password { get; set; }
         [MaxLength(12)]
         public string Role { get; set; }
