@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using AssoFlex.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 namespace AssoFlex.Models
@@ -44,7 +46,7 @@ namespace AssoFlex.Models
                 0755172316,
                 "gkastane@gmail.com",
                 EncodeMD5("11111"),
-                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin"
+                "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin"
             );
             this.CreateUtilisateur(
                 "Mateusz",
@@ -53,7 +55,7 @@ namespace AssoFlex.Models
                 0667127014,
                 "admin",
                 EncodeMD5("admin"),
-                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin"
+                "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin"
             );
             this.CreateUtilisateur(
                 "Billal",
@@ -62,7 +64,7 @@ namespace AssoFlex.Models
                 0755172317,
                 "billal.benziane1@gmail.com",
                 EncodeMD5("11111"), 
-                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin"
+                "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin"
             );
             this.CreateUtilisateur(
                 "Paul",
@@ -71,7 +73,7 @@ namespace AssoFlex.Models
                 0755172320,
                 "pjean@gmail.com",
                 EncodeMD5("22222"), 
-                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin-Asso"
+                "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin-Asso"
             );
             this.CreateUtilisateur(
                 "Jean",
@@ -80,7 +82,7 @@ namespace AssoFlex.Models
                 0755172324,
                 "jjacques@gmail.com", 
                 EncodeMD5("33333"), 
-                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin-Asso"
+                "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin-Asso"
             );
             this.CreateUtilisateur(
                 "Jessica",
@@ -89,7 +91,7 @@ namespace AssoFlex.Models
                 0755172328,
                 "jalba@gmail.com",
                 EncodeMD5("44444"), 
-                ImageToByteArray(AbsolutePath + "img/avatar.jpeg"),"Admin-Asso"
+                "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin-Asso"
             );
             this.CreateUtilisateur(
                 "Louis",
@@ -98,7 +100,7 @@ namespace AssoFlex.Models
                 0755172332,
                 "ldavid@gmail.com",
                 EncodeMD5("55555"),
-                ImageToByteArray(AbsolutePath + "img/avatar.jpeg")
+                "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg"
             );
             this.CreateUtilisateur(
                 "Alban",
@@ -107,7 +109,7 @@ namespace AssoFlex.Models
                 0755172338,
                 "aivanoff@gmail.com",
                 EncodeMD5("66666"),
-                ImageToByteArray(AbsolutePath + "img/avatar.jpeg")
+                "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg"
             );
             
             //------------- ASSOCIATIONS -------------//
@@ -664,7 +666,7 @@ namespace AssoFlex.Models
         }
 
         public Utilisateur CreateUtilisateur(string prenom, string nom, string adresse, int telephone, string email,
-            string password, byte[] profilImg, string role="Basic")
+            string password, string profilImg, string role = "Basic")
         {
             Utilisateur userToAdd = new Utilisateur()
             {
@@ -684,7 +686,7 @@ namespace AssoFlex.Models
         }
 
         public void UpdateUtilisateur(int id, string prenom, string nom, string adresse, int telephone, string email,
-            string password, byte[] profilImg, string role)
+            string password, string profilImg, string role)
         {
             Utilisateur userToUpdate = this._assoFlex.Utilisateurs.Find(id);
             if (userToUpdate != null)

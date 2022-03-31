@@ -1,17 +1,17 @@
-@model AssoFlex.Models.Association
+@model AssoFlex.ViewModels.LayoutModelView
 @{
     ViewBag.Title = "Association";
     Layout = "_Layout";
 }
 <style>
 .jumbotron {
-   background-image: url("@Model.AssoHeaderImage");
+   background-image: url("@Model.Association.AssoHeaderImage");
    background-size: cover;
 }
 </style>
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-3">Bienvenue sur @Model.Nom</h1>
-        <p class="lead"> @Model.Description </p>
+        <h1 class="display-3">Bienvenue sur @Model.Association.Nom</h1>
+        <p class="lead"> @Model.Association.Description </p>
     </div>
 </div>

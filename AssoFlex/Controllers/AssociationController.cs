@@ -42,7 +42,11 @@ namespace AssoFlex.Controllers
         public ActionResult DetailsAssociation(int id)
         {
             Association association = _dal.GetAssociation(id);
-            return View(association);
+            LayoutModelView layoutModelView = new LayoutModelView()
+            {
+                Association = association
+            };
+            return View(layoutModelView);
         }
         
         public ActionResult AddAdhesion(int idAsso, int idUser, int adhesionArticleId)

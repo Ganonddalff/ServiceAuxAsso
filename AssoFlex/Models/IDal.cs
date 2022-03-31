@@ -18,9 +18,9 @@ namespace AssoFlex.Models
         Utilisateur Authentifier(string email, string password);
         List<Utilisateur> GetAllUtilisateurs();
         Utilisateur CreateUtilisateur(string prenom, string nom, string adresse,
-            int telephone, string email, string password, byte[] profilImg, string role="Basic");
+            int telephone, string email, string password, string profilImg, string role = "Basic");
         void UpdateUtilisateur(int id, string prenom, string nom, string adresse,
-            int telephone, string email, string password, byte[] profilImg, string role);
+            int telephone, string email, string password, string profilImg, string role);
         void DeleteUtilisateur(int id);
 
         #endregion

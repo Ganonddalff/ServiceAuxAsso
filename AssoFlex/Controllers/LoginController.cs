@@ -16,10 +16,12 @@ namespace AssoFlex.Controllers
     public class LoginController : Controller
     {
         private IDal _dal;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public LoginController()
+        public LoginController(IWebHostEnvironment hostEnvironment)
         {
             this._dal = new Dal();
+            this._webHostEnvironment = hostEnvironment;
         }
         // GET
         public IActionResult Index()
@@ -51,6 +53,7 @@ namespace AssoFlex.Controllers
                         new Claim(ClaimTypes.Name, utilisateur.Prenom),
                         new Claim(ClaimTypes.Email, utilisateur.Email),
                         new Claim(ClaimTypes.NameIdentifier, utilisateur.Id.ToString()),
+                        new Claim("ProfilImage", utilisateur.ProfilImg),
                         new Claim(ClaimTypes.Role, utilisateur.Role)
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
@@ -75,19 +78,36 @@ namespace AssoFlex.Controllers
         {
             return View();
         }
+
+        private string UploadedFile(UtilisateurViewModel model)
+        {
+            string uniqueFileName = null;
+            if (model.ProfilImg != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "FileSystem");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfilImg.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ProfilImg.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
         
         // POST
         [HttpPost]
-        public ActionResult CreateCompte(UtilisateurViewModel model, IFormFile imageUpload)
+        public ActionResult CreateCompte(UtilisateurViewModel model) /*, IFormFile imageUpload*/
         {
             if (ModelState.IsValid)
             {
-                byte[] profilImg;
-                using (var memoryStream = new MemoryStream())
-                {
-                    imageUpload.CopyTo(memoryStream);
-                    profilImg = memoryStream.ToArray();
-                }
+                // byte[] profilImg;
+                // using (var memoryStream = new MemoryStream())
+                // {
+                //     imageUpload.CopyTo(memoryStream);
+                //     profilImg = memoryStream.ToArray();
+                // }
+                string uniqueFileName = UploadedFile(model);
                 var userToCreate = _dal.CreateUtilisateur(
                     model.Utilisateur.Prenom,
                     model.Utilisateur.Nom,
@@ -95,12 +115,13 @@ namespace AssoFlex.Controllers
                     model.Utilisateur.Telephone,
                     model.Utilisateur.Email,
                     model.Utilisateur.Password,
-                    profilImg);
+                    uniqueFileName);
                 var userClaims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, userToCreate.Prenom),
                     new Claim(ClaimTypes.Email, userToCreate.Email),
                     new Claim(ClaimTypes.NameIdentifier, userToCreate.Id.ToString()),
+                    new Claim("ProfilImage", userToCreate.ProfilImg),
                     new Claim(ClaimTypes.Role, userToCreate.Role)
                 };
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
