@@ -15,7 +15,10 @@ namespace AssoFlex.ViewModels
         public List<Evenement> Evenements { get; set; }
         public List<Crowdfunding> Crowdfundings { get; set; }
         public Panier Panier { get; set; }
-        
+        public List<IWidgetAsso> WidgetsAssos { get; set; }
+        public List<IWidgetEvent> WidgetsEvents { get; set; }
+        public List<IWidgetCF> WidgetsCrowdfundings { get; set; }
+
         public int GetNombreArticlePanier(string idUser)
         {
             Panier panier = _dal.GetPanierByUserId(idUser);

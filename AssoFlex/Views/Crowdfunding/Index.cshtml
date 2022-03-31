@@ -8,30 +8,26 @@
 
 <h2 class="text-center">PAGE CROWDFUNDING</h2>
 <div class="row justify-content-start">
-    @foreach (var crowdfunding in Model.Crowdfundings)
-    {
-        <div class="card col-4 m-5" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title"><a href=@Url.Action("DetailsCrowdfunding",new {id=@crowdfunding.Id})>@crowdfunding.Nom</a></h5>
-                
-                <h6 class="card-subtitle"><a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @crowdfunding.Id, @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value})>@crowdfunding.Collecte.MontantCollecte / @crowdfunding.MontantProjet</a></h6>
-                
-                <h6 class="card-subtitle">@crowdfunding.DateCreation</h6>
-                <p class="card-text">@crowdfunding.DateDebutProjet - @crowdfunding.DateFinProjet</p>
+    @* @foreach (var crowdfunding in Model.Crowdfundings) *@
+    @* { *@
+    @*     <div class="card col-4 m-5" style="width: 18rem;"> *@
+    @*         <div class="card-body"> *@
+    @*             <h5 class="card-title"><a href=@Url.Action("DetailsCrowdfunding",new {id=@crowdfunding.Id})>@crowdfunding.Nom</a></h5> *@
+    @*              *@
+    @*             <h6 class="card-subtitle"><a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @crowdfunding.Id, @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value})>@crowdfunding.Collecte.MontantCollecte / @crowdfunding.MontantProjet</a></h6> *@
+    @*              *@
+    @*             <h6 class="card-subtitle">@crowdfunding.DateCreation</h6> *@
+    @*             <p class="card-text">@crowdfunding.DateDebutProjet - @crowdfunding.DateFinProjet</p> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* } *@
+        <div class="container-fluid padding">
+             <div class="row padding">
+                 @{
+                    @Html.Partial("Widget/_WidgetContainerCF");
+                }
             </div>
         </div>
-    }
-    @* <div class="container-fluid padding"> *@
-    @*          <div class="row padding"> *@
-    @*          *@
-    @*             @{ *@
-    @*      *@
-    @*                 @Html.Partial("Widget/_WidgetContainerCF") *@
-    @*                 ; *@
-    @*             } *@
-    @*         </div> *@
-    @*      *@
-    @*     </div> *@
 </div>
 <div>
     @if (User.Identity.IsAuthenticated)

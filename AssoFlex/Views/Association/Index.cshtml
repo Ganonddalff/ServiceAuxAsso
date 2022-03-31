@@ -14,34 +14,32 @@
   <button>Search</button>
 </form>
 <div class="row justify-content-start">
-    @foreach (var asso in Model.Associations)
-    {
-        <div class="card col-4 m-5" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">@asso.Nom</h5>
-                <h6 class="card-subtitle">@asso.NumSiret</h6>
-                <h6 class="card-subtitle">@asso.DateInscription</h6>
-                <p class="card-text">@asso.Description</p>
-                <a href=@Url.Action("DetailsAssociation", new {id=@asso.Id}) class="btn btn-outline-primary">Voir Détails</a>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a href=@Url.Action("AddAdhesion", "Association", new {idAsso=@asso.Id, idUser=User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Adhérer</a>
-                }
-                else
-                {
-                    <a href=@Url.Action("Index", "Login") class="btn btn-primary">Adhérer</a>
-                }
-            </div>
-        </div>
-    }
-    @* <div class="row padding"> *@
-    @*      *@
-    @*         @{ *@
-    @* *@
-    @*             @Html.Partial("Widget/_WidgetContainerAsso") *@
-    @*             ; *@
-    @*         } *@
+    @* @foreach (var asso in Model.Associations) *@
+    @* { *@
+    @*     <div class="card col-4 m-5" style="width: 18rem;"> *@
+    @*         <div class="card-body"> *@
+    @*             <h5 class="card-title">@asso.Nom</h5> *@
+    @*             <h6 class="card-subtitle">@asso.NumSiret</h6> *@
+    @*             <h6 class="card-subtitle">@asso.DateInscription</h6> *@
+    @*             <p class="card-text">@asso.Description</p> *@
+    @*             <a href=@Url.Action("DetailsAssociation", new {id=@asso.Id}) class="btn btn-outline-primary">Voir Détails</a> *@
+    @*             @if (User.Identity.IsAuthenticated) *@
+    @*             { *@
+    @*                 <a href=@Url.Action("AddAdhesion", "Association", new {idAsso=@asso.Id, idUser=User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Adhérer</a> *@
+    @*             } *@
+    @*             else *@
+    @*             { *@
+    @*                 <a href=@Url.Action("Index", "Login") class="btn btn-primary">Adhérer</a> *@
+    @*             } *@
+    @*         </div> *@
     @*     </div> *@
+    @* } *@
+    <div class="row padding">
+        @{
+
+            @Html.Partial("Widget/_WidgetContainerAsso");
+        }
+    </div>
 </div>
 
 @section Scripts

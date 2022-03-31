@@ -57,7 +57,8 @@ namespace AssoFlex.Controllers
                         nouveauCrowdfunding.DateDebutProjet,
                         nouveauCrowdfunding.DateFinProjet,
                         Porteur,
-                        _dal.CreateCollecte()
+                        _dal.CreateCollecte(),
+                        nouveauCrowdfunding.Description
                 );
                 
             }

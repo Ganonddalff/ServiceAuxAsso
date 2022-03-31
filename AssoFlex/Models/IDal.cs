@@ -73,6 +73,8 @@ namespace AssoFlex.Models
         public List<IWidgetCF> GetCrowdfundingsToWidget();
         Crowdfunding GetCrowdfunding(int id);
         Crowdfunding GetCfCollecte(int id);
+        // Crowdfunding CreateCrowdfunding(string nouveauCrowdfundingNom, int nouveauCrowdfundingMontantProjet, string nouveauCrowdfundingLieuProjet, string nouveauCrowdfundingCategorieProjet, DateTime nouveauCrowdfundingDateDebutProjet, DateTime nouveauCrowdfundingDateFinProjet, Association porteur, Collecte createCollecte);
+
         public Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut,
             DateTime DateFin, Association Porteur, Collecte collecte, string description);
         Crowdfunding UpdateCrowdfunding(int id, string nom, int montant, string lieuProjet, 
@@ -125,6 +127,8 @@ namespace AssoFlex.Models
         public List<IWidgetEvent> GetEventToWidget();
         Evenement GetEvenement(int id);
         EvenementViewModel GetEvenementViewModel(int id);
+        // Evenement CreateEvenement(Association organisateur, string evenementNomEvent, int evenementNbTickets, DateTime evenementDateDebutEvent, DateTime evenementDateFinEvent, string evenementLieuEvent, string evenementCategorieEvent, int evenementPrix);
+
         public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
             string Lieu, string categorie, int prix, string description);
         void DeleteEvenement(int id);
@@ -177,5 +181,6 @@ namespace AssoFlex.Models
         // ******************************** //
         
         List<ArticlePanier> GetArticlesPanierByPanierId(int panierId);
+        AdhesionArticle GetAdhesionArticle(int i);
     }
 }

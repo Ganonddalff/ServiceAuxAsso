@@ -123,7 +123,8 @@ namespace AssoFlex.Controllers
                     orga, evenement.NomEvent,
                     evenement.NbTickets, 
                     evenement.DateDebutEvent, evenement.DateFinEvent,
-                    evenement.LieuEvent, evenement.CategorieEvent, evenement.Prix);
+                    evenement.LieuEvent, evenement.CategorieEvent, evenement.Prix,
+                    evenement.Description);
                 return RedirectToAction("Index");
             }
             return View("Error");

@@ -1,9 +1,8 @@
-@model AssoFlex.Models.IWidgetCF
+@model AssoFlex.ViewModels.LayoutModelView
 
 
 
-@foreach (AssoFlex.Models.IWidgetCF wm in ViewBag.Widgets)
+@foreach (var wm in Model.WidgetsCrowdfundings)
 {
-    
     @Html.Partial(string.Concat(new[] { "Widget", "/", "_WidgetCF" }), wm)
 }
