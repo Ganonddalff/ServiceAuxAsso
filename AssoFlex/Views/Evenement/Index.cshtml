@@ -1,4 +1,4 @@
-@model System.Collections.Generic.List<AssoFlex.Models.Evenement>
+@model AssoFlex.ViewModels.LayoutModelView
 
 @{
     Layout = "_Layout";
@@ -6,7 +6,7 @@
 
 <h2 class="page-section-heading text-center mb-0">Nos Evenements</h2>
 <div class="row justify-content-start">
-    @foreach (var eventInList in Model)
+    @foreach (var eventInList in Model.Evenements)
     {
         <div class="card col-4 m-5" style="width: 18rem;">
             <div class="card-body">
@@ -23,11 +23,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-
-    
-
     <br/>
-
     <a href=@Url.Action("CreerEvent")>Créer un évènement</a>
 }
 @if (User.Identity.IsAuthenticated.Equals(false))

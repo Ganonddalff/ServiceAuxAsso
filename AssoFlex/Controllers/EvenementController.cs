@@ -19,15 +19,23 @@ namespace AssoFlex.Controllers
         // GET
         public ActionResult Index()
         {
-            List<Evenement> listerMesEvenements = _dal.GetAllEvenements();
-            foreach (var monEvent in listerMesEvenements)
+            LayoutModelView lModelView = new LayoutModelView()
+            {
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings(),
+                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier))
+            };
+            if (lModelView.Panier == null)
+            {
+                lModelView.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            }
+            foreach (var monEvent in lModelView.Evenements)
             {
                 monEvent.Organisateur = _dal.GetAssociation(monEvent.OrganisateurId);
             }
-            return View(listerMesEvenements);
+            return View(lModelView);
         }
-
-
         
         public ActionResult Details(int id)
         {

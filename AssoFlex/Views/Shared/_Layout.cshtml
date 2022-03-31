@@ -1,117 +1,51 @@
-@using System.Security.Claims
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>AssoFlex</title>
-	<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <!-- Icons-->
-    <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="~/lib/coreui/icons/css/coreui-icons.css" rel="stylesheet" />
-    <link href="~/lib/flag-icon-css/css/flag-icon.css" rel="stylesheet" />
-    <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
-    <link href="~/lib/pace-progress/css/pace.css" rel="stylesheet" />
-    <!-- MAIN CSS -->
-    <link href="~/lib/coreui/css/style.css" rel="stylesheet" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="~/css/site.css" />
+	<environment include="Development">
+            <!-- VENDOR CSS -->
+            <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+            <!-- Icons-->
+            <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+            <link href="~/lib/coreui/icons/css/coreui-icons.css" rel="stylesheet" />
+            <link href="~/lib/flag-icon-css/css/flag-icon.css" rel="stylesheet" />
+            <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
+            <link href="~/lib/pace-progress/css/pace.css" rel="stylesheet" />
+            <link href="~/lib/dataTables/dist/css/dataTables.bootstrap4.min.css" />
+            <!-- MAIN CSS -->
+            <link href="~/lib/coreui/css/style.css" rel="stylesheet" />
+    
+            <link rel="stylesheet" href="~/css/site.css" />
+        </environment>
+	<environment exclude="Development">
+		<!-- VENDOR CSS -->
+		<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="~/lib/coreui/icons/css/coreui-icons.min.css" rel="stylesheet" />
+		<link href="~/lib/flag-icon-css/css/flag-icon.css" rel="stylesheet" />
+		<link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
+		<link href="~/lib/pace-progress/css/pace.css" rel="stylesheet" />
+		<link href="~/lib/dataTables/dist/css/dataTables.bootstrap4.min.css" />
+		<!-- MAIN CSS -->
+		<link href="~/lib/coreui/css/style.min.css" rel="stylesheet" />
+    
+		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+	</environment>
+	
+	 @RenderSection("Headers", required: false)
 </head>
 
 <body>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <div class="container-fluid">
-    	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="~/assets/img/logo.png" alt="logo"></a>
-    	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-    		<span class="navbar-toggler-icon"></span>
-    	</button>
-	    <div class="collapse navbar-collapse" id="navbarResponsive">
-		    <div class="navbar">
-			    <a class="nav-item nav-link" href=@Url.Action("Index", "Home")>
-				    Acceuil
-			    </a>
-			    <a class="nav-item nav-link" href=@Url.Action("Index","Presentation")>
-				    Présentation
-			    </a>
-			    <div class="nav-item dropdown">
-				    <a class="" href="#" role="button" id="servicesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="False">
-					    Nos services
-				    </a>
-				    <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="servicesDropdown">
-					    <a class="dropdown-item" href=@Url.Action("Index", "Crowdfunding")>
-						    Crowdfunding
-					    </a> 
-					    <div class="dropdown-divider"></div>
-					    <a class="dropdown-item" href=@Url.Action("Index", "Evenement")>
-						    Évènement
-					    </a> 
-				    </div>
-			    </div>
-			    <a class="nav-link" href=@Url.Action("Index", "Association")>
-				    Nos associations
-			    </a>
-		    </div>
-		    <div class="navbar-nav ml-auto">
-			    <a class="nav-item nav-link" href=@Url.Action("Index", "Souscription") style="color: #0c63e4; font-weight:700;">
-				    Inscris Ton Asso
-			    </a> @* @Url.Action("CreerAsso", "Association") *@
-			    @{
-				    if (User.Identity.IsAuthenticated)
-				    {
-					    <div class="nav-item dropdown justify-content-end">
-						    <a class="" data-toggle="dropdown" href="#" role="button" id="profilDropdown" aria-haspopup="true" aria-expanded="False">
-							    <b>Bonjour @User.Identity.Name</b>
-							    <img src=@("/Dashboard/GetImageProfil/"+ User.FindFirst(ClaimTypes.NameIdentifier).Value) 
-							         alt="userAvatar" class="rounded-circle" width="50px" height="40px"/>
-						    </a>
-						    <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="profilDropdown">
-							    @if (User.IsInRole("Admin"))
-							    {
-								    <a class="dropdown-item" href=@Url.Action("DashboardAdmin", "Dashboard")>
-									    <i class="fa fa-home"></i> Espace Personnel
-								    </a>
-							    }else if (User.IsInRole("Admin-Asso"))
-							    {
-								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id = User.FindFirst(ClaimTypes.NameIdentifier).Value})>
-									    <i class="fa fa-home"></i> Espace Personnel
-								    </a>
-							    }
-							    else
-							    {
-								    <a class="dropdown-item" href=@Url.Action("Profil", "Dashboard", new {id = User.FindFirst(ClaimTypes.NameIdentifier).Value})>
-									    <i class="fa fa-home"></i> Espace Personnel
-								    </a>
-							    }
-							    
-							    <div class="dropdown-divider"></div>
-							    <a class="dropdown-item" href=@Url.Action("Deconnexion", "Login")>
-								    <i class="fa fa-lock"></i> Deconnexion
-							    </a>
-						    </div>
-					    </div>
-				    }
-				    else
-				    {
-					    <div class="dropdown">
-						    <a class="nav-item nav-link" href=@Url.Action("Index", "Login") style="color: #157347; font-weight:700;"><b>Se Connecter</b></a>
-					    </div>
-				    }
-			    }
-		    </div>
-		    
-	    </div>
-    </div>
-</nav>
+<partial name="_NavBar"/>
+<!-- Main Content -->
 <div id="main">
-	@* <div id="menu"> *@
-	@*     <ul> *@
-	@*         @RenderSection("Menu", required:false) *@
-	@*     </ul> *@
-	@* </div> *@
-	<div id="content">
-		@RenderBody()
-	</div>
+	@RenderBody()
 </div>
 <!--- Footer -->
 <footer>
@@ -149,20 +83,38 @@
 	</div>
 </footer>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- CoreUI and necessary plugins-->
-<script src="~/lib/pace-progress/pace.min.js"></script>
+<environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <!-- CoreUI and necessary plugins-->
+        <script src="~/lib/pace-progress/js/pace.min.js"></script>
+        <script src="~/lib/dataTables/dist/js/jquery.dataTables.min.js"></script>
+        <script src="~/lib/dataTables/dist/js/dataTables.bootstrap4.min.js"></script>
+		<script src="~/lib/jquery-sdfilterme-master/jquery.sdFilterMe.js"></script>
+        @*<script src="~/lib/perfect-scrollbar/dist/perfect-scrollbar.js"></script>*@
+        <script src="~/lib/coreui/dist/js/coreui.js"></script>
+        <!-- Plugins and scripts required by this view-->
+        @*<script src="~/lib/chart.js/dist/Chart.js"></script>
+            <script src="~/lib/coreui/js/custom-tooltips.js"></script>
+            <script src="~/lib/coreui/js/main.js"></script>*@
 
-<script src="~/lib/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-<script src="~/lib/coreui/dist/js/coreui.min.js"></script>
-<script src="~/lib/jquery-sdfilterme-master/jquery.sdFilterMe.js"></script>
-<!-- Plugins and scripts required by this view-->
-@*<script src="~/lib/chart.js/dist/Chart.min.js"></script>
-<script src="~/lib/coreui/js/custom-tooltips.js"></script>
-<script src="~/lib/coreui/js/main.js"></script>*@
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- CoreUI and necessary plugins-->
+        <script src="~/lib/pace-progress/pace.min.js"></script>
+		<script src="~/lib/jquery-sdfilterme-master/jquery.sdFilterMe.js"></script>
+        <script src="~/lib/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+        <script src="~/lib/coreui/dist/js/coreui.min.js"></script>
+        <!-- Plugins and scripts required by this view-->
+        @*<script src="~/lib/chart.js/dist/Chart.min.js"></script>
+            <script src="~/lib/coreui/js/custom-tooltips.js"></script>
+            <script src="~/lib/coreui/js/main.js"></script>*@
 
-<script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
 
 @RenderSection("Scripts", required: false) 
 

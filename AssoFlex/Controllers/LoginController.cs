@@ -55,6 +55,7 @@ namespace AssoFlex.Controllers
                     };
                     var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
                     var userPrincipal = new ClaimsPrincipal(new[] {ClaimIdentity});
+                    Panier panierNew = _dal.CreatePanier(viewModel.Utilisateur);
                     HttpContext.SignInAsync(userPrincipal);
 
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
@@ -104,6 +105,7 @@ namespace AssoFlex.Controllers
                 };
                 var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
                 var userPrincipal = new ClaimsPrincipal(new[] {ClaimIdentity});
+                Panier panierNew = _dal.CreatePanier(userToCreate);
                 HttpContext.SignInAsync(userPrincipal);
                 return Redirect("/");
             }
@@ -114,6 +116,7 @@ namespace AssoFlex.Controllers
         // GET
         public ActionResult Deconnexion()
         {
+            //_dal.DeletePanier();
             HttpContext.SignOutAsync();
             return Redirect("/");
         }

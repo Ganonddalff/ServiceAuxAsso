@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
@@ -19,8 +20,18 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult Index()
         {
-            List<Association> listeDesAssociations = _dal.GetAllAssociations();
-            return View(listeDesAssociations);
+            LayoutModelView lModelView = new LayoutModelView()
+            {
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings(),
+                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier))
+            };
+            if (lModelView.Panier == null)
+            {
+                lModelView.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            }
+            return View(lModelView);
         }
         
         // GET
@@ -30,9 +41,33 @@ namespace AssoFlex.Controllers
             return View(association);
         }
         
-        public ActionResult AddAdhesion(int idAsso, int idUser)
+        public ActionResult AddAdhesion(int idAsso, int idUser, int adhesionArticleId)
         {
-            _dal.CreateAdhesion(idAsso, idUser);
+            Utilisateur user = _dal.GetUtilisateur(idUser);
+            AdhesionArticle adhesionArticle = _dal.GetAdhesionArticle(1);
+            Association association = _dal.GetAssociation(idAsso);
+            var panier = _dal.GetPanierByUserId(idUser);
+            ArticlePanier articlePanier = new ArticlePanier()
+            {
+                Quantite = 1,
+                MontantUnitaire = adhesionArticle.MontantAdh,
+                ProduitId = adhesionArticle.Id,
+                ProduitNom = adhesionArticle.Nom,
+                UtilisateurId = idUser,
+                Panier = panier,
+                TypeDeCommande = "Adhesion",
+            };
+            if ( panier != null)
+            {
+                _dal.AddArticleToPanier(panier.Id,articlePanier);
+            }
+            else
+            {
+                Panier panierNew = _dal.CreatePanier(user);
+                _dal.AddArticleToPanier(panierNew.Id, articlePanier);
+            }
+            
+            // _dal.CreateAdhesion(idAsso, idUser);
             return RedirectToAction("Index");
         }
 
@@ -63,9 +98,7 @@ namespace AssoFlex.Controllers
                     association.Id, association.Nom, association.NumSiret, association.AssoLogo,
                     association.Description);
                 return RedirectToAction("DashboardAdmin", "Dashboard");
-
             }
-
             return View("Error");
         }
     }

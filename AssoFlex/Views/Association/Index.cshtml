@@ -1,5 +1,5 @@
 @using System.Security.Claims
-@model System.Collections.Generic.List<AssoFlex.Models.Association>
+@model AssoFlex.ViewModels.LayoutModelView
 
 @{
     ViewBag.Title = "Nos Association";
@@ -12,7 +12,7 @@
   <button>Search</button>
 </form>
 <div class="row justify-content-start">
-    @foreach (var asso in Model)
+    @foreach (var asso in Model.Associations)
     {
         <div class="card col-4 m-5" style="width: 18rem;">
             <div class="card-body">

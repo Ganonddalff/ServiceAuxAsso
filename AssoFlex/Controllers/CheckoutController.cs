@@ -1,19 +1,19 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssoFlex.Controllers
 {
-    public class PresentationController : Controller
+    public class CheckoutController : Controller
     {
         private IDal _dal;
 
-        public PresentationController()
+        public CheckoutController()
         {
             _dal = new Dal();
         }
-        
+        // GET
         public IActionResult Index()
         {
             LayoutModelView lModelView = new LayoutModelView()
@@ -29,25 +29,5 @@ namespace AssoFlex.Controllers
             }
             return View(lModelView);
         }
-        public IActionResult VoirCvBillal()
-        {
-            return View();
-        }
-
-        public IActionResult VoirCvGuytri()
-        {
-            return View();
-        }
-
-        public IActionResult VoirCvMateusz()
-        {
-            return View();
-        }
-
-        public IActionResult VoirCvPaul()
-        {
-            return View();
-        }
-
     }
 }

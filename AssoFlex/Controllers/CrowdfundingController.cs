@@ -20,8 +20,18 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult Index()
         {
-            List<Crowdfunding> listeDesCrowdfundings = _dal.GetAllCrowdfundings();
-            return View(listeDesCrowdfundings);
+            LayoutModelView lModelView = new LayoutModelView()
+            {
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings(),
+                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier))
+            };
+            if (lModelView.Panier == null)
+            {
+                lModelView.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            }
+            return View(lModelView);
         }
 
         public ActionResult CreateCrowdfunding()

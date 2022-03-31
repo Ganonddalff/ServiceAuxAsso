@@ -205,6 +205,12 @@ namespace AssoFlex.Models
                 this.GetAssociation(1),
                 this.CreateCollecte()
                 );
+            //------------- ADHESION ARTICLE -------------//
+            this.CreateAdhesionArticle(
+                this.GetAssociation(1),
+                "1",
+                0
+            );
         }
         #endregion
 
@@ -254,6 +260,8 @@ namespace AssoFlex.Models
                 Role = role
             };
             this._assoFlex.Utilisateurs.Add(userToAdd);
+            Panier panier = this.CreatePanier(userToAdd);
+            panier.ArticlesPanier = new List<ArticlePanier>();
             this._assoFlex.SaveChanges();
             return userToAdd;
         }
@@ -356,14 +364,34 @@ namespace AssoFlex.Models
             return this._assoFlex.Adhesions.ToList();
         }
 
-        public Adhesion CreateAdhesion(int idAsso, int idUser)
+        public Adhesion CreateAdhesion(int idAsso, int idUser, int adhesionArticleId)
         {
+            AdhesionArticle adhesionArticle = this.GetAdhesionArticle(adhesionArticleId);
+            DateTime dateFin;
+            switch (Convert.ToInt16(adhesionArticle.Frequence))
+            {
+                case 1:
+                    dateFin = DateTime.Now.AddMonths(1);
+                    break;
+                case 2:
+                    dateFin = DateTime.Now.AddMonths(3);
+                    break;
+                case 3:
+                    dateFin = DateTime.Now.AddMonths(6);
+                    break;
+                case 4:
+                    dateFin = DateTime.Now.AddYears(1);
+                    break;
+                default:
+                    dateFin = DateTime.Now.AddMonths(1);
+                    break;
+            }
             Adhesion adhesionToAdd = new Adhesion()
             {
                 Association = this._assoFlex.Associations.Find(idAsso),
                 Utilisateur = this._assoFlex.Utilisateurs.Find(idUser),
                 DateDebut = DateTime.Now,
-                DateFin = DateTime.Now.AddYears(1)
+                DateFin = dateFin,
             };
             this._assoFlex.Adhesions.Add(adhesionToAdd);
             this._assoFlex.SaveChanges();
@@ -379,6 +407,48 @@ namespace AssoFlex.Models
         {
             Adhesion adhesionToDelete = this._assoFlex.Adhesions.Find(id);
             this._assoFlex.Adhesions.Remove(adhesionToDelete);
+            this._assoFlex.SaveChanges();
+        }
+
+        #endregion
+
+        #region AdhesionArticle
+
+        public List<AdhesionArticle> GetAllAdhesionArticles()
+        {
+            return this._assoFlex.AdhesionArticles.ToList();
+        }
+
+        public AdhesionArticle GetAdhesionArticle(int id)
+        {
+            return this._assoFlex.AdhesionArticles.Find(id);
+        }
+
+        public AdhesionArticle CreateAdhesionArticle(Association association,
+            string frequence, decimal montant)
+        {
+            AdhesionArticle adhesionArticleToAdd = new AdhesionArticle()
+            {
+                Association = association,
+                Nom = "Standard",
+                Frequence = frequence,
+                MontantAdh = montant
+            };
+            this._assoFlex.AdhesionArticles.Add(adhesionArticleToAdd);
+            this._assoFlex.SaveChanges();
+            return adhesionArticleToAdd;
+        }
+
+        public void UpdateAdhesionArticle(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAdhesionArticle(int id)
+        {
+            AdhesionArticle adhesionArticleToDelete = 
+                this._assoFlex.AdhesionArticles.Find(id);
+            this._assoFlex.AdhesionArticles.Remove(adhesionArticleToDelete);
             this._assoFlex.SaveChanges();
         }
 
@@ -666,8 +736,168 @@ namespace AssoFlex.Models
 
             return eventToUpdate;
         }
+        
+        #endregion
+
+        #region LigneDeCommande
+
+        public List<LigneDeCommande> GetAllLignesDeCommande()
+        {
+            return this._assoFlex.LignesDeCommande.ToList();
+        }
+
+        public LigneDeCommande GetLigneDeCommande(int id)
+        {
+            return this._assoFlex.LignesDeCommande.Find(id);
+        }
+
+        public LigneDeCommande CreateLigneDeCommande(int userId, decimal montantUnit, int quantite, string typeCommande)
+        {
+            LigneDeCommande ldcToAdd = new LigneDeCommande()
+            {
+                UtilisateurId = userId,
+                MontantUnitaire = montantUnit,
+                Quantite = quantite,
+                TypeDeCommande = typeCommande
+            };
+            this._assoFlex.LignesDeCommande.Add(ldcToAdd);
+            this._assoFlex.SaveChanges();
+            return ldcToAdd;
+        }
+
+        public void UpdateLigneDeCommande(int id, int userId, decimal montantUnit, int quantite, string typeCommande)
+        {
+            LigneDeCommande ldcToUpdate = this._assoFlex.LignesDeCommande.Find(id);
+            ldcToUpdate.UtilisateurId = userId;
+            ldcToUpdate.MontantUnitaire = montantUnit;
+            ldcToUpdate.Quantite = quantite;
+            ldcToUpdate.TypeDeCommande = typeCommande;
+            this._assoFlex.SaveChanges();
+        }
+
+        public void DeleteLigneDeCommande(int id)
+        {
+            LigneDeCommande ldcToDelete = this._assoFlex.LignesDeCommande.Find(id);
+            this._assoFlex.LignesDeCommande.Remove(ldcToDelete);
+            this._assoFlex.SaveChanges();
+        }
 
         #endregion
 
+        #region Commande
+
+        public List<Commande> GetAllCommandes()
+        {
+            return this._assoFlex.Commandes.ToList();
+        }
+
+        public Commande GetCommande(int id)
+        {
+            return this._assoFlex.Commandes.FirstOrDefault(c => c.Id == id);
+        }
+
+        public Commande CreateCommande(int userId, int quantiteTotal, double sousTotal, double total,
+            List<LigneDeCommande> lignesDeCommande)
+        {
+            Commande commandeToAdd = new Commande()
+            {
+                UtilisateurId = userId,
+                DateCommande = DateTime.Now,
+                QuantiteTotal = quantiteTotal,
+                SousTotal = sousTotal,
+                Total = total,
+                LignesDeCommande = lignesDeCommande
+            };
+            this._assoFlex.Commandes.Add(commandeToAdd);
+            this._assoFlex.SaveChanges();
+            return commandeToAdd;
+        }
+
+        public void AddLigneCommandeToCommande(int id, LigneDeCommande ligneDeCommande)
+        {
+            Commande commandeToAddLdC = this._assoFlex.Commandes.Find(id);
+            commandeToAddLdC.LignesDeCommande.Add(ligneDeCommande);
+            this._assoFlex.SaveChanges();
+        }
+
+        public void UpdateCommande(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCommande(int id)
+        {
+            Commande commandeToDelete = this._assoFlex.Commandes.Find(id);
+            this._assoFlex.Commandes.Remove(commandeToDelete);
+            this._assoFlex.SaveChanges();
+        }
+        
+        #endregion
+
+        #region Panier
+
+        public List<Panier> GetAllPaniers()
+        {
+            return this._assoFlex.Paniers.ToList();
+        }
+
+        public Panier GetPanier(int id)
+        {
+            return this._assoFlex.Paniers.Find(id);
+        }
+
+        public Panier GetPanierByUserId(int userId)
+        {
+            var panier = this._assoFlex.Paniers.FirstOrDefault(p => p.UtilisateurId == userId);
+            panier.Utilisateur = this.GetUtilisateur(userId);
+            return panier;
+        }
+
+        public Panier GetPanierByUserId(string userIdStr)
+        {
+            return int.TryParse(userIdStr, out var id) ? this.GetPanierByUserId(id) : null;
+        }
+
+        public Panier CreatePanier(Utilisateur user)
+        {
+            Panier panierToAdd = new Panier()
+            {
+                Utilisateur = user,
+                ArticlesPanier = new List<ArticlePanier>(),
+            };
+            this._assoFlex.Paniers.Add(panierToAdd);
+            this._assoFlex.SaveChanges();
+            return panierToAdd;
+        }
+
+        public void AddArticleToPanier(int id, ArticlePanier articlePanier)
+        {
+            Panier panier = this._assoFlex.Paniers.Find(id);
+            if (panier.ArticlesPanier == null)
+            {
+                panier.ArticlesPanier = new List<ArticlePanier>();
+            }
+            panier.ArticlesPanier.Add(articlePanier);
+            this._assoFlex.SaveChanges();
+        }
+
+        public void UpdatePanier(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeletePanier(int id)
+        {
+            Panier panierToDelete = this._assoFlex.Paniers.Find(id);
+            this._assoFlex.Paniers.Remove(panierToDelete);
+        }
+
+        public List<ArticlePanier> GetArticlesPanierByPanierId(int panierId)
+        {
+            List<ArticlePanier> listeArticle = this._assoFlex.ArticlesPanier.Where(c => c.PanierId == panierId).ToList();
+            return listeArticle;
+        }
+
+        #endregion
     }
 }

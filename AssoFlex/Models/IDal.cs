@@ -46,12 +46,25 @@ namespace AssoFlex.Models
         #region Adhesion
 
         List<Adhesion> GetAllAdhesions();
-        Adhesion CreateAdhesion(int idAsso, int idUser);
+        Adhesion CreateAdhesion(int idAsso, int idUser, int adhesionArticleId);
         void UpdateAdhesion();
         void DeleteAdhesion(int id);
 
         #endregion
 
+        // ************************************ //
+
+        #region AdhesionArticle
+
+        List<AdhesionArticle> GetAllAdhesionArticles();
+        AdhesionArticle GetAdhesionArticle(int id);
+        AdhesionArticle CreateAdhesionArticle(Association association,
+            string frequence, decimal montant);
+        void UpdateAdhesionArticle(int id);
+        void DeleteAdhesionArticle(int id);
+
+        #endregion
+        
         // ************************************ //
 
         #region Souscription
@@ -129,6 +142,50 @@ namespace AssoFlex.Models
             DateTime dateDebut, DateTime dateFin, string lieu, string categorie, int prix);
 
         #endregion
-       
+        
+        // ******************************** //
+
+        #region LigneDeCommande
+
+        List<LigneDeCommande> GetAllLignesDeCommande();
+        LigneDeCommande GetLigneDeCommande(int id);
+        LigneDeCommande CreateLigneDeCommande(int userId, decimal montantUnit, int quantite, string typeCommande);
+        void UpdateLigneDeCommande(int id, int userId, decimal montantUnit, int quantite, string typeCommande);
+        void DeleteLigneDeCommande(int id);
+
+        #endregion
+        
+        // ******************************** //
+
+        #region Commande
+
+        List<Commande> GetAllCommandes();
+        Commande GetCommande(int id);
+        Commande CreateCommande(int userId, int quantiteTotal,
+            double sousTotal, double total, List<LigneDeCommande> lignesDeCommande);
+        void AddLigneCommandeToCommande(int id, LigneDeCommande ligneDeCommande);
+        void UpdateCommande(int id);
+        void DeleteCommande(int id);
+
+        #endregion
+
+        // ******************************** //
+        
+        #region Panier
+
+        List<Panier> GetAllPaniers();
+        Panier GetPanier(int id);
+        Panier GetPanierByUserId(int userId);
+        Panier GetPanierByUserId(string userIdStr);
+        Panier CreatePanier(Utilisateur user);
+        void AddArticleToPanier(int id, ArticlePanier articlePanier);
+        void UpdatePanier(int id);
+        void DeletePanier(int id);
+
+        #endregion
+        
+        // ******************************** //
+        
+        List<ArticlePanier> GetArticlesPanierByPanierId(int panierId);
     }
 }

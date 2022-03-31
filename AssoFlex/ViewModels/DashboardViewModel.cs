@@ -9,5 +9,7 @@ namespace AssoFlex.ViewModels
         public List<Utilisateur> Utilisateurs{ get; set; }
         public List<Association> Associations { get; set; }
         public List<Adhesion> Adhesions { get; set; }
+        public List<Evenement> Evenements { get; set; }
+        public List<Crowdfunding> Crowdfundings { get; set; }
     }
 }

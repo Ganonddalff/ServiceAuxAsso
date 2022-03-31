@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">Associations</div>
                     <div class="card-body">
-                        <table id="listeAsso" class="table table-responsive-sm table-hover table-outline mb-0">
+                        <table id="listeAssos" class="table table-responsive-sm table-hover table-outline mb-0">
                             <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
@@ -33,9 +33,9 @@
                                     <td>@association.DateInscription</td>
                                     <td>@association.AdminAsso.Prenom @association.AdminAsso.Nom</td>
                                     <td>
-                                        <a class="link-primary" href=@Url.Action("DetailsAssociation", "Association", new {id = @association.Id})><i class="icon-eye"></i></a>
-                                        <a class="link-primary" href=@Url.Action("UpdateAssociation", "Association", new {id = @association.Id})><i class="icon-pencil"></i></a>
-                                        <a class="link-primary" href=@Url.Action("DeleteAssociation", "Association", new {id = @association.Id})><i class="icon-trash"></i></a>
+                                        <a class="btn btn-warning btn-sm" href=@Url.Action("DetailsAssociation", "Association", new {id = @association.Id})><i class="fa fa-eye"></i></a>
+                                        <a class="btn btn-info btn-sm" href=@Url.Action("UpdateAssociation", "Association", new {id = @association.Id})><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-sm" href=@Url.Action("DeleteAssociation", "Association", new {id = @association.Id})><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -71,8 +71,8 @@
                                     <td>@user.Email</td>
                                     <td>@user.Role</td>
                                     <td>
-                                        <a class="link-primary" href=@Url.Action("UpdateUtilisateur", "Utilisateur", new {id = @user.Id})><i class="icon-pencil"></i></a>
-                                        <a class="link-primary" href=@Url.Action("DeleteUtilisateur", "Utilisateur", new {id = @user.Id})><i class="icon-trash"></i></a>
+                                        <a class="btn btn-info btn-sm" href=@Url.Action("UpdateUtilisateur", "Utilisateur", new {id = @user.Id})><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-sm" href=@Url.Action("DeleteUtilisateur", "Utilisateur", new {id = @user.Id})><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -82,11 +82,11 @@
                 <div class="card">
                     <div class="card-header">Adhésions</div>
                     <div class="card-body">
-                        <table id="listeAdhesion" class="table table-striped table-bordered">
+                        <table id="listeAdhesions" class="table table-striped table-bordered">
                             <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
-                                <th>Associaiton</th>
+                                <th>Association</th>
                                 <th>Utilisateur</th>
                                 <th>Date de début</th>
                                 <th>Date de fin</th>
@@ -102,6 +102,71 @@
                                     <td>@adh.Utilisateur.Prenom @adh.Utilisateur.Nom</td>
                                     <td>@adh.DateDebut</td>
                                     <td>@adh.DateFin</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Évènements</div>
+                    <div class="card-body">
+                        <table id="listeEvenements" class="table table-striped table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Catégorie</th>
+                                <th>Associaiton</th>
+                                <th>Prix</th>
+                                <th>Restants/Total</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            @foreach (var evenement in Model.Evenements)
+                            {
+                                <tr>
+                                    <td>@evenement.IdEvent</td>
+                                    <td>@evenement.CategorieEvent</td>
+                                    <td>@evenement.Organisateur.Nom</td>
+                                    <td>@evenement.Prix</td>
+                                    <td>@evenement.NbPlacesRestantes/@evenement.NbTickets</td>
+                                    <td>@evenement.DateDebutEvent</td>
+                                    <td>@evenement.DateFinEvent</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Crowdfundings</div>
+                    <div class="card-body">
+                        <table id="listeCrowdfundings" class="table table-striped table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Catégorie</th>
+                                <th>Associaiton</th>
+                                <th>Montant</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            @foreach (var crowdfunding in Model.Crowdfundings)
+                            {
+                                <tr>
+                                    <td>@crowdfunding.Id</td>
+                                    <td>@crowdfunding.Nom</td>
+                                    <td>@crowdfunding.CategorieProjet</td>
+                                    <td>@crowdfunding.PorteurDuProjet.Nom</td>
+                                    <td>@crowdfunding.MontantProjet</td>
+                                    @* <td>@crowdfunding.NbPlacesRestantes/@crowdfunding.NbTickets</td> *@
+                                    <td>@crowdfunding.DateDebutProjet</td>
+                                    <td>@crowdfunding.DateFinProjet</td>
                                 </tr>
                             }
                         </table>
@@ -598,8 +663,12 @@
     
     <script>
          $(document).ready( function () {
-                    $('#listeAsso, #listeMembres, #listeAdhesion').DataTable();
-                } );
+                    $('#listeAssos, ' +
+                      '#listeMembres, ' +
+                      '#listeAdhesions, ' +
+                      '#listeEvenements, ' +
+                      '#listeCrowdfundings').DataTable();
+                });
     </script>
 }
 

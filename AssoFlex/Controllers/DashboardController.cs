@@ -24,7 +24,9 @@ namespace AssoFlex.Controllers
                 Admin = _dal.GetUtilisateur(User.FindFirst(ClaimTypes.NameIdentifier).Value),
                 Associations = _dal.GetAllAssociations(),
                 Utilisateurs = _dal.GetAllUtilisateurs(),
-                Adhesions = _dal.GetAllAdhesions()
+                Adhesions = _dal.GetAllAdhesions(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings()
             };
             return View(dVM);
         }
@@ -38,7 +40,7 @@ namespace AssoFlex.Controllers
         
         [Authorize(Roles = "Admin-Asso, Basic")]
         // GET
-        public IActionResult Profil(int id)
+        public IActionResult DashboardUser(int id)
         {
             return View();
         }

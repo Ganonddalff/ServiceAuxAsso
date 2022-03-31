@@ -11,5 +11,7 @@ namespace AssoFlex.Models
         public Utilisateur Utilisateur { get; set; }
         public DateTime DateDebut { get; set; }
         public DateTime DateFin { get; set; }
+        public int AdhesionArticleId { get; set; }
+        public AdhesionArticle AdhesionArticle { get; set; }
     }
 }

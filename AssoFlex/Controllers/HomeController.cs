@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,17 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult Index()
         {
-            HomeViewModel hvm = new HomeViewModel()
+            LayoutModelView hvm = new LayoutModelView()
             {
-                Associations = _dal.GetAllAssociations()
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings(),
+                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier))
             };
+            if (hvm.Panier == null)
+            {
+                hvm.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            }
             return View(hvm);
         }
     }

@@ -1,35 +1,31 @@
+using System;
 using System.Security.Claims;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssoFlex.Controllers
 {
-    public class SouscriptionController : Controller
+    public class PanierController : Controller
     {
         private IDal _dal;
 
-        public SouscriptionController()
+        public PanierController()
         {
             _dal = new Dal();
         }
-        
-        [Authorize]
         // GET
-        public IActionResult Index()
+        public IActionResult Index(int idUser)
         {
+            Panier panier = _dal.GetPanierByUserId(idUser);
+            panier.ArticlesPanier = _dal.GetArticlesPanierByPanierId(panier.Id);
             LayoutModelView lModelView = new LayoutModelView()
             {
                 Associations = _dal.GetAllAssociations(),
                 Evenements = _dal.GetAllEvenements(),
                 Crowdfundings = _dal.GetAllCrowdfundings(),
-                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier))
+                Panier = panier,
             };
-            if (lModelView.Panier == null)
-            {
-                lModelView.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
-            }
             return View(lModelView);
         }
     }
