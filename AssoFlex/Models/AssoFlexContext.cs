@@ -24,6 +24,7 @@ namespace AssoFlex.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+           
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 optionsBuilder.UseMySql("server=localhost;user id=guytri;password=aaaaa;database=Assoflex");
@@ -31,11 +32,13 @@ namespace AssoFlex.Models
             else
             {
                 IConfiguration configuration = new ConfigurationBuilder()
-                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-                optionsBuilder.UseMySql("server=localhost;user id=guytri;password=aaaaa;database=Assoflex");
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+                optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
             }
+
+
         }
 
     }
