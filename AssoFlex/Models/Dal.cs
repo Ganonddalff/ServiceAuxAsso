@@ -569,6 +569,206 @@ namespace AssoFlex.Models
                 this.GetAssociation(3),
                 this.CreateCollecte()
                 );
+            this.CreateCrowdfunding(
+                "Plus vite que jamais",
+                450000,
+                "Marseille",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "LinkedinLink",
+                450000,
+                "Metropolis",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+
+            this.CreateCrowdfunding(
+                "seizsoupapes",
+                450000,
+                "Viry chatillon",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+
+            this.CreateCrowdfunding(
+                "Departpour100",
+                450000,
+                "Montluçon",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "ChangeMyride",
+                450000,
+                "Houston",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+
+            this.CreateCrowdfunding(
+                "EmptyUrMind",
+                450000,
+                "Hong Kong",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Fountain KENtEK",
+                450000,
+                "Dubaï",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Les bails sont doux",
+                450000,
+                "Dubaï",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "JAVA au puits thon",
+                450000,
+                "Paris",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Trois frères",
+                450000,
+                "Paris",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Etoiles AC",
+                450000,
+                "Montpellier",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Pas de secret et pas d'histoires",
+                450000,
+                "Aix en provence",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Trop de polémiques",
+                450000,
+                "Toulouse",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Triple F",
+                450000,
+                "Guyane",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Izerdanlevaisso",
+                450000,
+                "Ottawa",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(1),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Rasso Sud",
+                450000,
+                "Montpellier",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(1),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Pleins Nord",
+                450000,
+                "Melun",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
+
+            this.CreateCrowdfunding(
+                "Momertuis",
+                450000,
+                "Evry",
+                "Construction",
+                new DateTime(2022, 12, 24),
+                new DateTime(2023, 11, 21),
+                this.GetAssociation(3),
+                this.CreateCollecte()
+                );
         }
         #endregion
 
