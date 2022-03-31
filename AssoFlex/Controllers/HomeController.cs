@@ -21,11 +21,12 @@ namespace AssoFlex.Controllers
                 Associations = _dal.GetAllAssociations(),
                 Evenements = _dal.GetAllEvenements(),
                 Crowdfundings = _dal.GetAllCrowdfundings(),
-                Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier))
+                
             };
-            if (hvm.Panier == null)
+            if (User.Identity.IsAuthenticated) /*hvm.Panier == null*/
             {
-                hvm.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+                hvm.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                // hvm.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
             }
             return View(hvm);
         }

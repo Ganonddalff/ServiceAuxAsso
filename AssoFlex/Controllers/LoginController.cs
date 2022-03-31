@@ -116,7 +116,7 @@ namespace AssoFlex.Controllers
         // GET
         public ActionResult Deconnexion()
         {
-            //_dal.DeletePanier();
+            _dal.DeletePanier(Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)));
             HttpContext.SignOutAsync();
             return Redirect("/");
         }
