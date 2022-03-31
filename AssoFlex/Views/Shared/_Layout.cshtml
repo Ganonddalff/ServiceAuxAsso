@@ -49,38 +49,40 @@
 </div>
 <!--- Footer -->
 <footer>
-	<div class="container-fluid padding">
-		<div class="row text-center">
-			<div class="col-md-4">
-				@* <img src="img/w3newbie.png"> *@
-				<hr class="light">
-				<p>+33 (0)7 55 17 23 16</p>
-				<p>contact@assoflex.com</p>
-				<p>31 rue de l'aurore</p>
-				<p>78100, Saint-Germain-en-Laye, France</p>
-			</div>
-			<div class="col-md-4">
-				<hr class="light">
-				<h5>Nos horaires</h5>
-				<hr class="light">
-				<p>Lundi, Mardi : 9h - 17h</p>
-				<p>Mercredi,Jeudi : 12h - 17h</p>
-				<p>Vendredi : Fermé</p>
-			</div>
-			<div class="col-md-4">
-				<hr class="light">
-				<h5>Ville</h5>
-				<hr class="light">
-				<p>78100, Saint-Germain-en-Laye, France</p>
-				<p>75000, Paris, France</p>
-				<p>51100 , Reims, France</p>
-			</div>
-			<div class="col-12">
-				<hr class="light-100">
-				<h5>&COPY; @DateTime.Now.Year - Assoflex.com</h5>
-			</div>
-		</div>
-	</div>
+    
+    <div class="container-fluid padding">
+        <div class="row text-center">
+
+            <div class="col-md-4">
+                @*<img src="~/assets/img/PNL.jpg"> *@
+                <hr class="light">
+                <p>+33 (0)7 55 17 23 16</p>
+                <p>contact@assoflex.com</p>
+                <p>31 rue de l'aurore</p>
+                <p>78100, Saint-Germain-en-Laye, France</p>
+            </div>
+            <div class="col-md-4">
+                <hr class="light">
+                <h5>Nos horaires</h5>
+                <hr class="light">
+                <p>Lundi, Mardi : 9h - 17h</p>
+                <p>Mercredi,Jeudi : 12h - 17h</p>
+                <p>Vendredi : Fermé</p>
+            </div>
+            <div class="col-md-4">
+                <hr class="light">
+                <h5>Ville</h5>
+                <hr class="light">
+                <p>78100, Saint-Germain-en-Laye, France</p>
+                <p>75000, Paris, France</p>
+                <p>51100 , Reims, France</p>
+            </div>
+            <div class="col-12">
+                <hr class="light-100">
+                <h5>&COPY; @DateTime.Now.Year - Assoflex.com</h5>
+            </div>
+        </div>
+    </div>
 </footer>
 
 <environment include="Development">
@@ -113,8 +115,7 @@
             <script src="~/lib/coreui/js/custom-tooltips.js"></script>
             <script src="~/lib/coreui/js/main.js"></script>*@
 
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+<script src="~/js/site.min.js" asp-append-version="true"></script>
 
 @RenderSection("Scripts", required: false) 
 

@@ -7,5 +7,7 @@ namespace AssoFlex.ViewModels
     {
         public List<Association> Associations { get; set; }
         public Panier Panier { get; set; }
+        public List<Evenement> Evenements  { get; set; }
+        public List<Crowdfunding> Crowdfunding { get; internal set; }
     }
 }

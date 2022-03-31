@@ -44,7 +44,88 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<form id="form"> 
-  <input type="search" id="query" name="q" placeholder="Search...">
-  <button>Search</button>
+<form id="form">
+    <input type="search" id="query" name="q" placeholder="Search...">
+    <button>Search</button>
 </form>
+
+
+<h1>Evenements à ne pas manquer</h1>
+<div class="container-fluid padding">
+    <div class="row padding">
+        @foreach (var evenement in Model.Evenements)
+        {
+            if (evenement.IdEvent <= 4)
+            {
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="~/assets/img/voie lactée.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"> @evenement.NomEvent</h4>
+                            <p class="card-text"></p>
+                            <a href=@Url.Action("Details", "Evenement", new { id = evenement.IdEvent }) class="btn btn-outline-secondary">Voir Détails</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+    <hr class="my-4">
+</div>
+
+<h1>Projets à ne pas manquer</h1>
+<div class="container-fluid padding">
+    <div class="row padding">
+        @foreach (var crowdfunding in Model.Crowdfunding)
+        {
+            if (crowdfunding.Id <= 4)
+            {
+                <div class="col-md-3">
+                    <div class="card">
+                       <img src="~/assets/img/projets.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"> @crowdfunding.Nom</h4>
+                            <p class="card-text"></p>
+                            <a href=@Url.Action("DetailsCrowdfunding", "Crowdfunding", new { id = crowdfunding.Id }) class="btn btn-outline-secondary">Voir Détails</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+    <hr class="my-4">
+</div>
+
+<h1>Ils nous font confiance</h1>
+<div class="container-fluid padding">
+    <div class="row padding">
+        @foreach (var association in Model.Associations)
+        {
+            if (association.Id <= 4)
+            {
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="~/assets/img/confiance.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h4 class="card-title"> @association.Nom</h4>
+                            <p class="card-text"></p>
+                            <a href=@Url.Action("DetailsAssociation", "Association", new { id = association.Id }) class="btn btn-outline-secondary"><bold>Voir Détails</bold></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+    <hr class="my-4">
+</div>
+
+
+
+
+
+
+
+
