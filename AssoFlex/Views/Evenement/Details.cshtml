@@ -1,4 +1,7 @@
+@using System.Security.Permissions
+@using Microsoft.Web.Helpers
 @model AssoFlex.ViewModels.LayoutModelView
+@using System.Web
 
 @{
     ViewBag.Title = "Détails ";
@@ -21,6 +24,13 @@
     <h6>@Model.Evenement.NbTickets places restantes</h6>
     <h6>@Model.Evenement.Prix €</h6>
     
+
+       <iframe width="560" 
+                height="315" 
+                src="http://www.youtube.com/embed/x7bgGwFPyb0" 
+                frameborder="0" 
+                allowfullscreen></iframe>
+
     @if (User.Identity.IsAuthenticated && @Model.Evenement.Organisateur.AdminAsso.Prenom == @User.Identity.Name)
     {
         <a href=@Url.Action("ModifEvent", "Evenement", new {id = @Model.Evenement.IdEvent})>Modifier cet évènement</a>

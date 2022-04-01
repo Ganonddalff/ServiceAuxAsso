@@ -18,7 +18,7 @@
 @if (User.IsInRole("Admin-Asso"))
 {
     <br/>
-    <a href=@Url.Action("CreerEvent")>Créer un évènement</a>
+    <a href=@Url.Action("CreerEvent","Evenement")>Créer un évènement</a>
 }
 @if (User.Identity.IsAuthenticated.Equals(false))
 {
