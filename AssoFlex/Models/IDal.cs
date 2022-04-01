@@ -35,7 +35,8 @@ namespace AssoFlex.Models
         List<Association> GetAllAssociations();
         public List<IWidgetAsso> GetAssociationsToWidget();
         Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso,
-            string description="");
+
+            string categorie, string description = "");
         void UpdateAssociation(int id, string nom, string numSiret, byte[] logoAsso,
             string description);
         void DeleteAssociation(int id);

@@ -118,24 +118,29 @@ namespace AssoFlex.Models
                 "111111-111",
                 2,
                 ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
-                "Association des Gabonais de Poitiers"
-            );
+                "13",
+                "Association des Gabonais de Poitiers");
             this.CreateAssociation(
                 "ASTEC",
                 "222222-222",
                 3,
                 ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
+                "5",
                 "L'Association pour la Science et la " +
                 "Transmission de l'Esprit Critique a pour principal" +
                 " projet la chaîne YouTube la Tronche en Biais."
-            );
+                );
             this.CreateAssociation(
                 "Tête en l'air",
                 "333333-333",
                 4,
                 ImageToByteArray(AbsolutePath + "logos/default-logo.png"),
+                "2",
                 "Depuis 2006, nous avons pour objectif de faire partager à un large public notre passion. " +
                 "A ce titre, nos membres se déplacent avec leur matériel dans les écoles, centres de loisirs, associations," +
+                " soirées privées etc."
+                );
+            
                 " soirées privées etc."
             );
             this.CreateAssociation(
