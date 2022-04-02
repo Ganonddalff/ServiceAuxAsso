@@ -1,17 +1,19 @@
 @using System.Security.Claims
 @model  AssoFlex.Models.IWidgetCF
 
-
-
-<div class="card col-3 m-5">
+<div class="card col-3 m-5" style="border-radius: 10px">
     <div class="@Model.CategorieProjet">
-        <div class="card-header">
-            @Model.Nom
+        <div class="card-header" style="background-color: #ffffff">
+          <img src="~/assets/img/@Model.ImageCrowdfunding" class="card-img-top">
         </div>
         <div class="card-body">
-            @Html.Partial(string.Concat(new[] { "Widget", "/", "_SubWidgetCF" }), @Model.SubWidgetCF)
+            @Model.Nom
+            @Html.Partial(string.Concat(new[]
+            {
+                "Widget", "/", "_SubWidgetCF"
+            }), @Model.SubWidgetCF)
         </div>
-        <div class="card-footer">
+        <div class="card-footer" style="background-color: #ffffff">
             <a href=@Url.Action("DetailsCrowdfunding", "Crowdfunding", new {id = @Model.Id}) class="btn btn-outline-primary">
                 Voir Détails
             </a>

@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
@@ -17,21 +18,26 @@ namespace AssoFlex.Controllers
         }
 
         // GET
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
+            List<IWidgetEvent> widgetEvents = _dal.GetEventToWidget();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                widgetEvents = widgetEvents
+                    .Where(s => s.NomEvent.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
             LayoutModelView lModelView = new LayoutModelView()
             {
                 Associations = _dal.GetAllAssociations(),
                 Evenements = _dal.GetAllEvenements(),
                 Crowdfundings = _dal.GetAllCrowdfundings(),
                 WidgetsAssos = _dal.GetAssociationsToWidget(),
-                WidgetsEvents = _dal.GetEventToWidget(),
+                WidgetsEvents = widgetEvents,
                 WidgetsCrowdfundings = _dal.GetCrowdfundingsToWidget(),
             };
             if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
             {
                 lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                // lModelView.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
             }
             foreach (var monEvent in lModelView.Evenements)
             {
@@ -93,6 +99,7 @@ namespace AssoFlex.Controllers
                     eventUpdate.DateDebutEvent, 
                     eventUpdate.DateFinEvent, 
                     eventUpdate.LieuEvent,
+                    eventUpdate.VisuelEvent,
                     eventUpdate.CategorieEvent, 
                     eventUpdate.Prix);
                 return RedirectToAction("Index");
@@ -124,7 +131,7 @@ namespace AssoFlex.Controllers
                     orga, evenement.NomEvent,
                     evenement.NbTickets, 
                     evenement.DateDebutEvent, evenement.DateFinEvent,
-                    evenement.LieuEvent, evenement.CategorieEvent, evenement.Prix,
+                    evenement.LieuEvent, evenement.VisuelEvent,evenement.CategorieEvent,evenement.Prix,
                     evenement.Description);
                 return RedirectToAction("Index");
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace AssoFlex.Models
 {
@@ -8,11 +9,13 @@ namespace AssoFlex.Models
     {
         public int Id { get; set; }
         public string Nom { get; set; }
+
         public int MontantProjet { get; set; }
         public DateTime DateCreation { get; set; }
         public DateTime DateDebutProjet { get; set; }
         public DateTime DateFinProjet { get; set; }
         public string LieuProjet { get; set; }
+        [MaxLength(14)]
         public string CategorieProjet { get; set; }
         public bool Statut { get; set; }
         
@@ -23,6 +26,8 @@ namespace AssoFlex.Models
         public Collecte Collecte { get; set; }
 
         public Association PorteurDuProjet { get; set; }
+
+        public string ImageCrowdfunding { get; set; }
         public string Description { get; set; }
         [NotMapped]
         public ISubWidgetCF SubWidgetCF { get; set; }

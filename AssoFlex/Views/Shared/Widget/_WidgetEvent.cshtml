@@ -1,16 +1,19 @@
 @using System.Security.Claims
 @model  AssoFlex.Models.IWidgetEvent
 
-<div class="card col-3 m-5">
+<div class="card col-3 m-5" style="border-radius: 10px">
     <div class="@Model.LieuEvent">
-        <div class="card-header">
-            @Model.NomEvent
+        <div class="card-header" style="background-color: #ffffff">
+           <img src="~/assets/img/@Model.VisuelEvent" class="card-img-top">
         </div>
         <div class="card-body">
-            @Html.Partial(string.Concat(new[] { "Widget", 
-                "/", "_SubWidgetEvent" }), @Model.SubWidgetEvent)
+            @Model.NomEvent
+            @Html.Partial(string.Concat(new[]
+            {
+                "Widget", "/", "_SubWidgetEvent"
+            }), @Model.SubWidgetEvent)
         </div>
-        <div class="card-footer">
+        <div class="card-footer" style="background-color: #ffffff">
             <a href=@Url.Action("Details","Evenement", new {id=@Model.IdEvent}) class="btn btn-outline-primary">Voir Détails</a>
             @if (User.Identity.IsAuthenticated)
             {

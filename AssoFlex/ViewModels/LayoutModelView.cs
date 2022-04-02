@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AssoFlex.Controllers;
 using AssoFlex.Models;
 
 namespace AssoFlex.ViewModels
@@ -13,7 +14,10 @@ namespace AssoFlex.ViewModels
         }
         
         public Evenement Evenement { get; set; }
+        public Association Association { get; set; }
         public ContributionViewModel ContributionViewModel { get; set; }
+        
+        public CheckoutController CheckoutController { get; set; }
         public List<Association> Associations { get; set; }
         public List<Evenement> Evenements { get; set; }
         public List<Crowdfunding> Crowdfundings { get; set; }

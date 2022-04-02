@@ -12,7 +12,9 @@ namespace AssoFlex.Models
     public class Billetterie
     {
         public int Id { get; set; }
+        [MaxLength(30)]
         public string Nom { get; set; }
+        [MaxLength(25)]
         public string Prenom { get; set; }
         public int EvenementId { get; set; }
         public Evenement Evenement { get; set; }

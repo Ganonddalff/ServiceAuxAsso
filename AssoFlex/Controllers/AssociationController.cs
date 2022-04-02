@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AssoFlex.Models;
@@ -18,31 +20,46 @@ namespace AssoFlex.Controllers
         }
         
         // GET
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
+            List<IWidgetAsso> widgetsAssos = _dal.GetAssociationsToWidget();;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                widgetsAssos = _dal.GetAssociationsToWidget().Where(s => s.Nom.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
             LayoutModelView lModelView = new LayoutModelView()
             {
-                Associations = _dal.GetAllAssociations(),
+                Associations = _dal.GetAllAssociations(), 
                 Evenements = _dal.GetAllEvenements(),
                 Crowdfundings = _dal.GetAllCrowdfundings(),
                 
-                WidgetsAssos = _dal.GetAssociationsToWidget(),
+                WidgetsAssos = widgetsAssos,
                 WidgetsEvents = _dal.GetEventToWidget(),
                 WidgetsCrowdfundings = _dal.GetCrowdfundingsToWidget(),
             };
             if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
             {
                 lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                // lModelView.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
             }
+            
             return View(lModelView);
+        }
+        
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + searchString;
         }
         
         // GET
         public ActionResult DetailsAssociation(int id)
         {
             Association association = _dal.GetAssociation(id);
-            return View(association);
+            LayoutModelView layoutModelView = new LayoutModelView()
+            {
+                Association = association
+            };
+            return View(layoutModelView);
         }
         
         public ActionResult AddAdhesion(int idAsso, int idUser, int adhesionArticleId)
@@ -99,7 +116,11 @@ namespace AssoFlex.Controllers
             if (ModelState.IsValid)
             {
                 this._dal.UpdateAssociation(
-                    association.Id, association.Nom, association.NumSiret, association.AssoLogo,
+                    association.Id, 
+                    association.Nom, 
+                    association.NumSiret,association.AdminAssoId,
+                    association.AssoLogo, 
+                    association.CategorieAsso,
                     association.Description);
                 return RedirectToAction("DashboardAdmin", "Dashboard");
 
@@ -112,5 +133,10 @@ namespace AssoFlex.Controllers
             Association asso = _dal.GetAssociation(id);
             return File(asso.AssoLogo, "image/png");
         }
+
+        // public IActionResult SearchAsso()
+        // {
+        //     throw new NotImplementedException();
+        // }
     }
 }
