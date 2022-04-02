@@ -84,8 +84,19 @@ namespace AssoFlex.Controllers
         //GET
         public ActionResult ModifEvent(int id)
         {
-            Evenement evenement = _dal.GetEvenement(id);
-            return View(evenement);
+            LayoutModelView lModelView = new LayoutModelView()
+            {
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings(),
+                Evenement = _dal.GetEvenement(id)
+
+            };
+            if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
+            {
+                lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            }
+            return View(lModelView);
         }
 
         [HttpPost]
@@ -117,7 +128,19 @@ namespace AssoFlex.Controllers
         //GET
         public ActionResult CreerEvent()
         {
-            return View();
+            LayoutModelView lModelView = new LayoutModelView()
+            {
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings(),
+               
+
+            };
+            if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
+            {
+                lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            }
+            return View(lModelView);
         }
         
         [HttpPost]

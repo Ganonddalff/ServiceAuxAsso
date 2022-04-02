@@ -59,9 +59,7 @@
 				    <li class="nav-item dropdown d-md-down-none panier" id="panierDropdown">
 					    <a class="nav-link" href=@Url.Action("Index","Panier", new {idUser=User.FindFirst(ClaimTypes.NameIdentifier).Value}) role="button">
 						    <i class="icon-basket-loaded"></i>
-						    @*
 						    <span class="badge badge-pill badge-danger">@Model.GetNombreArticlePanier(User.FindFirst(ClaimTypes.NameIdentifier).Value)</span>
-					    *@
 					    </a>
 				    </li>
 				}

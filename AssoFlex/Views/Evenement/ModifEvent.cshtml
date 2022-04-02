@@ -1,7 +1,7 @@
-@model AssoFlex.Models.Evenement
+@model AssoFlex.ViewModels.LayoutModelView
 @{
      
-    Layout = null;
+    Layout = "_Layout";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +38,7 @@
 
 
 <body>
-<h4>Modifier @Model.NomEvent</h4>
+<h4>Modifier @Model.Evenement.NomEvent</h4>
 
 <div class="container">
 
@@ -52,12 +52,12 @@
         <div >
             @using (Html.BeginForm())
             {
-                <div>@Html.HiddenFor(model =>model.IdEvent)</div>
+                <div>@Html.HiddenFor(model =>model.Evenement.IdEvent)</div>
                             
                 <div class="form-floating mb-3">
                     @*@Html.Label("Nom de l'évènement : ")*@
-                    @Html.TextBoxFor(model => model.NomEvent, new {@class = "form-control", placeholder = @Model.NomEvent})
-                    @Html.ValidationMessageFor(model => model.NomEvent)
+                    @Html.TextBoxFor(model => model.Evenement.NomEvent, new {@class = "form-control", placeholder = @Model.Evenement.NomEvent})
+                    @Html.ValidationMessageFor(model => model.Evenement.NomEvent)
                 </div>
                 <br/>
                             
@@ -66,49 +66,57 @@
                         
                         
                     @Html.Label("  Type d'évènement : ")
-                    <select asp-for="@Model.CategorieEvent" asp-items="Html.GetEnumSelectList<EventTypes>()"> </select>
-                    @Html.ValidationMessageFor(model => model.CategorieEvent)
+                    <select asp-for="@Model.Evenement.CategorieEvent" asp-items="Html.GetEnumSelectList<EventTypes>()"> </select>
+                    @Html.ValidationMessageFor(model => model.Evenement.CategorieEvent)
                     <br/>
                 </div>
 
                 <br/>
                 <div class="form-floating mb-3">
                     @*@Html.Label("Lieu : ")*@
-                    @Html.TextBoxFor(model => model.LieuEvent, new {@class = "form-control", placeholder = @Model.LieuEvent})
-                    @Html.ValidationMessageFor(model => model.LieuEvent)
+                    @Html.TextBoxFor(model => model.Evenement.LieuEvent, new {@class = "form-control", placeholder = @Model.Evenement.LieuEvent})
+                    @Html.ValidationMessageFor(model => model.Evenement.LieuEvent)
                 </div>
                 <br/>
                 <div class="date-field">
                     @*
                             @Html.Label("Date et heure de début de l'évènement : ")
                             *@
-                    @Html.TextBoxFor(model => model.DateDebutEvent, new {@class = "form-control datepick",@type="text",@id="datepick1", placeholder = @Model.DateDebutEvent})
-                    @Html.ValidationMessageFor(model => model.DateDebutEvent)
+                    @Html.TextBoxFor(model => model.Evenement.DateDebutEvent, new {@class = "form-control datepick",@type="text",@id="datepick1", placeholder = @Model.Evenement.DateDebutEvent})
+                    @Html.ValidationMessageFor(model => model.Evenement.DateDebutEvent)
                 </div>
                 <br/>
                 <div class="date-field">
                     @*
                             @Html.Label("Date et heure de fin : ")
                             *@
-                    @Html.TextBoxFor(model => model.DateFinEvent, new {@class = "form-control datepick",@type="text",@id="datepick2", placeholder = @Model.DateFinEvent})
-                    @Html.ValidationMessageFor(model => model.DateFinEvent)
+                    @Html.TextBoxFor(model => model.Evenement.DateFinEvent, new {@class = "form-control datepick",@type="text",@id="datepick2", placeholder = @Model.Evenement.DateFinEvent})
+                    @Html.ValidationMessageFor(model => model.Evenement.DateFinEvent)
                 </div>
                 <br/>
                 <div class="form-floating mb-3">
                     @*
                             @Html.Label("Nombre de places disponibles à la vente : ")
                             *@
-                    @Html.TextBoxFor(model => model.NbTickets, new {@class = "form-control", placeholder = @Model.DateFinEvent})
-                    @Html.ValidationMessageFor(model => model.NbTickets)
+                    @Html.TextBoxFor(model => model.Evenement.NbTickets, new {@class = "form-control", placeholder = @Model.Evenement.DateFinEvent})
+                    @Html.ValidationMessageFor(model => model.Evenement.NbTickets)
                 </div>
                 <br/>
 
                 <div class="form-floating mb-3">
                     @Html.Label("Prix (€) : ")
-                    @Html.TextBoxFor(model => model.Prix, new {@class = "form-control", placeholder = "ex : 15 "})
-                    @Html.ValidationMessageFor(model => model.Prix)
+                    @Html.TextBoxFor(model => model.Evenement.Prix, new {@class = "form-control", placeholder = "ex : 15 "})
+                    @Html.ValidationMessageFor(model => model.Evenement.Prix)
                             
                 </div>
+                
+                <div class="form-floating mb-3">
+                    @Html.Label("Votre vidéo : ")
+                    @Html.TextBoxFor(model => model.Evenement.ytURL, new {@class = "form-control", placeholder = @Model.Evenement.ytURL})
+                    @Html.ValidationMessageFor(model => model.Evenement.ytURL)
+                            
+                </div>
+
 
 
 
