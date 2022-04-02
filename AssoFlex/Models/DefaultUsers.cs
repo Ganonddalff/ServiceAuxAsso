@@ -20,7 +20,7 @@ namespace AssoFlex.Models
                     "Tirel",
                     "19, rue des petites murailles",
                     0667127014,
-                    "admin",
+                    "admin@admin.admin",
                     _dal.EncodeMD5("admin"),
                     "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin"
                 );

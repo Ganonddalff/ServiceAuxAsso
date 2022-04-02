@@ -7,7 +7,7 @@
     ViewBag.Title = "Détails ";
     Layout = "_Layout";
 }
-<div class="container p-10 my-10 bg-dark text-white text-center">
+<div class="container p-10 my-10 text-center">
     <h2>@Model.Evenement.NomEvent</h2>
     <br/>
     <h6>Type : @Enum.GetName(typeof(EventTypes),Convert.ToInt32(Model.Evenement.CategorieEvent))</h6>
@@ -25,11 +25,14 @@
     <h6>@Model.Evenement.Prix €</h6>
     
 
-       <iframe width="560" 
-                height="315" 
-                src=@Model.Evenement.ytURL 
-                frameborder="0" 
-                allowfullscreen></iframe>
+    <iframe width="560"
+            height="315"
+            src=@Model.Evenement.ytURL
+            frameborder="0"
+            allowfullscreen>
+        
+    </iframe>
+</div>
 
     @if (User.Identity.IsAuthenticated && @Model.Evenement.Organisateur.AdminAsso.Prenom == @User.Identity.Name)
     {
@@ -39,4 +42,3 @@
                                                                                                
     }
     
-</div>

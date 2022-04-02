@@ -43,7 +43,20 @@ namespace AssoFlex.Controllers
 
         public ActionResult CreateCrowdfunding()
         {
-            return View();
+            LayoutModelView lModelView = new LayoutModelView()
+            {
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings(),
+                
+                
+
+            };
+            if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
+            {
+                lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            }
+            return View(lModelView);
         }
 
         [HttpPost]
@@ -124,24 +137,33 @@ namespace AssoFlex.Controllers
         public ActionResult DetailsCrowdfunding(int id)
         {
             Crowdfunding monCF = _dal.GetCrowdfunding(id);
-            ContributionViewModel cvm = new ContributionViewModel()
+            LayoutModelView layoutModelView = new LayoutModelView()
             {
                 Collecte = _dal.GetCollecte(monCF.Id),
                 Crowdfunding = _dal.GetCrowdfunding(id)
 
             };
-            LayoutModelView layoutModelView = new LayoutModelView()
-            {
-                ContributionViewModel = cvm
-            };
+
             
             return View(layoutModelView);
         }
 
         public ActionResult UpdateCrowdfunding(int id)
         {
-            Crowdfunding monCF = _dal.GetCrowdfunding(id);
-            return View(monCF);
+            LayoutModelView lModelView = new LayoutModelView()
+            {
+                Associations = _dal.GetAllAssociations(),
+                Evenements = _dal.GetAllEvenements(),
+                Crowdfundings = _dal.GetAllCrowdfundings(),
+                Crowdfunding  = _dal.GetCrowdfunding(id)
+
+            };
+            if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
+            {
+                lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            }
+
+            return View(lModelView);
         }
 
         [HttpPost]
