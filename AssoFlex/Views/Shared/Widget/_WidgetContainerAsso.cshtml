@@ -4,6 +4,5 @@
 
 @foreach (var wm in Model.WidgetsAssos)
 {
-    
     @Html.Partial(string.Concat(new[] { "Widget", "/", "_WidgetAsso" }), wm)
 }

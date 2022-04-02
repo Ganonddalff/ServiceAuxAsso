@@ -1,4 +1,4 @@
-@model Association
+@model AssoFlex.ViewModels.LayoutModelView
 @{
     Layout = "_Layout";
 }
@@ -59,7 +59,7 @@
             <div class="form-row"> 
               <div class="form-group col-md-4"></div>  
               <div class="form-group col-md-4"> 
-                <select asp-for="@Model.CategorieAsso" asp-items="Html.GetEnumSelectList<CategoriesAsso>()"> </select>
+                <select asp-for="@Model.Association.CategorieAsso" asp-items="Html.GetEnumSelectList<CategoriesAsso>()"> </select>
               </div>
               <div class="form-group col-md-4"></div> 
             </div>

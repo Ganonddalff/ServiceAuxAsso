@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using AssoFlex.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -14,8 +16,14 @@ namespace AssoFlex.Controllers
             this._dal = new Dal();
         }
         // GET
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
+            List<IWidgetCF> widgetCfs = _dal.GetCrowdfundingsToWidget();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                widgetCfs = widgetCfs.Where(s => s.Nom.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
             LayoutModelView lModelView = new LayoutModelView()
             {
                 Associations = _dal.GetAllAssociations(),
@@ -24,12 +32,11 @@ namespace AssoFlex.Controllers
                 
                 WidgetsAssos = _dal.GetAssociationsToWidget(),
                 WidgetsEvents = _dal.GetEventToWidget(),
-                WidgetsCrowdfundings = _dal.GetCrowdfundingsToWidget(),
+                WidgetsCrowdfundings = widgetCfs,
             };
             if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
             {
                 lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                // lModelView.Panier = _dal.CreatePanier(_dal.GetUtilisateur(User.FindFirstValue(ClaimTypes.NameIdentifier)));
             }
             return View(lModelView);
         }
@@ -55,6 +62,7 @@ namespace AssoFlex.Controllers
                         nouveauCrowdfunding.DateFinProjet,
                         Porteur,
                         _dal.CreateCollecte(),
+                        nouveauCrowdfunding.ImageCrowdfunding,
                         nouveauCrowdfunding.Description
                 );
                 
@@ -147,8 +155,10 @@ namespace AssoFlex.Controllers
                     cfToUpdate.MontantProjet,
                     cfToUpdate.LieuProjet,
                     cfToUpdate.CategorieProjet,
-                    cfToUpdate.DateFinProjet
-                    );
+                    cfToUpdate.DateFinProjet,
+                    cfToUpdate.ImageCrowdfunding,
+                    cfToUpdate.Description
+                );
                return RedirectToAction("Index");
             }
 

@@ -22,7 +22,7 @@ namespace AssoFlex.Models
         public DateTime DateDebutEvent { get; set; }
         public int NbTickets { get; set; }
         public int NbPlacesRestantes { get; set; }
-        
+        public string VisuelEvent { get; set; }
         public int Prix { get; set; }
         [DataType(DataType.Date)]
         public DateTime DateFinEvent { get; set; }
@@ -40,14 +40,9 @@ namespace AssoFlex.Models
 
     public enum EventTypes 
     {
-        Education = 1,
-        Sport = 2,
-        Humanitaire = 3,
-        Environnement = 4,
-        Culture = 5,
-        Santé = 6,
-        Spectacle = 7,
-        Conférence = 8,
-        Séminaire = 9
+        Spectacle = 1,
+        Conference = 2,
+        Seminaire = 3,
+        Manifestation = 4
     }
 }
