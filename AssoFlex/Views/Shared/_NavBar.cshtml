@@ -32,16 +32,19 @@
 			    {
 				    <div class="nav-item dropdown">
 					    <a class="" data-toggle="dropdown" href="#" role="button" id="profilDropdown" aria-haspopup="true" aria-expanded="False">
-						    <b>Bonjour @User.Identity.Name</b>
 						    <img src="~/FileSystem/@User.FindFirstValue("ProfilImage")" alt="userAvatar" class="rounded-circle" width="50px" height="40px"/>
 					    </a>
 					    <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="profilDropdown">
+						    <div class="dropdown-header text-center">
+                                <strong>Bonjour @User.Identity.Name</strong>
+                            </div>
 						    @if (User.IsInRole("Admin"))
 						    {
 							    <a class="dropdown-item" href=@Url.Action("DashboardAdmin", "Dashboard")>
 								    <i class="fa fa-home"></i> Espace Personnel
 							    </a>
-						    }else if (User.IsInRole("Admin-Asso"))
+						    }
+						    else if (User.IsInRole("Admin-Asso"))
 						    {
 							    <a class="dropdown-item" href=@Url.Action("DashboardUser", "Dashboard", new {id = User.FindFirst(ClaimTypes.NameIdentifier).Value})>
 								    <i class="fa fa-home"></i> Espace Personnel

@@ -1,15 +1,15 @@
 @model AssoFlex.Models.ISubWidgetCF
 
-
-
-<div class="card-body ">
+<div>  @*class="card-body "*@
     <div>
-        <div style="float: left">
-            @Html.LabelFor(p => p.Nom, @Model.Nom)
+        <div > @*style="float: left"*@
+            @Model.Nom
+            @* @Html.LabelFor(p => p.Nom, @Model.Nom) *@
         </div>
     </div>
-    <div@* style="clear: both"*@>
+    <div> @* style="clear: both"*@
+        @Model.Description
         @*<a>@Model.Collecte.MontantCollecte / @Model.MontantProjet</a>*@
-        @Html.LabelFor(p=>p.Description, @Model.Description)
+        @* @Html.LabelFor(p=>p.Description, @Model.Description) *@
     </div>
 </div>

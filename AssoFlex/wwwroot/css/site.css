@@ -13,3 +13,64 @@ for details on configuring this project to bundle and minify static web assets. 
    color: white;
 }
 
+/*--- Description association (voir présentation) --*/
+#description-association {
+    padding: 7%;
+ 
+}
+.description-assoflex::first-letter {font-size:150%}
+.description-assoflex {
+    text-indent: 5%;
+}
+body {
+    background-color: #ffffff;
+}
+#taille{
+    font-size: 20px;
+}
+
+.search-sec,
+.search-sec-event,
+.search-sec-asso,
+.search-sec-projet{
+    padding: 2rem;
+}
+.search-slt{
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    height: calc(4rem + 2px) !important;
+    border-radius:10px;
+}
+.wrn-btn{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: capitalize;
+    height: calc(4rem + 2px) !important;
+    border-radius:0;
+}
+@media (min-width: 992px){
+    .search-sec,
+    .search-sec-event,
+    .search-sec-asso,
+    .search-sec-projet{
+        position: relative;
+        top: -114px;
+        background: rgba(26, 70, 104, 0.51);
+    }
+}
+
+@media (max-width: 992px){
+    .search-sec,
+    .search-sec-event,
+    .search-sec-asso,
+    .search-sec-projet{
+        background: #1A4668;
+    }
+}

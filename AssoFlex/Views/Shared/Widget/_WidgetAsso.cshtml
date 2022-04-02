@@ -1,13 +1,11 @@
 @using System.Security.Claims
 @model  AssoFlex.Models.IWidgetAsso
 
-
-
-<div class="card col-3 m-5">
+<div class="card col-3 m-5" style="border-radius: 10px">
     <div class="@Model.AdminAsso.Prenom">
  
-        <div class="card-header">
-            @Model.Nom
+        <div class="card-header" style="background-color: #ffffff">
+           <img src="~/assets/logos/@Model.AssoLogo" class="card-img-top">
         </div>
         <div class="card-body">
  
@@ -15,7 +13,7 @@
                 "/", "_SubWidgetAsso" }), @Model.SubWidgetAsso)
  
         </div>
-        <div class="card-footer">
+        <div class="card-footer" style="background-color: #ffffff">
             <a href=@Url.Action("DetailsAssociation","Association", new {id=@Model.Id}) class="btn btn-outline-primary">Voir Détails</a>
             @if (User.Identity.IsAuthenticated)
             {

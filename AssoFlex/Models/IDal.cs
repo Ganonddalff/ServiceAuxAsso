@@ -34,10 +34,10 @@ namespace AssoFlex.Models
         int GetAssociationId(int idAdmin);
         List<Association> GetAllAssociations();
         public List<IWidgetAsso> GetAssociationsToWidget();
-        Association CreateAssociation(string nom, string numSiret, int idGerant, byte[] logoAsso,
-            string description="");
-        void UpdateAssociation(int id, string nom, string numSiret, byte[] logoAsso,
-            string description);
+        Association CreateAssociation(string nom, string numSiret, int idGerant, string logoAsso,
+            string categorie, string description = "");
+        void UpdateAssociation(int id, string nom, string numSiret, int idGerant, string logoAsso,
+            string categorie, string description);
         void DeleteAssociation(int id);
 
         #endregion
@@ -73,12 +73,10 @@ namespace AssoFlex.Models
         public List<IWidgetCF> GetCrowdfundingsToWidget();
         Crowdfunding GetCrowdfunding(int id);
         Crowdfunding GetCfCollecte(int id);
-        // Crowdfunding CreateCrowdfunding(string nouveauCrowdfundingNom, int nouveauCrowdfundingMontantProjet, string nouveauCrowdfundingLieuProjet, string nouveauCrowdfundingCategorieProjet, DateTime nouveauCrowdfundingDateDebutProjet, DateTime nouveauCrowdfundingDateFinProjet, Association porteur, Collecte createCollecte);
-
         public Crowdfunding CreateCrowdfunding(string Nom, int Montant, string LieuProjet, string CategorieProjet, DateTime DateDebut,
-            DateTime DateFin, Association Porteur, Collecte collecte, string description);
+            DateTime DateFin, Association Porteur, Collecte collecte, string image, string description);
         Crowdfunding UpdateCrowdfunding(int id, string nom, int montant, string lieuProjet, 
-            string categorieProjet, DateTime dateFin);
+            string categorieProjet, DateTime dateFin, string image, string description);
         void DeleteCrowdfunding(int id);
         
         #endregion
@@ -127,13 +125,11 @@ namespace AssoFlex.Models
         public List<IWidgetEvent> GetEventToWidget();
         Evenement GetEvenement(int id);
         EvenementViewModel GetEvenementViewModel(int id);
-        // Evenement CreateEvenement(Association organisateur, string evenementNomEvent, int evenementNbTickets, DateTime evenementDateDebutEvent, DateTime evenementDateFinEvent, string evenementLieuEvent, string evenementCategorieEvent, int evenementPrix);
-
         public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
-            string Lieu, string categorie, int prix, string description);
+            string Lieu, string visuelEvent,string categorie, int prix, string description);
         void DeleteEvenement(int id);
         Evenement UpdateEvenement(int id, string nom, int nbTicket, 
-            DateTime dateDebut, DateTime dateFin, string lieu, string categorie, int prix);
+            DateTime dateDebut, DateTime dateFin, string lieu, string visuelEvent,string categorie, int prix);
 
         #endregion
         
@@ -182,5 +178,6 @@ namespace AssoFlex.Models
         
         List<ArticlePanier> GetArticlesPanierByPanierId(int panierId);
         AdhesionArticle GetAdhesionArticle(int i);
+        string EncodeMD5(string s);
     }
 }

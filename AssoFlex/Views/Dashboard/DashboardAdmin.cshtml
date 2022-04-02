@@ -660,15 +660,20 @@
     <script src="~/lib/chart.js/dist/Chart.min.js"></script>
     <script src="~/lib/coreui/js/custom-tooltips.min.js"></script>
     <script src="~/lib/coreui/js/main.js"></script>
-    
+
     <script>
-         $(document).ready( function () {
-                    $('#listeAssos, ' +
-                      '#listeMembres, ' +
-                      '#listeAdhesions, ' +
-                      '#listeEvenements, ' +
-                      '#listeCrowdfundings').DataTable();
-                });
+        $(document).ready(function (){
+            $(".table").DataTable();
+        })
+         // $(document).ready( function () {
+         //    $('#listeAssos, ' +
+         //    '#listeMembres, ' +
+         //    '#listeAdhesions' ).DataTable();
+         // });
+         // $(document).ready(function (){
+         //    $('#listeEvenements, ' +
+         //    '#listeCrowdfundings').DataTable();
+         // })
     </script>
 }
 

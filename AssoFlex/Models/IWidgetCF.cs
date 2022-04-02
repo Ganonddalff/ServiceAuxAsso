@@ -21,6 +21,7 @@ namespace AssoFlex.Models
         public Collecte Collecte { get; set; }
 
         public Association PorteurDuProjet { get; set; }
+        public string ImageCrowdfunding { get; set; }
         public string Description { get; set; }
         public ISubWidgetCF SubWidgetCF { get; set; }
     }
