@@ -33,6 +33,7 @@
 
     @if (User.Identity.IsAuthenticated && @Model.Evenement.Organisateur.AdminAsso.Prenom == @User.Identity.Name)
     {
+        <br/>
         <a href=@Url.Action("ModifEvent", "Evenement", new {id = @Model.Evenement.IdEvent})>Modifier cet évènement</a>
         <a href=@Url.Action("SupprEvent","Evenement",new {id = @Model.Evenement.IdEvent})>Supprimer cet évènement</a>                                                                                       
                                                                                                
