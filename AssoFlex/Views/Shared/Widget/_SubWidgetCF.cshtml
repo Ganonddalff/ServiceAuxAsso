@@ -1,15 +1,22 @@
+@using System.Reflection.Emit
 @model AssoFlex.Models.ISubWidgetCF
 
-<div>  @*class="card-body "*@
+<div class="text-center">  @*class="card-body "*@
     <div>
         <div > @*style="float: left"*@
-            @Model.Nom
-            @* @Html.LabelFor(p => p.Nom, @Model.Nom) *@
+      <a>     @Html.Label("Catégorie : ") @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(@Model.CategorieProjet))</a> 
         </div>
     </div>
     <div> @* style="clear: both"*@
-        @Model.Description
-        @*<a>@Model.Collecte.MontantCollecte / @Model.MontantProjet</a>*@
-        @* @Html.LabelFor(p=>p.Description, @Model.Description) *@
+            @{
+                int MaxDesc = 50;
+                @if (Model.Description.Length > MaxDesc)
+                {
+                    Model.Description = Model.Description.ToString().Substring(0, MaxDesc)+"...";
+                }
+                <a> A propos : <br/> </a>
+                <a>@Html.DisplayFor(m => Model.Description) <br/></a>
+                <a>@Html.Label("Fonds collectés :") &nbsp; @Html.DisplayFor(m => m.Collecte.MontantCollecte) @Html.Label(" / ") @Html.DisplayFor(m => m.MontantProjet)</a>
+            }
     </div>
 </div>

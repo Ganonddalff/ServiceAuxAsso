@@ -7,6 +7,13 @@
         </div>
     </div>
     <div @*style="clear: both"*@>
+        @{
+            int MaxDesc = 50;
+            @if (Model.Description.Length > MaxDesc)
+            {
+                Model.Description = Model.Description.ToString().Substring(0, MaxDesc)+"...";
+            }
+        }
         @Model.Description
     </div>
 </div>

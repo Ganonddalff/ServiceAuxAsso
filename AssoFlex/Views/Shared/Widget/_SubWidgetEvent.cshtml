@@ -2,14 +2,23 @@
 
 
 
-<div > @*class="card-body "*@
+<div > 
     <div>
-        <div > s@*tyle="float: left"*@
-            @Html.LabelFor(p => p.Description, @Model.Description)
+        <div >
+            @{
+                int MaxDesc = 50;
+                @if (Model.Description.Length > MaxDesc)
+                {
+                    Model.Description = Model.Description.ToString().Substring(0, MaxDesc) + "...";
+                }
+                @Html.LabelFor(p => p.Description, @Model.Description)
+            }
+            
         </div>
     </div>
-    <div > @*style="clear: both"*@
-        @Model.Prix
-        @Model.DateDebutEvent
+    <div > 
+        <a> @Model.Prix €</a>
+        <a><br/></a>
+       <a> Le @Model.DateDebutEvent</a>
     </div>
 </div>

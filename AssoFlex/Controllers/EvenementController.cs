@@ -132,7 +132,7 @@ namespace AssoFlex.Controllers
                     evenement.NbTickets, 
                     evenement.DateDebutEvent, evenement.DateFinEvent,
                     evenement.LieuEvent, evenement.VisuelEvent,evenement.CategorieEvent,evenement.Prix,
-                    evenement.Description);
+                    evenement.Description, evenement.ytURL);
                 return RedirectToAction("Index");
             }
             return View("Error");

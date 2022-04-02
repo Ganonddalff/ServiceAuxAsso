@@ -126,7 +126,7 @@ namespace AssoFlex.Models
         Evenement GetEvenement(int id);
         EvenementViewModel GetEvenementViewModel(int id);
         public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
-            string Lieu, string visuelEvent,string categorie, int prix, string description);
+            string Lieu, string visuelEvent,string categorie, int prix, string description, string URL);
         void DeleteEvenement(int id);
         Evenement UpdateEvenement(int id, string nom, int nbTicket, 
             DateTime dateDebut, DateTime dateFin, string lieu, string visuelEvent,string categorie, int prix);

@@ -3,7 +3,7 @@
 @using AssoFlex.Controllers
 @using System.ComponentModel
 @using System.Linq.Expressions
-@model AssoFlex.Models.Evenement
+@model AssoFlex.ViewModels.LayoutModelView
 
 
 
@@ -38,8 +38,8 @@
                         
                         
                         @Html.Label("  Type d'évènement : ")
-                        <select asp-for="@Model.CategorieEvent" asp-items="Html.GetEnumSelectList<EventTypes>()"> </select>
-                        @Html.ValidationMessageFor(model => model.CategorieEvent)
+                        <select asp-for="@Model.Evenement.CategorieEvent" asp-items="Html.GetEnumSelectList<EventTypes>()"> </select>
+                        @Html.ValidationMessageFor(model => model.Evenement.CategorieEvent)
                         <br/>
                     </div>
 
@@ -51,8 +51,8 @@
                         </div>
 
                         <div class="date-field">
-                            @Html.TextBoxFor(model => model.NomEvent, new {@class = "form-control", placeholder = "ex : Birdy Nam Nam en concert"})
-                            @Html.ValidationMessageFor(model => model.NomEvent)
+                            @Html.TextBoxFor(model => model.Evenement.NomEvent, new {@class = "form-control", placeholder = "ex : Birdy Nam Nam en concert"})
+                            @Html.ValidationMessageFor(model => model.Evenement.NomEvent)
                         </div>
                         <br/>
 
@@ -61,8 +61,8 @@
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.LieuEvent, new {@class = "form-control", placeholder = "ex : Nom de la salle de concert"})
-                            @Html.ValidationMessageFor(model => model.LieuEvent)
+                            @Html.TextBoxFor(model => model.Evenement.LieuEvent, new {@class = "form-control", placeholder = "ex : Nom de la salle de concert"})
+                            @Html.ValidationMessageFor(model => model.Evenement.LieuEvent)
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
@@ -70,9 +70,9 @@
                         </div>
                         <br/>
                         <div class="date-field">
-                            @Html.TextBoxFor(model => model.DateDebutEvent, new {@class = "form-control", placeholder = "AAAA/MM/JJ HH,MM,SS"})
+                            @Html.TextBoxFor(model => model.Evenement.DateDebutEvent, new {@class = "form-control", placeholder = "AAAA/MM/JJ HH,MM,SS"})
                             
-                            @Html.ValidationMessageFor(model => model.DateDebutEvent)
+                            @Html.ValidationMessageFor(model => model.Evenement.DateDebutEvent)
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
@@ -80,8 +80,8 @@
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.DateFinEvent, new {@class = "form-control", placeholder = "AAAA/MM/JJ HH,MM,SS"})
-                            @Html.ValidationMessageFor(model => model.DateFinEvent)
+                            @Html.TextBoxFor(model => model.Evenement.DateFinEvent, new {@class = "form-control", placeholder = "AAAA/MM/JJ HH,MM,SS"})
+                            @Html.ValidationMessageFor(model => model.Evenement.DateFinEvent)
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
@@ -89,21 +89,29 @@
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
-                            @Html.TextBoxFor(model => model.NbTickets, new {@class = "form-control", placeholder = "ex : 150 "})
-                            @Html.ValidationMessageFor(model => model.NbTickets)
+                            @Html.TextBoxFor(model => model.Evenement.NbTickets, new {@class = "form-control", placeholder = "ex : 150 "})
+                            @Html.ValidationMessageFor(model => model.Evenement.NbTickets)
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
                             @Html.Label("Prix (€) : ")
-                            @Html.TextBoxFor(model => model.Prix, new {@class = "form-control", placeholder = "ex : 15 "})
-                            @Html.ValidationMessageFor(model => model.Prix)
+                            @Html.TextBoxFor(model => model.Evenement.Prix, new {@class = "form-control", placeholder = "ex : 15 "})
+                            @Html.ValidationMessageFor(model => model.Evenement.Prix)
                             
                         </div>
                         <br/>
                         <div class="form-floating mb-3">
                             @Html.Label("Description : ")
-                            @Html.TextAreaFor(model => model.Description, new {@class = "form-control", placeholder = "exemple : Le collectif POUTOU PRESIDENT vous convie à une journée sur le thème sauve la planète, mange un riche. "})
-                            @Html.ValidationMessageFor(model => model.Description)
+                            @Html.TextAreaFor(model => model.Evenement.Description, new {@class = "form-control", placeholder = "exemple : Le collectif POUTOU PRESIDENT vous convie à une journée sur le thème sauve la planète, mange un riche. "})
+                            @Html.ValidationMessageFor(model => model.Evenement.Description)
+                            
+                        </div>
+                        <br/>
+                        
+                        <div class="form-floating mb-3">
+                            @Html.Label("Vidéo YouTube : ")
+                            @Html.TextAreaFor(model => model.Evenement.ytURL, new {@class = "form-control", placeholder = "youtube.com/watch?v=MateuszEstTropBeau"})
+                            @Html.ValidationMessageFor(model => model.Evenement.ytURL)
                             
                         </div>
                         <br/>

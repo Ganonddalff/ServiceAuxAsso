@@ -32,6 +32,7 @@ namespace AssoFlex.Models
         [MaxLength(30)]
         public string CategorieEvent { get; set; }
         public string Description { get; set; }
+        public string ytURL { get; set; }
         [NotMapped]
         public ISubWidgetEvent SubWidgetEvent { get; set; }
         

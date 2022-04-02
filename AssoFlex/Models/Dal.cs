@@ -383,7 +383,7 @@ namespace AssoFlex.Models
             var cfWidget = new List<IWidgetCF>();
             foreach (var cf in laListe)
             {
-                cf.SubWidgetCF = new SubWidgetCF
+                cf.SubWidgetCF = new ISubWidgetCF
                 {
                     Nom = cf.Nom,
                     DateFinProjet = cf.DateFinProjet,
@@ -391,7 +391,7 @@ namespace AssoFlex.Models
                     MontantProjet = cf.MontantProjet,
                     Collecte = cf.Collecte,
                     PorteurDuProjet = cf.PorteurDuProjet,
-                    Description = cf.Description
+                    Description = cf.Description,
                 };
                 cfWidget.Add(cf);
             }
@@ -598,7 +598,7 @@ namespace AssoFlex.Models
         }
 
         public Evenement CreateEvenement(Association organisateur, string nom, int nbTickets, DateTime DateDebut, DateTime DateFin,
-            string Lieu, string visuelEvent,string categorie, int prix, string description)
+            string Lieu, string visuelEvent,string categorie, int prix, string description, string URL)
         {
             Evenement eventToAdd = new Evenement()
             {
@@ -613,7 +613,8 @@ namespace AssoFlex.Models
                 CategorieEvent = categorie,
                 Prix = prix,
                 Statut = true,
-                Description = description
+                Description = description,
+                ytURL = URL.Replace("watch?v=","embed/")
             };
             this._assoFlex.Evenements.Add(eventToAdd);
             this._assoFlex.SaveChanges();
