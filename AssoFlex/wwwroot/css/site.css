@@ -1,6 +1,88 @@
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
 for details on configuring this project to bundle and minify static web assets. */
 
+body {
+    margin: 0;
+    font-family: Comfortaa, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.carousel-item {
+    height: 100vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.carousel-caption {
+    bottom: 270px;
+}
+
+.carousel-caption h5 {
+    font-size: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 25px;
+}
+
+.carousel-caption p {
+    width: 75%;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.9;
+}
+
+.navbar-light .navbar-brand {
+    color: #fff;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+    color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-toggler {
+    background: #fff;
+}
+
+.navbar-nav {
+    text-align: center;
+}
+
+.nav-link {
+    padding: .2rem 1rem;
+}
+
+.nav-link.active,.nav-link:focus{
+    color: #fff;
+}
+
+.navbar-toggler {
+    padding: 1px 5px;
+    font-size: 18px;
+    line-height: 0.3;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: #fff;
+}
+
+
 .panier .icon-basket-loaded{
    font-size: 1.5rem;
 }
@@ -16,14 +98,10 @@ for details on configuring this project to bundle and minify static web assets. 
 /*--- Description association (voir présentation) --*/
 #description-association {
     padding: 7%;
- 
 }
 .description-assoflex::first-letter {font-size:150%}
 .description-assoflex {
     text-indent: 5%;
-}
-body {
-    background-color: #ffffff;
 }
 #taille{
     font-size: 20px;
@@ -40,10 +118,10 @@ body {
     width: 100%;
     font-size: 0.875rem;
     line-height: 1.5;
-    color: #55595c;
+    /*color: #55595c;*/
     background-color: #fff;
     background-image: none;
-    border: 1px solid #ccc;
+    border: 1px solid; /*#ccc;*/
     height: calc(4rem + 2px) !important;
     border-radius:10px;
 }
@@ -81,7 +159,7 @@ body {
 
 #skill {
     list-style: none;
-    font: 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    /*font: 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
     width: 296px;
     margin: 50px auto 0;
     position: relative;
@@ -181,7 +259,6 @@ body {
 @-webkit-keyframes barre-jaune        { 0%  { width:0px;} 100%{ width:90%;}  }
 @-webkit-keyframes barre-verte      { 0%  { width:0px;} 100%{ width:65%;}  }
 @-webkit-keyframes barre-bleue   { 0%  { width:0px;} 100%{ width:80%;}  }
-
 
 @media (min-width: 992px){
     .search-sec,
