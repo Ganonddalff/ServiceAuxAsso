@@ -142,7 +142,7 @@ namespace AssoFlex.Controllers
         public ActionResult UpdateCrowdfunding(int id)
         {
             Crowdfunding monCF = _dal.GetCrowdfunding(id);
-            return View(monCF);
+            return Ok(); /*View(monCF);*/
         }
 
         [HttpPost]
