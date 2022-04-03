@@ -35,7 +35,7 @@ namespace AssoFlex.Models
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
                 .Build();
-                optionsBuilder.UseMySql("server=localhost;user id=matt;password=loki;database=Assoflex");
+                optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
             }
 
 
