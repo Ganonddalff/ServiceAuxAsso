@@ -10,16 +10,16 @@ namespace AssoFlex.Models
             {
                 _dal.CreateEvenement(
                     _dal.GetAssociation(1),
-                    "Eminem", 
+                    "PussycatDolls", 
                     50, 
                     new DateTime(2022, 12, 30), 
                     new DateTime(2022, 12, 30), 
                     "ACCORD ARENA",
-                    "default-spectacle.jpg",
+                    "jaiho.jpg",
                     "5",
                     90,
-                    "Slim Shady, the real Slim Shady. \nPlease, stand up.",
-                    "https://www.youtube.com/watch?v=eI5qEYaa-4A"
+                    "When i grow up!. \nJai ho, nananana!.",
+                    "https://www.youtube.com/watch?v=Yc5OyXmHD0w"
                 );
                 _dal.CreateEvenement(
                     _dal.GetAssociation(1),
@@ -28,24 +28,24 @@ namespace AssoFlex.Models
                     new DateTime(2022, 12, 30),
                     new DateTime(2022, 12, 30),
                     "ACCORD ARENA",
-                    "default-spectacle.jpg",
+                    "PNL.jpg",
                     "5",
                     10,
                     "Concert pour collégiens.",
-                    "https://www.youtube.com/watch?v=0UNycii3lSw"
+                    "https://www.youtube.com/watch?v=BtyHYIpykN0"
                 );
                 _dal.CreateEvenement(
                     _dal.GetAssociation(3),
-                    "Eminem 2", 
+                    "Eminem ", 
                     50,
                     new DateTime(2022, 12, 30),
                     new DateTime(2022, 12, 30),
                     "ACCORD ARENA",
-                    "default-spectacle.jpg",
+                    "eminem.jpg",
                     "5",
                     100,
                     "Slim Shady, the real Slim Shady. \nPlease, stand up.",
-                    "https://www.youtube.com/watch?v=eI5qEYaa-4A"
+                    "https://www.youtube.com/watch?v=_Yhyp-_hX2s"
                 );
                 _dal.CreateEvenement(
                     _dal.GetAssociation(2),
@@ -54,24 +54,24 @@ namespace AssoFlex.Models
                     new DateTime(2022, 04, 02),
                     new DateTime(2022, 04, 03),
                     "Paris",
-                    "default-spectacle.jpg",
+                    "consup.jpg",
                     "1",
                     5,
-                    "C'est un concert qu'a l'air bien.",
+                    "C'est le concert super attendue, super pas cher, et surtout SUPER.",
                     "https://www.youtube.com/watch?v=DwoIiK68e3o"
                 );
                 _dal.CreateEvenement(
                     _dal.GetAssociation(2),
-                    "Red country",
+                    "Michael Jackson & Coffee",
                     200,
                     new DateTime(2022, 04, 02),
                     new DateTime(2022, 04, 03),
                     "Lille",
-                    "default-spectacle.jpg",
+                    "mj.jpg",
                     "1",
                     5,
-                    "A l'ancienne tmtc",
-                    "https://www.youtube.com/watch?v=mOYZaiDZ7BM"
+                    "Chorégraphie,chant et collation. THIS IS SO BAD",
+                    "https://www.youtube.com/watch?v=UNFwkeBopCM"
                 );
                 _dal.CreateEvenement(
                     _dal.GetAssociation(2),
@@ -80,11 +80,11 @@ namespace AssoFlex.Models
                     new DateTime(2022, 04, 02),
                     new DateTime(2022, 04, 03),
                     "Paris",
-                    "default-spectacle.jpg",
+                    "HSM.jpg",
                     "1",
                     5,
                     "ZACK IL EST TROP BEAUUUUU",
-                    "https://www.youtube.com/watch?v=nKMJ9CVVabY"
+                    "https://www.youtube.com/watch?v=0qj67KE5VXI"
                 );
                 _dal.CreateEvenement(
                     _dal.GetAssociation(2),
@@ -93,11 +93,11 @@ namespace AssoFlex.Models
                     new DateTime(2022, 04, 02),
                     new DateTime(2022, 04, 03),
                     "Paris",
-                    "default-spectacle.jpg",
+                    "DTF.png",
                     "1",
                     5,
-                    "Dans ton fion",
-                    "https://www.youtube.com/watch?v=KoSxEtNmO9I"
+                    "Moment à ne pas rater avec l'organisation DTF afin de discuter de sujets divers et variés",
+                    "https://www.youtube.com/watch?v=ahladr74Kr8"
                 );
                 _dal.CreateEvenement(
                     _dal.GetAssociation(2),
@@ -106,63 +106,63 @@ namespace AssoFlex.Models
                     new DateTime(2022, 04, 02),
                     new DateTime(2022, 04, 03),
                     "NY",
-                    "default-spectacle.jpg",
+                    "logo_fastandfood.jpg",
                     "1",
                     5,
-                    "Ca s'écoute sans se manger",
-                    "https://www.youtube.com/watch?v=t_6xShx9Mxo"
+                    "Vérifiez vos huiles moteur parceque l'on a faim!",
+                    "https://www.youtube.com/watch?v=4sQB2ZgLYs4"
                 );
                 _dal.CreateEvenement(
                     _dal.GetAssociation(2),
-                    "Daggers",
+                    "DBZ",
                     200,
                     new DateTime(2022, 04, 02),
                     new DateTime(2022, 04, 03),
                     "Londres",
-                    "default-spectacle.jpg",
+                    "dbz.gif",
                     "1",
                     5,
-                    "Le nouvel album, en concert",
-                    "https://www.youtube.com/watch?v=ssYNyKth0bI"
+                    "Dormir Bien ZzzzZ",
+                    "https://www.youtube.com/watch?v=sFWki-0yMXY"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
-                   "Sunset",
+                   "Sunny",
                    200,
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "selling.jpg",
                    "1",
                    5,
-                   "Ca veut dire couché de soleil",
-                   "https://www.youtube.com/watch?v=SCmERpC4lPo"
+                   "Offre de logement en promo",
+                   "https://www.youtube.com/watch?v=DXdO0Revllc"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
-                   "Garage Monster",
+                   "Soirée Gare Monster",
                    200,
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "monster.jpg",
                    "1",
                    5,
                    "Il y a un monstre dans le garage",
-                   "https://www.youtube.com/watch?v=qCyr-fGibVI"
+                   "https://www.youtube.com/watch?v=WFgycBCWxQ8"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
-                   "Movie cars",
+                   "Karz",
                    200,
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "karz.jpg",
                    "1",
                    5,
-                   "Mieux que le salon de l'auto",
-                   "https://www.youtube.com/watch?v=SbXIj2T-_uk"
+                   "C'est le moment d'échanger vos cars",
+                   "https://www.youtube.com/watch?v=ZkDNVGrCpHQ"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
@@ -171,11 +171,11 @@ namespace AssoFlex.Models
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "bttp.jpg",
                    "1",
                    5,
-                   "Orchestre basé sur le célèbre film",
-                   "https://www.youtube.com/watch?v=MPphWCr4ba8"
+                   "Apprendre les techniques de self defense en LIVE",
+                   "https://www.youtube.com/watch?v=O6GfD9A-XAw"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
@@ -184,11 +184,11 @@ namespace AssoFlex.Models
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "YY.jpg",
                    "1",
                    5,
                    "Yin & Yang ? Nan. Yin & Ytwo, pour vous servir.",
-                   "https://www.youtube.com/watch?v=yxgzfl1yctU"
+                   "https://www.youtube.com/watch?v=kH0NsmFZzZg"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
@@ -197,10 +197,10 @@ namespace AssoFlex.Models
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "saltpepps.jpg",
                    "1",
                    5,
-                   "Poivré & salé à la fois. Gare aux éternuments.",
+                   "Tu veux du power? Prend ton salt and pepps.",
                    "https://www.youtube.com/watch?v=MxJzWGbG8vo"
                 );
                 _dal.CreateEvenement(
@@ -210,50 +210,50 @@ namespace AssoFlex.Models
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "kiri.jpg",
                    "1",
                    5,
-                   "Retour sur l'histoire de la célèbre de revue qui a indigné la bourgeoisie dans les années 80",
+                   "Un kiri à paris avec toute l'equipe d'HARA",
                    "https://www.youtube.com/watch?v=ZNI5SEUtcjk"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
-                   "Paris Papleure",
+                   "SPX",
                    200,
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "spx.jpg",
                    "1",
-                   5,
-                   "Serj Tankian performing at Red Bull Sound Space At KROQ 2012",
-                   "https://www.youtube.com/watch?v=OeBcnoOIfyQ"
+                   30,
+                   "SPX est le leader de la découverte spatiale, viens planer la haut!",
+                   "https://www.youtube.com/watch?v=-Oox2w5sMcA"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
-                   "Zelensky's speech",
+                   "Street Soccer",
                    200,
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
                    "Paris",
-                   "default-spectacle.jpg",
+                   "foot2.jpg",
                    "1",
                    5,
-                   "Volodymyr Zelensky, the president of Ukraine, is addressing British politicians in the House of Commons via video link as his country continues to battle the Russian invasion.",
-                   "https://www.youtube.com/watch?v=JAdUXFoLJYQ"
+                   "Enfile tes crampons et le but, c'est d'en mettre un.",
+                   "https://www.youtube.com/watch?v=uStppdeIm5w"
                 );
                 _dal.CreateEvenement(
                    _dal.GetAssociation(2),
-                   "Con sert deux l'eau riz",
+                   "CTR",
                    200,
                    new DateTime(2022, 04, 02),
                    new DateTime(2022, 04, 03),
-                   "Paris",
-                   "default-spectacle.jpg",
+                   "Lyon",
+                   "ctr.png",
                    "1",
                    5,
-                   "Lorie chante son album sur scène pour la croix rouge.",
-                   "https://www.youtube.com/watch?v=kL3hBiiLuAk"
+                   "Allumez vos kart, c'est le moment de se passer dessus.",
+                   "https://www.youtube.com/watch?v=3Lis_oukze0"
                 );
             }
         }
