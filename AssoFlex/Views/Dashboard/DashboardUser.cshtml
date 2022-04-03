@@ -1,11 +1,447 @@
-@model AssoFlex.Models.Utilisateur
+@using System.Security.Claims
+@model AssoFlex.ViewModels.DashboardViewModel
 
 @{
-    ViewBag.Title = "Dashboard Profil";
+    ViewBag.Title = "DashboardUser";
     Layout = "_LayoutDashboard";
 }
-<div class="container p-5 my-5 bg-dark text-white text-center">
-    <p>Bienvenue @User.Identity.Name</p>
+<div class="container p-5 my-5 text-center">
+    <h3>Bienvenue sur le Dashboard de @Model.Association.Nom</h3>
+    <div class="animated fadeIn">
+        <div class="row">
+            @* La liste des adhérents *@
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Adhérents</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                        <br/>
+                        <table id="listeAdh" class="table table-responsive-sm table-hover table-outline mb-0">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Association</th>
+                                <th>Utilisateur</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var adh in Model.Adhesions)
+                            {
+                                <tr>
+                                    <td>@adh.Id</td>
+                                    <td>@adh.Association.Nom</td>
+                                    <td>@adh.Utilisateur.Prenom @adh.Utilisateur.Nom</td>
+                                    <td>@adh.DateDebut</td>
+                                    <td>@adh.DateFin</td>
+                                    <td>
+                                        <a class="btn btn-info btn-sm" href=""><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-sm" href=""><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Évènements</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <a class="btn btn-info" data-toggle="modal" data-target="#CreateEventModal" href=@Url.Action("CreerEvent", "Evenement")><i class="fa fa-plus"></i> Ajouter</a>
+                            </div>
+                        </div>
+                        <br/>
+                        <table id="listeEvenements" class="table table-striped table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Catégorie</th>
+                                <th>Associaiton</th>
+                                <th>Prix</th>
+                                <th>Restants/Total</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            @foreach (var evenement in Model.Evenements)
+                            {
+                                <tr>
+                                    <td>@evenement.IdEvent</td>
+                                    <td>@evenement.CategorieEvent</td>
+                                    <td>@evenement.Organisateur.Nom</td>
+                                    <td>@evenement.Prix</td>
+                                    <td>@evenement.NbPlacesRestantes/@evenement.NbTickets</td>
+                                    <td>@evenement.DateDebutEvent</td>
+                                    <td>@evenement.DateFinEvent</td>
+                                    <td>
+                                        <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#UpdateEventModal" href=@Url.Action("ModifEvent","Evenement", new {id=@evenement.IdEvent})><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-sm" href=@Url.Action("SupprEvent","Evenement",new {id=@evenement.IdEvent})><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <div class="modal fade" id="UpdateEventModal" tabindex="-1" role="dialog" aria-labelledby="Update" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Modifier un évènement</h4>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @using (Html.BeginForm("ModifEvent", "Evenement")) @*, FormMethod.Post,new {enctype="multipart/form-data" }*@
+                                                {
+                                                    <div>@Html.HiddenFor(model =>evenement.IdEvent)</div>
+                                                    <div class="form-floating mb-3">
+                                                        @Html.Label("Nom de l'évènement : ")
+                                                        @Html.TextBoxFor(model => evenement.NomEvent, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => evenement.NomEvent)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="col-lg-8 col-xl-7">
+                                                        @Html.Label("  Type d'évènement : ")
+                                                        <select asp-for="@Model.Evenement.CategorieEvent" asp-items="Html.GetEnumSelectList<EventTypes>()"> </select>
+                                                        @Html.ValidationMessageFor(model => evenement.CategorieEvent)
+                                                        <br/>
+                                                    </div>
+                                                    <br/>
+                                                    <div class="form-floating mb-3">
+                                                        @Html.Label("Lieu : ")
+                                                        @Html.TextBoxFor(model => evenement.LieuEvent, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => evenement.LieuEvent)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="date-field">
+                                                        @Html.Label("Date et heure de début de l'évènement : ")
+                                                        @Html.TextBoxFor(model => evenement.DateDebutEvent, new {@class = "form-control", id="date-input", type="date", placeholder=evenement.DateDebutEvent.Date})
+                                                        @Html.ValidationMessageFor(model => evenement.DateDebutEvent)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="date-field">
+                                                        @Html.Label("Date et heure de fin : ")
+                                                        @Html.TextBoxFor(model => evenement.DateFinEvent, new {@class = "form-control", id="date-input", type="date", placeholder=evenement.DateFinEvent.Date})
+                                                        @Html.ValidationMessageFor(model => evenement.DateFinEvent)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="form-floating mb-3">
+                                                        @Html.Label("Nombre de places disponibles à la vente : ")
+                                                        @Html.TextBoxFor(model => evenement.NbTickets, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => evenement.NbTickets)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="form-floating mb-3">
+                                                        @Html.Label("Prix (€) : ")
+                                                        @Html.TextBoxFor(model => evenement.Prix, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => evenement.Prix)
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        @Html.Label("Votre vidéo : ")
+                                                        @Html.TextBoxFor(model => evenement.ytURL, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => evenement.ytURL)
+                                                    </div>
+                                                    <!-- Submit Button-->
+                                                    <button class="btn btn-primary btn-xl" type="submit">Modifier</button>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">Crowdfundings</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <a class="btn btn-info" data-toggle="modal" data-target="#CreateCFModal" href=@Url.Action("CreateCrowdfunding","Crowdfunding")><i class="fa fa-plus"></i> Ajouter</a>
+                            </div>
+                        </div>
+                        <br/>
+                        <table id="listeCrowdfundings" class="table table-striped table-bordered">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Catégorie</th>
+                                <th>Associaiton</th>
+                                <th>Montant</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            @foreach (var crowdfunding in Model.Crowdfundings)
+                            {
+                                <tr>
+                                    <td>@crowdfunding.Id</td>
+                                    <td>@crowdfunding.Nom</td>
+                                    <td>@crowdfunding.CategorieProjet</td>
+                                    <td>@crowdfunding.PorteurDuProjet.Nom</td>
+                                    <td>@crowdfunding.MontantProjet</td>
+                                    @* <td>@crowdfunding.NbPlacesRestantes/@crowdfunding.NbTickets</td> *@
+                                    <td>@crowdfunding.DateDebutProjet</td>
+                                    <td>@crowdfunding.DateFinProjet</td>
+                                    <td>
+                                        <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#UpdateCFModal" href=@Url.Action("UpdateCrowdfunding","Crowdfunding", new {@crowdfunding.Id})><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-danger btn-sm" href=@Url.Action("DeleteCrowdfunding","Crowdfunding", new {@crowdfunding.Id})><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <div class="modal fade" id="UpdateCFModal" tabindex="-1" role="dialog" aria-labelledby="Update" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Modifier un évènement</h4>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @using (Html.BeginForm("UpdateCrowdfunding", "Crowdfunding", FormMethod.Post,new {enctype="multipart/form-data"}))
+                                                {
+                                                    <div >
+                                                        @Html.Label("  Proteur du projet : ")
+                                                        @Html.DisplayFor(model => crowdfunding.PorteurDuProjet)
+                                                        @Html.ValidationMessageFor(model => crowdfunding.PorteurDuProjet)
+                                                        <br/>
+                                                    </div>
+                                                    <div >
+                                                        @Html.Label("  Catégorie du projet : ")
+                                                        <select asp-for="@Model.Crowdfunding.CategorieProjet" asp-items="Html.GetEnumSelectList<TypesProjet>()"> </select>
+                                                        @Html.ValidationMessageFor(model => crowdfunding.CategorieProjet)
+                                                        <br/>
+                                                    </div>
+                                                    <div class="form-floating-mb-3">
+                                                        @Html.Label("Nom du projet : ")
+                                                        @Html.TextBoxFor(model => crowdfunding.Nom, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => crowdfunding.Nom)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="form-floating-mb-3">
+                                                        @Html.Label("Description de mon projet : ")
+                                                        @Html.TextBoxFor(model => crowdfunding.Description, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => crowdfunding.Description)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="form-floating-mb-3">
+                                                        @Html.Label("Objectif de collecte : ")
+                                                        @Html.TextBoxFor(model => crowdfunding.MontantProjet, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => crowdfunding.MontantProjet)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="form-floating-mb-3">
+                                                        @Html.Label("Où votre projet se déroule-t-il ? ")
+                                                        @Html.TextBoxFor(model => crowdfunding.LieuProjet, new {@class = "form-control"})
+                                                        @Html.ValidationMessageFor(model => crowdfunding.LieuProjet)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="date-field">
+                                                        @Html.LabelFor(model => crowdfunding.DateDebutProjet, "Date de début")
+                                                        @Html.TextBoxFor(model => crowdfunding.DateDebutProjet, new {@class = "form-control", id="date-input", type="date"})
+                                                        @Html.ValidationMessageFor(model => crowdfunding.DateDebutProjet)
+                                                    </div>
+                                                    <br/>
+                                                    <div class="date-field">
+                                                        @Html.Label("Date prévisionnelle de fin de collecte :")
+                                                        @Html.TextBoxFor(model => crowdfunding.DateFinProjet, new {@class = "form-control", id="date-input", type="date"})
+                                                        @Html.ValidationMessageFor(model => crowdfunding.DateFinProjet)
+                                                    </div>
+                                                    <br/>
+                                                    <button class="btn btn-primary btn-xl" type="submit">Soumettre mon projet</button>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>>
+    </div>
+</div>
+<div class="modal fade" id="CreateEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Créer un évènement</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CreerEvent", "Evenement", FormMethod.Post,new {enctype="multipart/form-data" }))
+                {
+                    <div >
+                        @Html.Label("  Organisateur : ")
+                        @Html.DisplayFor(model => model.Association)
+                        @Html.ValidationMessageFor(model => model.Evenement.CategorieEvent)
+                        <br/>
+                    </div>
+                <div >
+                    @Html.Label("  Type d'évènement : ")
+                    <select asp-for="@Model.Evenement.CategorieEvent" asp-items="Html.GetEnumSelectList<EventTypes>()"> </select>
+                    @Html.ValidationMessageFor(model => model.Evenement.CategorieEvent)
+                    <br/>
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.Label("Nom de l'évènement : ")
+                    <br/>
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(model => model.Evenement.NomEvent, new {@class = "form-control", placeholder = "ex : Birdy Nam Nam en concert"})
+                    @Html.ValidationMessageFor(model => model.Evenement.NomEvent)
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.Label("Lieu : ")
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(model => model.Evenement.LieuEvent, new {@class = "form-control", placeholder = "ex : Nom de la salle de concert"})
+                    @Html.ValidationMessageFor(model => model.Evenement.LieuEvent)
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.Label("Date et heure de début de l'évènement : ")
+                </div>
+                <br/>
+                <div class="date-field">
+                    @Html.TextBoxFor(model => model.Evenement.DateDebutEvent, new {@class = "form-control ", id="date-input", type="date", placeholder = "AAAA/MM/JJ HH,MM,SS"})
+                    @Html.ValidationMessageFor(model => model.Evenement.DateDebutEvent)
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.Label("Date et heure de fin : ")
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(model => model.Evenement.DateFinEvent, new {@class = "form-control" , id="date-input", type="date", placeholder = "AAAA/MM/JJ HH,MM,SS"})
+                    @Html.ValidationMessageFor(model => model.Evenement.DateFinEvent)
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.Label("Nombre de places disponibles à la vente : ")
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(model => model.Evenement.NbTickets, new {@class = "form-control", placeholder = "ex : 150 "})
+                    @Html.ValidationMessageFor(model => model.Evenement.NbTickets)
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.Label("Prix (€) : ")
+                    @Html.TextBoxFor(model => model.Evenement.Prix, new {@class = "form-control", placeholder = "ex : 15 "})
+                    @Html.ValidationMessageFor(model => model.Evenement.Prix)
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.Label("Description : ")
+                    @Html.TextAreaFor(model => model.Evenement.Description, new {@class = "form-control", placeholder = "exemple : Le collectif POUTOU PRESIDENT vous convie à une journée sur le thème sauve la planète, mange un riche. "})
+                    @Html.ValidationMessageFor(model => model.Evenement.Description)
+                </div>
+                <br/>
+                <div class="form-floating mb-3">
+                    @Html.Label("Vidéo YouTube : ")
+                    @Html.TextAreaFor(model => model.Evenement.ytURL, new {@class = "form-control", placeholder = "youtube.com/watch?v=MateuszEstTropBeau"})
+                    @Html.ValidationMessageFor(model => model.Evenement.ytURL)
+                </div>
+                <br/>
+                <!-- Submit Button-->
+                <button class="btn btn-primary btn-xl" type="submit">Créer</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="CreateCFModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Créer un évènement</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CreateCrowdfunding", "Crowdfunding", FormMethod.Post,new {enctype="multipart/form-data"}))
+                {
+                    <div >
+                        @Html.Label("  Proteur du projet : ")
+                        @Html.DisplayFor(model => model.Association)
+                        @Html.ValidationMessageFor(model => model.Crowdfunding.CategorieProjet)
+                        <br/>
+                    </div>
+                    <div >
+                        @Html.Label("  Catégorie du projet : ")
+                        <select asp-for="@Model.Crowdfunding.CategorieProjet" asp-items="Html.GetEnumSelectList<TypesProjet>()"> </select>
+                        @Html.ValidationMessageFor(model => model.Crowdfunding.CategorieProjet)
+                        <br/>
+                    </div>
+                    <div class="form-floating-mb-3">
+                        @Html.Label("Nom du projet : ")
+                        @Html.TextBoxFor(model => model.Crowdfunding.Nom, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Crowdfunding.Nom)
+                    </div>
+                    <br/>
+                    <div class="form-floating-mb-3">
+                        @Html.Label("Description de mon projet : ")
+                        @Html.TextBoxFor(model => model.Crowdfunding.Description, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Crowdfunding.Description)
+                    </div>
+                    <br/>
+                    <div class="form-floating-mb-3">
+                        @Html.Label("Objectif de collecte : ")
+                        @Html.TextBoxFor(model => model.Crowdfunding.MontantProjet, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Crowdfunding.MontantProjet)
+                    </div>
+                    <br/>
+                    <div class="form-floating-mb-3">
+                        @Html.Label("Où votre projet se déroule-t-il ? ")
+                        @Html.TextBoxFor(model => model.Crowdfunding.LieuProjet, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Crowdfunding.LieuProjet)
+                    </div>
+                    <br/>
+                    <div class="date-field">
+                        @Html.LabelFor(model => model.Crowdfunding.DateDebutProjet, "Date de début")
+                        @Html.TextBoxFor(model => model.Crowdfunding.DateDebutProjet, new {@class = "form-control", id="date-input", type="date"})
+                        @Html.ValidationMessageFor(model => model.Crowdfunding.DateDebutProjet)
+                    </div>
+                    <br/>
+                    <div class="date-field">
+                        @Html.Label("Date prévisionnelle de fin de collecte :")
+                        @Html.TextBoxFor(model => model.Crowdfunding.DateFinProjet, new {@class = "form-control", id="date-input", type="date"})
+                        @Html.ValidationMessageFor(model => model.Crowdfunding.DateFinProjet)
+                    </div>
+                    <br/>
+                    <button class="btn btn-primary btn-xl" type="submit">Soumettre mon projet</button>
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function (){
+            $(".table").DataTable();
+        })
+    </script>
+}
 

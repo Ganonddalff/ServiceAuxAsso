@@ -31,7 +31,7 @@ namespace AssoFlex.Models
                     0755172317,
                     "billal.benziane1@gmail.com",
                     _dal.EncodeMD5("11111"), 
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin-Asso"
                 );
                 _dal.CreateUtilisateur(
                     "Paul",

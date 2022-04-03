@@ -31,6 +31,7 @@ namespace AssoFlex.Models
 
         Association GetAssociation(int id);
         Association GetAssociation(string idStr);
+        Association GetAssociationByUserId(int id);
         int GetAssociationId(int idAdmin);
         List<Association> GetAllAssociations();
         public List<IWidgetAsso> GetAssociationsToWidget();
@@ -179,5 +180,6 @@ namespace AssoFlex.Models
         List<ArticlePanier> GetArticlesPanierByPanierId(int panierId);
         AdhesionArticle GetAdhesionArticle(int i);
         string EncodeMD5(string s);
+        
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Security.Claims;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
@@ -42,7 +43,17 @@ namespace AssoFlex.Controllers
         // GET
         public IActionResult DashboardUser(int id)
         {
-            return View();
+            Utilisateur admin = _dal.GetUtilisateur(id);
+            Association association = _dal.GetAssociationByUserId(id);
+            DashboardViewModel dVM = new DashboardViewModel()
+            {
+                Admin = admin,
+                Association = association,
+                Adhesions = _dal.GetAllAdhesions().Where(a => a.AssociationId == association.Id).ToList(),
+                Evenements = _dal.GetAllEvenements().Where(e => e.OrganisateurId == association.Id).ToList(),
+                Crowdfundings = _dal.GetAllCrowdfundings().Where(c => c.PorteurDuProjetId == association.Id).ToList()
+            };
+            return View(dVM);
         }
         
         

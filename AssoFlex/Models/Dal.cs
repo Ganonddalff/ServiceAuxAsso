@@ -148,6 +148,11 @@ namespace AssoFlex.Models
             return int.TryParse(idStr, out var id) ? this.GetAssociation(id) : null;
         }
 
+        public Association GetAssociationByUserId(int id)
+        {
+            return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == id);
+        }
+
         public int GetAssociationId(int idAdmin)
         {
             return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == idAdmin)!.Id;
