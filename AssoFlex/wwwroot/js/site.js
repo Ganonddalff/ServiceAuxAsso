@@ -4,13 +4,14 @@
 // Write your Javascript code.
 jQuery(
     function($) {
-        $(window).on('scroll', function() {
-            if ($(this).scrollTop() <= 50) {
-                $('.navbar').addClass('fixed-top');
-            } 
-            // else if ($(this).scrollTop() === 0) { //
-            //     $('.navbar').removeClass('fixed-top');
-            // }
+        $(window).scroll(function() {
+            if ($(document).scrollTop() >= 400) {
+                // $('.navbar').removeClass('shadow');
+                $('.navbar').addClass('bg-white'); 
+            } else { 
+                $('.navbar').removeClass('bg-white');
+                $('.navbar').addClass('fixed-top shadow');
+            }
     });
 
     function adjustNav() {

@@ -69,82 +69,89 @@
     </div>
 </section>
 
-@* <form id="form"> *@
-@*     <input type="search"  id="query" name="q" placeholder="Votre recherche ..."> *@
-@*     <button>Rechercher</button> *@
-@*     <a href=”mon lien ” target=”_blank”> *@
-@*         <i class="bi bi-search"></i> *@
-@*     </a> *@
-@* </form> *@
-
-
-<h1 class="text-success">Evenements à ne pas manquer</h1>
-<div class="container-fluid padding">
-    <div class="row padding" > 
-        @foreach (var evenement in Model.Evenements)
-        {
-            if (evenement.IdEvent <= 4)
-            {
-                <div class="col-md-3">
-                    <div class="card">
-                        <img src="~/assets/img/voie lactée.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <h4 class="card-title"> @evenement.NomEvent</h4>
-                            <p class="card-text"></p>
-                            <a href=@Url.Action("Details", "Evenement", new { id = evenement.IdEvent }) class="btn btn-warning">Voir Détails</a>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-
+<div class="container">
+    <div>
+        <h3>Evenements à ne pas manquer</h3>
     </div>
-    <hr class="my-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                @foreach (var evenement in Model.Evenements)
+                {
+                    if (evenement.IdEvent <= 3)
+                    {
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <img src="~/assets/img/voie lactée.jpg" class="card-img-top">
+                                <div class="card-body">
+                                    <h4 class="card-title"> @evenement.NomEvent</h4>
+                                    <p class="card-text"></p>
+                                    <a href=@Url.Action("Details", "Evenement", new {id = evenement.IdEvent}) class="btn btn-warning">Voir Détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+         <hr class="my-4">
+    </div>
 </div>
 
-<h1 class="text-success">Projets à ne pas manquer</h1>
-<div class="container-fluid padding">
-    <div class="row padding">
-        @foreach (var crowdfunding in Model.Crowdfundings)
-        {
-            if (crowdfunding.Id <= 4)
-            {
-                <div class="col-md-3">
-                    <div class="card">
-                       <img src="~/assets/img/projets.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <h4 class="card-title"> @crowdfunding.Nom</h4>
-                            <p class="card-text"></p>
-                            <a href=@Url.Action("DetailsCrowdfunding", "Crowdfunding", new { id = crowdfunding.Id }) class="btn btn-warning">Voir Détails</a>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
+<div class="container">
+    <div>
+        <h3>Projets à ne pas manquer</h3>
     </div>
-    <hr class="my-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                @foreach (var crowdfunding in Model.Crowdfundings)
+                {
+                    if (crowdfunding.Id <= 3)
+                    {
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <img src="~/assets/img/projets.jpg" class="card-img-top">
+                                <div class="card-body">
+                                    <h4 class="card-title"> @crowdfunding.Nom</h4>
+                                    <p class="card-text"></p>
+                                    <a href=@Url.Action("DetailsCrowdfunding", "Crowdfunding", new {id = crowdfunding.Id}) class="btn btn-warning">Voir Détails</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <hr class="my-4">
+    </div>
 </div>
 
-<h1 class="text-success" >Ils nous font confiance</h1>
-<div class="container-fluid padding">
-    <div class="row padding">
-        @foreach (var association in Model.Associations)
-        {
-            if (association.Id <= 4)
-            {
-                <div class="col-md-3">
-                    <div class="card">
-                        <img src="~/assets/logos/@association.AssoLogo" class="card-img-top">
-                        <div class="card-body">
-                            <h4 class="card-title"> @association.Nom</h4>
-                            <p class="card-text"></p>
-                            <a href=@Url.Action("DetailsAssociation", "Association", new { id = association.Id }) class="btn btn-warning"><bold>Voir Détails</bold></a>
+<div class="container">
+    <div>
+        <h3>Ils nous font confiance</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                @foreach (var association in Model.Associations)
+                {
+                    if (association.Id <= 4)
+                    {
+                        <div class="col-md-3">
+                            <div class="card shadow">
+                                <img src="~/assets/logos/@association.AssoLogo" class="card-img-top">
+                                <div class="card-body">
+                                    <h4 class="card-title"> @association.Nom</h4>
+                                    <p class="card-text"></p>
+                                    <a href=@Url.Action("DetailsAssociation", "Association", new {id = association.Id}) class="btn btn-primary"><bold>Voir Détails</bold></a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            }
-        }
-
+                    }
+                }
+            </div>
+        </div>
     </div>
     <hr class="my-4">
 </div>
