@@ -1,22 +1,40 @@
 @using System.Reflection.Emit
 @model AssoFlex.Models.ISubWidgetCF
 
+@{
+    double ratio = (@Model.Collecte.MontantCollecte/@Model.MontantProjet)*100;
+}
+
+
 <div class="text-center">  @*class="card-body "*@
     <div>
         <div > @*style="float: left"*@
-      <a>     @Html.Label("Catégorie : ") @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(@Model.CategorieProjet))</a> 
+            
+            <br/>
+            <a>     @Html.Label("Catégorie : ") @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(@Model.CategorieProjet))</a> 
         </div>
     </div>
     <div> @* style="clear: both"*@
-            @{
-                int MaxDesc = 50;
-                @if (Model.Description.Length > MaxDesc)
-                {
-                    Model.Description = Model.Description.ToString().Substring(0, MaxDesc)+"...";
-                }
-                <a> A propos : <br/> </a>
-                <a>@Html.DisplayFor(m => Model.Description) <br/></a>
-                <a>@Html.Label("Fonds collectés :") &nbsp; @Html.DisplayFor(m => m.Collecte.MontantCollecte) @Html.Label(" / ") @Html.DisplayFor(m => m.MontantProjet)</a>
+        @{
+            var MaxDesc = 50;
+            @if (Model.Description.Length > MaxDesc)
+            {
+                Model.Description = Model.Description.Substring(0, MaxDesc) + "...";
             }
+        }
+        <a> A propos : <br/> </a>
+        <a>
+            @Html.DisplayFor(m => Model.Description) <br/>
+        </a>
+        <br/>
+        @Html.Label("Fonds collectés : ") &nbsp; @Html.DisplayFor(m => m.Collecte.MontantCollecte) @Html.Label(" / ") @Html.DisplayFor(m => m.MontantProjet)
+
     </div>
+</div>
+<div>
+    <ul id="skill">
+        <li>
+            <span class="bar barre-bleue" style="width:@ratio%"></span>
+        </li>
+    </ul>
 </div>

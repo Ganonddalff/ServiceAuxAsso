@@ -6,8 +6,10 @@
         <div class="card-header" style="background-color: #ffffff">
           <img src="~/assets/img/@Model.ImageCrowdfunding" class="card-img-top">
         </div>
-        <div class="card-body text-center">
-            <a>@Model.Nom, projet de @Model.PorteurDuProjet.Nom</a>
+        <div class="card-body @*text-center*@">
+            <div class="text-center">
+                <a >@Model.Nom, projet de @Model.PorteurDuProjet.Nom</a>
+                </div>
             @Html.Partial(string.Concat(new[]
             {
                 "Widget", "/", "_SubWidgetCF"
