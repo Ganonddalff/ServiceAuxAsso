@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\assets" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Include="Views\Presentation\VoirCvGuytri1.cshtml" />
       <None Include="Views\Presentation\VoirCvMateusz1.cshtml" />
       <None Include="Views\Presentation\VoirCvPaul1.cshtml" />
