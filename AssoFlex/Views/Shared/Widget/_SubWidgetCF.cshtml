@@ -15,26 +15,37 @@
         </div>
     </div>
     <div> @* style="clear: both"*@
+        <a> A propos : <br/> </a>
         @{
             var MaxDesc = 50;
             @if (Model.Description.Length > MaxDesc)
             {
-                Model.Description = Model.Description.Substring(0, MaxDesc) + "...";
+                Model.Description = Model.Description.ToString().Substring(0, MaxDesc) + "...";
+                @Html.LabelFor(p => p.Description, @Model.Description) 
+            }
+                
+            @if (Model.Description.Length < 35)
+            {
+                Model.Description = Model.Description.ToString();
+                @Html.LabelFor(p => p.Description, @Model.Description) <br></br>
+            }
+                
+            @if (Model.Description.Length > 35 && Model.Description.Length < MaxDesc)
+            {
+                Model.Description = Model.Description.ToString();
+                @Html.LabelFor(p => p.Description, @Model.Description) 
             }
         }
-        <a> A propos : <br/> </a>
-        <a>
-            @Html.DisplayFor(m => Model.Description) <br/>
-        </a>
-        <br/>
-        @Html.Label("Fonds collectés : ") &nbsp; @Html.DisplayFor(m => m.Collecte.MontantCollecte) @Html.Label(" / ") @Html.DisplayFor(m => m.MontantProjet)
+        
+
+
 
     </div>
 </div>
 <div>
-    <ul id="skill">
+    <ul id="skill1">
         <li>
-            <span class="bar barre-bleue" style="width:@ratio%"></span>
+            <span class="bar barre-bleue" style="width:@ratio%"></span><h3>@ratio%</h3>
         </li>
     </ul>
 </div>
