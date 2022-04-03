@@ -28,8 +28,7 @@ namespace AssoFlex
                     else
                     {
                         Console.WriteLine("Release mode");
-                        webBuilder.UseStartup<Startup>().UseUrls("http://localhost:5000", "https://localhost:5001");
-                    }
+                        webBuilder.UseStartup<Startup>().UseUrls("http://0.0.0.0:5000", "http://0.0.0.0:5001");                    }
                 });
     }
 }
