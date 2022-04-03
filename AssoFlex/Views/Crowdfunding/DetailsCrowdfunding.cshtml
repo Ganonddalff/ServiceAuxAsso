@@ -17,14 +17,14 @@
     </div>
     <div class="row align-items-lg-start">
         <div class="row col">
-            <div class="col">
- 
-                <div class="col ">
+            <div class="col " style="height:400px">
+
+                @*<div class="col h-100">
                     <br/>
-                </div>
+                </div>*@
             </div>
             <div class="row">
-                <div class="col text-center">
+                <div class="col-12 text-center align-self-center">
                     <h6>Type : @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(Model.Crowdfunding.CategorieProjet))</h6>
                     <h6>Organisé par @Model.Crowdfunding.PorteurDuProjet.Nom</h6>
                     <h6>à @Model.Crowdfunding.LieuProjet</h6>
@@ -39,17 +39,11 @@
                 <br/>
             </div>
 
-
-            <div class="col text-center">
-                <div class="col">
-                    <a>
-                        @Html.DisplayFor(m => m.Crowdfunding.Description)
-                    </a>
-                </div>
-            </div>
+</div>
 
 
-        </div>
+
+        
         <div class="card col-sm-9">
             <div class="carousel slide" id="carouselExampleCaptions" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -94,6 +88,14 @@
             </div>
 
         </div>
+        
+                    <div class="row col-12 text-center align-self-center">
+                        <div class="col align-self-center text-center" style="height:200px">
+                            <a class="h-100">
+                                @Html.DisplayFor(m => m.Crowdfunding.Description)
+                            </a>
+                        </div>
+                    </div>
 
         <div class="row col">
             <ul id="skill">
