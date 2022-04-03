@@ -31,11 +31,11 @@ namespace AssoFlex.Models
             }
             else
             {
-                IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-                optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+                // IConfiguration configuration = new ConfigurationBuilder()
+                // .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                // .AddJsonFile("appsettings.json")
+                // .Build();
+                optionsBuilder.UseMySql(("server=localhost;user id=matt;password=loki;database=Assoflex"));
             }
 
 

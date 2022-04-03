@@ -141,7 +141,7 @@ namespace AssoFlex.Controllers
             {
                 Collecte = _dal.GetCollecte(monCF.Id),
                 Crowdfunding = _dal.GetCrowdfunding(id)
-
+                
             };
 
             

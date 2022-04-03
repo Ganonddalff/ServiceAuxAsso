@@ -2,11 +2,13 @@
 @model  AssoFlex.Models.IWidgetEvent
 
 <div class="card col-3 m-5" style="border-radius: 10px">
-    <div class="@Model.LieuEvent">
+    <div class="@Model.LieuEvent" style="align-self: center">
+        
         <div class="card-header" style="background-color: #ffffff">
-           <img src="~/assets/img/@Model.VisuelEvent" class="card-img-top">
+            <img src="~/assets/img/@Model.VisuelEvent" class="croppedCard card-img-top">
         </div>
-        <div class="card-body">
+
+        <div class="card-body" style="width: 260px">
             @Model.NomEvent
             @Html.Partial(string.Concat(new[]
             {
@@ -14,7 +16,7 @@
             }), @Model.SubWidgetEvent)
         </div>
         <div class="card-footer" style="background-color: #ffffff">
-            <a href=@Url.Action("Details","Evenement", new {id=@Model.IdEvent}) class="btn btn-outline-primary">Voir Détails</a>
+            <a href=@Url.Action("Details", "Evenement", new {id = @Model.IdEvent}) class="btn btn-outline-primary">Voir Détails</a>
             @if (User.Identity.IsAuthenticated)
             {
                 <a href=@Url.Action("AchatTicket", "Evenement", new {idEvent = @Model.IdEvent, idUser = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Acheter</a>

@@ -9,14 +9,14 @@ namespace AssoFlex.Models
             using (IDal _dal = new Dal())
             {
                 _dal.CreateCrowdfunding(
-                    "WICLUB Agritech",
+                    "Jackson",
                     10000,
-                    "Balma (31)",
+                    "Montreuil",
                     "1", 
                     new DateTime(2022, 04, 22),
                     new DateTime(2023, 04, 21),
                     _dal.GetAssociation(1), 
-                    _dal.CreateCollecte(),
+                    new Collecte(){MontantCollecte = 6000},
                     "Agritech.jpg",
                     "La France doit bâtir une agriculture plus forte et plus souveraine. Cela passera inévitablement par l'intégration renforcée des technologies et des innovations ainsi que par un accompagnement des pépites de l'Agri/Agro. Face aux enjeux socio-économiques et environnementaux, l'innovation répond aux enjeux contemporains. En faisant de l'innovation une priorité dans le monde agricole, nous nous engageons pour une agriculture plus durable, résiliente et compétitive." +
 "Le Pôle de compétitivité Agri Sud - Ouest Innovation contribue activement à faire émerger des solutions performantes et compétitives dans les domaines d’activité agri / agro, en soutenant les initiatives de porteurs de projets mais aussi en repérant les futurs besoins et marchés. "

@@ -7,14 +7,22 @@
     var ratio = Model.Collecte.MontantCollecte / Model.Crowdfunding.MontantProjet * 100;
     var mailto = "mailto:" + Model.Crowdfunding.PorteurDuProjet.AdminAsso.Email;
 }
-
-
+<div class="row  " style="text-align:center;vertical-align: center;height: 200px">
+    <div class="col-12 text-center align-self-center" style="width:available">
+        <strong>
+            <h1 class="fa-display" style="font-size:40px">Ce projet en détails</h1><br/>
+        </strong>
+        <h3>
+            <a class="fa-display" href=@Url.Action("Index", "Home")>Accueil</a> <a> / </a> <a class="fa-display" href=@Url.Action("Index", "Crowdfunding")>Crowdfundings</a> <a> / </a>
+            <i>
+                <a>@Model.Crowdfunding.Nom</a>
+            </i>
+        </h3>
+    </div>
+</div>
 <div class="container card">
 
-    <div class="card-header text-center">
 
-        <h2>@Model.Crowdfunding.Nom</h2>
-    </div>
     <div class="row align-items-lg-start">
         <div class="row col">
             <div class="col " style="height:400px">
@@ -25,26 +33,26 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center align-self-center">
-                    <h6>Type : @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(Model.Crowdfunding.CategorieProjet))</h6>
-                    <h6>Organisé par @Model.Crowdfunding.PorteurDuProjet.Nom</h6>
+
+                    <h4><img src="~/FileSystem/@Model.Crowdfunding.PorteurDuProjet.AdminAsso.ProfilImg" alt="userAvatar" class="rounded-circle" width="50px" height="40px"/>@Model.Crowdfunding.PorteurDuProjet.AdminAsso.Prenom @Model.Crowdfunding.PorteurDuProjet.AdminAsso.Nom, @Model.Crowdfunding.PorteurDuProjet.Nom</h4>
                     <h6>à @Model.Crowdfunding.LieuProjet</h6>
-                    <h6>Commence le </h6>
+                    <img src="~/assets/logos/@Model.Crowdfunding.PorteurDuProjet.AssoLogo"  width="auto" height="auto"/>
+
+                    @*<h6>Commence le </h6>
                     <h6> @Html.DisplayFor(model => model.Crowdfunding.DateDebutProjet)</h6>
                     <h6>Termine le </h6>
-                    @Html.DisplayFor(model => model.Crowdfunding.DateFinProjet)
+                    @Html.DisplayFor(model => model.Crowdfunding.DateFinProjet)*@
                 </div>
             </div>
 
             <div class="col">
-                <br/>
+                
             </div>
 
-</div>
+        </div>
 
 
-
-        
-        <div class="card col-sm-9">
+        <div class=" col-sm-9">
             <div class="carousel slide" id="carouselExampleCaptions" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li class="active" data-target="#carouselExampleCaptions" data-slide-to="0"></li>
@@ -88,34 +96,61 @@
             </div>
 
         </div>
-        
-                    <div class="row col-12 text-center align-self-center">
-                        <div class="col align-self-center text-center" style="height:200px">
-                            <a class="h-100">
-                                @Html.DisplayFor(m => m.Crowdfunding.Description)
-                            </a>
-                        </div>
-                    </div>
+        <div class="row col " style="height: 30px">
 
-        <div class="row col">
-            <ul id="skill">
-                <h6 class="text-center"> @Model.Collecte.MontantCollecte / @Model.Crowdfunding.MontantProjet €</h6>
+            <ul id="skill2">
+
                 <li>
                     <span class="bar barre-bleue" style="width:@ratio%"></span>
+                    <h3 style="text-align: center">@ratio%</h3>
                 </li>
             </ul>
         </div>
+        <div class="row col-12" style="height: 60px">
+            <a>   </a>
+        </div>
+
+        <div class="row col-12 text-center align-self-center">
+            <div class="col-4 align-self-center text-center" style="height:auto">
+                <a class="h-100">
+                    <h6><i class="icon-calendar"></i> @Convert.ToInt32((Model.Crowdfunding.DateFinProjet - DateTime.Now).TotalDays) jours restants</h6>
+
+
+                </a>
+            </div>
+            <div class="col-4 align-self-center text-center" style="height:auto">
+                <h6> @Model.Collecte.MontantCollecte€ collectés </h6>
+            </div>
+            <div class="col-4 align-self-center text-center" style="height:auto">
+                <h6>Type : @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(Model.Crowdfunding.CategorieProjet))</h6>
+            </div>
+
+            <div class="col-12 align-self-center text-justify" style="height:auto">
+                <h2>@Model.Crowdfunding.Nom</h2>
+                @Html.DisplayFor(m => m.Crowdfunding.Description)
+                <br> </br>
+
+            </div>
+        </div>
 
     </div>
-    <div class="row card-footer text-center">
-        <h6> Pour plus d'informations, écrivez à <a href="@mailto">@Model.Crowdfunding.PorteurDuProjet.AdminAsso.Email</a></h6>
-        <br/>
+    <div class="row footer " style="align-items: center;width: inherit;text-align: center">
+        <div class="col-4 w-100" style=""></div>
+         <div class="col-4 w-100" style="">
+        @*<div class="row col-auto" style="text-align: center;width: available;position: center">*@
+
         @if (User.Identity.IsAuthenticated)
         {
-            <br/>
             <a href=@Url.Action("Contribute", "Crowdfunding", new {cfId = Model.Crowdfunding.Id, userId = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Contribuer à ce projet</a>
         }
-
+        @if (User.Identity.IsAuthenticated.Equals(false))
+        {
+            <a href=@Url.Action("Index", "Login") class="btn btn-primary">Contribuer à ce projet</a>
+        }
+        <br></br>
+        </div>
+         <div class="col-4 w-100" style=""></div>
+        
     </div>
 </div>
 

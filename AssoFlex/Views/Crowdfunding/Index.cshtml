@@ -54,14 +54,16 @@
  </section>
 
 
-<div class="row justify-content-start">
-    <div class="container-fluid padding">
-             <div class="row padding">
-                 @{
-                    @Html.Partial("Widget/_WidgetContainerCF");
-                }
-            </div>
+<div class="container">
+    <h2>Les projets qui vous attendent</h2>
+    <div class="row justify-content-start">
+        <div class="row padding">
+            @{
+                @Html.Partial("Widget/_WidgetContainerCF")
+                ;
+            }
         </div>
+    </div>
 </div>
 <div>
     @if (User.Identity.IsAuthenticated)

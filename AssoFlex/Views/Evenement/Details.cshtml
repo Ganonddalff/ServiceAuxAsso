@@ -2,43 +2,136 @@
 @using Microsoft.Web.Helpers
 @model AssoFlex.ViewModels.LayoutModelView
 @using System.Web
+@using System.Security.Claims
 
 @{
     ViewBag.Title = "Détails ";
     Layout = "_Layout";
 }
-<div class="container p-10 my-10 text-center">
-    <h2>@Model.Evenement.NomEvent</h2>
-    <br/>
-    <h6>Type : @Enum.GetName(typeof(EventTypes),Convert.ToInt32(Model.Evenement.CategorieEvent))</h6>
-    
-    <h6>Organisé par @Model.Evenement.Organisateur.Nom</h6>
-    
-    <h6>à @Model.Evenement.LieuEvent</h6>
-    <br/>
-    <div class="fa-display">Commence le </div>
-    <div>@Html.DisplayFor(model => model.Evenement.DateDebutEvent)</div>
-    <div>Termine le</div>
-    <div >@Html.DisplayFor(model => model.Evenement.DateFinEvent)</div>
-    <br/>
-    <h6>@Model.Evenement.NbTickets places restantes</h6>
-    <h6>@Model.Evenement.Prix €</h6>
-    
 
-    <iframe width="560"
-            height="315"
-            src=@Model.Evenement.ytURL
-            frameborder="0"
-            allowfullscreen>
-        
-    </iframe>
+<div class="row  " style="text-align:center;vertical-align: center;height: 200px">
+    <div class="col-12 text-center align-self-center" style="width:available">
+        <strong>
+            <h1 class="fa-display" style="font-size:40px">L'évènement en détails</h1><br/>
+        </strong>
+        <h3>
+            <a class="fa-display" href=@Url.Action("Index", "Home")>Accueil</a> <a> / </a> <a class="fa-display" href=@Url.Action("Index", "Evenement")>Evènement</a> <a> / </a>
+            <i>
+                <a>@Model.Evenement.NomEvent</a>
+            </i>
+        </h3>
+    </div>
 </div>
 
-    @if (User.Identity.IsAuthenticated && @Model.Evenement.Organisateur.AdminAsso.Prenom == @User.Identity.Name)
-    {
-        <br/>
-        <a href=@Url.Action("ModifEvent", "Evenement", new {id = @Model.Evenement.IdEvent})>Modifier cet évènement</a>
-        <a href=@Url.Action("SupprEvent","Evenement",new {id = @Model.Evenement.IdEvent})>Supprimer cet évènement</a>                                                                                       
-                                                                                               
-    }
-    
+<div class="container card">
+
+    <div class="row align-items-lg-start" style="vertical-align: center">
+
+        <div class="col-5 text-center align-self-center">
+            <h4><img src="~/FileSystem/@Model.Evenement.Organisateur.AdminAsso.ProfilImg" alt="userAvatar" class="rounded-circle" width="50px" height="40px"/>@Model.Evenement.Organisateur.AdminAsso.Prenom @Model.Evenement.Organisateur.AdminAsso.Nom, @Model.Evenement.Organisateur.Nom</h4>
+            <h6>à @Model.Evenement.LieuEvent</h6>
+            <img src="~/assets/logos/@Model.Evenement.Organisateur.AssoLogo" width="auto" height="auto"/>
+
+        </div>
+        @*<div class="col-auto"style="width: 250px"></div>*@
+
+
+        <div class=" col-6 " style="align-items: center">
+            <div class="col-3 w-100"></div>
+            <div class="carousel slide" id="carouselExampleCaptions" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li></li>
+                    <li class="active" data-target="#carouselExampleCaptions" data-slide-to="0"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <iframe width="550px"
+                                height="309px"
+                                src="@Model.Evenement.ytURL"
+                                frameborder="0"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="carousel-item ">
+                        <img src="~/assets/img/eminem.jpg" class="d-block w-100 cropped2" data-src="holder.js/800x400?auto=no&amp;bg=777&amp;fg=555&amp;text=First slide"
+                             data-holder-rendered="true">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Titre de cette image</h3>
+                            <p>Sous-titre</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/assets/img/confiance.jpg" class="d-block w-100 cropped2" data-src="holder.js/800x400?auto=no&amp;bg=666&amp;fg=444&amp;text=Second slide" alt="Second slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160549c9275%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160549c9275%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22217.75625%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                             data-holder-rendered="true">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Titre de cette image</h3>
+                            <p>Sous-titre</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/assets/img/mateusz.jpg" class="d-block w-100 cropped2" data-src="holder.js/800x400?auto=no&amp;bg=555&amp;fg=333&amp;text=Third slide" alt="Third slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_160549c9277%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_160549c9277%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277.0078125%22%20y%3D%22217.75625%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                             data-holder-rendered="true">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>Titre de cette image</h3>
+                            <p>Sous-titre</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Suivant</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Précédent</span>
+                </a>
+            </div>
+            <div class="col-3 w-100"></div>
+        </div>
+        <div class="row col-12 text-center align-self-center">
+            <div class="col-4">
+                <h6> <i class="icon-calendar"></i> le @Model.Evenement.DateDebutEvent </h6>
+            </div>
+            <div class="col-4">
+                <h6>
+                    <i class="icon-credit-card">Prix TTC : @Model.Evenement.Prix€</i>
+                </h6>
+            </div>
+            <div class="col-4">
+                <h6><i class="icon-hourglass"></i>Dépêchez-vous ! Il ne reste plus que @Model.Evenement.NbPlacesRestantes places. </h6>
+            </div>
+            <div class="col-12">
+                <h2>@Model.Evenement.NomEvent</h2>
+                @Html.DisplayFor(m => m.Evenement.Description)
+                <br> </br>
+            </div>
+        </div>
+    </div>
+    <div class="row footer" style="align-items: center;width: inherit;text-align: center">
+        <div class="col-4 w-100" style=""></div>
+        <div class="col-4 w-100" style="">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href=@Url.Action("AchatTicket", "Evenement", new {idEvent = Model.Evenement.IdEvent, idUser = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Ajouter au panier</a>
+            }
+            @if (User.Identity.IsAuthenticated.Equals(false))
+            {
+                <a href=@Url.Action("Index", "Login") class="btn btn-primary">Ajouter au panier</a>
+            }
+            <br></br>
+        </div>
+        <div class="col-4 w-100" style=""></div>
+    </div>
+</div>
+
+
+@if (User.Identity.IsAuthenticated && Model.Evenement.Organisateur.AdminAsso.Prenom == User.Identity.Name)
+{
+    <br/>
+    <a href=@Url.Action("ModifEvent", "Evenement", new {id = Model.Evenement.IdEvent})>Modifier cet évènement</a>
+    <a href=@Url.Action("SupprEvent", "Evenement", new {id = Model.Evenement.IdEvent})>Supprimer cet évènement</a>
+}

@@ -10,9 +10,26 @@
                 @if (Model.Description.Length > MaxDesc)
                 {
                     Model.Description = Model.Description.ToString().Substring(0, MaxDesc) + "...";
+                    @Html.LabelFor(p => p.Description, @Model.Description) 
                 }
-                @Html.LabelFor(p => p.Description, @Model.Description)
+                
+                @if (Model.Description.Length < 35)
+                {
+                    Model.Description = Model.Description.ToString();
+                    @Html.LabelFor(p => p.Description, @Model.Description) <br></br>
+                }
+                
+                @if (Model.Description.Length > 35 && Model.Description.Length < MaxDesc)
+                {
+                    Model.Description = Model.Description.ToString();
+                    @Html.LabelFor(p => p.Description, @Model.Description) 
+                }
+                
+                
             }
+            
+            
+            
             
         </div>
     </div>
