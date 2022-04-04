@@ -24,7 +24,7 @@
 			    </a>
 		</div>
 	    <div class="navbar-nav ml-auto">
-		    <a class="nav-item nav-link" role="button" href=@Url.Action("Index", "Souscription") style="text-transform:uppercase; color: #0c63e4;">
+		    <a class="nav-item nav-link" role="button" href=@Url.Action("Index", "Souscription", new {idUser = User.FindFirstValue(ClaimTypes.NameIdentifier)}) style="text-transform:uppercase; color: #0c63e4;">
 			    Inscris Ton Asso
 		    </a> @* @Url.Action("CreerAsso", "Association") *@
 		    @{
@@ -32,7 +32,7 @@
 			    {
 				    <div class="nav-item dropdown">
 					    <a class="" data-toggle="dropdown" href="#" role="button" id="profilDropdown" aria-haspopup="true" aria-expanded="False">
-						    <img src="~/FileSystem/@User.FindFirstValue("ProfilImage")" alt="userAvatar" class="rounded-circle" width="50px" height="50px" /> 
+						    <img src="~/FileSystem/@User.FindFirstValue("ProfilImage")" alt="userAvatar" class="rounded-circle" width="50px" height="40px" /> 
 					    </a>
 					    <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="profilDropdown">
 						    <div class="dropdown-header text-center">
