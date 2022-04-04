@@ -96,7 +96,8 @@ namespace AssoFlex.Controllers
             {
                 lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
             }
-            return View(lModelView);
+
+            return Ok(); /*View(lModelView);*/
         }
 
         [HttpPost]
@@ -133,14 +134,13 @@ namespace AssoFlex.Controllers
                 Associations = _dal.GetAllAssociations(),
                 Evenements = _dal.GetAllEvenements(),
                 Crowdfundings = _dal.GetAllCrowdfundings(),
-               
-
             };
-            if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
+            if (User.Identity.IsAuthenticated)
             {
                 lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
             }
-            return View(lModelView);
+
+            return Ok(); /*View(lModelView);*/
         }
         
         [HttpPost]
@@ -156,7 +156,7 @@ namespace AssoFlex.Controllers
                     evenement.DateDebutEvent, evenement.DateFinEvent,
                     evenement.LieuEvent, evenement.VisuelEvent,evenement.CategorieEvent,evenement.Prix,
                     evenement.Description, evenement.ytURL);
-                return RedirectToAction("Index");
+                return RedirectToAction("DashboardUser", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value});
             }
             return View("Error");
         }
@@ -168,7 +168,7 @@ namespace AssoFlex.Controllers
             {
                 _dal.DeleteEvenement(id);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("DashboardUser", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value});
         }
         
         public IActionResult AchatTicket(int idEvent, int idUser)

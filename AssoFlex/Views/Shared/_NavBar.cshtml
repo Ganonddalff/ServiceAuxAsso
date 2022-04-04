@@ -1,30 +1,30 @@
 @using System.Security.Claims
 @model AssoFlex.ViewModels.LayoutModelView
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
     	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="~/assets/img/logo.png" alt="logo"></a>
     	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
     		<span class="navbar-toggler-icon"></span>
     	</button>
 	    <div class="collapse navbar-collapse" id="navbarResponsive">
-				<a class="nav-item nav-link" href=@Url.Action("Index", "Home")>
+				<a class="nav-item nav-link" href=@Url.Action("Index", "Home") style="text-transform:uppercase;">
 				    Accueil
 			    </a>
-			    <a class="nav-item nav-link" href=@Url.Action("Index","Presentation")>
+			    <a class="nav-item nav-link" href=@Url.Action("Index","Presentation") style="text-transform:uppercase;">
 				    Présentation
 			    </a>
-			    <a class="nav-item nav-link" href=@Url.Action("Index", "Crowdfunding")>
+			    <a class="nav-item nav-link" href=@Url.Action("Index", "Crowdfunding") style="text-transform:uppercase;">
 				    Crowdfunding
 			    </a>
-			    <a class="nav-item nav-link" href=@Url.Action("Index", "Evenement")>
+			    <a class="nav-item nav-link" href=@Url.Action("Index", "Evenement") style="text-transform:uppercase;">
 				    Évènement
 			    </a>
-			    <a class="nav-item nav-link" href=@Url.Action("Index", "Association")>
-				    Nos associations
+			    <a class="nav-item nav-link" href=@Url.Action("Index", "Association") style="text-transform:uppercase;">
+				    Associations
 			    </a>
 		</div>
 	    <div class="navbar-nav ml-auto">
-		    <a class="nav-item nav-link" href=@Url.Action("Index", "Souscription") style="color: #0c63e4; font-weight:700;">
+		    <a class="nav-item nav-link" role="button" href=@Url.Action("Index", "Souscription") style="text-transform:uppercase; color: #0c63e4;">
 			    Inscris Ton Asso
 		    </a> @* @Url.Action("CreerAsso", "Association") *@
 		    @{
@@ -32,7 +32,7 @@
 			    {
 				    <div class="nav-item dropdown">
 					    <a class="" data-toggle="dropdown" href="#" role="button" id="profilDropdown" aria-haspopup="true" aria-expanded="False">
-						    <img src="~/FileSystem/@User.FindFirstValue("ProfilImage")" alt="userAvatar" class="rounded-circle" width="50px" height="40px"/>
+						    <img src="~/FileSystem/@User.FindFirstValue("ProfilImage")" alt="userAvatar" class="rounded-circle" width="50px" height="50px" /> 
 					    </a>
 					    <div class="dropdown-menu dropdown-menu-right mt-13" aria-labelledby="profilDropdown">
 						    <div class="dropdown-header text-center">
@@ -73,4 +73,5 @@
 	    </div>
     </div>
 </nav>
+
 

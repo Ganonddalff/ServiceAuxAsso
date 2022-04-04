@@ -45,11 +45,11 @@ namespace AssoFlex.Controllers
             return View(lModelView);
         }
         
-        [HttpPost]
-        public string Index(string searchString, bool notUsed)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
-        }
+        // [HttpPost]
+        // public string Index(string searchString, bool notUsed)
+        // {
+        //     return "From [HttpPost]Index: filter on " + searchString;
+        // }
         
         // GET
         public ActionResult DetailsAssociation(int id)
@@ -128,15 +128,5 @@ namespace AssoFlex.Controllers
 
             return View("Error");
         }
-        public IActionResult GetImageAsso(int id)
-        {
-            Association asso = _dal.GetAssociation(id);
-            return File(asso.AssoLogo, "image/png");
-        }
-
-        // public IActionResult SearchAsso()
-        // {
-        //     throw new NotImplementedException();
-        // }
     }
 }

@@ -41,47 +41,35 @@ namespace AssoFlex.Controllers
             return View(lModelView);
         }
 
-        public ActionResult CreateCrowdfunding()
-        {
-            LayoutModelView lModelView = new LayoutModelView()
-            {
-                Associations = _dal.GetAllAssociations(),
-                Evenements = _dal.GetAllEvenements(),
-                Crowdfundings = _dal.GetAllCrowdfundings(),
-                
-                
-
-            };
-            if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
-            {
-                lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            }
-            return View(lModelView);
-        }
+        // public ActionResult CreateCrowdfunding()
+        // {
+        //     return View();
+        // }
 
         [HttpPost]
-        public ActionResult CreateCrowdfunding(Crowdfunding nouveauCrowdfunding)
+        public ActionResult CreateCrowdfunding(Crowdfunding crowdfunding)
         {
-            var PorteurID = _dal.GetAssociationId(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-            Association Porteur = _dal.GetAssociation(PorteurID);
             if (ModelState.IsValid){
-         
-                nouveauCrowdfunding = _dal.CreateCrowdfunding(
-                        nouveauCrowdfunding.Nom,
-                        nouveauCrowdfunding.MontantProjet,
-                        nouveauCrowdfunding.LieuProjet,
-                        nouveauCrowdfunding.CategorieProjet,
-                        nouveauCrowdfunding.DateDebutProjet,
-                        nouveauCrowdfunding.DateFinProjet,
-                        Porteur,
-                        _dal.CreateCollecte(),
-                        nouveauCrowdfunding.ImageCrowdfunding,
-                        nouveauCrowdfunding.Description
+                var PorteurID = _dal.GetAssociationId(Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+                Association Porteur = _dal.GetAssociation(PorteurID);
+                crowdfunding = _dal.CreateCrowdfunding(
+                    crowdfunding.Nom,
+                    crowdfunding.MontantProjet,
+                    crowdfunding.LieuProjet,
+                    crowdfunding.CategorieProjet,
+                    crowdfunding.DateDebutProjet,
+                    crowdfunding.DateFinProjet,
+                    Porteur,
+                    _dal.CreateCollecte(),
+                    crowdfunding.ImageCrowdfunding,
+                    crowdfunding.Description
                 );
-                
+                return RedirectToAction("DashboardUser", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value});
             }
-            return RedirectToAction("Index");
+
+            return View("Error");
         }
+            
         
         //Get
         public ActionResult Contribute(int cfId, int userId)
@@ -137,33 +125,24 @@ namespace AssoFlex.Controllers
         public ActionResult DetailsCrowdfunding(int id)
         {
             Crowdfunding monCF = _dal.GetCrowdfunding(id);
-            LayoutModelView layoutModelView = new LayoutModelView()
+            ContributionViewModel cvm = new ContributionViewModel()
             {
                 Collecte = _dal.GetCollecte(monCF.Id),
                 Crowdfunding = _dal.GetCrowdfunding(id)
                 
             };
-
+            LayoutModelView layoutModelView = new LayoutModelView()
+            {
+                ContributionViewModel = cvm
+            };
             
             return View(layoutModelView);
         }
 
         public ActionResult UpdateCrowdfunding(int id)
         {
-            LayoutModelView lModelView = new LayoutModelView()
-            {
-                Associations = _dal.GetAllAssociations(),
-                Evenements = _dal.GetAllEvenements(),
-                Crowdfundings = _dal.GetAllCrowdfundings(),
-                Crowdfunding  = _dal.GetCrowdfunding(id)
-
-            };
-            if (User.Identity.IsAuthenticated) /*lModelView.Panier == null*/
-            {
-                lModelView.Panier = _dal.GetPanierByUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            }
-
-            return View(lModelView);
+            Crowdfunding monCF = _dal.GetCrowdfunding(id);
+            return Ok(); /*View(monCF);*/
         }
 
         [HttpPost]
@@ -195,7 +174,7 @@ namespace AssoFlex.Controllers
             {
                 _dal.DeleteCrowdfunding(id);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("DashboardUser", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value});
         }
     }
 }
