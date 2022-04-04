@@ -65,18 +65,3 @@
         </div>
     </div>
 </div>
-<div>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <a href=@Url.Action("AchatTicket", "Evenement")>Contribuer à un projet</a>
-        <br/>
-        @if (User.IsInRole("Admin-Asso"))
-        {
-            <a href=@Url.Action("CreateCrowdfunding")>Créer un projet</a>
-        }
-    }
-    @if (User.Identity.IsAuthenticated.Equals(false))
-    {
-        <a>Connectez-vous pour accéder à plus de services ! </a>
-    }
-</div>
