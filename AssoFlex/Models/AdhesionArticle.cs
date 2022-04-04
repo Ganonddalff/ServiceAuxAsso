@@ -6,7 +6,7 @@ namespace AssoFlex.Models
         public string Nom { get; set; }
         public int AssociationId { get; set; }
         public Association Association { get; set; }
-        public decimal MontantAdh { get; set; }
+        public double MontantAdh { get; set; }
         public string  Frequence { get; set; }
         
     }

@@ -21,6 +21,9 @@ namespace AssoFlex.Controllers
                 Associations = _dal.GetAllAssociations(),
                 Evenements = _dal.GetAllEvenements(),
                 Crowdfundings = _dal.GetAllCrowdfundings(),
+                WidgetsAssos = _dal.GetAssociationsToWidget(),
+                WidgetsEvents = _dal.GetEventToWidget(),
+                WidgetsCrowdfundings = _dal.GetCrowdfundingsToWidget(),
                 
             };
             if (User.Identity.IsAuthenticated) /*hvm.Panier == null*/

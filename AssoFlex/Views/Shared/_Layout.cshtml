@@ -17,6 +17,7 @@
             <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
             <link href="~/lib/pace-progress/css/pace.css" rel="stylesheet" />
             <link href="~/lib/dataTables/dist/css/dataTables.bootstrap4.min.css" />
+            <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
             <!-- MAIN CSS -->
             <link href="~/lib/coreui/css/style.css" rel="stylesheet" />
     
@@ -31,6 +32,7 @@
 		<link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
 		<link href="~/lib/pace-progress/css/pace.css" rel="stylesheet" />
 		<link href="~/lib/dataTables/dist/css/dataTables.bootstrap4.min.css" />
+		<link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
 		<!-- MAIN CSS -->
 		<link href="~/lib/coreui/css/style.min.css" rel="stylesheet" />
     
@@ -40,7 +42,7 @@
 	 @RenderSection("Headers", required: false)
 </head>
 
-<body>
+<body class="sidebar-collapse">
 <!-- Navigation -->
 <partial name="_NavBar"/>
 <!-- Main Content -->
@@ -50,7 +52,7 @@
 <!--- Footer -->
 <footer>
     
-    <div class="container-fluid padding">
+    <div class="container">
         <div class="row text-center">
 
             <div class="col-md-4">
@@ -115,7 +117,7 @@
         <script src="~/lib/coreui/js/custom-tooltips.js"></script>
         <script src="~/lib/coreui/js/main.js"></script>*@
 
-<script src="~/js/site.min.js" asp-append-version="true"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 </environment>
 
 @RenderSection("Scripts", required: false) 

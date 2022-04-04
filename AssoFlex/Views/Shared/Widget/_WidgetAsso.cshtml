@@ -1,24 +1,21 @@
 @using System.Security.Claims
 @model  AssoFlex.Models.IWidgetAsso
 
-<div class="card col-3 m-5" style="border-radius: 10px">
-    <div class="@Model.AdminAsso.Prenom">
- 
-        <div class="card-header" style="background-color: #ffffff">
-           <img src="~/assets/logos/@Model.AssoLogo" class="card-img-top">
-        </div>
-        <div class="card-body">
- 
-            @Html.Partial(string.Concat(new[] { "Widget", 
-                "/", "_SubWidgetAsso" }), @Model.SubWidgetAsso)
- 
-        </div>
-        <div class="card-footer" style="background-color: #ffffff">
-            <a href=@Url.Action("DetailsAssociation","Association", new {id=@Model.Id}) class="btn btn-outline-primary">Voir Détails</a>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a href=@Url.Action("AddAdhesion", "Association", new {idAsso = @Model.Id, idUser = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Adhérer</a>
-            }
-        </div>
+<div class="card shadow" style="border-radius: 10px;align-self: center;margin: 1rem"> @**@
+    <div class="card-header" style="background-color: #ffffff">
+        <img src="~/assets/logos/@Model.AssoLogo"  class="croppedCard card-img-top">
+        <span class="badge badge-pill badge-warning">@Enum.GetName(typeof(CategoriesAsso),Convert.ToInt32(Model.CategorieAsso))</span>
+    </div>
+    <div class="card-body" style="width: 260px;height: 250px">
+        @Html.Partial(string.Concat(new[] { "Widget", 
+            "/", "_SubWidgetAsso" }), @Model.SubWidgetAsso)
+    </div>
+    <div class="card-footer" style="background-color: #ffffff">
+        <a href=@Url.Action("DetailsAssociation","Association", new {id=@Model.Id}) class="btn btn-outline-primary">Voir Détails</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href=@Url.Action("AddAdhesion", "Association", new {idAsso = @Model.Id, idUser = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Adhérer</a>
+        }
     </div>
 </div>
+

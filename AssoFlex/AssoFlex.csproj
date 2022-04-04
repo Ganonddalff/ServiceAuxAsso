@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\assets" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Include="Views\Presentation\VoirCvGuytri1.cshtml" />
       <None Include="Views\Presentation\VoirCvMateusz1.cshtml" />
       <None Include="Views\Presentation\VoirCvPaul1.cshtml" />
@@ -34,6 +30,7 @@
       </PackageReference>
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
       <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.5" />
+      <PackageReference Include="WebkitFrameworkCore" Version="1.0.0.1" />
     </ItemGroup>
 
     <ItemGroup>

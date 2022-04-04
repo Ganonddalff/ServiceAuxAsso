@@ -13,16 +13,16 @@ namespace AssoFlex.Models
                     0755172316,
                     "gkastane@gmail.com",
                     _dal.EncodeMD5("11111"),
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.png","Admin"
                 );
                 _dal.CreateUtilisateur(
                     "Mateusz",
                     "Tirel",
                     "19, rue des petites murailles",
                     0667127014,
-                    "admin",
+                    "admin@admin.admin",
                     _dal.EncodeMD5("admin"),
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.png","Admin"
                 );
                 _dal.CreateUtilisateur(
                     "Billal",
@@ -31,7 +31,7 @@ namespace AssoFlex.Models
                     0755172317,
                     "billal.benziane1@gmail.com",
                     _dal.EncodeMD5("11111"), 
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.png","Admin-Asso"
                 );
                 _dal.CreateUtilisateur(
                     "Paul",
@@ -40,7 +40,7 @@ namespace AssoFlex.Models
                     0755172320,
                     "pjean@gmail.com",
                     _dal.EncodeMD5("22222"), 
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin-Asso"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.png","Admin-Asso"
                 );
                 _dal.CreateUtilisateur(
                     "Jean",
@@ -49,7 +49,7 @@ namespace AssoFlex.Models
                     0755172324,
                     "jjacques@gmail.com", 
                     _dal.EncodeMD5("33333"), 
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin-Asso"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.png","Admin-Asso"
                 );
                 _dal.CreateUtilisateur(
                     "Jessica",
@@ -58,7 +58,7 @@ namespace AssoFlex.Models
                     0755172328,
                     "jalba@gmail.com",
                     _dal.EncodeMD5("44444"), 
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg","Admin-Asso"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.png","Admin-Asso"
                 );
                 _dal.CreateUtilisateur(
                     "Louis",
@@ -67,7 +67,7 @@ namespace AssoFlex.Models
                     0755172332,
                     "ldavid@gmail.com",
                     _dal.EncodeMD5("55555"),
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.png"
                 );
                 _dal.CreateUtilisateur(
                     "Alban",
@@ -76,7 +76,7 @@ namespace AssoFlex.Models
                     0755172338,
                     "aivanoff@gmail.com",
                     _dal.EncodeMD5("66666"),
-                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.jpeg"
+                    "fefb70a3-20bf-42e6-8420-7852d44cfa96_avatar.png"
                 );
             }
         }

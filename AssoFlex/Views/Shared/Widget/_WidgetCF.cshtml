@@ -1,27 +1,26 @@
 @using System.Security.Claims
 @model  AssoFlex.Models.IWidgetCF
 
-<div class="card col-3 m-5" style="border-radius: 10px">
-    <div class="@Model.CategorieProjet">
-        <div class="card-header" style="background-color: #ffffff">
-          <img src="~/assets/img/@Model.ImageCrowdfunding" class="card-img-top">
-        </div>
-        <div class="card-body text-center">
-            <a>@Model.Nom, projet de @Model.PorteurDuProjet.Nom</a>
-            @Html.Partial(string.Concat(new[]
-            {
-                "Widget", "/", "_SubWidgetCF"
-            }), @Model.SubWidgetCF)
-        </div>
-        <div class="card-footer" style="background-color: #ffffff">
-            <a href=@Url.Action("DetailsCrowdfunding", "Crowdfunding", new {id = @Model.Id}) class="btn btn-outline-primary">
-                Voir Détails
-            </a>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @Model.Id, 
-                            @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Contribuer</a>
-            }
-        </div>
+<div class="card shadow" style="border-radius: 15px;align-self: center;margin: 1rem"> @*col-3 m-5*@
+    <div class="card-header" style="background-color: #ffffff">
+        <img src="~/assets/img/@Model.ImageCrowdfunding" alt="img-cf" class="croppedCard card-img-top">
+        <span class="badge badge-pill badge-warning">@Enum.GetName(typeof(TypesProjet),Convert.ToInt32(Model.CategorieProjet))</span>
+    </div>
+    <div class="card-body" style="width: 260px;height: 250px">
+        <a >@Model.Nom, projet de @Model.PorteurDuProjet.Nom</a>
+        @Html.Partial(string.Concat(new[]
+        {
+            "Widget", "/", "_SubWidgetCF"
+        }), @Model.SubWidgetCF)
+    </div>
+    <div class="card-footer" style="background-color: #ffffff">
+        <a href=@Url.Action("DetailsCrowdfunding", "Crowdfunding", new {id = @Model.Id}) class="btn btn-outline-primary">
+            Voir Détails
+        </a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href=@Url.Action("Contribute","Crowdfunding", new {@cfId = @Model.Id, 
+                        @userId = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Contribuer</a>
+        }
     </div>
 </div>

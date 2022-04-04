@@ -1,24 +1,24 @@
 @using System.Security.Claims
 @model  AssoFlex.Models.IWidgetEvent
 
-<div class="card col-3 m-5" style="border-radius: 10px">
-    <div class="@Model.LieuEvent">
-        <div class="card-header" style="background-color: #ffffff">
-           <img src="~/assets/img/@Model.VisuelEvent" class="card-img-top">
-        </div>
-        <div class="card-body">
-            @Model.NomEvent
+<div class="card shadow" style="border-radius: 15px;align-self: center;margin: 1rem">  @*col-3 m-5*@
+    <div class="card-header" style="background-color: #ffffff">
+        <img src="~/assets/img/@Model.VisuelEvent" class="croppedCard card-img-top">
+        <span class="badge badge-pill badge-warning">@Enum.GetName(typeof(EventTypes),Convert.ToInt32(Model.CategorieEvent))</span>
+    </div>
+    <div class="card-body" style="width: 260px;height: 250px">
+            @Model.NomEvent / @Model.LieuEvent
             @Html.Partial(string.Concat(new[]
             {
                 "Widget", "/", "_SubWidgetEvent"
             }), @Model.SubWidgetEvent)
-        </div>
-        <div class="card-footer" style="background-color: #ffffff">
-            <a href=@Url.Action("Details","Evenement", new {id=@Model.IdEvent}) class="btn btn-outline-primary">Voir Détails</a>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a href=@Url.Action("AchatTicket", "Evenement", new {idEvent = @Model.IdEvent, idUser = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Acheter</a>
-            }
-        </div>
     </div>
+    <div class="card-footer" style="background-color: #ffffff">
+        <a href=@Url.Action("Details", "Evenement", new {id = @Model.IdEvent}) class="btn btn-outline-primary">Voir Détails</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href=@Url.Action("AchatTicket", "Evenement", new {idEvent = @Model.IdEvent, idUser = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Acheter</a>
+        }
+    </div>
+    
 </div>

@@ -148,6 +148,11 @@ namespace AssoFlex.Models
             return int.TryParse(idStr, out var id) ? this.GetAssociation(id) : null;
         }
 
+        public Association GetAssociationByUserId(int id)
+        {
+            return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == id);
+        }
+
         public int GetAssociationId(int idAdmin)
         {
             return this._assoFlex.Associations.FirstOrDefault(a => a.AdminAssoId == idAdmin)!.Id;
@@ -289,7 +294,7 @@ namespace AssoFlex.Models
         }
 
         public AdhesionArticle CreateAdhesionArticle(Association association,
-            string frequence, decimal montant)
+            string frequence, double montant)
         {
             AdhesionArticle adhesionArticleToAdd = new AdhesionArticle()
             {
@@ -327,10 +332,10 @@ namespace AssoFlex.Models
 
         public Souscription GetSouscription(int id)
         {
-            throw new NotImplementedException();
+            return this._assoFlex.Souscriptions.Find(id);
         }
 
-        public Souscription CreateSouscrition(int id, string formule="Formule 0")
+        public Souscription CreateSouscrition(int id, string formule="Formule 1")
         {
             Association association = this._assoFlex.Associations.Find(id);
             Souscription souscriptionToAdd = new Souscription()

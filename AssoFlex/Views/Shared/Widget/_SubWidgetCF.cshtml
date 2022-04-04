@@ -1,22 +1,41 @@
-@using System.Reflection.Emit
 @model AssoFlex.Models.ISubWidgetCF
 
-<div class="text-center">  @*class="card-body "*@
+@{
+    double ratio = (@Model.Collecte.MontantCollecte/@Model.MontantProjet)*100;
+}
+
+<div>
     <div>
-        <div > @*style="float: left"*@
-      <a>     @Html.Label("Catégorie : ") @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(@Model.CategorieProjet))</a> 
-        </div>
-    </div>
-    <div> @* style="clear: both"*@
+        <div>
             @{
-                int MaxDesc = 50;
+                var MaxDesc = 50;
                 @if (Model.Description.Length > MaxDesc)
                 {
-                    Model.Description = Model.Description.ToString().Substring(0, MaxDesc)+"...";
+                    Model.Description = Model.Description.ToString().Substring(0, MaxDesc) + "...";
+                    @Html.LabelFor(p => p.Description, @Model.Description)
                 }
-                <a> A propos : <br/> </a>
-                <a>@Html.DisplayFor(m => Model.Description) <br/></a>
-                <a>@Html.Label("Fonds collectés :") &nbsp; @Html.DisplayFor(m => m.Collecte.MontantCollecte) @Html.Label(" / ") @Html.DisplayFor(m => m.MontantProjet)</a>
+
+                @if (Model.Description.Length < 35)
+                {
+                    Model.Description = Model.Description.ToString();
+                    @Html.LabelFor(p => p.Description, @Model.Description)
+                    <br/>
+                }
+
+                @if (Model.Description.Length > 35 && Model.Description.Length < MaxDesc)
+                {
+                    Model.Description = Model.Description.ToString();
+                    @Html.LabelFor(p => p.Description, @Model.Description)
+                }
             }
+        </div>
+    </div>
+    <div>
+        <ul id="skill1">
+            <li>
+                <span class="bar barre-bleue" style="width:@ratio%"></span><h3>@ratio%</h3>
+            </li>
+        </ul>
     </div>
 </div>
+

@@ -1,7 +1,5 @@
 @model AssoFlex.Models.ISubWidgetEvent
 
-
-
 <div > 
     <div>
         <div >
@@ -10,15 +8,26 @@
                 @if (Model.Description.Length > MaxDesc)
                 {
                     Model.Description = Model.Description.ToString().Substring(0, MaxDesc) + "...";
+                    @Html.LabelFor(p => p.Description, @Model.Description) 
                 }
-                @Html.LabelFor(p => p.Description, @Model.Description)
+                
+                @if (Model.Description.Length < 35)
+                {
+                    Model.Description = Model.Description.ToString();
+                    @Html.LabelFor(p => p.Description, @Model.Description) <br/>
+                }
+                
+                @if (Model.Description.Length > 35 && Model.Description.Length < MaxDesc)
+                {
+                    Model.Description = Model.Description.ToString();
+                    @Html.LabelFor(p => p.Description, @Model.Description) 
+                }
             }
-            
         </div>
     </div>
     <div > 
-        <a> @Model.Prix €</a>
+        <a> @Model.Prix€</a>
         <a><br/></a>
-       <a> Le @Model.DateDebutEvent</a>
+       <a>Le @Model.DateDebutEvent.Date.ToShortDateString()</a>
     </div>
 </div>
