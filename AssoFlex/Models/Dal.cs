@@ -294,7 +294,7 @@ namespace AssoFlex.Models
         }
 
         public AdhesionArticle CreateAdhesionArticle(Association association,
-            string frequence, decimal montant)
+            string frequence, double montant)
         {
             AdhesionArticle adhesionArticleToAdd = new AdhesionArticle()
             {
@@ -332,10 +332,10 @@ namespace AssoFlex.Models
 
         public Souscription GetSouscription(int id)
         {
-            throw new NotImplementedException();
+            return this._assoFlex.Souscriptions.Find(id);
         }
 
-        public Souscription CreateSouscrition(int id, string formule="Formule 0")
+        public Souscription CreateSouscrition(int id, string formule="Formule 1")
         {
             Association association = this._assoFlex.Associations.Find(id);
             Souscription souscriptionToAdd = new Souscription()

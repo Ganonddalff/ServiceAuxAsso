@@ -12,7 +12,7 @@ namespace AssoFlex.ViewModels
         {
             _dal = new Dal();
         }
-        
+        public Utilisateur Utilisateur { get; set; }
         public Evenement Evenement { get; set; }
         public Association Association { get; set; }
         public Crowdfunding Crowdfunding { get; set; }
@@ -37,6 +37,10 @@ namespace AssoFlex.ViewModels
                 return 0;
             }
             return panier.ArticlesPanier.Count;
+        }
+        public Utilisateur GetUserByClaim(string idUser)
+        {
+            return _dal.GetUtilisateur(idUser);
         }
     }
 }

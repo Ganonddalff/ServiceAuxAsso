@@ -18,12 +18,17 @@ namespace AssoFlex.Models
         public string Description { get; set; }
         public int AdminAssoId { get; set; }
         public Utilisateur AdminAsso { get; set; }
+        public double MontantAdhesion { get; set; }
+        public List<AdhesionArticle> AdhesionArticles { get; set; }
+        public string RIB { get; set; }
+        public string PieceIdentite { get; set; }
+        public string PublieJO { get; set; }
         public string AssoHeaderImage { get; set; }
         public string AssoLogo { get; set; }
-        [NotMapped]
-        public ISubWidgetAsso SubWidgetAsso { get; set; }
         [MaxLength(18)]
         public string CategorieAsso { get; set; }
+        [NotMapped]
+        public ISubWidgetAsso SubWidgetAsso { get; set; }
     }
     
     public enum CategoriesAsso

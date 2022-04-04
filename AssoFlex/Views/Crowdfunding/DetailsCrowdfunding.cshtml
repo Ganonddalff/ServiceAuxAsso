@@ -2,10 +2,10 @@
 @model AssoFlex.ViewModels.LayoutModelView
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = @Model.ContributionViewModel.Crowdfunding.Nom;
     Layout = "_Layout";
-    var ratio = Model.Collecte.MontantCollecte / Model.Crowdfunding.MontantProjet * 100;
-    var mailto = "mailto:" + Model.Crowdfunding.PorteurDuProjet.AdminAsso.Email;
+    var ratio = Model.ContributionViewModel.Collecte.MontantCollecte / Model.ContributionViewModel.Crowdfunding.MontantProjet * 100;
+    var mailto = "mailto:" + Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.AdminAsso.Email;
 }
 <div class="row  " style="text-align:center;vertical-align: center;height: 200px">
     <div class="col-12 text-center align-self-center" style="width:available">
@@ -15,7 +15,7 @@
         <h3>
             <a class="fa-display" href=@Url.Action("Index", "Home")>Accueil</a> <a> / </a> <a class="fa-display" href=@Url.Action("Index", "Crowdfunding")>Crowdfundings</a> <a> / </a>
             <i>
-                <a>@Model.Crowdfunding.Nom</a>
+                <a>@Model.ContributionViewModel.Crowdfunding.Nom</a>
             </i>
         </h3>
     </div>
@@ -34,9 +34,12 @@
             <div class="row">
                 <div class="col-12 text-center align-self-center">
 
-                    <h4><img src="~/FileSystem/@Model.Crowdfunding.PorteurDuProjet.AdminAsso.ProfilImg" alt="userAvatar" class="rounded-circle" width="50px" height="40px"/>@Model.Crowdfunding.PorteurDuProjet.AdminAsso.Prenom @Model.Crowdfunding.PorteurDuProjet.AdminAsso.Nom, @Model.Crowdfunding.PorteurDuProjet.Nom</h4>
-                    <h6>à @Model.Crowdfunding.LieuProjet</h6>
-                    <img src="~/assets/logos/@Model.Crowdfunding.PorteurDuProjet.AssoLogo"  width="auto" height="auto"/>
+                    <h4>
+                        <img src="~/FileSystem/@Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.AdminAsso.ProfilImg" alt="userAvatar" class="rounded-circle" width="50px" height="40px"/>
+                        @Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.AdminAsso.Prenom @Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.AdminAsso.Nom, @Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.Nom
+                    </h4>
+                    <h6>à @Model.ContributionViewModel.Crowdfunding.LieuProjet</h6>
+                    <img src="~/assets/logos/@Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.AssoLogo"  width="auto" height="auto"/>
 
                     @*<h6>Commence le </h6>
                     <h6> @Html.DisplayFor(model => model.Crowdfunding.DateDebutProjet)</h6>
@@ -113,21 +116,19 @@
         <div class="row col-12 text-center align-self-center">
             <div class="col-4 align-self-center text-center" style="height:auto">
                 <a class="h-100">
-                    <h6><i class="icon-calendar"></i> @Convert.ToInt32((Model.Crowdfunding.DateFinProjet - DateTime.Now).TotalDays) jours restants</h6>
-
-
+                    <h6><i class="icon-calendar"></i> @Convert.ToInt32((Model.ContributionViewModel.Crowdfunding.DateFinProjet - DateTime.Now).TotalDays) jours restants</h6>
                 </a>
             </div>
             <div class="col-4 align-self-center text-center" style="height:auto">
-                <h6> @Model.Collecte.MontantCollecte€ collectés </h6>
+                <h6> @Model.ContributionViewModel.Collecte.MontantCollecte€ collectés </h6>
             </div>
             <div class="col-4 align-self-center text-center" style="height:auto">
-                <h6>Type : @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(Model.Crowdfunding.CategorieProjet))</h6>
+                <h6>Type : @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(Model.ContributionViewModel.Crowdfunding.CategorieProjet))</h6>
             </div>
 
             <div class="col-12 align-self-center text-justify" style="height:auto">
-                <h2>@Model.Crowdfunding.Nom</h2>
-                @Html.DisplayFor(m => m.Crowdfunding.Description)
+                <h2>@Model.ContributionViewModel.Crowdfunding.Nom</h2>
+                @Html.DisplayFor(m => m.ContributionViewModel.Crowdfunding.Description)
                 <br> </br>
 
             </div>
@@ -141,7 +142,7 @@
 
         @if (User.Identity.IsAuthenticated)
         {
-            <a href=@Url.Action("Contribute", "Crowdfunding", new {cfId = Model.Crowdfunding.Id, userId = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Contribuer à ce projet</a>
+            <a href=@Url.Action("Contribute", "Crowdfunding", new {cfId = Model.ContributionViewModel.Crowdfunding.Id, userId = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Contribuer à ce projet</a>
         }
         @if (User.Identity.IsAuthenticated.Equals(false))
         {
@@ -155,8 +156,8 @@
 </div>
 
 
-@if (User.Identity.IsAuthenticated && Model.Crowdfunding.PorteurDuProjet.AdminAsso.Prenom == User.Identity.Name)
+@if (User.Identity.IsAuthenticated && Model.ContributionViewModel.Crowdfunding.PorteurDuProjet.AdminAsso.Prenom == User.Identity.Name)
 {
-    <a href=@Url.Action("UpdateCrowdfunding", "Crowdfunding", new {id = Model.Crowdfunding.Id})>Modifier ce projet</a>
-    <a href=@Url.Action("DeleteCrowdfunding", "Crowdfunding", new {id = Model.Crowdfunding.Id})>Supprimer ce projet</a>
+    <a href=@Url.Action("UpdateCrowdfunding", "Crowdfunding", new {id = Model.ContributionViewModel.Crowdfunding.Id})>Modifier ce projet</a>
+    <a href=@Url.Action("DeleteCrowdfunding", "Crowdfunding", new {id = Model.ContributionViewModel.Crowdfunding.Id})>Supprimer ce projet</a>
 }
