@@ -124,7 +124,7 @@ namespace AssoFlex.Controllers
                     model.Utilisateur.Adresse,
                     model.Utilisateur.Telephone,
                     model.Utilisateur.Email,
-                    model.Utilisateur.Password,
+                    _dal.EncodeMD5(model.Utilisateur.Password),
                     uniqueFileName);
                 var userClaims = new List<Claim>()
                 {
