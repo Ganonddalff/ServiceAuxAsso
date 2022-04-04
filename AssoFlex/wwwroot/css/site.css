@@ -98,6 +98,15 @@ body {
    color: white;
 }
 
+.card-header .badge {
+    position: absolute;
+    top: -5px;
+    left: -8px;
+    padding: 5px 10px;
+    /*border-radius: 50%;*/
+    /*color: white;*/
+}
+
 /*--- Description association (voir présentation) --*/
 #description-association {
     padding: 7%;
@@ -746,3 +755,5 @@ body {
     font-weight: 600;
     padding: 9px 0;
 }
+
+.ca

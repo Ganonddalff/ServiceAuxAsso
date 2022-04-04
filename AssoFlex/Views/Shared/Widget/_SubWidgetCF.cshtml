@@ -1,51 +1,41 @@
-@using System.Reflection.Emit
 @model AssoFlex.Models.ISubWidgetCF
 
 @{
     double ratio = (@Model.Collecte.MontantCollecte/@Model.MontantProjet)*100;
 }
 
-
-<div class="text-center">  @*class="card-body "*@
+<div>
     <div>
-        <div > @*style="float: left"*@
-            
-            <br/>
-            <a>     @Html.Label("Catégorie : ") @Enum.GetName(typeof(TypesProjet), Convert.ToInt32(@Model.CategorieProjet))</a> 
+        <div>
+            @{
+                var MaxDesc = 50;
+                @if (Model.Description.Length > MaxDesc)
+                {
+                    Model.Description = Model.Description.ToString().Substring(0, MaxDesc) + "...";
+                    @Html.LabelFor(p => p.Description, @Model.Description)
+                }
+
+                @if (Model.Description.Length < 35)
+                {
+                    Model.Description = Model.Description.ToString();
+                    @Html.LabelFor(p => p.Description, @Model.Description)
+                    <br/>
+                }
+
+                @if (Model.Description.Length > 35 && Model.Description.Length < MaxDesc)
+                {
+                    Model.Description = Model.Description.ToString();
+                    @Html.LabelFor(p => p.Description, @Model.Description)
+                }
+            }
         </div>
     </div>
-    <div> @* style="clear: both"*@
-        <a> A propos : <br/> </a>
-        @{
-            var MaxDesc = 50;
-            @if (Model.Description.Length > MaxDesc)
-            {
-                Model.Description = Model.Description.ToString().Substring(0, MaxDesc) + "...";
-                @Html.LabelFor(p => p.Description, @Model.Description) 
-            }
-                
-            @if (Model.Description.Length < 35)
-            {
-                Model.Description = Model.Description.ToString();
-                @Html.LabelFor(p => p.Description, @Model.Description) <br></br>
-            }
-                
-            @if (Model.Description.Length > 35 && Model.Description.Length < MaxDesc)
-            {
-                Model.Description = Model.Description.ToString();
-                @Html.LabelFor(p => p.Description, @Model.Description) 
-            }
-        }
-        
-
-
-
+    <div>
+        <ul id="skill1">
+            <li>
+                <span class="bar barre-bleue" style="width:@ratio%"></span><h3>@ratio%</h3>
+            </li>
+        </ul>
     </div>
 </div>
-<div>
-    <ul id="skill1">
-        <li>
-            <span class="bar barre-bleue" style="width:@ratio%"></span><h3>@ratio%</h3>
-        </li>
-    </ul>
-</div>
+

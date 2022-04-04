@@ -1,6 +1,6 @@
 @using System.Security.Claims
 @model AssoFlex.ViewModels.LayoutModelView
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
     <div class="container">
     	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="~/assets/img/logo.png" alt="logo"></a>
     	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -14,10 +14,10 @@
 				    Présentation
 			    </a>
 			    <a class="nav-item nav-link" href=@Url.Action("Index", "Crowdfunding") style="text-transform:uppercase;">
-				    Crowdfunding
+				    Crowdfundings
 			    </a>
 			    <a class="nav-item nav-link" href=@Url.Action("Index", "Evenement") style="text-transform:uppercase;">
-				    Évènement
+				    Évènements
 			    </a>
 			    <a class="nav-item nav-link" href=@Url.Action("Index", "Association") style="text-transform:uppercase;">
 				    Associations

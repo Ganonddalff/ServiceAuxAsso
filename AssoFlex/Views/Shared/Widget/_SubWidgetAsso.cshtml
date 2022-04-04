@@ -1,12 +1,12 @@
 @model AssoFlex.Models.ISubWidgetAsso
 
-<div @*class="card-body "*@>
+<div >
     <div>
-        <div @*style="float: left"*@>
+        <div>
             <strong> @Html.LabelFor(p => p.Nom, @Model.Nom) </strong>
         </div>
     </div>
-    <div @*style="clear: both"*@>
+    <div>
         @{
             int MaxDesc = 50;
             @if (Model.Description.Length > MaxDesc)
