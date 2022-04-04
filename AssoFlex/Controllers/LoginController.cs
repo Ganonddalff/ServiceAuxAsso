@@ -101,13 +101,23 @@ namespace AssoFlex.Controllers
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName;
                 // byte[] profilImg;
                 // using (var memoryStream = new MemoryStream())
                 // {
                 //     imageUpload.CopyTo(memoryStream);
                 //     profilImg = memoryStream.ToArray();
                 // }
-                string uniqueFileName = UploadedFile(model);
+
+                if (model.ProfilImg != null)
+                {
+                     uniqueFileName = UploadedFile(model);
+                }
+                else
+                {
+                     uniqueFileName = "avatar.png";
+                }
+                
                 var userToCreate = _dal.CreateUtilisateur(
                     model.Utilisateur.Prenom,
                     model.Utilisateur.Nom,
