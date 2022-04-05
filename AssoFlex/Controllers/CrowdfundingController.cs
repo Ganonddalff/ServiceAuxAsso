@@ -72,49 +72,70 @@ namespace AssoFlex.Controllers
             
         
         //Get
-        public ActionResult Contribute(int cfId, int userId)
-        {
-            Crowdfunding crowdfunding = _dal.GetCfCollecte(cfId);
-            Utilisateur user = _dal.GetUtilisateur(userId);
-            Collecte collecte = crowdfunding.Collecte;
-            var panier = _dal.GetPanierByUserId(userId);
-            ArticlePanier articlePanier = new ArticlePanier()
-            {
-                Quantite = 1,
-                MontantUnitaire = 0,
-                ProduitId = crowdfunding.Id,
-                ProduitNom = crowdfunding.Nom,
-                UtilisateurId = userId,
-                Panier = panier,
-                TypeDeCommande = "Crowdfunding",
-            };
-            if ( panier != null)
-            {
-                _dal.AddArticleToPanier(panier.Id,articlePanier);
-            }
-            else
-            {
-                Panier panierNew = _dal.CreatePanier(user);
-                _dal.AddArticleToPanier(panierNew.Id, articlePanier);
-            }
-            return RedirectToAction("Index");
-        }
+        // public ActionResult Contribute(int cfId, int userId)
+        // {
+        //     Crowdfunding crowdfunding = _dal.GetCfCollecte(cfId);
+        //     Utilisateur user = _dal.GetUtilisateur(userId);
+        //     Collecte collecte = crowdfunding.Collecte;
+        //     var panier = _dal.GetPanierByUserId(userId);
+        //     ArticlePanier articlePanier = new ArticlePanier()
+        //     {
+        //         Quantite = 1,
+        //         MontantUnitaire = 0,
+        //         ProduitId = crowdfunding.Id,
+        //         ProduitNom = crowdfunding.Nom,
+        //         UtilisateurId = userId,
+        //         Panier = panier,
+        //         TypeDeCommande = "Crowdfunding",
+        //     };
+        //     if ( panier != null)
+        //     {
+        //         _dal.AddArticleToPanier(panier.Id,articlePanier);
+        //     }
+        //     else
+        //     {
+        //         Panier panierNew = _dal.CreatePanier(user);
+        //         _dal.AddArticleToPanier(panierNew.Id, articlePanier);
+        //     }
+        //     return RedirectToAction("Index");
+        // }
 
         [HttpPost]
-         public ActionResult Contribute(ContributionViewModel cvm, int cfId, int userId)
+         public ActionResult Contribute(int cfId, int userId, int montant)
          {
-             if (cvm.Montant != 0)
+             if (montant != 0)
              {
                  Crowdfunding monCF = _dal.GetCfCollecte(cfId);
                  Utilisateur monUser = _dal.GetUtilisateur(userId);
+                 var panier = _dal.GetPanierByUserId(userId);
                  Collecte maCollecte = monCF.Collecte;
                  ContributionViewModel cvm2 = new ContributionViewModel()
                  {
                      Collecte = maCollecte,
-                     Contribution = _dal.CreateContribution(cvm.Montant, maCollecte.Id, monUser),
+                     Contribution = _dal.CreateContribution(montant, maCollecte.Id, monUser),
                      Crowdfunding = monCF,
                      Utilisateur = monUser
                  };
+                 
+                 ArticlePanier articlePanier = new ArticlePanier()
+                 {
+                     Quantite = 1,
+                     MontantUnitaire = montant,
+                     ProduitId = monCF.Id,
+                     ProduitNom = monCF.Nom,
+                     UtilisateurId = userId,
+                     Panier = panier,
+                     TypeDeCommande = "Crowdfunding",
+                 };
+                 if ( panier != null)
+                 {
+                     _dal.AddArticleToPanier(panier.Id,articlePanier);
+                 }
+                 else
+                 {
+                     Panier panierNew = _dal.CreatePanier(monUser);
+                     _dal.AddArticleToPanier(panierNew.Id, articlePanier);
+                 }
 
                  return RedirectToAction("Index", "Crowdfunding");
              }

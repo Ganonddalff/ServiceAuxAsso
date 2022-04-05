@@ -171,14 +171,15 @@ namespace AssoFlex.Controllers
             return RedirectToAction("DashboardUser", "Dashboard", new {id=User.FindFirst(ClaimTypes.NameIdentifier).Value});
         }
         
-        public IActionResult AchatTicket(int idEvent, int idUser)
+        [HttpPost]
+        public IActionResult AchatTicket(int idEvent, int idUser, int nbticket)
         {
             Utilisateur user = _dal.GetUtilisateur(idUser);
             Evenement evenement = _dal.GetEvenement(idEvent);
             var panier = _dal.GetPanierByUserId(idUser);
             ArticlePanier articlePanier = new ArticlePanier()
             {
-                Quantite = 1,
+                Quantite = nbticket,
                 MontantUnitaire = evenement.Prix,
                 ProduitId = evenement.IdEvent,
                 ProduitNom = evenement.NomEvent,
@@ -188,6 +189,7 @@ namespace AssoFlex.Controllers
             };
             if ( panier != null)
             {
+                _dal.CreateReservation(evenement.IdEvent,user.Id,nbticket);
                 _dal.AddArticleToPanier(panier.Id,articlePanier);
             }
             else

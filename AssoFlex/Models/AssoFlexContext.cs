@@ -21,13 +21,14 @@ namespace AssoFlex.Models
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<Panier> Paniers { get; set; }
         public DbSet<ArticlePanier> ArticlesPanier { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=matt;password=loki;database=Assoflex");
+                optionsBuilder.UseMySql("server=localhost;user id=guytri;password=aaaaa;database=Assoflex");
             }
             else
             {

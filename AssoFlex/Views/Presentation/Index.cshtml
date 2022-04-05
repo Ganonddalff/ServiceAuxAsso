@@ -3,17 +3,20 @@
         Layout = "_Layout";
 }
 <!--- Présentation de ASSOFLEX-->
-<div class="container w-100" style="align-items: center">
-	<div class="row w-100 align-items-center">
-		<div class="col-3 w-100"></div>
-		<div class="col-4" style="align-items: center">
-			<iframe src="https://prezi.com/p/6ubf9akh5fsu/embed" id="iframe_container" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay;fullscreen" height="315" width="560" ></iframe>
+
+@*<div class="row "style="height: 100px"></div>*@
+<div class="container-fluid  text-center" style="padding-top: 7%;align-self: center">
+	<a style="font-size: 300%">Support de présentation, soutenance Isika</a>
+	
+		
+		<div class="col-auto" style="align-items: center">
+			<iframe class="align-self-center" src="https://prezi.com/p/6ubf9akh5fsu/embed" id="iframe_container" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay;fullscreen" height="563" width="1000"></iframe>
 		</div>
-		<div class="col-4 w-100"></div>
-	</div>
+		
+	
 </div>
- <div id="description-association" style="padding: 7%; font-size:150%;}">  @*background-color:rgba(0,0,255,0.1);*@
-	 <h1> Qui sommes-nous ?</h1>
+ <div id="description-association" class="text-justify" style=" font-size:150%;padding: 7%">  @*background-color:rgba(0,0,255,0.1);*@
+	 <a> Qui sommes-nous ?</a>
 	 <p class="description-assoflex" style="text-indent: 5%;">
 		 ASSOFLEX est une plateforme nationale mise sur pied, en 2022, pour accompagner le développement des organisations et des projets qu’elles portent. Le réseau porté par ASSOFLEX est le plus largement ouvert et a vocation à rassembler un grand nombre d’organisations qui laisse une place centrale à l’humain.
 		 Cette plateforme a été conçue pour fournir aux associations et à leurs adhérents des services leur permettant d’avoir une fluidité dans la transmission des informations. Qu’il s’agit de la gestion de leur adhésion aux associations, de l’achat de billet pour des événements spécifiques ou encore de la participation à des projets portés par ces associations.
@@ -36,7 +39,7 @@
 		<div class="row padding">
 			<div class="col-md-6">
 				<div class="">
-					<img src="~/assets/img/Crowdfunding.jpg" class="" width=800px height=800px>
+					<img src="~/assets/img/Crowdfunding.jpg" class="" style="object-fit: contain" width=800px height=800px>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -79,7 +82,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class="">
-					<img src="~/assets/img/BILLETTERIE-EN-LIGNE.jpg" class="" width=800px height=550px>
+					<img src="~/assets/img/BILLETTERIE-EN-LIGNE.jpg" style="object-fit: contain" width=800px height=550px>
 				</div>
 			</div>
 		</div>
@@ -88,7 +91,7 @@
 		<div class="row padding">
 			<div class="col-md-6">
 				<div class="">
-					<img src="~/assets/img/Adhésions.jpeg" class="" width=800px height=550px>
+					<img src="~/assets/img/Adhésions.jpeg" style="object-fit: contain" width=800px height=550px>
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -120,27 +123,27 @@
 	<div class="row padding">
 		<div class="col-md-3">
 			<div class="card">
-				<img src="~/assets/img/billal.jpg" class="card-img-top" width=450px height=450px>
+				<img src="~/assets/img/billal.jpg" class="card-img-top" style="object-fit: contain" width=450px height=450px>
 				<div class="card-body">
 					<h4 class="card-title"> Billal Benziane</h4>
-					<p class="card-text">Passionné des sciences et des mathématiques en particulier, Billal est l'un des co-fondateurs de ASSOFLEX. Il est aussi le Président'.</p>
+					<p class="card-text">Passionné des sciences et des mathématiques en particulier, Billal est l'un des co-fondateurs et président d'AssoFlex. </p>
 					<a href=@Url.Action("VoirCvBillal", "Presentation") class="btn btn-outline-secondary" target="_blank">Voir le CV</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-3">
 			<div class="card">
-				<img src="~/assets/img/guytri.png" class="card-img-top" width=450px height=450px>
+				<img src="~/assets/img/guytri.png" class="card-img-top" style="object-fit: contain" width=450px height=450px>
 				<div class="card-body">
 					<h4 class="card-title"> Guytri Kastane</h4>
-					<p class="card-text">Guytri est l'un des fondateurs de ASSOFLEX. Sa fibre associative le conduit ce jour au poste de Directeur Exécutif '.</p>
+					<p class="card-text">Guytri est l'un des fondateurs de ASSOFLEX. Sa fibre associative le conduit ce jour au poste de Directeur Exécutif.</p>
 					<a href=@Url.Action("VoirCvGuytri", "Presentation") class="btn btn-outline-secondary" target="_blank">Voir le CV</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-3">
 			<div class="card">
-				<img src="~/assets/img/mateusz.jpg" class="card-img-top" width=450px height=450px>
+				<img src="~/assets/img/mateusz.jpg" class="card-img-top" style="object-fit: contain" width=450px height=450px>
 				<div class="card-body">
 					<h4 class="card-title"> Mateusz Tirel</h4>
 					<p class="card-text">Ingénieur généraliste et co-fondateur de ASSOFLEX, Mateusz est en charge la Direction des services.</p>
@@ -150,7 +153,7 @@
 		</div>
 		<div class="col-md-3">
 			<div class="card">
-				<img src="~/assets/img/paul.jpg" class="card-img-top" width=450px height=450px>
+				<img src="~/assets/img/paul.jpg" class="card-img-top" style="object-fit: contain" width=450px height=450px>
 				<div class="card-body">
 					<h4 class="card-title"> Paul Kammegne</h4> 
 					<p class="card-text">Membre de plusieurs associations, Paul occupe le poste de Gestionnaire des évènements et des formations.</p>

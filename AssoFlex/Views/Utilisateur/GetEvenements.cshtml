@@ -1,4 +1,4 @@
-@model System.Collections.Generic.List<AssoFlex.Models.Evenement>
+@model List<Reservation>
 
 @{
     ViewBag.Title = "Mes évènements";
@@ -17,7 +17,7 @@
                         <th>ID</th>
                         <th>Nom</th>
                         @* <th>Utilisateur</th> *@
-                        <th>Organisateur</th>
+                        @* <th>Organisateur</th> *@
                         @* <th>Montant encours</th> *@
                         @* <th>Ma participation</th> *@
                         <th>Date de début</th>
@@ -26,14 +26,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var evenement in Model)
+                    @foreach (var reservation in Model)
                     {
                         <tr>
-                            <td>@evenement.IdEvent</td>
-                            <td>@evenement.NomEvent</td>
-                            <td>@evenement.Organisateur.Nom</td>
-                            <td>@evenement.DateDebutEvent</td>
-                            <td>@evenement.DateFinEvent</td>
+                            <td>@reservation.Id</td>
+                            <td>@reservation.Event.NomEvent</td>
+                            @* <td>@reservation.Event.Organisateur.Nom</td> *@
+                            <td>@reservation.Event.DateDebutEvent</td>
+                            <td>@reservation.Event.DateFinEvent</td>
                             @* <td>@evenement.Reservation</td> *@
                             @* <td>@adhesion.Statut</td> *@
                             <td>

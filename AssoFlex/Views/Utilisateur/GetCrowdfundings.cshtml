@@ -1,4 +1,4 @@
-@model System.Collections.Generic.List<AssoFlex.Models.Crowdfunding>
+@model List<Contribution>
 
 @{
     ViewBag.Title = "Mes Crowdfundings";
@@ -15,24 +15,24 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nom</th>
+                        @* <th>Nom</th> *@
                         @* <th>Utilisateur</th> *@
-                        <th>Montant visé</th>
+                        <th>Montant</th>
                         @* <th>Montant encours</th> *@
                         @* <th>Ma participation</th> *@
-                        <th>Date de début</th>
-                        <th>Data de fin</th>
+                        <th>Date </th>
+                        @* <th>Data de fin</th> *@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var crowdfunding in Model)
+                    @foreach (var contribution in Model)
                     {
                         <tr>
-                            <td>@crowdfunding.Id</td>
-                            <td>@crowdfunding.Nom</td>
-                            <td>@crowdfunding.MontantProjet</td>
-                            <td>@crowdfunding.DateDebutProjet</td>
-                            <td>@crowdfunding.DateFinProjet</td>
+                            <td>@contribution.Id</td>
+                            <td>@contribution.MontantContribution</td>
+                            <td>@contribution.DateContribution</td>
+                            @* <td>@crowdfunding.DateDebutProjet</td> *@
+                            @* <td>@crowdfunding.DateFinProjet</td> *@
                             @* <td>@adhesion.Statut</td> *@
                             <td>
                                 <span class="badge badge-success">Active</span>

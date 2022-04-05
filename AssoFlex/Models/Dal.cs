@@ -67,12 +67,46 @@ namespace AssoFlex.Models
             return int.TryParse(idStr, out var id) ? this.GetUtilisateur(id) : null;
         }
 
+        public AdhesionArticle GetAdhesionArticleByUser(int id)
+        {
+            return this._assoFlex.AdhesionArticles.FirstOrDefault(a => a.AssociationId == id);
+        }
+
         public string EncodeMD5(string motDePasse)
         {
             string motDePasseSel = "Assoflex" + motDePasse + "ASP.NET MVC";
             return BitConverter.ToString(
                 new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
         }
+
+        public List<Reservation> GetAllReservations()
+        {
+            return this._assoFlex.Reservations.Include(e => e.Event).ToList();
+        }
+
+        public Reservation CreateReservation(int idEvent, int idUser, int nbTicket)
+        {
+            Reservation reservation = new Reservation()
+            {
+                Event = this.GetEvenement(idEvent),
+                User = this.GetUtilisateur(idUser),
+                NbTicket = nbTicket,
+            };
+            this._assoFlex.Reservations.Add(reservation);
+            this._assoFlex.SaveChanges();
+            return reservation;
+        }
+
+        public void UpdateReservation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteReservation(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Utilisateur Authentifier(string email, string password)
         {
             var motDePasse = EncodeMD5(password);
@@ -180,8 +214,8 @@ namespace AssoFlex.Models
             return assoWidget;
         }
 
-        public Association CreateAssociation(string nom, string numSiret, int idGerant, string logoAsso, string categorie,
-            string description = "")
+        public Association CreateAssociation(string nom, string numSiret, int idGerant, double montantAdhesion, 
+            string rib, string pieceIdentite, string publieJO, string logoAsso, string categorie, string description = "")
         {
             Association assoToAdd = new Association()
             {
@@ -191,9 +225,18 @@ namespace AssoFlex.Models
                 DateInscription = DateTime.Now,
                 CategorieAsso = categorie,
                 Description = description,
-                AdminAsso = this._assoFlex.Utilisateurs.Find(idGerant)
+                AdminAsso = this._assoFlex.Utilisateurs.Find(idGerant),
+                MontantAdhesion = montantAdhesion,
+                RIB = rib,
+                PieceIdentite = pieceIdentite,
+                PublieJO = publieJO
             };
             this._assoFlex.Associations.Add(assoToAdd);
+            this.CreateAdhesionArticle(
+                assoToAdd,
+                "1",
+                montantAdhesion
+            );
             this._assoFlex.SaveChanges();
             return assoToAdd;
         }
@@ -230,37 +273,20 @@ namespace AssoFlex.Models
 
         public List<Adhesion> GetAllAdhesions()
         {
-            return this._assoFlex.Adhesions.ToList();
+            return this._assoFlex.Adhesions.Include(a => a.Association).ToList();
         }
 
         public Adhesion CreateAdhesion(int idAsso, int idUser, int adhesionArticleId)
         {
             AdhesionArticle adhesionArticle = this.GetAdhesionArticle(adhesionArticleId);
-            DateTime dateFin;
-            switch (Convert.ToInt16(adhesionArticle.Frequence))
-            {
-                case 1:
-                    dateFin = DateTime.Now.AddMonths(1);
-                    break;
-                case 2:
-                    dateFin = DateTime.Now.AddMonths(3);
-                    break;
-                case 3:
-                    dateFin = DateTime.Now.AddMonths(6);
-                    break;
-                case 4:
-                    dateFin = DateTime.Now.AddYears(1);
-                    break;
-                default:
-                    dateFin = DateTime.Now.AddMonths(1);
-                    break;
-            }
+            DateTime dateFin = DateTime.Now.AddYears(1);;
             Adhesion adhesionToAdd = new Adhesion()
             {
                 Association = this._assoFlex.Associations.Find(idAsso),
                 Utilisateur = this._assoFlex.Utilisateurs.Find(idUser),
                 DateDebut = DateTime.Now,
                 DateFin = dateFin,
+                AdhesionArticle = adhesionArticle
             };
             this._assoFlex.Adhesions.Add(adhesionToAdd);
             this._assoFlex.SaveChanges();
@@ -286,6 +312,30 @@ namespace AssoFlex.Models
         public List<AdhesionArticle> GetAllAdhesionArticles()
         {
             return this._assoFlex.AdhesionArticles.ToList();
+        }
+
+        public ArticlePanier GetArticlePanier(int idArticle)
+        {
+            return this._assoFlex.ArticlesPanier.Find(idArticle);
+        }
+
+        public void DeleteArticlePanier(int idArticle, int idPanier)
+        {
+            List<ArticlePanier> articleFromPanier = this._assoFlex.ArticlesPanier.Where(a => a.PanierId == idPanier).ToList();
+            ArticlePanier articleToDelete = articleFromPanier.FirstOrDefault(a => a.Id == idArticle);
+            if (articleToDelete != null)
+            {
+                this._assoFlex.ArticlesPanier.Remove(articleToDelete);
+                this._assoFlex.SaveChanges();
+            }
+        }
+
+        public void UpdateArticlePanier(int idArticle, int quantite, int montant)
+        {
+            ArticlePanier articleToUpdate = this._assoFlex.ArticlesPanier.Find(idArticle);
+            articleToUpdate.Quantite = quantite;
+            articleToUpdate.MontantUnitaire = montant;
+            this._assoFlex.SaveChanges();
         }
 
         public AdhesionArticle GetAdhesionArticle(int id)
@@ -494,7 +544,7 @@ namespace AssoFlex.Models
 
         public List<Contribution> GetAllContributions()
         {
-            throw new NotImplementedException();
+            return this._assoFlex.Contributions.ToList();
         }
 
         public Contribution GetAllContribution(int id)
@@ -765,9 +815,14 @@ namespace AssoFlex.Models
 
         public Panier GetPanierByUserId(int userId)
         {
-            var panier = this._assoFlex.Paniers.FirstOrDefault(p => p.UtilisateurId == userId);
-            panier.Utilisateur = this.GetUtilisateur(userId);
-            return panier;
+            if (userId != 0)
+            {
+                var panier = this._assoFlex.Paniers.FirstOrDefault(p => p.UtilisateurId == userId);
+                panier.Utilisateur = this.GetUtilisateur(userId);
+                return panier;
+            }
+
+            return null;
         }
 
         public Panier GetPanierByUserId(string userIdStr)

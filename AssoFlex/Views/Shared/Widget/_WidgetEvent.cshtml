@@ -17,7 +17,34 @@
         <a href=@Url.Action("Details", "Evenement", new {id = @Model.IdEvent}) class="btn btn-outline-primary">Voir Détails</a>
         @if (User.Identity.IsAuthenticated)
         {
-            <a href=@Url.Action("AchatTicket", "Evenement", new {idEvent = @Model.IdEvent, idUser = User.FindFirst(ClaimTypes.NameIdentifier).Value}) class="btn btn-primary">Acheter</a>
+            string modalName= "AchatModal"+Model.IdEvent.ToString();
+            <a data-toggle="modal" data-target="#@modalName" href=@Url.Action("AchatTicket", "Evenement") class="btn btn-primary">Acheter</a>
+            <div class="modal fade" id="@modalName" tabindex="-1" role="dialog" aria-labelledby="Contribute" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Choisissez votre montant</h4>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm("AchatTicket", "Evenement", FormMethod.Post,new {enctype="multipart/form-data"}))
+                            {
+                                <div >
+                                    <input name="idEvent" value=@Model.IdEvent type="text" class="form-control" hidden="hidden"/> @*  *@
+                                    <input name="idUser" type="text" value=@User.FindFirst(ClaimTypes.NameIdentifier).Value class="form-control" hidden="hidden"/> @**@
+                                    @Html.Label("  Le nombre : ")
+                                    <input name="nbticket" type="number" id="reservation" class="form-control">
+                                    <br/>
+                                </div>
+                                <br/>
+                                <button class="btn btn-primary btn-xl" type="submit">Valider</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
     </div>
     

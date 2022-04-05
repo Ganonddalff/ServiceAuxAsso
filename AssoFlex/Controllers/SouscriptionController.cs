@@ -58,6 +58,10 @@ namespace AssoFlex.Controllers
                 layoutModelView.Association.Nom,
                 layoutModelView.Association.NumSiret,
                 user.Id,
+                layoutModelView.Association.MontantAdhesion,
+                layoutModelView.Association.RIB,
+                layoutModelView.Association.PieceIdentite,
+                layoutModelView.Association.PublieJO,
                 "default-logo.png",
                 layoutModelView.Association.CategorieAsso,
                 layoutModelView.Association.Description);
