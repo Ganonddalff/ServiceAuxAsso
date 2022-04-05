@@ -30,16 +30,16 @@ namespace AssoFlex.Controllers
 
         public IActionResult GetEvenements(int id)
         {
-            List<Evenement> allEvenements = _dal.GetAllEvenements();
-            List<Evenement> listEvenements = new List<Evenement>();
-            return View(listEvenements);
+            List<Reservation> allReservations = _dal.GetAllReservations();
+            List<Reservation> listReservations = allReservations.Where(e => e.UserId == id).ToList();
+            return View(listReservations);
         }
         
-        public IActionResult GetCrowdfundings(string id)
+        public IActionResult GetCrowdfundings(int id)
         {
-            List<Crowdfunding> allCrowdfundings = _dal.GetAllCrowdfundings();
-            List<Crowdfunding> listCrowdfundings = new List<Crowdfunding>();
-            return View(listCrowdfundings);
+            List<Contribution> allContributions = _dal.GetAllContributions();
+            List<Contribution> listContributions = allContributions.Where(e => e.utilisateurId == id ).ToList();
+            return View(listContributions);
         }
 
         public IActionResult DeleteUtilisateur(int id)

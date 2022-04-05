@@ -81,7 +81,7 @@ namespace AssoFlex.Models
 
         public List<Reservation> GetAllReservations()
         {
-            return this._assoFlex.Reservations.ToList();
+            return this._assoFlex.Reservations.Include(e => e.Event).ToList();
         }
 
         public Reservation CreateReservation(int idEvent, int idUser, int nbTicket)
@@ -273,37 +273,20 @@ namespace AssoFlex.Models
 
         public List<Adhesion> GetAllAdhesions()
         {
-            return this._assoFlex.Adhesions.ToList();
+            return this._assoFlex.Adhesions.Include(a => a.Association).ToList();
         }
 
         public Adhesion CreateAdhesion(int idAsso, int idUser, int adhesionArticleId)
         {
             AdhesionArticle adhesionArticle = this.GetAdhesionArticle(adhesionArticleId);
-            DateTime dateFin;
-            switch (Convert.ToInt16(adhesionArticle.Frequence))
-            {
-                case 1:
-                    dateFin = DateTime.Now.AddMonths(1);
-                    break;
-                case 2:
-                    dateFin = DateTime.Now.AddMonths(3);
-                    break;
-                case 3:
-                    dateFin = DateTime.Now.AddMonths(6);
-                    break;
-                case 4:
-                    dateFin = DateTime.Now.AddYears(1);
-                    break;
-                default:
-                    dateFin = DateTime.Now.AddMonths(1);
-                    break;
-            }
+            DateTime dateFin = DateTime.Now.AddYears(1);;
             Adhesion adhesionToAdd = new Adhesion()
             {
                 Association = this._assoFlex.Associations.Find(idAsso),
                 Utilisateur = this._assoFlex.Utilisateurs.Find(idUser),
                 DateDebut = DateTime.Now,
                 DateFin = dateFin,
+                AdhesionArticle = adhesionArticle
             };
             this._assoFlex.Adhesions.Add(adhesionToAdd);
             this._assoFlex.SaveChanges();
@@ -561,7 +544,7 @@ namespace AssoFlex.Models
 
         public List<Contribution> GetAllContributions()
         {
-            throw new NotImplementedException();
+            return this._assoFlex.Contributions.ToList();
         }
 
         public Contribution GetAllContribution(int id)
