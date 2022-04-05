@@ -62,7 +62,7 @@ namespace AssoFlex.Controllers
             return View(layoutModelView);
         }
         
-        public ActionResult AddAdhesion(int idAsso, int idUser, int adhesionArticleId)
+        public ActionResult AddAdhesion(int idAsso, int idUser)
         {
             Utilisateur user = _dal.GetUtilisateur(idUser);
             AdhesionArticle adhesionArticle = _dal.GetAdhesionArticle(1);
@@ -80,6 +80,7 @@ namespace AssoFlex.Controllers
             };
             if ( panier != null)
             {
+                _dal.CreateAdhesion(idAsso, idUser,adhesionArticle.Id);
                 _dal.AddArticleToPanier(panier.Id,articlePanier);
             }
             else

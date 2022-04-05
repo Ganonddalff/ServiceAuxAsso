@@ -185,9 +185,14 @@ namespace AssoFlex.Models
         void UpdateArticlePanier(int idArticle, int quantite, int montant);
         #endregion
         
-        AdhesionArticle GetAdhesionArticle(int i);
+        AdhesionArticle GetAdhesionArticle(int id);
+        AdhesionArticle GetAdhesionArticleByUser(int id);
         string EncodeMD5(string s);
 
+        List<Reservation> GetAllReservations();
+        Reservation CreateReservation(int idEvent, int idUser, int nbTicket);
+        void UpdateReservation();
+        void DeleteReservation(int id);
         
     }
 }

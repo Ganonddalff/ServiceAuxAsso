@@ -2,7 +2,7 @@
 @model AssoFlex.ViewModels.LayoutModelView
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
     <div class="container">
-    	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="~/assets/img/logo.png" alt="logo" width="50px" height="50px"> <strong>ASSOFLEX</strong></a>
+    	<a class="navbar-brand" href=@Url.Action("Index", "Home")><img src="~/assets/img/logo.png" alt="logo" width="50px" height="50px"> <strong style="color: #5b6871">ASSOFLEX</strong></a>
     	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
     		<span class="navbar-toggler-icon"></span>
     	</button>
@@ -58,7 +58,7 @@
 				    </div>
 				    <li class="nav-item dropdown d-md-down-none panier" id="panierDropdown">
 					    <a class="nav-link" href=@Url.Action("Index","Panier", new {idUser=User.FindFirst(ClaimTypes.NameIdentifier).Value}) role="button">
-						    <i class="icon-basket-loaded"></i>
+						    <i class="icon-basket-loaded" style="color: #5b6871"></i>
 						    <span class="badge badge-pill badge-danger">@Model.GetNombreArticlePanier(User.FindFirst(ClaimTypes.NameIdentifier).Value)</span>
 					    </a>
 				    </li>

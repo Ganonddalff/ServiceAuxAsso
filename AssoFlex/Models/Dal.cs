@@ -67,12 +67,46 @@ namespace AssoFlex.Models
             return int.TryParse(idStr, out var id) ? this.GetUtilisateur(id) : null;
         }
 
+        public AdhesionArticle GetAdhesionArticleByUser(int id)
+        {
+            return this._assoFlex.AdhesionArticles.FirstOrDefault(a => a.AssociationId == id);
+        }
+
         public string EncodeMD5(string motDePasse)
         {
             string motDePasseSel = "Assoflex" + motDePasse + "ASP.NET MVC";
             return BitConverter.ToString(
                 new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
         }
+
+        public List<Reservation> GetAllReservations()
+        {
+            return this._assoFlex.Reservations.ToList();
+        }
+
+        public Reservation CreateReservation(int idEvent, int idUser, int nbTicket)
+        {
+            Reservation reservation = new Reservation()
+            {
+                Event = this.GetEvenement(idEvent),
+                User = this.GetUtilisateur(idUser),
+                NbTicket = nbTicket,
+            };
+            this._assoFlex.Reservations.Add(reservation);
+            this._assoFlex.SaveChanges();
+            return reservation;
+        }
+
+        public void UpdateReservation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteReservation(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Utilisateur Authentifier(string email, string password)
         {
             var motDePasse = EncodeMD5(password);
@@ -198,6 +232,11 @@ namespace AssoFlex.Models
                 PublieJO = publieJO
             };
             this._assoFlex.Associations.Add(assoToAdd);
+            this.CreateAdhesionArticle(
+                assoToAdd,
+                "1",
+                montantAdhesion
+            );
             this._assoFlex.SaveChanges();
             return assoToAdd;
         }
@@ -793,9 +832,14 @@ namespace AssoFlex.Models
 
         public Panier GetPanierByUserId(int userId)
         {
-            var panier = this._assoFlex.Paniers.FirstOrDefault(p => p.UtilisateurId == userId);
-            panier.Utilisateur = this.GetUtilisateur(userId);
-            return panier;
+            if (userId != 0)
+            {
+                var panier = this._assoFlex.Paniers.FirstOrDefault(p => p.UtilisateurId == userId);
+                panier.Utilisateur = this.GetUtilisateur(userId);
+                return panier;
+            }
+
+            return null;
         }
 
         public Panier GetPanierByUserId(string userIdStr)

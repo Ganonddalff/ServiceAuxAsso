@@ -21,6 +21,7 @@ namespace AssoFlex.Models
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<Panier> Paniers { get; set; }
         public DbSet<ArticlePanier> ArticlesPanier { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
