@@ -180,8 +180,8 @@ namespace AssoFlex.Models
             return assoWidget;
         }
 
-        public Association CreateAssociation(string nom, string numSiret, int idGerant, string logoAsso, string categorie,
-            string description = "")
+        public Association CreateAssociation(string nom, string numSiret, int idGerant, double montantAdhesion, 
+            string rib, string pieceIdentite, string publieJO, string logoAsso, string categorie, string description = "")
         {
             Association assoToAdd = new Association()
             {
@@ -191,7 +191,11 @@ namespace AssoFlex.Models
                 DateInscription = DateTime.Now,
                 CategorieAsso = categorie,
                 Description = description,
-                AdminAsso = this._assoFlex.Utilisateurs.Find(idGerant)
+                AdminAsso = this._assoFlex.Utilisateurs.Find(idGerant),
+                MontantAdhesion = montantAdhesion,
+                RIB = rib,
+                PieceIdentite = pieceIdentite,
+                PublieJO = publieJO
             };
             this._assoFlex.Associations.Add(assoToAdd);
             this._assoFlex.SaveChanges();
