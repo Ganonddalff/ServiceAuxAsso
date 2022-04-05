@@ -44,12 +44,19 @@
 								    <i class="fa fa-home"></i> Espace Personnel
 							    </a>
 						    }
-						    else if (User.IsInRole("Admin-Asso") || User.IsInRole("Basic"))
+						    else if (User.IsInRole("Admin-Asso"))
 						    {
 							    <a class="dropdown-item" href=@Url.Action("DashboardUser", "Dashboard", new {id = User.FindFirst(ClaimTypes.NameIdentifier).Value})>
 								    <i class="fa fa-home"></i> Espace Personnel
 							    </a>
 						    }
+						    else 
+						    {
+							    <a class="dropdown-item" href=@Url.Action("GetUtilisateur", "Utilisateur", new {id = User.FindFirst(ClaimTypes.NameIdentifier).Value})>
+								    <i class="fa fa-home"></i> Espace Personnel
+							    </a>
+						    }
+						    
 						    <div class="dropdown-divider"></div>
 						    <a class="dropdown-item" href=@Url.Action("Deconnexion", "Login")>
 							    <i class="fa fa-lock"></i> Deconnexion

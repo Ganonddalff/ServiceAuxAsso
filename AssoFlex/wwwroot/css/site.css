@@ -24,6 +24,7 @@ body {
 }
 .carousel-caption {
     bottom: 270px;
+    position: absolute;
 }
 
 .carousel-caption h5 {
@@ -174,7 +175,7 @@ body {
 }
 .cropped2 {
     width: 550px;
-    height: 309px;
+    height: 400px;
     object-fit: cover;
     object-position: center center;
     border: 5px solid black;
@@ -213,6 +214,7 @@ body {
     position:relative;
     top:-25px;
     text-align: center;
+    
 }
 
 #skill2 {
@@ -244,6 +246,7 @@ body {
 #skill2 li h3 {
     position:relative;
     top:-25px;
+   
 }
 
 .bar {

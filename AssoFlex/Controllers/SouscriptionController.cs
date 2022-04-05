@@ -86,6 +86,11 @@ namespace AssoFlex.Controllers
                 Panier panierNew = _dal.CreatePanier(user);
                 _dal.AddArticleToPanier(panierNew.Id, articlePanier);
             }
+            if(user.Role.Equals("Admin-Assso").Equals(false))
+            {
+                _dal.UpdateUtilisateur(user.Id,user.Prenom,user.Nom,user.Adresse,user.Telephone,user.Email,user.Password,user.ProfilImg,"Admin-Asso");
+            }
+
             return RedirectToAction("Index", "Home");
         }
     }
