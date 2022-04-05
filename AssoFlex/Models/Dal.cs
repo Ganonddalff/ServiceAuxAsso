@@ -180,8 +180,8 @@ namespace AssoFlex.Models
             return assoWidget;
         }
 
-        public Association CreateAssociation(string nom, string numSiret, int idGerant, string logoAsso, string categorie,
-            string description = "")
+        public Association CreateAssociation(string nom, string numSiret, int idGerant, double montantAdhesion, 
+            string rib, string pieceIdentite, string publieJO, string logoAsso, string categorie, string description = "")
         {
             Association assoToAdd = new Association()
             {
@@ -191,7 +191,11 @@ namespace AssoFlex.Models
                 DateInscription = DateTime.Now,
                 CategorieAsso = categorie,
                 Description = description,
-                AdminAsso = this._assoFlex.Utilisateurs.Find(idGerant)
+                AdminAsso = this._assoFlex.Utilisateurs.Find(idGerant),
+                MontantAdhesion = montantAdhesion,
+                RIB = rib,
+                PieceIdentite = pieceIdentite,
+                PublieJO = publieJO
             };
             this._assoFlex.Associations.Add(assoToAdd);
             this._assoFlex.SaveChanges();
@@ -286,6 +290,30 @@ namespace AssoFlex.Models
         public List<AdhesionArticle> GetAllAdhesionArticles()
         {
             return this._assoFlex.AdhesionArticles.ToList();
+        }
+
+        public ArticlePanier GetArticlePanier(int idArticle)
+        {
+            return this._assoFlex.ArticlesPanier.Find(idArticle);
+        }
+
+        public void DeleteArticlePanier(int idArticle, int idPanier)
+        {
+            List<ArticlePanier> articleFromPanier = this._assoFlex.ArticlesPanier.Where(a => a.PanierId == idPanier).ToList();
+            ArticlePanier articleToDelete = articleFromPanier.FirstOrDefault(a => a.Id == idArticle);
+            if (articleToDelete != null)
+            {
+                this._assoFlex.ArticlesPanier.Remove(articleToDelete);
+                this._assoFlex.SaveChanges();
+            }
+        }
+
+        public void UpdateArticlePanier(int idArticle, int quantite, int montant)
+        {
+            ArticlePanier articleToUpdate = this._assoFlex.ArticlesPanier.Find(idArticle);
+            articleToUpdate.Quantite = quantite;
+            articleToUpdate.MontantUnitaire = montant;
+            this._assoFlex.SaveChanges();
         }
 
         public AdhesionArticle GetAdhesionArticle(int id)

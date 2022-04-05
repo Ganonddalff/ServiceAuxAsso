@@ -35,8 +35,8 @@ namespace AssoFlex.Models
         int GetAssociationId(int idAdmin);
         List<Association> GetAllAssociations();
         public List<IWidgetAsso> GetAssociationsToWidget();
-        Association CreateAssociation(string nom, string numSiret, int idGerant, string logoAsso,
-            string categorie, string description = "");
+        Association CreateAssociation(string nom, string numSiret, int idGerant, double montantAdhesion, 
+            string rib, string pieceIdentite, string publieJO, string logoAsso, string categorie, string description = "");
         void UpdateAssociation(int id, string nom, string numSiret, int idGerant, string logoAsso,
             string categorie, string description);
         void DeleteAssociation(int id);
@@ -176,10 +176,18 @@ namespace AssoFlex.Models
         #endregion
         
         // ******************************** //
-        
+
+        #region MyRegion
+
         List<ArticlePanier> GetArticlesPanierByPanierId(int panierId);
+        ArticlePanier GetArticlePanier(int idArticle);
+        void DeleteArticlePanier(int idArticle, int idPanier);
+        void UpdateArticlePanier(int idArticle, int quantite, int montant);
+        #endregion
+        
         AdhesionArticle GetAdhesionArticle(int i);
         string EncodeMD5(string s);
+
         
     }
 }
