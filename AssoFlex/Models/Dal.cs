@@ -288,6 +288,30 @@ namespace AssoFlex.Models
             return this._assoFlex.AdhesionArticles.ToList();
         }
 
+        public ArticlePanier GetArticlePanier(int idArticle)
+        {
+            return this._assoFlex.ArticlesPanier.Find(idArticle);
+        }
+
+        public void DeleteArticlePanier(int idArticle, int idPanier)
+        {
+            List<ArticlePanier> articleFromPanier = this._assoFlex.ArticlesPanier.Where(a => a.PanierId == idPanier).ToList();
+            ArticlePanier articleToDelete = articleFromPanier.FirstOrDefault(a => a.Id == idArticle);
+            if (articleToDelete != null)
+            {
+                this._assoFlex.ArticlesPanier.Remove(articleToDelete);
+                this._assoFlex.SaveChanges();
+            }
+        }
+
+        public void UpdateArticlePanier(int idArticle, int quantite, int montant)
+        {
+            ArticlePanier articleToUpdate = this._assoFlex.ArticlesPanier.Find(idArticle);
+            articleToUpdate.Quantite = quantite;
+            articleToUpdate.MontantUnitaire = montant;
+            this._assoFlex.SaveChanges();
+        }
+
         public AdhesionArticle GetAdhesionArticle(int id)
         {
             return this._assoFlex.AdhesionArticles.Find(id);

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using AssoFlex.Models;
 using AssoFlex.ViewModels;
@@ -27,6 +29,14 @@ namespace AssoFlex.Controllers
                 Panier = panier,
             };
             return View(lModelView);
+        }
+
+        public IActionResult DeleteArticle(int idUser, int idArticle)
+        {
+            Panier panier = _dal.GetPanierByUserId(idUser);
+            // List<ArticlePanier> articlePaniers = _dal.GetArticlesPanierByPanierId(panier.Id);
+            _dal.DeleteArticlePanier(idArticle, panier.Id);
+            return RedirectToAction("Index", "Panier", new {idUser=User.FindFirstValue(ClaimTypes.NameIdentifier)});
         }
     }
 }

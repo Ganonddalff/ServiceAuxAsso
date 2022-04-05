@@ -176,10 +176,18 @@ namespace AssoFlex.Models
         #endregion
         
         // ******************************** //
-        
+
+        #region MyRegion
+
         List<ArticlePanier> GetArticlesPanierByPanierId(int panierId);
+        ArticlePanier GetArticlePanier(int idArticle);
+        void DeleteArticlePanier(int idArticle, int idPanier);
+        void UpdateArticlePanier(int idArticle, int quantite, int montant);
+        #endregion
+        
         AdhesionArticle GetAdhesionArticle(int i);
         string EncodeMD5(string s);
+
         
     }
 }
