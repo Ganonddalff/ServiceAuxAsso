@@ -7,76 +7,79 @@
 }
 
 <main class="container" style="">
-    <div class="p-5 text-center bg-light">
-        <h1 class="mb-3">MON PANIER</h1>
-    </div>
-    <div class="basket">
-        <div class="basket-module">
-            <label for="promo-code">Entrer un code promotionel</label>
-            <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
-            <button class="promo-code-cta">valider</button>
+    @using (Html.BeginForm("Payer", "Panier", FormMethod.Post, new {enctype="multipart/form-data"}))
+    {
+        <div class="p-5 text-center bg-light">
+            <h1 class="mb-3">MON PANIER</h1>
         </div>
-        <div class="basket-labels">
-            <ul>
-                <li class="item item-heading">Produit</li>
-                <li class="price">Prix</li>
-                <li class="quantity">Quantité</li>
-                <li class="subtotal">Sous-total</li>
-            </ul>
-        </div>
-        @foreach (var produit in Model.Panier.ArticlesPanier)
-        {
-            <div class="basket-product">
-                <div class="item">
-                    <div class="product-image">
-                        <img src="http://placehold.it/120x166" alt="..." class="product-frame">
+        <div class="basket">
+            <div class="basket-module">
+                <label for="promo-code">Entrer un code promotionel</label>
+                <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
+                <button class="promo-code-cta">valider</button>
+            </div>
+            <div class="basket-labels">
+                <ul>
+                    <li class="item item-heading">Produit</li>
+                    <li class="price">Prix</li>
+                    <li class="quantity">Quantité</li>
+                    <li class="subtotal">Sous-total</li>
+                </ul>
+            </div>
+            @foreach (var produit in Model.Panier.ArticlesPanier)
+            {
+                <div class="basket-product">
+                    <div class="item">
+                        <div class="product-image">
+                            <img src="http://placehold.it/120x166" alt="..." class="product-frame">
+                        </div>
+                        <div class="product-details">
+                            <h1><strong><span class="item-quantity">1</span> x @Html.DisplayFor(m => produit.ProduitNom)</strong></h1>
+                            <p><strong>@Html.DisplayFor(m => produit.TypeDeCommande)</strong></p>
+                            @* <p>Product Code - 232321939</p> *@
+                        </div>
                     </div>
-                    <div class="product-details">
-                        <h1><strong><span class="item-quantity">1</span> x @produit.ProduitNom</strong></h1>
-                        <p><strong>@produit.TypeDeCommande</strong></p>
-                        @* <p>Product Code - 232321939</p> *@
+                    <div class="price">@Html.DisplayFor(m => produit.MontantUnitaire)</div>
+                    <div class="quantity">
+                        <input type="number" value="1" min="1" class="quantity-field">
+                    </div>
+                    <div class="subtotal">@Html.DisplayFor(m => produit.MontantUnitaire)</div>
+                    <div class="remove">
+                        <a href=@Url.Action("DeleteArticle", "Panier", new {idUser = User.FindFirstValue(ClaimTypes.NameIdentifier), idArticle = produit.Id})>Supprimer</a>
                     </div>
                 </div>
-                <div class="price">@produit.MontantUnitaire</div>
-                <div class="quantity">
-                    <input type="number" value="1" min="1" class="quantity-field">
-                </div>
-                <div class="subtotal">@produit.MontantUnitaire</div>
-                <div class="remove">
-                    <a href=@Url.Action("DeleteArticle","Panier", new {idUser = User.FindFirstValue(ClaimTypes.NameIdentifier), idArticle = produit.Id})>Remove</a>
-                </div>
-            </div>
-        }
-    </div>
-    <aside>
-        <div class="summary">
-            <div class="summary-total-items"><span class="total-items"></span> articles dans votre panier</div>
-            <div class="summary-subtotal">
-                <div class="subtotal-title">Sous-total</div>
-                <div class="subtotal-value final-value" id="basket-subtotal">0.00</div>
-                <div class="summary-promo hide">
-                    <div class="promo-title">Promotion</div>
-                    <div class="promo-value final-value" id="basket-promo"></div>
-                </div>
-            </div>
-            @* <div class="summary-delivery"> *@
-            @*     <select name="delivery-collection" class="summary-delivery-selection"> *@
-            @*         <option value="0" selected="selected">Select Collection or Delivery</option> *@
-            @*         <option value="collection">Collection</option> *@
-            @*         <option value="first-class">Royal Mail 1st Class</option> *@
-            @*         <option value="second-class">Royal Mail 2nd Class</option> *@
-            @*         <option value="signed-for">Royal Mail Special Delivery</option> *@
-            @*     </select> *@
-            @* </div> *@
-            <div class="summary-total">
-                <div class="total-title">Total</div>
-                <div class="total-value final-value" id="basket-total">0.00</div>
-            </div>
-            <div class="summary-checkout">
-                <button class="checkout-cta">Continuer pour payer</button>
-            </div>
+            }
         </div>
-    </aside>
+        <aside>
+            <div class="summary">
+                <div class="summary-total-items"><span class="total-items"></span> articles dans votre panier</div>
+                <div class="summary-subtotal">
+                    <div class="subtotal-title">Sous-total</div>
+                    <div class="subtotal-value final-value" id="basket-subtotal">0.00</div>
+                    <div class="summary-promo hide">
+                        <div class="promo-title">Promotion</div>
+                        <div class="promo-value final-value" id="basket-promo"></div>
+                    </div>
+                </div>
+                @* <div class="summary-delivery"> *@
+                @*     <select name="delivery-collection" class="summary-delivery-selection"> *@
+                @*         <option value="0" selected="selected">Select Collection or Delivery</option> *@
+                @*         <option value="collection">Collection</option> *@
+                @*         <option value="first-class">Royal Mail 1st Class</option> *@
+                @*         <option value="second-class">Royal Mail 2nd Class</option> *@
+                @*         <option value="signed-for">Royal Mail Special Delivery</option> *@
+                @*     </select> *@
+                @* </div> *@
+                <div class="summary-total">
+                    <div class="total-title">Total</div>
+                    <div class="total-value final-value" id="basket-total">0.00</div>
+                </div>
+                <div class="summary-checkout">
+                    <button type="submit" class="checkout-cta">Continuer pour payer</button>
+                </div>
+            </div>
+        </aside>
+    }
 </main>
 
 @section Scripts
